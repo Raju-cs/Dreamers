@@ -1,0 +1,40 @@
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\bin\Release\netcoreapp3.1\App.Setup.deps.json
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\bin\Release\netcoreapp3.1\App.Setup.dll
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\bin\Release\netcoreapp3.1\App.Setup.pdb
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.AssemblyReference.cache
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.GeneratedMSBuildEditorConfig.editorconfig
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfoInputs.cache
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfo.cs
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.CoreCompileInputs.cache
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.dll
+D:\P R O J E C T S\Jasmine\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.pdb
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\bin\Release\netcoreapp3.1\App.Setup.deps.json
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\bin\Release\netcoreapp3.1\App.Setup.dll
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\bin\Release\netcoreapp3.1\App.Setup.pdb
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.AssemblyReference.cache
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.GeneratedMSBuildEditorConfig.editorconfig
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfoInputs.cache
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfo.cs
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.CoreCompileInputs.cache
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.dll
+D:\P R O J E C T S\ShoppersPerk_E\Admin\App.Setup\obj\Release\netcoreapp3.1\App.Setup.pdb
+D:\P R O J E C T S\Boilerplate\App.Setup\bin\Release\netcoreapp3.1\App.Setup.deps.json
+D:\P R O J E C T S\Boilerplate\App.Setup\bin\Release\netcoreapp3.1\App.Setup.dll
+D:\P R O J E C T S\Boilerplate\App.Setup\bin\Release\netcoreapp3.1\App.Setup.pdb
+D:\P R O J E C T S\Boilerplate\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.AssemblyReference.cache
+D:\P R O J E C T S\Boilerplate\App.Setup\obj\Release\netcoreapp3.1\App.Setup.GeneratedMSBuildEditorConfig.editorconfig
+D:\P R O J E C T S\Boilerplate\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfoInputs.cache
+D:\P R O J E C T S\Boilerplate\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfo.cs
+D:\P R O J E C T S\Boilerplate\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.CoreCompileInputs.cache
+D:\P R O J E C T S\Boilerplate\App.Setup\obj\Release\netcoreapp3.1\App.Setup.dll
+D:\P R O J E C T S\Boilerplate\App.Setup\obj\Release\netcoreapp3.1\App.Setup.pdb
+H:\Coaching_Management\App.Setup\bin\Release\netcoreapp3.1\App.Setup.deps.json
+H:\Coaching_Management\App.Setup\bin\Release\netcoreapp3.1\App.Setup.dll
+H:\Coaching_Management\App.Setup\bin\Release\netcoreapp3.1\App.Setup.pdb
+H:\Coaching_Management\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.AssemblyReference.cache
+H:\Coaching_Management\App.Setup\obj\Release\netcoreapp3.1\App.Setup.GeneratedMSBuildEditorConfig.editorconfig
+H:\Coaching_Management\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfoInputs.cache
+H:\Coaching_Management\App.Setup\obj\Release\netcoreapp3.1\App.Setup.AssemblyInfo.cs
+H:\Coaching_Management\App.Setup\obj\Release\netcoreapp3.1\App.Setup.csproj.CoreCompileInputs.cache
+H:\Coaching_Management\App.Setup\obj\Release\netcoreapp3.1\App.Setup.dll
+H:\Coaching_Management\App.Setup\obj\Release\netcoreapp3.1\App.Setup.pdb

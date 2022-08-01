@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\P R O J E C T S\Jasmine\Admin\Published</_PublishTargetUrl>
+    <History>True|2022-04-28T04:52:08.3975873Z;False|2022-04-28T10:50:44.3489634+06:00;True|2022-04-28T10:45:22.7645621+06:00;True|2022-04-27T16:46:56.5057678+06:00;True|2022-04-27T16:45:57.1025471+06:00;True|2022-04-22T15:42:35.9151948+06:00;True|2022-04-22T14:44:18.7677695+06:00;True|2022-04-16T17:24:49.5031234+06:00;True|2022-04-16T15:48:02.2714809+06:00;</History>
+  </PropertyGroup>
+</Project>

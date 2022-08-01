@@ -1,0 +1,155 @@
+[
+  [
+    [
+      "ebed21c4-3779-403f-a897-04717e37bff8",
+      "Beauty Product",
+      [
+        [
+          "f0f77b63-2ea1-46a6-ac0e-bd6813210e47",
+          "Makeup",
+          [
+            ["0e44c39e-90f2-4966-b098-a01bcf1b9d4f", "Face Powder", []],
+            ["2a33372c-2446-47a6-a5b3-9311a4e677aa", "Dry Face Powder", []]
+          ]
+        ],
+        ["08de2ce9-0439-4e4c-bf11-432676173796", "Cool Face Powder", []]
+      ]
+    ]
+  ],
+  [
+    [
+      "0bb18e68-a353-4cae-a9f1-379dd0efd873",
+      1,
+      "LARGE",
+      "/images/banners/original/dbc36953-ed5c-4392-bad1-967733f0e824.jpeg",
+      null
+    ],
+    [
+      "f6514fba-879a-4c99-8938-8fa0088bc51c",
+      2,
+      "LARGE",
+      "/images/banners/original/c95ccac1-2fdf-4a9e-83cf-ef3ba38b6a52.jpeg",
+      null
+    ],
+    [
+      "4f2b50a1-e1b5-48af-9202-a7179d897e65",
+      3,
+      "LARGE",
+      "/images/banners/original/08c659bc-b386-4f72-abec-f9a55d110a29.jpeg",
+      null
+    ]
+  ],
+  [["0b1eae94-07b5-416e-a90a-65eb526d052e", 1, "Welcome To Shoppers Perk"]],
+  [
+    [
+      "6e7138ac-9b72-436d-8e11-bd593ab3daee",
+      "Beauty Product",
+      1,
+      [
+        [
+          "6e7138ac-9b72-436d-8e11-bd593ab3daee",
+          "Beauty Product",
+          "Ponds Regular",
+          "12",
+          "12",
+          "/images/products/icon/70c47e5a-1f85-4557-962c-609717a52b25.jpg",
+          150,
+          180,
+          30,
+          16.6667,
+          10,
+          1,
+          "2b48bdb6-5cef-43ca-9efd-41d16a887021",
+          "7b5d2a2d-5c11-4ecd-99bf-0544fcfad400"
+        ]
+      ]
+    ],
+    [
+      "2b79ac66-bec7-441d-a0e7-f1c58355bcc8",
+      "Up Raising",
+      2,
+      [
+        [
+          "2b79ac66-bec7-441d-a0e7-f1c58355bcc8",
+          "Up Raising",
+          "ASUS ROG Zephyrus G14 ",
+          "1",
+          "1",
+          "/images/products/icon/522268d9-2dd1-4cfc-9e9c-6edf0b722e87.jpg",
+          125000,
+          130000,
+          5000,
+          3.8462,
+          5,
+          2,
+          "00000000-0000-0000-0000-000000000000",
+          "3533b9ee-976b-4e72-bc46-0d91184b120b"
+        ],
+        [
+          "2b79ac66-bec7-441d-a0e7-f1c58355bcc8",
+          "Up Raising",
+          "GTX 1660 TI",
+          "1",
+          "1",
+          "/images/products/icon/97fb181b-63e2-41d3-9fc1-c82fd351485e.jpg",
+          28000,
+          30000,
+          2000,
+          6.6667,
+          10,
+          2,
+          "00000000-0000-0000-0000-000000000000",
+          "3533b9ee-976b-4e72-bc46-0d91184b120b"
+        ]
+      ]
+    ]
+  ],
+  [
+    [
+      "e78bbd3a-9720-4f77-8ce9-125ae6e5e20a",
+      "Cool Face Powder",
+      "Cool Face Powder",
+      "12",
+      "/images/products/icon/a5df0f95-c277-45fb-9ed9-2e1092cadbd6.jpg",
+      250,
+      275,
+      25,
+      9.0909,
+      10,
+      1,
+      "2b48bdb6-5cef-43ca-9efd-41d16a887021",
+      "7b5d2a2d-5c11-4ecd-99bf-0544fcfad400"
+    ],
+    [
+      "fff3c426-5547-4b03-b44c-1bde3ab0f0e9",
+      "Ponds Fresh",
+      "Ponds Fresh",
+      "12",
+      "/images/products/icon/3ac2d925-1fc7-4dbc-97e0-5448a891c23e.jpg",
+      225,
+      250,
+      25,
+      10,
+      10,
+      1,
+      "2b48bdb6-5cef-43ca-9efd-41d16a887021",
+      "7b5d2a2d-5c11-4ecd-99bf-0544fcfad400"
+    ],
+    [
+      "3c99f01f-cbcf-42bc-aa74-8cc6c8de84a3",
+      "Ponds",
+      "Ponds Regular",
+      "12",
+      "/images/products/icon/70c47e5a-1f85-4557-962c-609717a52b25.jpg",
+      150,
+      180,
+      30,
+      16.6667,
+      10,
+      2,
+      "2b48bdb6-5cef-43ca-9efd-41d16a887021",
+      "7b5d2a2d-5c11-4ecd-99bf-0544fcfad400"
+    ]
+  ],
+  []
+]

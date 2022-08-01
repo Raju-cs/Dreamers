@@ -1,0 +1,216 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\AddressArea\**" />
+    <Compile Remove="Controllers\AppArea\**" />
+    <Compile Remove="Controllers\AppDataArea\**" />
+    <Compile Remove="Controllers\BannerArea\**" />
+    <Compile Remove="Controllers\BlogArea\**" />
+    <Compile Remove="Controllers\CareerArea\**" />
+    <Compile Remove="Controllers\CheckoutArea\**" />
+    <Compile Remove="Controllers\CommonArea\**" />
+    <Compile Remove="Controllers\ComplainArea\**" />
+    <Compile Remove="Controllers\ContactArea\**" />
+    <Compile Remove="Controllers\DataArea\**" />
+    <Compile Remove="Controllers\DataCenterArea\**" />
+    <Compile Remove="Controllers\FindStoreArea\**" />
+    <Compile Remove="Controllers\GalleryArea\**" />
+    <Compile Remove="Controllers\MessagingArea\**" />
+    <Compile Remove="Controllers\NoticeArea\**" />
+    <Compile Remove="Controllers\OfferArea\**" />
+    <Compile Remove="Controllers\ProductOrderArea\**" />
+    <Compile Remove="Controllers\PromotionalArea\**" />
+    <Compile Remove="Controllers\RequestOrderArea\**" />
+    <Compile Remove="Controllers\ReviewArea\**" />
+    <Compile Remove="Controllers\UrgentOrderArea\**" />
+    <Compile Remove="Controllers\WishListArea\**" />
+    <Compile Remove="wwwroot\js\EmployeeArea\**" />
+    <Content Remove="Controllers\AddressArea\**" />
+    <Content Remove="Controllers\AppArea\**" />
+    <Content Remove="Controllers\AppDataArea\**" />
+    <Content Remove="Controllers\BannerArea\**" />
+    <Content Remove="Controllers\BlogArea\**" />
+    <Content Remove="Controllers\CareerArea\**" />
+    <Content Remove="Controllers\CheckoutArea\**" />
+    <Content Remove="Controllers\CommonArea\**" />
+    <Content Remove="Controllers\ComplainArea\**" />
+    <Content Remove="Controllers\ContactArea\**" />
+    <Content Remove="Controllers\DataArea\**" />
+    <Content Remove="Controllers\DataCenterArea\**" />
+    <Content Remove="Controllers\FindStoreArea\**" />
+    <Content Remove="Controllers\GalleryArea\**" />
+    <Content Remove="Controllers\MessagingArea\**" />
+    <Content Remove="Controllers\NoticeArea\**" />
+    <Content Remove="Controllers\OfferArea\**" />
+    <Content Remove="Controllers\ProductOrderArea\**" />
+    <Content Remove="Controllers\PromotionalArea\**" />
+    <Content Remove="Controllers\RequestOrderArea\**" />
+    <Content Remove="Controllers\ReviewArea\**" />
+    <Content Remove="Controllers\UrgentOrderArea\**" />
+    <Content Remove="Controllers\WishListArea\**" />
+    <Content Remove="wwwroot\js\EmployeeArea\**" />
+    <EmbeddedResource Remove="Controllers\AddressArea\**" />
+    <EmbeddedResource Remove="Controllers\AppArea\**" />
+    <EmbeddedResource Remove="Controllers\AppDataArea\**" />
+    <EmbeddedResource Remove="Controllers\BannerArea\**" />
+    <EmbeddedResource Remove="Controllers\BlogArea\**" />
+    <EmbeddedResource Remove="Controllers\CareerArea\**" />
+    <EmbeddedResource Remove="Controllers\CheckoutArea\**" />
+    <EmbeddedResource Remove="Controllers\CommonArea\**" />
+    <EmbeddedResource Remove="Controllers\ComplainArea\**" />
+    <EmbeddedResource Remove="Controllers\ContactArea\**" />
+    <EmbeddedResource Remove="Controllers\DataArea\**" />
+    <EmbeddedResource Remove="Controllers\DataCenterArea\**" />
+    <EmbeddedResource Remove="Controllers\FindStoreArea\**" />
+    <EmbeddedResource Remove="Controllers\GalleryArea\**" />
+    <EmbeddedResource Remove="Controllers\MessagingArea\**" />
+    <EmbeddedResource Remove="Controllers\NoticeArea\**" />
+    <EmbeddedResource Remove="Controllers\OfferArea\**" />
+    <EmbeddedResource Remove="Controllers\ProductOrderArea\**" />
+    <EmbeddedResource Remove="Controllers\PromotionalArea\**" />
+    <EmbeddedResource Remove="Controllers\RequestOrderArea\**" />
+    <EmbeddedResource Remove="Controllers\ReviewArea\**" />
+    <EmbeddedResource Remove="Controllers\UrgentOrderArea\**" />
+    <EmbeddedResource Remove="Controllers\WishListArea\**" />
+    <EmbeddedResource Remove="wwwroot\js\EmployeeArea\**" />
+    <None Remove="Controllers\AddressArea\**" />
+    <None Remove="Controllers\AppArea\**" />
+    <None Remove="Controllers\AppDataArea\**" />
+    <None Remove="Controllers\BannerArea\**" />
+    <None Remove="Controllers\BlogArea\**" />
+    <None Remove="Controllers\CareerArea\**" />
+    <None Remove="Controllers\CheckoutArea\**" />
+    <None Remove="Controllers\CommonArea\**" />
+    <None Remove="Controllers\ComplainArea\**" />
+    <None Remove="Controllers\ContactArea\**" />
+    <None Remove="Controllers\DataArea\**" />
+    <None Remove="Controllers\DataCenterArea\**" />
+    <None Remove="Controllers\FindStoreArea\**" />
+    <None Remove="Controllers\GalleryArea\**" />
+    <None Remove="Controllers\MessagingArea\**" />
+    <None Remove="Controllers\NoticeArea\**" />
+    <None Remove="Controllers\OfferArea\**" />
+    <None Remove="Controllers\ProductOrderArea\**" />
+    <None Remove="Controllers\PromotionalArea\**" />
+    <None Remove="Controllers\RequestOrderArea\**" />
+    <None Remove="Controllers\ReviewArea\**" />
+    <None Remove="Controllers\UrgentOrderArea\**" />
+    <None Remove="Controllers\WishListArea\**" />
+    <None Remove="wwwroot\js\EmployeeArea\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\AppBaseController.cs" />
+    <Compile Remove="Controllers\DropDownBaseController.cs" />
+    <Compile Remove="Entities\AppBaseEntity.cs" />
+    <Compile Remove="Entities\DropDownBaseEntity.cs" />
+    <Compile Remove="Entities\Mapper.cs" />
+    <Compile Remove="Services\DBService.cs" />
+    <Compile Remove="Services\IDropDownService.cs" />
+    <Compile Remove="Services\IService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Areas\MenuArea\Content\MenuAccess\CategoryAccess.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Content\MenuAccess\MenuAccess.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Content\MenuAccess\SetCategoryDesignationAccess.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Content\MenuAccess\SetCategoryUserAccess.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Content\MenuAccess\SetMenuAccess.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Content\MenuCategory\AppScript.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Content\MenuItem\AppScript.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Content\SubMenuItem\AppScript.js" />
+    <Content Remove="wwwroot\Areas\MenuArea\Templates\SetMenuAccess.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.15" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="IqraBase.Data">
+      <HintPath>..\DLLs\IqraBase.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="IqraBase.Service">
+      <HintPath>..\DLLs\IqraBase.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="IqraBase.Web">
+      <HintPath>..\DLLs\IqraBase.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="IqraBase.Web.Views">
+      <HintPath>..\DLLs\IqraBase.Web.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="IqraService.DB">
+      <HintPath>..\DLLs\IqraService.DB.dll</HintPath>
+    </Reference>
+    <Reference Include="IqraService.Search">
+      <HintPath>..\DLLs\IqraService.Search.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\App.Setup\App.Setup.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\MenuArea\Views\MenuAccess\Index.cshtml" />
+    <None Include="Areas\MenuArea\Views\MenuCategory\Index.cshtml" />
+    <None Include="Areas\MenuArea\Views\MenuItem\Index.cshtml" />
+    <None Include="Areas\MenuArea\Views\SubMenuItem\Index.cshtml" />
+    <None Include="Areas\MenuArea\Views\web.config" />
+    <None Include="Areas\MenuArea\Views\_ViewStart.cshtml" />
+    <None Include="Views\Account\Login.cshtml" />
+    <None Include="Views\Auth\Index.cshtml" />
+    <None Include="Views\Auth\Login.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\CategoryAccess.js" />
+    <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\MenuAccess.js" />
+    <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\SetCategoryDesignationAccess.js" />
+    <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\SetCategoryUserAccess.js" />
+    <None Include="wwwroot\Areas\MenuArea\Content\MenuAccess\SetMenuAccess.js" />
+    <None Include="wwwroot\Areas\MenuArea\Content\MenuCategory\AppScript.js" />
+    <None Include="wwwroot\Areas\MenuArea\Content\MenuItem\AppScript.js" />
+    <None Include="wwwroot\Areas\MenuArea\Content\SubMenuItem\AppScript.js" />
+    <None Include="wwwroot\Areas\MenuArea\Templates\SetMenuAccess.html" />
+    <None Include="wwwroot\lib\bootstrap\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\lib\bootstrap\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\js\npm.js" />
+    <None Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\lib\font-awesome\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\font-awesome\fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\MenuArea\Models\" />
+    <Folder Include="Areas\MenuArea\Views\Shared\" />
+  </ItemGroup>
+
+</Project>

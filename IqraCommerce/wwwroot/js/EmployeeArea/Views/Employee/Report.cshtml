@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Employee Report";
+}
+@section MenuItems {
+    @Html.Partial("~/Views/Menu/Admin.cshtml")
+}
+<script type="text/javascript">
+    $('.employee_group').addClass('active menu-open').find('.report').addClass('active');
+</script>
+<div id="filter_container" class="row">
+
+</div>
+<div id="sale_summary_container" style="font-size: 1.5em; font-weight: bold; margin: 10px 0px;" class="row">
+
+</div>
+<div class="empty_style button_container row">
+
+</div>
+<div>
+    <div class="">
+        <div id="grid"></div>
+    </div>
+</div>
+<script src="~/Content/IqraPharmacy/EmployeeArea/Content/User/Report.js"></script>

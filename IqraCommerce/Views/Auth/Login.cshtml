@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/IqraService/CSS/Global.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/IqraService/CSS/LogIn.css")" />
+    <script src="~/Content/IqraService/Js/IqraConfig.js"></script>
+    <script src="~/Content/IqraService/Js/Global.js"></script>
+</head>
+<body class="no-skin">
+    <div class="main-container" id="main-container">
+        <div class="main-content page-content-wrapper">
+            <div id="page_content" class="mid_body page-content">
+                <div class="login_form">
+                    <div class="form_header">LOGIN</div>
+                    <div class="login_form_container">
+                        <form id="login_form" action="/Account/LogIn" class="" method="post" role="form">
+                            <div class="">
+                                <div class="col-xs-12 input_container row">
+                                    <input type="hidden" name="Role" data-binding="Role" value="ADM" />
+                                    <div class="col-xs-4 field_title">Username</div>
+                                    <div class="col-xs-8">
+                                        <div class="form-group">
+                                            <input class="form-control" data-binding="UserName" required maxlength="50" data-minlength="2" data-val="true" name="UserName" placeholder="UserName" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 field_title">Password</div>
+                                    <div class="col-xs-8">
+                                        <div class="form-group">
+                                            <input class="form-control" data-binding="Password" required data-minlength="2" name="Password" placeholder="Password" type="password" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 field_title"><input id="remember_me" class="check-box" data-binding="RememberMe" name="RememberMe" type="checkbox" /></div>
+                                    <div class="col-xs-8 label_text">
+                                        <label for="remember_me"> Remember me </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn_save btn-white btn-default btn-round">
+                                    <span class="glyphicon glyphicon-save"></span>
+                                    Login
+                                </button>
+                                <button id="btn_forget_passwoed" type="button" class="btn btn-white btn-default btn-round">
+                                    <span class="glyphicon glyphicon-open"></span>
+                                    Forget Password
+                                </button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script src="@Url.Content("~/Content/IqraService/Js/Login.js")"></script>
+            </div>
+        </div>
+    </div><!-- /.main-container -->
+    <div class="footer">
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

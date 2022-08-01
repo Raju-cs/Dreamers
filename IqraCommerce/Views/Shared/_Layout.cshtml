@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IqraCommerce</title>
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/font-awesome.css" rel="stylesheet" />
+    
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Theme/Css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/Theme/Css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/Theme/Css/dashboard.css?v=1.0" rel="stylesheet" />
+    <link href="~/Content/Theme/Css/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/Style.css" rel="stylesheet" />
+    <script src="~/Content/IqraService/Js/IqraConfig.js?v=1.30"></script>
+
+    <script src="~/Content/IqraService/Js/Global.js?v=1.19"></script>
+    @*<script src="~/Content/Scripts/Tracker.js"></script>*@
+    <script src="~/Content/Scripts/AppComponent.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <header class="main-header">
+        <a href="/" class="logo">
+            <span class="logo-mini"><b>D</b></span>
+            <span class="logo-lg"><b> DREAMERS </b></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="submenu_container" style="display: inline-block;">
+                @RenderSection("SubMenuItems", required: false)
+                @ViewBag.Title
+            </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    @*@Html.Partial("_LoginPartial")*@
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+       
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <!--<div class="user-panel">
+                    <div class="pull-left image">-->
+                        @*<img src="~/Content/Img/LazzPharma.ico" class="img-circle" />*@
+                    <!--</div>
+                    <div class="pull-left info">-->
+                        @*<p>Welcome</p>
+                        <a href="#">@User.Identity.GetUserName()</a>*@
+                    <!--</div>
+                </div>-->
+
+                <ul id="menu_container" class="sidebar-menu" data-widget="tree">
+                    @RenderSection("MenuItems", required: false)
+                </ul>
+                <script src="~/Content/Scripts/UserProfile.js"></script>
+                <script src="~/Content/Theme/Js/adminlte.min.js"></script>
+                <script src="~/Content/Scripts/bootstrap.min.js"></script>
+                <link href="~/Content/IqraService/CSS/Window.css" rel="stylesheet" />
+            </section>
+        </aside>
+
+        <script src="~/lib/IqraService/Js/IqraConfig.js"></script>
+        <script src="~/lib/IqraService/Js/Global.js"></script>
+        <div class="content-wrapper" id="page_container">
+            <!-- Content Header (Page header) -->
+            @RenderBody()
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+            </div>
+            <strong>Copyright &copy; @DateTime.Now.Year <a href="http://www.iqrasys.com/">Iqrasys Solution Ltd.</a>.</strong> All rights
+            reserved.
+        </footer>
+
+        <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+</body>
+</html>
