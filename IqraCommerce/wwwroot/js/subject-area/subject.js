@@ -112,7 +112,7 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         remove: false,
         actions: [{
             click: edit,
-            html: menuBtn("Edit Information")
+            html: editBtn("Edit Information")
         }, {
                 click: viewDetails,
                 html: eyeBtn("View Details")

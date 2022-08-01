@@ -107,7 +107,7 @@ var Controller = new function () {
                         actions: [
                             {
                                 click: edit,
-                                html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject"></span> Edit subject </a>'
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject"></i></a>`
                                 
                             }
                         ],

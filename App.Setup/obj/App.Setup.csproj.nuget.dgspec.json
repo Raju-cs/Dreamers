@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Coaching_Management\\App.Setup\\App.Setup.csproj": {}
+    "H:\\Dreamers\\App.Setup\\App.Setup.csproj": {}
   },
   "projects": {
-    "H:\\Coaching_Management\\App.Setup\\App.Setup.csproj": {
+    "H:\\Dreamers\\App.Setup\\App.Setup.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Coaching_Management\\App.Setup\\App.Setup.csproj",
+        "projectUniqueName": "H:\\Dreamers\\App.Setup\\App.Setup.csproj",
         "projectName": "App.Setup",
-        "projectPath": "H:\\Coaching_Management\\App.Setup\\App.Setup.csproj",
+        "projectPath": "H:\\Dreamers\\App.Setup\\App.Setup.csproj",
         "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
-        "outputPath": "H:\\Coaching_Management\\App.Setup\\obj\\",
+        "outputPath": "H:\\Dreamers\\App.Setup\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

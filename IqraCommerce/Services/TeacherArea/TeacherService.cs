@@ -60,7 +60,7 @@ namespace IqraCommerce.Services.TeacherArea
       ,[tchr].[ActivityId]
       ,[tchr].[Name]
       ,[tchr].[PhoneNumber]
-      ,[tchr].[Email]
+      ,ISNULL([tchr].[Email], '') [Email]
       ,[tchr].[Gender]
       ,ISNULL([tchr].[UniversityName], '') [UniversityName]
       ,ISNULL([tchr].[UniversitySubject], '') [UniversitySubject]

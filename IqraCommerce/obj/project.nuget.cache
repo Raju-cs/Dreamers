@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "slydO3x2k6/1dCeHas7vYa420BfscS2+jhUCaeE/TAkGH8AlggYce+swE2RaYlksOArC2+YcVcQr8GDlZY2NUw==",
+  "dgSpecHash": "UHry2qWl76gv0PTIFHtJSwqTFqIoZ+GPcmw9ZlncbUnTC4c9dDPaIXNzWfcTeCqtnzOQs7EScbWPYr6OjXrPVw==",
   "success": true,
-  "projectFilePath": "H:\\Coaching_Management\\IqraCommerce\\IqraCommerce.csproj",
+  "projectFilePath": "H:\\Dreamers\\IqraCommerce\\IqraCommerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Windows 10\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
     "C:\\Users\\Windows 10\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",

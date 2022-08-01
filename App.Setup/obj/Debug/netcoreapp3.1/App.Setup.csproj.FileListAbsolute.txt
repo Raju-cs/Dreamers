@@ -38,3 +38,13 @@ H:\Coaching_Management\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.AssemblyInfo.
 H:\Coaching_Management\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.csproj.CoreCompileInputs.cache
 H:\Coaching_Management\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.dll
 H:\Coaching_Management\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.pdb
+H:\Dreamers\App.Setup\bin\Debug\netcoreapp3.1\App.Setup.deps.json
+H:\Dreamers\App.Setup\bin\Debug\netcoreapp3.1\App.Setup.dll
+H:\Dreamers\App.Setup\bin\Debug\netcoreapp3.1\App.Setup.pdb
+H:\Dreamers\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.csproj.AssemblyReference.cache
+H:\Dreamers\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.GeneratedMSBuildEditorConfig.editorconfig
+H:\Dreamers\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.AssemblyInfoInputs.cache
+H:\Dreamers\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.AssemblyInfo.cs
+H:\Dreamers\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.csproj.CoreCompileInputs.cache
+H:\Dreamers\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.dll
+H:\Dreamers\App.Setup\obj\Debug\netcoreapp3.1\App.Setup.pdb

@@ -8921,11 +8921,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\Coaching_Management\\IqraCommerce\\IqraCommerce.csproj",
+      "projectUniqueName": "H:\\Dreamers\\IqraCommerce\\IqraCommerce.csproj",
       "projectName": "IqraCommerce",
-      "projectPath": "H:\\Coaching_Management\\IqraCommerce\\IqraCommerce.csproj",
+      "projectPath": "H:\\Dreamers\\IqraCommerce\\IqraCommerce.csproj",
       "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
-      "outputPath": "H:\\Coaching_Management\\IqraCommerce\\obj\\",
+      "outputPath": "H:\\Dreamers\\IqraCommerce\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -8946,8 +8946,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "H:\\Coaching_Management\\App.Setup\\App.Setup.csproj": {
-              "projectPath": "H:\\Coaching_Management\\App.Setup\\App.Setup.csproj"
+            "H:\\Dreamers\\App.Setup\\App.Setup.csproj": {
+              "projectPath": "H:\\Dreamers\\App.Setup\\App.Setup.csproj"
             }
           }
         }
