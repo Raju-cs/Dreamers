@@ -1,17 +1,17 @@
 ﻿
 var Controller = new function () {
     const teacherFilter = { "field": "TeacherId", "value": '', Operation: 0 };
+    const subjectActiveFilter = { "field": "IsActive", "value": 1, Operation: 0}
     var _options;
 
-    function openAssignSubject(model, grid, something) {
-        console.log([model, grid, something]);
+    function openAssignSubject(page) {
          Global.Add({
              name: 'ADD_SUBJECT',
              model: undefined,
              title: 'Add Subject',
              columns: [
                  { field: 'Charge', title: 'Subject Charge', filter: true, position: 2 },
-                 { field: 'Remarks', title: 'Remarks', add: {sibling: 1}, position: 3 },
+                 { field: 'Remarks', title: 'Remarks', add: { sibling: 1 }, position: 3, required: false },
              ],
              dropdownList: [
                  {
@@ -20,40 +20,54 @@ var Controller = new function () {
                      position: 1,
                      url: '/Subject/AutoComplete',
                      Type: 'AutoComplete',
-                 }             ],
+                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [subjectActiveFilter] }
+                   
+                 }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
                 formModel.TeacherId = _options.Id;
+                
              },
              onSaveSuccess: function () {
-                 //tabs.gridModel?.Reload();
+                 page.Grid.Model.Reload();
              },
+             filter: [subjectActiveFilter],
              save: `/TeacherSubject/Create`,
         });
     }
 
 
-    function edit(model) {
+    function edit(model, grid) {
+        console.log({ model, grid });
         Global.Add({
             name: 'EDIT_SUBJECT',
             model: model,
             title: 'Edit Subject',
             columns: [
-                { field: 'SubjectName', title: 'Subject Name', filter: true, position: 1, },
-                { field: 'Charge', title: 'Subject Charge', filter: true, position: 3, },
+                { field: 'Charge', title: 'Charge', filter: true, position: 3, },
 
             ],
-            dropdownList: [],
+            dropdownList: [{
+                Id: 'SubjectId',
+                add: { sibling: 2 },
+                position: 1,
+                url: '/Subject/AutoComplete',
+                Type: 'AutoComplete',
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [subjectActiveFilter] }
+            }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
+                formModel.TeacherId = _options.Id;
+                
 
             },
             onSaveSuccess: function () {
-                tabs.gridModel?.Reload();
+                grid?.Reload();
             },
+            filter: [subjectActiveFilter],
             saveChange: `/TeacherSubject/Edit`,
         });
     };
@@ -61,8 +75,7 @@ var Controller = new function () {
     this.Show = function (options) {
         _options = options;
         teacherFilter.value = _options.Id;
-        console.log("options=>", options);
-
+        console.log("option=>", _options);
         Global.Add({
             title: 'Teacher Information',
             selected: 0,
@@ -79,7 +92,7 @@ var Controller = new function () {
                             { field: 'UniversityName', title: 'Unitversity Name', filter: true, position: 5, required: false },
                             { field: 'UniversitySubject', title: 'Unitversity Subject', filter: true, position: 6, required: false },
                             { field: 'UniversityResult', title: 'Unitversity Result', filter: true, position: 7, required: false },
-                            { field: 'IsActive', title: 'Active', filter: true, add: false },
+                           
                            
                         ],
                         
@@ -91,13 +104,13 @@ var Controller = new function () {
                         }
                     
                 }, {
-                    title: 'Teacher Maintain Subject',
+                    title: 'Teachers Subject',
                     Grid: [{
                         
                         Header: 'Subject',
                         columns:[
-                            { field: 'SubjectName', title: 'Subject Name', filter: true, position: 1, },
-                            { field: 'Charge', title: 'Subject Charge', filter: true, position: 3, },
+                            { field: 'SubjectName', title: 'Subject', filter: true, position: 1, },
+                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
                             
                         ],
 
@@ -124,7 +137,7 @@ var Controller = new function () {
                     }],
                     
                 }, {
-                    title: 'Teacher Maintain Course',
+                    title: 'Teachers Course',
                     Grid: [{
                         Header: 'Course',
                         columns: [
@@ -136,7 +149,6 @@ var Controller = new function () {
                             { field: 'UniversityName', title: 'Unitversity Name', filter: true, position: 5, required: false },
                             { field: 'UniversitySubject', title: 'Unitversity Subject', filter: true, position: 6, required: false },
                             { field: 'UniversityResult', title: 'Unitversity Result', filter: true, position: 7, required: false },
-                            { field: 'IsActive', title: 'Active', filter: true, add: false },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false },
                             { field: 'CreatedBy', title: 'Creator', add: false },
                             { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },

@@ -1,4 +1,5 @@
 ﻿using IqraBase.Service;
+using System;
 using IqraCommerce.Entities.CourseArea;
 using IqraService.Search;
 using System.Collections.Generic;
@@ -37,6 +38,13 @@ namespace IqraCommerce.Services.CourseArea
                 return await db.GetPages(page, CourseQuery.Get());
             }
         }
+        public async Task<ResponseList<Dictionary<string, object>>> BasicInfo(Guid Id)
+        {
+            using (var db = new DBService(this))
+            {
+                return await db.FirstOrDefault(CourseQuery.BasicInfo + Id + "'");
+            }
+        }
     }
     public class CourseQuery
     {
@@ -62,6 +70,10 @@ namespace IqraCommerce.Services.CourseArea
             LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [crsh].[CreatedBy]
             LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [crsh].[UpdatedBy]";
 
+        }
+        public static string BasicInfo
+        {
+            get { return @"SELECT " + Get() + " Where crsh.Id = '"; }
         }
 
 

@@ -1,29 +1,31 @@
 ﻿
 
 var Controller = new function () {
-    const subjectFilter = { "field": "SubjectId", "value": '', Operation: 0 };
+   // const subjectFilter = { "field": "SubjectId", "value": '', Operation: 0 };
     var _options;
 
     this.Show = function (options) {
         _options = options;
-        subjectFilter.value = _options.Id;
+        
 
         Global.Add({
-            title: 'Subject Information',
+            title: 'Course Information',
             selected: 0,
             Tabs: [
                 {
-                    title: 'Subject Information',
+                    title: 'Course Information',
                    
                             columns : [
                                 { field: 'Name', title: 'Name', filter: true, position: 1, },
                                 { field: 'Class', title: 'Class', filter: true, position: 2, },
-                                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
+                                { field: 'DurationInMonth', title: 'Duration', filter: true, position: 3, },
+                                { field: 'Hour', title: 'Hour', filter: true, position: 4, },
+                                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                            
                         ],
                         
                         DetailsUrl: function () {
-                            return '/Subject/BasicInfo?Id=' + _options.Id;
+                            return '/Course/BasicInfo?Id=' + _options.Id;
                         },
                         onLoaded: function (tab, data) {
 
@@ -41,7 +43,7 @@ var Controller = new function () {
                         ],
 
                         Url: '/TeacherSubject/Get/',
-                        filter: [subjectFilter],
+                        filter: [],
                         onDataBinding: function (response) { },
                         actions: [
                             
@@ -62,7 +64,7 @@ var Controller = new function () {
                
             ],
 
-            name: 'Subject Information',
+            name: 'Course Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
           
         });

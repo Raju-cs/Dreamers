@@ -1,6 +1,9 @@
-import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
+import { editBtn, eyeBtn, statusBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
+import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
+
 import { imageBound } from '../utils.js';
+
 
 (function () {
     const controller = 'Teacher';
@@ -18,7 +21,6 @@ import { imageBound } from '../utils.js';
         { field: 'UniversityName', title: 'Unitversity Name', filter: true, position: 5, required: false },
         { field: 'UniversitySubject', title: 'Unitversity Subject', filter: true, position: 6, required: false },
         { field: 'UniversityResult', title: 'Unitversity Result', filter: true, position: 7, required: false },
-        { field: 'IsActive', title: 'Active', filter: true, add: false },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -37,9 +39,9 @@ import { imageBound } from '../utils.js';
                     title: 'Gender',
                     Id: 'Gender',
                     dataSource: [
-                        { text: 'Male', value: 'Male' },
-                        { text: 'Female', value: 'Female' },
-                        { text: 'Non-Binary', value: 'Non-Binary' },
+                        { text: 'Male', value: Gender.MALE },
+                        { text: 'Female', value: Gender.FEMALE },
+                        { text: 'Non-Binary', value: Gender.NON_BINARY },
                     ],
                     position: 8,
                    
@@ -72,8 +74,8 @@ import { imageBound } from '../utils.js';
                     title: 'Teacher Active Status',
                     Id: 'IsActive',
                     dataSource: [
-                        { text: 'yes', value: 'true' },
-                        { text: 'no', value: 'false' },
+                        { text: 'yes', value: ACTIVE_STATUS.TRUE },
+                        { text: 'no', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 2 },
                     position: 9,
@@ -82,9 +84,9 @@ import { imageBound } from '../utils.js';
                     title: 'Gender',
                     Id: 'Gender',
                     dataSource: [
-                        { text: 'Male', value: 'Male' },
-                        { text: 'Female', value: 'Female' },
-                        { text: 'Non-Binary', value: 'Non-Binary' },
+                        { text: 'Male', value: Gender.MALE },
+                        { text: 'Female', value: Gender.FEMALE },
+                        { text: 'Non-Binary', value: Gender.NON_BINARY },
                     ],
                     position: 10,
                     add: { sibling: 1 },
@@ -105,7 +107,7 @@ import { imageBound } from '../utils.js';
         });
     };
 
-    function isactive(model) {
+    function inactive(model) {
         
         Global.Add({
             name: 'EDIT_TEACHER_ACTIVE_STATUS',
@@ -118,8 +120,8 @@ import { imageBound } from '../utils.js';
                     title: 'Teacher Active Status',
                     Id: 'IsActive',
                     dataSource: [
-                        { text: 'yes', value: 'true' },
-                        { text: 'no', value: 'false' },
+                        { text: 'yes', value: ACTIVE_STATUS.TRUE },
+                        { text: 'no', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 2 },
                     position: 9,
@@ -128,9 +130,9 @@ import { imageBound } from '../utils.js';
                     title: 'Gender',
                     Id: 'Gender',
                     dataSource: [
-                        { text: 'Male', value: 'Male' },
-                        { text: 'Female', value: 'Female' },
-                        { text: 'Non-Binary', value: 'Non-Binary' },
+                        { text: 'Male', value: Gender.MALE },
+                        { text: 'Female', value: Gender.FEMALE },
+                        { text: 'Non-Binary', value: Gender.NON_BINARY },
                     ],
                     position: 10,
 
@@ -159,7 +161,7 @@ import { imageBound } from '../utils.js';
             name: 'Teachers Information' + row.Id,
             url: '/js/teacher-area/teacher-details-modal.js',
         });
-        //alert('Not Yet Implemented!');
+        
     }
 
     // Active Tab Config
@@ -191,8 +193,8 @@ import { imageBound } from '../utils.js';
         filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL), liveRecord],
         remove: false,
         actions: [ {
-            click: isactive,
-            html: flashBtn("Edit Active Status")
+            click: inactive,
+            html: warnBtn("Edit Active Status")
 
         }, {
                 click: viewDetails,
@@ -212,10 +214,12 @@ import { imageBound } from '../utils.js';
             Url: `/${controller}/`,
         },
         items: [activeTab, inactiveTab],
+        /*
         periodic: {
             container: '.filter_container',
             type: 'ThisMonth',
         }
+        */
     };
 
     //Initialize Tabs

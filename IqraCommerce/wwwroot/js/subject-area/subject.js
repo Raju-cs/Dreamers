@@ -1,5 +1,7 @@
-import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
+import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn, statusBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
+import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
+
 (function () {
     const controller = 'Subject';
 
@@ -10,8 +12,7 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
     const columns = () => [
         { field: 'Name', title: 'Name', filter: true, position: 1, },
         { field: 'Class', title: 'Class', filter: true, position: 2, },
-        { field: 'Version', title: 'Version', filter: true, position: 3, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -29,8 +30,8 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
                 title: 'Version',
                 Id: 'Version',
                 dataSource: [
-                    { text: 'Bangla', value: 'Bangla' },
-                    { text: 'English', value: 'English' },
+                    { text: 'Bangla', value: SUBJECT.BANGLA },
+                    { text: 'English', value: SUBJECT.ENGLISH },
                     
                 ],
                 position: 3,
@@ -62,8 +63,8 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
                 title: 'Version',
                 Id: 'Version',
                 dataSource: [
-                    { text: 'Bangla', value: 'Bangla' },
-                    { text: 'English', value: 'English' },
+                    { text: 'Bangla', value: SUBJECT.BANGLA },
+                    { text: 'English', value: SUBJECT.ENGLISH },
 
                 ],
                 position: 3,
@@ -72,10 +73,10 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 
             }, {
                     title: 'Subject Active Status',
-                    Id: 'Isactive',
-                    dataSource: [
-                        { text: 'yes', value: 'true' },
-                        { text: 'no', value: 'false' },
+                    Id: 'IsActive',
+                dataSource: [
+                    { text: 'yes', value: ACTIVE_STATUS.TRUE },
+                    { text: 'no', value: ACTIVE_STATUS.FALSE },
                     ],
                 add: { sibling: 2 },
                 position: 4,
@@ -104,6 +105,52 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         
     }
 
+    function inactive(model) {
+
+        Global.Add({
+            name: 'EDIT_SUBJECT_ACTIVE_STATUS',
+            model: model,
+            title: 'Edit Teacher Active Status',
+            columns: columns(),
+            dropdownList: [{
+                title: 'Version',
+                Id: 'Version',
+                dataSource: [
+                    { text: 'Bangla', value: SUBJECT.BANGLA },
+                    { text: 'English', value: SUBJECT.ENGLISH },
+
+                ],
+                position: 3,
+
+
+
+            }, {
+                title: 'Subject Active Status',
+                Id: 'IsActive',
+                dataSource: [
+                    { text: 'yes', value: ACTIVE_STATUS.TRUE },
+                    { text: 'no', value: ACTIVE_STATUS.FALSE },
+                ],
+                add: { sibling: 2 },
+                position: 4,
+
+
+            },],
+            additionalField: [],
+            onSubmit: function (formModel, data, model) {
+                formModel.Id = model.Id
+                formModel.ActivityId = window.ActivityId;
+
+            },
+            onSaveSuccess: function () {
+                tabs.gridModel?.Reload();
+            },
+            saveChange: `/${controller}/Edit`,
+        });
+
+    };
+
+
     const activeTab = {
         Id: '4F000385-ABC3-4BE1-9627-2A1A442F02A0',
         Name: 'ACTIVE_SUBJECT',
@@ -124,15 +171,15 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Url: 'Get',
     }
 
-    const inActiveTab = {
+    const inactiveTab = {
         Id: '1FAF0800-93B1-4ABA-9821-F5FA05D150FD',
         Name: 'INACTIVE_SUBJECT',
         Title: 'Inactive',
         filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL), liveRecord],
         remove: false,
         actions: [{
-            click: edit,
-            html: menuBtn("Edit Information")
+            click: inactive,
+            html: flashBtn("Edit Information")
         }, {
                 click: viewDetails,
                 html: eyeBtn("View Details")
@@ -150,17 +197,11 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Base: {
             Url: `/${controller}/`,
         },
-        items: [activeTab, inActiveTab],
-        periodic: {
-            container: '.filter_container',
-            type: 'ThisMonth',
-        }
+        items: [activeTab, inactiveTab],
     };
 
  
     //Initialize Tabs
     Global.Tabs(tabs);
     tabs.items[0].set(tabs.items[0]);
-    
-
 })();

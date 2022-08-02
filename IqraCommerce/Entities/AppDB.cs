@@ -2,6 +2,7 @@
 using IqraCommerce.Entities.CourseArea;
 using IqraCommerce.Entities.SubjectArea;
 using IqraCommerce.Entities.TeacherArea;
+using IqraCommerce.Entities.TeacherCourseArea;
 using IqraCommerce.Entities.TeacherSubjectArea;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -57,6 +58,11 @@ namespace IqraCommerce.Entities
         #region Course
         public virtual DbSet<Course> Course { get; set; }
         #endregion
+
+        #region TeacherCourse
+        public virtual DbSet<TeacherCourse> TeacherCourse { get; set; }
+        #endregion
+
 
 
         protected override void OnModelCreating(ModelBuilder builder)

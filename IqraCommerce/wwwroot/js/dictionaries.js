@@ -64,6 +64,24 @@ export const REVIEW_STATUS = {
     ON_HOLD: "ON HOLD",
 };
 
+export const Gender = {
+    MALE: "Male",
+    FEMALE: "Female",
+    NON_BINARY: "NonBinary",
+};
+
+export const ACTIVE_STATUS = {
+    TRUE: "true",
+    FALSE: "false"
+}
+
+export const SUBJECT = {
+    BANGLA: "Bangla",
+    ENGLISH: "English"
+}
+
+
+
 export const ORDER_STATUS = {
     PENDING: 'PENDING',
     CONFIRMED: 'CONFIRMED',

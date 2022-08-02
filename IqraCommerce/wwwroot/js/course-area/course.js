@@ -1,5 +1,6 @@
 import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
+import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
 (function () {
     const controller = 'Course';
@@ -13,7 +14,6 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         { field: 'Class', title: 'Class', filter: true, position: 2, },
         { field: 'DurationInMonth', title: 'Duration', filter: true, position: 3, },
         { field: 'Hour', title: 'Hour', filter: true, position: 4, },
-        { field: 'IsActive', title: 'Active', filter: true, add: false, position: 6, },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -31,8 +31,8 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
                 title: 'Version',
                 Id: 'Version',
                 dataSource: [
-                    { text: 'Bangla', value: 'Bangla' },
-                    { text: 'English', value: 'English' },
+                    { text: 'Bangla', value: SUBJECT.BANGLA },
+                    { text: 'English', value: SUBJECT.ENGLISH },
 
                 ],
                 position: 5,
@@ -64,8 +64,8 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
                 title: 'Version',
                 Id: 'Version',
                 dataSource: [
-                    { text: 'Bangla', value: 'Bangla' },
-                    { text: 'English', value: 'English' },
+                    { text: 'Bangla', value: SUBJECT.BANGLA },
+                    { text: 'English', value: SUBJECT.ENGLISH },
 
                 ],
                 position: 3,
@@ -76,8 +76,8 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
                 title: 'Course Active Status',
                 Id: 'Isactive',
                 dataSource: [
-                    { text: 'yes', value: 'true' },
-                    { text: 'no', value: 'false' },
+                    { text: 'yes', value: ACTIVE_STATUS.TRUE },
+                    { text: 'no', value: ACTIVE_STATUS.FALSE },
                 ],
                 add: { sibling: 2 },
                 position: 4,
@@ -100,9 +100,11 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
     const viewDetails = (row) => {
         Global.Add({
             Id: row.Id,
-            name: 'Subject Information' + row.Id,
-            url: '/js/subject-area/subject-details-modal.js',
+            name: 'Course Information' + row.Id,
+            url: '/js/course-area/course-details-modal.js',
         });
+        
+      
 
     }
 
@@ -114,7 +116,7 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         remove: false,
         actions: [{
             click: edit,
-            html: menuBtn("Edit Information")
+            html: editBtn("Edit Information")
         }, {
             click: viewDetails,
             html: eyeBtn("View Details")
@@ -126,15 +128,15 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Url: 'Get',
     }
 
-    const inActiveTab = {
+    const inactiveTab = {
         Id: 'B8D5164D-E78D-4BDA-ACE4-231D4F343ACA',
-        Name: 'INACTIVE_SUBJECT',
+        Name: 'INACTIVE_COURSE',
         Title: 'Inactive',
         filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL), liveRecord],
         remove: false,
         actions: [{
             click: edit,
-            html: menuBtn("Edit Information")
+            html: editBtn("Edit Information")
         }, {
             click: viewDetails,
             html: eyeBtn("View Details")
@@ -152,11 +154,12 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Base: {
             Url: `/${controller}/`,
         },
-        items: [activeTab, inActiveTab],
-        periodic: {
+        items: [activeTab, inactiveTab],
+        /* periodic: {
             container: '.filter_container',
             type: 'ThisMonth',
         }
+        */
     };
 
 
