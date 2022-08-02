@@ -11,10 +11,13 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
     const columns = () => [
         { field: 'Name', title: 'Name', filter: true, position: 1, },
-        { field: 'Class', title: 'Class', filter: true, position: 2, },
-        { field: 'DurationInMonth', title: 'Duration', filter: true, position: 3, },
-        { field: 'Hour', title: 'Hour', filter: true, position: 4, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
+        { field: 'Class', title: 'Class', filter: true, position: 2, add: { sibling:4 } },
+        { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 4, required: false, add: { sibling: 4 } },
+        { field: 'CourseFee', title: 'Course fee', filter: true, position: 3, add: { sibling: 4 }  },
+        { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 5, add: { sibling: 4 } },
+        { field: 'Hour', title: 'Hour', filter: true, position: 6, add: { sibling: 4 } , required: false},
+        { field: 'Version', title: 'Version', filter: true, position: 7, add: false, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 , type: 'textarea'},  required: false, position: 8, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -36,6 +39,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
                 ],
                 position: 5,
+                add: { sibling: 4 }
             }
 
 
@@ -59,7 +63,15 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             name: 'EDIT_COURSE',
             model: model,
             title: 'Edit Course',
-            columns: columns(),
+            columns: [
+                { field: 'Name', title: 'Name', filter: true, position: 1, add: { sibling: 4 } },
+                { field: 'Class', title: 'Class', filter: true, position: 2, add: { sibling: 4 } },
+                { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 3, add: { sibling: 4 } },
+                { field: 'CourseFee', title: 'Course fee', filter: true, position: 4, add: { sibling: 4 } },
+                { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 5, add: { sibling: 4 } },
+                { field: 'Hour', title: 'Hour', filter: true, position: 6, add: { sibling: 4 } },
+                { field: 'Version', title: 'Version', filter: true, position: 7, add: false, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 8, },],
             dropdownList: [{
                 title: 'Version',
                 Id: 'Version',
@@ -69,6 +81,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
                 ],
                 position: 3,
+                add: { sibling: 4 }
 
 
 
@@ -79,7 +92,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                     { text: 'yes', value: ACTIVE_STATUS.TRUE },
                     { text: 'no', value: ACTIVE_STATUS.FALSE },
                 ],
-                add: { sibling: 2 },
+                add: { sibling: 4 },
                 position: 4,
 
 

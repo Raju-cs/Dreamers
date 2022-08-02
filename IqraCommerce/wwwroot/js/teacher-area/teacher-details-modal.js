@@ -1,7 +1,9 @@
 ﻿
 var Controller = new function () {
     const teacherFilter = { "field": "TeacherId", "value": '', Operation: 0 };
-    const subjectActiveFilter = { "field": "IsActive", "value": 1, Operation: 0}
+    const subjectActiveFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const courseActiveFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+
     var _options;
 
     function openAssignSubject(page) {
@@ -10,7 +12,7 @@ var Controller = new function () {
              model: undefined,
              title: 'Add Subject',
              columns: [
-                 { field: 'Charge', title: 'Subject Charge', filter: true, position: 2 },
+                 { field: 'Charge', title: 'Charge', filter: true, position: 2 },
                  { field: 'Remarks', title: 'Remarks', add: { sibling: 1 }, position: 3, required: false },
              ],
              dropdownList: [
@@ -36,9 +38,40 @@ var Controller = new function () {
              save: `/TeacherSubject/Create`,
         });
     }
+    function openAssignCourse(page) {
+        Global.Add({
+            name: 'ADD_COURSE',
+            model: undefined,
+            title: 'Add Course',
+            columns: [
+                { field: 'Charge', title: 'Charge', filter: true, position: 2 },
+                { field: 'Remarks', title: 'Remarks', add: { sibling: 1 }, position: 3, required: false },
+            ],
+            dropdownList: [{
+                Id: 'CourseId',
+                add: { sibling: 2 },
+                position: 1,
+                url: '/Course/AutoComplete',
+                Type: 'AutoComplete',
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [courseActiveFilter] }
+
+            },],
+            additionalField: [],
+            onSubmit: function (formModel, data, model) {
+                formModel.ActivityId = window.ActivityId;
+                formModel.TeacherId = _options.Id;
+
+            },
+            onSaveSuccess: function () {
+                page.Grid.Model.Reload();
+            },
+            filter: [],
+            save: `/TeacherCourse/Create`,
+        });
+    }
 
 
-    function edit(model, grid) {
+    function editSubject(model, grid) {
         console.log({ model, grid });
         Global.Add({
             name: 'EDIT_SUBJECT',
@@ -69,6 +102,40 @@ var Controller = new function () {
             },
             filter: [subjectActiveFilter],
             saveChange: `/TeacherSubject/Edit`,
+        });
+    };
+
+    function editCourse(model, grid) {
+        console.log({ model, grid });
+        Global.Add({
+            name: 'EDIT_COURSE',
+            model: model,
+            title: 'Edit Course',
+            columns: [
+                { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+
+            ],
+            dropdownList: [{
+                Id: 'CourseId',
+                add: { sibling: 2 },
+                position: 1,
+                url: '/Course/AutoComplete',
+                Type: 'AutoComplete',
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [subjectActiveFilter] }
+            }],
+            additionalField: [],
+            onSubmit: function (formModel, data, model) {
+                formModel.Id = model.Id
+                formModel.ActivityId = window.ActivityId;
+                formModel.TeacherId = _options.Id;
+
+
+            },
+            onSaveSuccess: function () {
+                grid?.Reload();
+            },
+            filter: [subjectActiveFilter],
+            saveChange: `/TeacherCourse/Edit`,
         });
     };
 
@@ -119,7 +186,7 @@ var Controller = new function () {
                         onDataBinding: function (response) { },
                         actions: [
                             {
-                                click: edit,
+                                click: editSubject,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject"></i></a>`
                                 
                             }
@@ -139,27 +206,30 @@ var Controller = new function () {
                 }, {
                     title: 'Teachers Course',
                     Grid: [{
+
                         Header: 'Course',
                         columns: [
-                            { field: 'Name', title: 'Name', filter: true, position: 1, },
-                            { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 2, },
-                            { field: 'OptionalPhoneNumber', title: 'Optional Phone Number', filter: true, position: 3, required: false },
-                            { field: 'Email', title: 'Email', filter: true, position: 4, required: false },
-                            { field: 'Gender', filter: true, add: false, position: 8, },
-                            { field: 'UniversityName', title: 'Unitversity Name', filter: true, position: 5, required: false },
-                            { field: 'UniversitySubject', title: 'Unitversity Subject', filter: true, position: 6, required: false },
-                            { field: 'UniversityResult', title: 'Unitversity Result', filter: true, position: 7, required: false },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false },
-                            { field: 'CreatedBy', title: 'Creator', add: false },
-                            { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
-                            { field: 'UpdatedBy', title: 'Updator', add: false },
-                            { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
+                            { field: 'CourseName', title: 'Course', filter: true, position: 1, },
+                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+
                         ],
 
-                        Url: '/Teacher/Get/',
-                        filter: [],
+                        Url: '/TeacherCourse/Get/',
+                        filter: [teacherFilter],
                         onDataBinding: function (response) { },
-                        actions: [],
+                        actions: [
+                            {
+                                click: editCourse,
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject"></i></a>`
+
+                            }
+                        ],
+                        buttons: [
+                            {
+                                click: openAssignCourse,
+                                html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject"></span> Add course </a>'
+                            }
+                        ],
                         selector: false,
                         Printable: {
                             container: $('void')

@@ -43,12 +43,8 @@ var Controller = new function () {
                         Url: '/TeacherSubject/Get/',
                         filter: [subjectFilter],
                         onDataBinding: function (response) { },
-                        actions: [
-                            
-                        ],
-                        buttons: [
-                          
-                        ],
+                        actions: [],
+                        buttons: [],
                         selector: false,
                         Printable: {
                             container: $('void')
