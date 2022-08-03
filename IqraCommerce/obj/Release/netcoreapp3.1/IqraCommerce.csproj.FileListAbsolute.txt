@@ -2353,3 +2353,4 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\IqraCommerce.RazorTargetAssem
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\IqraCommerce.Views.pdb
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\IqraCommerce.csproj.CopyComplete
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\IqraCommerce.genruntimeconfig.cache
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CourseSubjectTeacher\Index.cshtml.g.cs

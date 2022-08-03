@@ -1,8 +1,8 @@
 ﻿using EBonik.Data.Entities.HistoryArea;
 using IqraCommerce.Entities.CourseArea;
+using IqraCommerce.Entities.CourseSubjectTeacherArea;
 using IqraCommerce.Entities.SubjectArea;
 using IqraCommerce.Entities.TeacherArea;
-using IqraCommerce.Entities.TeacherCourseArea;
 using IqraCommerce.Entities.TeacherSubjectArea;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -59,8 +59,8 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Course> Course { get; set; }
         #endregion
 
-        #region TeacherCourse
-        public virtual DbSet<TeacherCourse> TeacherCourse { get; set; }
+        #region CourseSubjectTeacher
+        public virtual DbSet<CourseSubjectTeacher> CourseSubjectTeacher { get; set; }
         #endregion
 
 

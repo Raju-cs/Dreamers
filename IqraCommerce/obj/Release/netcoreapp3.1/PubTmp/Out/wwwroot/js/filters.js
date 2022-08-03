@@ -1,19 +1,19 @@
-export const operationType = {
-    equal: 0,
-    greaterThan: 1,
-    greaterOrEqual: 2,
-    lessThan: 3,
-    lessOrEqual: 4,
-    contains: 5,
-    startsWith: 6,
-    endsWith: 7,
-    soundEquals: 8,
-    soundContains: 9,
-    soundStartsWith: 10,
-    soundEndsWith: 11,
-    in: 12,
-    notIn: 13,
-    notEqual: 14
+export const OPERATION_TYPE = {
+    EQUAL: 0,
+    GREATERTHAN: 1,
+    GREATEROREQUAL:2,
+    LESSTHAN: 3,
+    LESSOREQUAL: 4,
+    CONTAINS: 5,
+    STARTSWITH: 6,
+    ENDSWITH: 7,
+    SOUNDEQUAL: 8,
+    SOUNDCONTAINS: 9,
+    SOUNDSTARTWITH: 10,
+    SOUNDENDWITH: 11,
+    IN: 12,
+    NOTIN: 13,
+    NOTEQUAL: 14
 }
 
 export const trashRecord = { "field": "IsDeleted", "value": 1, Operation: 0 };
