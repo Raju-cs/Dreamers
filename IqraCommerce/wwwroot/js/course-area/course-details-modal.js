@@ -1,17 +1,22 @@
 
 
 var Controller = new function () {
+    const courseFilter = { "field": "CourseId", "value": '', Operation: 0 };
+    const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     var _options;
 
     this.Show = function (options) {
         _options = options;
+        courseFilter.value = _options.Id;
+       
+        console.log("options=>", _options);
         
        
-        function openAssignCourse(page) {
+        function openToCourseSubjectTeacher(page) {
             Global.Add({
                 name: 'ADD_SUBJECT_AND_TEACHER',
                 model: undefined,
-                title: 'Add Subject & Teacher',
+                title: 'Add Subject & teacher',
                 columns: [
                      { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
                 ],
@@ -22,7 +27,7 @@ var Controller = new function () {
                         position: 1,
                         url: '/Subject/AutoComplete',
                         Type: 'AutoComplete',
-                        page: { 'PageNumber': 1, 'PageSize': 20,  }
+                        page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter]  }
 
                     }, {
                         Id: 'TeacherId',
@@ -30,12 +35,13 @@ var Controller = new function () {
                         position: 1,
                         url: '/Teacher/AutoComplete',
                         Type: 'AutoComplete',
-                        page: { 'PageNumber': 1, 'PageSize': 20, }
+                        page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter]  }
 
                     }],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.ActivityId = window.ActivityId;
+                    formModel.CourseId = _options.Id;
 
                 },
                 onSaveSuccess: function () {
@@ -71,7 +77,7 @@ var Controller = new function () {
                         }
                     
                 }, {
-                    title: ' Teachers & Subject ',
+                    title: ' Subject and Teacher ',
                     Grid: [{
 
                         Header: 'Subject',
@@ -83,14 +89,14 @@ var Controller = new function () {
                         ],
 
                         Url: '/CourseSubjectTeacher/Get/',
-                        filter: [],
+                        filter: [courseFilter],
                         onDataBinding: function (response) { },
                         actions: [
                            
                         ],
                         buttons: [
                             {
-                                click: openAssignCourse,
+                                click: openToCourseSubjectTeacher,
                                 html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject"></span> </a>'
                             }
                         ],

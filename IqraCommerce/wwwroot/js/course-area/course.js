@@ -111,6 +111,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
     };
 
     const viewDetails = (row) => {
+        console.log("row=>", row);
         Global.Add({
             Id: row.Id,
             name: 'Course Information' + row.Id,

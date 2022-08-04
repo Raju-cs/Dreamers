@@ -67,7 +67,16 @@ import { imageBound } from '../utils.js';
             name: 'EDIT_TEACHER_INFORMATION',
             model: model,
             title: 'Edit Teacher Information',
-            columns: columns(),
+            columns: [
+                { field: 'Name', title: 'Name', filter: true, position: 1, },
+                { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 2, },
+                { field: 'OptionalPhoneNumber', title: 'Optional Phone Number', filter: true, position: 3, required: false },
+                { field: 'Email', title: 'Email', filter: true, position: 4, required: false },
+                { field: 'UniversityName', title: 'Unitversity Name', filter: true, position: 5, required: false },
+                { field: 'UniversitySubject', title: 'Unitversity Subject', filter: true, position: 6, required: false },
+                { field: 'UniversityResult', title: 'Unitversity Result', filter: true, position: 7, required: false },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false },
+            ],
             dropdownList: [
                 
                 {
@@ -89,7 +98,7 @@ import { imageBound } from '../utils.js';
                         { text: 'Non-Binary', value: Gender.NON_BINARY },
                     ],
                     position: 10,
-                    add: { sibling: 1 },
+                    add: { sibling: 2 },
 
 
                 }

@@ -12,7 +12,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
     const columns = () => [
         { field: 'Name', title: 'Name', filter: true, position: 1, },
         { field: 'Class', title: 'Class', filter: true, position: 2, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 5, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -58,7 +58,11 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             name: 'EDIT_SUBJECT',
             model: model,
             title: 'Edit subject',
-            columns: columns(),
+            columns: [
+                { field: 'Name', title: 'Name', filter: true, position: 1, },
+                { field: 'Class', title: 'Class', filter: true, position: 2, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 5, },
+            ],
             dropdownList: [{
                 title: 'Version',
                 Id: 'Version',

@@ -1,8 +1,8 @@
 ﻿
 var Controller = new function () {
     const teacherFilter = { "field": "TeacherId", "value": '', Operation: 0 };
-    const subjectActiveFilter = { "field": "IsActive", "value": 1, Operation: 0 };
-    const courseActiveFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const courseFilter = { "field": "TeacherId", "value": '', Operation: 0 };
 
     var _options;
 
@@ -22,7 +22,7 @@ var Controller = new function () {
                      position: 1,
                      url: '/Subject/AutoComplete',
                      Type: 'AutoComplete',
-                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [subjectActiveFilter] }
+                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter] }
                    
                  }],
             additionalField: [],
@@ -57,13 +57,14 @@ var Controller = new function () {
                 position: 1,
                 url: '/Subject/AutoComplete',
                 Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [subjectActiveFilter] }
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter] }
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
                 formModel.TeacherId = _options.Id;
+                
                 
 
             },
@@ -82,7 +83,7 @@ var Controller = new function () {
             model: model,
             title: 'Edit Course',
             columns: [
-                { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 3, },
 
             ],
             dropdownList: [{
@@ -91,7 +92,7 @@ var Controller = new function () {
                 position: 1,
                 url: '/Course/AutoComplete',
                 Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [subjectActiveFilter] }
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter] }
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
@@ -104,14 +105,15 @@ var Controller = new function () {
             onSaveSuccess: function () {
                 grid?.Reload();
             },
-            filter: [subjectActiveFilter],
-            saveChange: `/TeacherCourse/Edit`,
+            filter: [],
+            saveChange: `/CourseSubjectTeacher/Edit`,
         });
     };
 
     this.Show = function (options) {
         _options = options;
         teacherFilter.value = _options.Id;
+        courseFilter.value = _options.Id;
         console.log("option=>", _options);
         Global.Add({
             title: 'Teacher Information',
@@ -179,13 +181,16 @@ var Controller = new function () {
 
                         Header: 'Course',
                         columns: [
-                            { field: 'CourseName', title: 'Course', filter: true, position: 1, },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                           
+                            { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
+                            { field: 'SubjectName', title: 'Subject Name', filter: true, position: 2, add: false },
+                            { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 3, },
+                           
 
                         ],
 
                         Url: '/CourseSubjectTeacher/Get/',
-                        filter: [],
+                        filter: [courseFilter],
                         onDataBinding: function (response) { },
                         actions: [
                             {
