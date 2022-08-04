@@ -1,14 +1,50 @@
 
 
 var Controller = new function () {
-    const teacherFilter = { "field": "CourseId", "value": '', Operation: 0 };
     var _options;
 
     this.Show = function (options) {
         _options = options;
-        teacherFilter.value = _options.Id;
-       
         
+       
+        function openAssignCourse(page) {
+            Global.Add({
+                name: 'ADD_SUBJECT_AND_TEACHER',
+                model: undefined,
+                title: 'Add Subject & Teacher',
+                columns: [
+                     { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
+                ],
+                dropdownList: [
+                    {
+                        Id: 'SubjectId',
+                        add: { sibling: 2 },
+                        position: 1,
+                        url: '/Subject/AutoComplete',
+                        Type: 'AutoComplete',
+                        page: { 'PageNumber': 1, 'PageSize': 20,  }
+
+                    }, {
+                        Id: 'TeacherId',
+                        add: { sibling: 2 },
+                        position: 1,
+                        url: '/Teacher/AutoComplete',
+                        Type: 'AutoComplete',
+                        page: { 'PageNumber': 1, 'PageSize': 20, }
+
+                    }],
+                additionalField: [],
+                onSubmit: function (formModel, data, model) {
+                    formModel.ActivityId = window.ActivityId;
+
+                },
+                onSaveSuccess: function () {
+                    page.Grid.Model.Reload();
+                },
+                filter: [],
+                save: `/CourseSubjectTeacher/Create`,
+            });
+        }
 
         Global.Add({
             title: 'Course Information',
@@ -35,50 +71,28 @@ var Controller = new function () {
                         }
                     
                 }, {
-                    title: 'Teachers',
+                    title: ' Teachers & Subject ',
                     Grid: [{
 
                         Header: 'Subject',
                         columns: [
                             { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                            { field: 'SubjectName', title: 'Subject Name', filter: true, position: 2, add: false },
+                            { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
 
                         ],
 
-                        Url: '/TeacherCourse/Get/',
-                        filter: [teacherFilter],
-                        onDataBinding: function (response) { },
-                        actions: [
-                            
-                        ],
-                        buttons: [
-                          
-                        ],
-                        selector: false,
-                        Printable: {
-                            container: $('void')
-                        }
-                    }],
-
-                }, {
-                    title: 'Subject',
-                    Grid: [{
-
-                        Header: 'Subject',
-                        columns: [
-                            { field: 'SubjectName', title: 'Subject', filter: true, position: 1, },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
-
-                        ],
-
-                        Url: '/TeacherSubject/Get/',
+                        Url: '/CourseSubjectTeacher/Get/',
                         filter: [],
                         onDataBinding: function (response) { },
                         actions: [
-
+                           
                         ],
                         buttons: [
-
+                            {
+                                click: openAssignCourse,
+                                html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject"></span> </a>'
+                            }
                         ],
                         selector: false,
                         Printable: {
@@ -86,12 +100,7 @@ var Controller = new function () {
                         }
                     }],
 
-                },
-
-
-
-               
-            ],
+                }],
 
             name: 'Course Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',

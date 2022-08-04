@@ -38,41 +38,11 @@ var Controller = new function () {
              save: `/TeacherSubject/Create`,
         });
     }
-    function openAssignCourse(page) {
-        Global.Add({
-            name: 'ADD_COURSE',
-            model: undefined,
-            title: 'Add Course',
-            columns: [
-                { field: 'Charge', title: 'Charge', filter: true, position: 2 },
-                { field: 'Remarks', title: 'Remarks', add: { sibling: 1 }, position: 3, required: false },
-            ],
-            dropdownList: [{
-                Id: 'CourseId',
-                add: { sibling: 2 },
-                position: 1,
-                url: '/Course/AutoComplete',
-                Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [courseActiveFilter] }
-
-            },],
-            additionalField: [],
-            onSubmit: function (formModel, data, model) {
-                formModel.ActivityId = window.ActivityId;
-                formModel.TeacherId = _options.Id;
-
-            },
-            onSaveSuccess: function () {
-                page.Grid.Model.Reload();
-            },
-            filter: [],
-            save: `/TeacherCourse/Create`,
-        });
-    }
+   
 
 
     function editSubject(model, grid) {
-        console.log({ model, grid });
+      
         Global.Add({
             name: 'EDIT_SUBJECT',
             model: model,
@@ -214,8 +184,8 @@ var Controller = new function () {
 
                         ],
 
-                        Url: '/TeacherCourse/Get/',
-                        filter: [teacherFilter],
+                        Url: '/CourseSubjectTeacher/Get/',
+                        filter: [],
                         onDataBinding: function (response) { },
                         actions: [
                             {
@@ -226,7 +196,7 @@ var Controller = new function () {
                         ],
                         buttons: [
                             {
-                                click: openAssignCourse,
+                                click: [],
                                 html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject"></span> Add course </a>'
                             }
                         ],

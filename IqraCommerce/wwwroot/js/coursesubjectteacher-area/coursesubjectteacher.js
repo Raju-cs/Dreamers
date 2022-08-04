@@ -1,6 +1,6 @@
 import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
 (function () {
-    const controller = 'Course';
+    const controller = 'CourseSubjectTeacher';
 
     $(document).ready(() => {
         $('#add-record').click(add);
@@ -79,10 +79,7 @@ import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "
             Url: `/${controller}/`,
         },
         items: [activecoursetTab],
-        periodic: {
-            container: '.filter_container',
-            type: 'ThisMonth',
-        }
+        
     };
 
 
