@@ -84,7 +84,7 @@ var Controller = new function () {
                         columns: [
                             { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, },
                             { field: 'SubjectName', title: 'Subject Name', filter: true, position: 2, add: false },
-                            { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
+                            { field: 'TeacherPercentange', title: 'Percentange%', filter: true, position: 4, },
 
                         ],
 
