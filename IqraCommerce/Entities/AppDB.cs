@@ -1,4 +1,5 @@
 ﻿using EBonik.Data.Entities.HistoryArea;
+using IqraCommerce.Entities.BatchArea;
 using IqraCommerce.Entities.CourseArea;
 using IqraCommerce.Entities.CourseSubjectTeacherArea;
 using IqraCommerce.Entities.SubjectArea;
@@ -61,6 +62,10 @@ namespace IqraCommerce.Entities
 
         #region CourseSubjectTeacher
         public virtual DbSet<CourseSubjectTeacher> CourseSubjectTeacher { get; set; }
+        #endregion
+
+        #region Batch
+        public virtual DbSet<Batch> Batch { get; set; }
         #endregion
 
 

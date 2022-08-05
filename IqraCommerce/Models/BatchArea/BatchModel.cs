@@ -1,9 +1,14 @@
-﻿namespace IqraCommerce.Models.BatchArea
+﻿using System;
+namespace IqraCommerce.Models.BatchArea
 {
     public class BatchModel: AppDropDownBaseModel
     {
-        public string BatchDay { get; set; }
-        public string BatchTime { get; set; }
-        public int AmountOfStudent { get; set; }
+        public Guid TeacherId { get; set; }
+        public Guid SubjectId { get; set; }
+        public double TeacherPercentange { get; set; }
+        public double ChargePerStudent { get; set; }
+        public string MaxStudent { get; set; }
+        public string ClassRoomNumber { get; set; }
+        public bool IsActive { get; set; }
     }
 }

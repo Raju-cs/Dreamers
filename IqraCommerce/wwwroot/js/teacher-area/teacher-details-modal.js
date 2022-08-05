@@ -34,7 +34,7 @@ var Controller = new function () {
              onSaveSuccess: function () {
                  page.Grid.Model.Reload();
              },
-             filter: [subjectActiveFilter],
+             filter: [activeFilter],
              save: `/TeacherSubject/Create`,
         });
     }
@@ -71,7 +71,7 @@ var Controller = new function () {
             onSaveSuccess: function () {
                 grid?.Reload();
             },
-            filter: [subjectActiveFilter],
+            filter: [activeFilter],
             saveChange: `/TeacherSubject/Edit`,
         });
     };

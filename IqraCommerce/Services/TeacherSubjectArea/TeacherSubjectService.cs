@@ -31,7 +31,7 @@ namespace IqraCommerce.Services.TeacherSubjectArea
 
         public override async Task<ResponseList<Pagger<Dictionary<string, object>>>> Get(Page page)
         {
-            page.SortBy = page.SortBy ?? "[Name] asc";
+            page.SortBy = (page.SortBy == null || page.SortBy == "" ) ? "[Name] asc" : page.SortBy;
             using (var db = new DBService(this))
             {
                 return await db.GetPages(page, TeacherSubjectQuery.Get());

@@ -3,11 +3,15 @@
 var Controller = new function () {
     const courseFilter = { "field": "CourseId", "value": '', Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const subjectFilter = { "field": "SubjectId", "value": '', Operation: 0 }
+   
     var _options;
 
     this.Show = function (options) {
         _options = options;
         courseFilter.value = _options.Id;
+        subjectFilter.value = _options.Id;
+      
        
         console.log("options=>", _options);
         
@@ -16,7 +20,7 @@ var Controller = new function () {
             Global.Add({
                 name: 'ADD_SUBJECT_AND_TEACHER',
                 model: undefined,
-                title: 'Add Subject & teacher',
+                title: 'Add Subject and Teacher',
                 columns: [
                      { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
                 ],
