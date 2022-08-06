@@ -22,6 +22,12 @@ namespace IqraCommerce.Services.TeacherSubjectArea
                 case "teacher subject":
                     name = "tchrsbjct.[Name]";
                     break;
+                case "teachername":
+                    name = "[tchr].Name";
+                    break;
+                case "subjectname":
+                    name = "[sbjct].Name";
+                    break;
                 default:
                     name = "tchrsbjct." + name;
                     break;

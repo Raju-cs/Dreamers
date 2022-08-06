@@ -1,7 +1,7 @@
 ﻿
 
 var Controller = new function () {
-    const subjectFilter = { "field": "SubjectId", "value": '', Operation: 0 };
+    const subjectFilter = { "field": "SubjectId", "value": '', Operation: 0 }
     var _options;
 
     this.Show = function (options) {
@@ -35,7 +35,7 @@ var Controller = new function () {
 
                         Header: 'Subject',
                         columns: [
-                            { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, },
+                            { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, add: false },
                             { field: 'Charge', title: 'Charge', filter: true, position: 3, },
 
                         ],

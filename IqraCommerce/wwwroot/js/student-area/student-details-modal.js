@@ -52,24 +52,27 @@ var Controller = new function () {
         }
 
         Global.Add({
-            title: 'Course Information',
+            title: 'Student Information',
             selected: 0,
             Tabs: [
                 {
-                    title: 'Course Information',
+                    title: 'Student Information',
                    
                             columns : [
-                                { field: 'Name', title: 'Name', filter: true, position: 1, },
-                                { field: 'Class', title: 'Class', filter: true, position: 2, },
-                                { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 3, },
-                                { field: 'CourseFee', title: 'Course fee', filter: true, position: 4, },
-                                { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 5, },
-                                { field: 'Hour', title: 'Hour', filter: true, position: 6 },
+                                { field: 'DreamersId', title: 'Dreamers Id', filter: true, position: 2, add: { sibling: 3 }, },
+                                { field: 'Name', title: 'Full Name', filter: true, position: 3, add: { sibling: 3 }, },
+                                { field: 'NickName', title: 'Nick Name', filter: true, position: 4, add: { sibling: 3 }, required: false },
+                                { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 5, add: { sibling: 3 }, },
+                                { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 6, add: { sibling: 3 }, },
+                                { field: 'Gender', title: 'Gender', filter: true, position: 7, add: { sibling: 3 }, },
+                                { field: 'Religion', title: 'Religion', filter: true, position: 8, add: { sibling: 3 }, },
+                                { field: 'BloodGroup', title: 'Blood Group', filter: true, position: 9, add: { sibling: 3 }, required: false },
+                                { field: 'Nationality', title: 'Nationality', filter: true, position: 10, add: { sibling: 3 }, required: false },
                            
                         ],
                         
                         DetailsUrl: function () {
-                            return '/Course/BasicInfo?Id=' + _options.Id;
+                            return '/Student/BasicInfo?Id=' + _options.Id;
                         },
                         onLoaded: function (tab, data) {
 

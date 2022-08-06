@@ -67,17 +67,17 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             title: 'Edit Batch',
             columns: [
                 { field: 'Name', title: 'Name', filter: true, position: 1, add: { sibling: 3 } },
-                { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, add: { sibling: 3 } },
-                { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 3 } },
-                { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: { sibling: 3 } },
-                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 7, add: { sibling: 3} },
+                { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, add: { sibling: 2 } },
+                { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 2 } },
+                { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: { sibling: 2 } },
+                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 7, add: { sibling: 2} },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 8, }
             ],
             dropdownList: [
                 {
                     Id: 'SubjectId',
                     add: { sibling: 3 },
-                    position: 1,
+                    position: 2,
                     url: '/Subject/AutoComplete',
                     Type: 'AutoComplete',
                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [] }
@@ -85,7 +85,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 }, {
                     Id: 'TeacherId',
                     add: { sibling: 3 },
-                    position: 1,
+                    position: 3,
                     url: '/Teacher/AutoComplete',
                     Type: 'AutoComplete',
                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [] }
@@ -98,7 +98,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                         { text: 'yes', value: ACTIVE_STATUS.TRUE },
                         { text: 'no', value: ACTIVE_STATUS.FALSE },
                     ],
-                    add: { sibling: 3 },
+                    add: { sibling: 2 },
                     position: 4,
 
 

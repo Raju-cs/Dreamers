@@ -57,6 +57,12 @@ export const orderAquiredOfferType =
     Cashback: 0, Coupon: 1, Delivery: 2, Product: 3
 }
 
+export const Religion = {
+    ISLAM: "Islam",
+    HINDUISM: "Hinduism",
+    CHRISTIAN: "Christian"
+};
+
 export const REVIEW_STATUS = {
     PENDING: "PENDING",
     APPROVED: "APPROVED",
@@ -79,6 +85,9 @@ export const SUBJECT = {
     BANGLA: "Bangla",
     ENGLISH: "English"
 }
+
+
+
 
 
 

@@ -2,6 +2,7 @@
 using IqraCommerce.Entities.BatchArea;
 using IqraCommerce.Entities.CourseArea;
 using IqraCommerce.Entities.CourseSubjectTeacherArea;
+using IqraCommerce.Entities.StudentArea;
 using IqraCommerce.Entities.SubjectArea;
 using IqraCommerce.Entities.TeacherArea;
 using IqraCommerce.Entities.TeacherSubjectArea;
@@ -68,6 +69,9 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Batch> Batch { get; set; }
         #endregion
 
+        #region Student
+        public virtual DbSet<Student> Student { get; set; }
+        #endregion
 
 
         protected override void OnModelCreating(ModelBuilder builder)

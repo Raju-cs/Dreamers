@@ -18,9 +18,15 @@ namespace IqraCommerce.Services.BatchArea
                     break;
                 case "updator":
                     name = "updtr.Name";
-                    break;
+                    break; 
                 case "batch":
                     name = "btch.[Name]";
+                    break;
+                case "teachername":
+                    name = "[tchr].Name";
+                    break;
+                case "subjectname":
+                    name = "[sbjct].Name";
                     break;
                 default:
                     name = "btch." + name;

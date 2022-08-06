@@ -1,6 +1,7 @@
 ﻿using IqraCommerce.Entities.TeacherArea;
 using IqraCommerce.Models.TeacherArea;
 using IqraCommerce.Services.TeacherArea;
+using IqraService.Search;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

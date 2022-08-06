@@ -182,8 +182,8 @@ var Controller = new function () {
                         Header: 'Course',
                         columns: [
                            
-                            { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
-                            { field: 'SubjectName', title: 'Subject Name', filter: true, position: 2, add: false },
+                            { field: 'CourseName', title: 'Course', filter: true, position: 1, add: false },
+                            { field: 'SubjectName', title: 'Subject', filter: true, position: 2, add: false },
                             { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 3, },
                            
 
