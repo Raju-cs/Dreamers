@@ -10,6 +10,7 @@ import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "
         { field: 'SubjectName', title: 'Subject Name', filter: true, position: 2, add: false },
         { field: 'CourseName', title: 'Course Name', filter: true, position: 3, add: false },
         { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
+        { field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },

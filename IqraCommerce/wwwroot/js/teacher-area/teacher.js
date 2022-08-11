@@ -21,7 +21,7 @@ import { imageBound } from '../utils.js';
         { field: 'UniversityName', title: 'Unitversity Name', filter: true, position: 5, required: false },
         { field: 'UniversitySubject', title: 'Unitversity Subject', filter: true, position: 6, required: false },
         { field: 'UniversityResult', title: 'Unitversity Result', filter: true, position: 7, required: false },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -83,8 +83,8 @@ import { imageBound } from '../utils.js';
                     title: 'Teacher Active Status',
                     Id: 'IsActive',
                     dataSource: [
-                        { text: 'yes', value: ACTIVE_STATUS.TRUE },
-                        { text: 'no', value: ACTIVE_STATUS.FALSE },
+                        { text: 'Yes', value: ACTIVE_STATUS.TRUE },
+                        { text: 'No', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 2 },
                     position: 9,
@@ -129,8 +129,8 @@ import { imageBound } from '../utils.js';
                     title: 'Teacher Active Status',
                     Id: 'IsActive',
                     dataSource: [
-                        { text: 'yes', value: ACTIVE_STATUS.TRUE },
-                        { text: 'no', value: ACTIVE_STATUS.FALSE },
+                        { text: 'Yes', value: ACTIVE_STATUS.TRUE },
+                        { text: 'No', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 2 },
                     position: 9,
@@ -179,7 +179,6 @@ import { imageBound } from '../utils.js';
         Name: 'ACTIVE_TEACHER_TAB',
         Title: 'Active',
         filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL), liveRecord ],
-        remove: false,
         actions: [{
             click: edit,
             html: editBtn("Edit Information")
@@ -191,6 +190,7 @@ import { imageBound } from '../utils.js';
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
 
@@ -200,10 +200,9 @@ import { imageBound } from '../utils.js';
         Name: 'INACTIVE_TEACHER_TAB',
         Title: 'Inactive',
         filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL), liveRecord],
-        remove: false,
         actions: [ {
             click: inactive,
-            html: warnBtn("Edit Active Status")
+            html: editBtn("Edit Active Status")
 
         }, {
                 click: viewDetails,
@@ -213,8 +212,24 @@ import { imageBound } from '../utils.js';
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
+
+    // Delete tab config
+    const deleteTab = {
+        Id: '99A00B9C-9E07-4E74-A9C5-AE375A6BF810',
+        Name: 'DELETE_TEACHER',
+        Title: 'Deleted',
+        filter: [trashRecord],
+        actions: [],
+        onDataBinding: () => { },
+        rowBound: () => { },
+        columns: columns(),
+        Printable: { container: $('void') },
+        Url: 'Get',
+    }
+  
 
     //Tabs config
     const tabs = {
@@ -222,7 +237,7 @@ import { imageBound } from '../utils.js';
         Base: {
             Url: `/${controller}/`,
         },
-        items: [activeTab, inactiveTab],
+        items: [activeTab, inactiveTab, deleteTab],
         /*
         periodic: {
             container: '.filter_container',

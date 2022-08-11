@@ -11,13 +11,14 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
     const columns = () => [
         { field: 'Name', title: 'Name', filter: true, position: 1, },
-        { field: 'Class', title: 'Class', filter: true, position: 2, add: { sibling:4 } },
-        { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 4, required: false, add: { sibling: 4 } },
-        { field: 'CourseFee', title: 'Course fee', filter: true, position: 3, add: { sibling: 4 }  },
-        { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 5, add: { sibling: 4 } },
-        { field: 'Hour', title: 'Hour', filter: true, position: 6, add: { sibling: 4 } , required: false},
-        { field: 'Version', title: 'Version', filter: true, position: 7, add: false, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 , type: 'textarea'},  required: false, position: 8, },
+        { field: 'Class', title: 'Class', filter: true, position: 2, add: { sibling:2 } },
+        { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 2, required: false, add: { sibling: 2 } },
+        { field: 'CourseFee', title: 'Course fee', filter: true, position: 3, add: { sibling: 2 } },
+        { field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, add: { sibling: 2 } },
+        { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 6, add: { sibling: 2 } },
+        { field: 'Hour', title: 'Hour', filter: true, position: 7, add: { sibling: 2 } , required: false},
+        { field: 'Version', title: 'Version', filter: true, position: 8, add: false, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 , type: 'textarea'},  required: false, position: 9, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -39,11 +40,8 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
                 ],
                 position: 5,
-                add: { sibling: 4 }
-            }
-
-
-            ],
+                add: { sibling: 2 }
+            }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
@@ -64,14 +62,15 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             model: model,
             title: 'Edit Course',
             columns: [
-                { field: 'Name', title: 'Name', filter: true, position: 1, add: { sibling: 4 } },
-                { field: 'Class', title: 'Class', filter: true, position: 2, add: { sibling: 4 } },
-                { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 3, required: false, add: { sibling: 4 } },
-                { field: 'CourseFee', title: 'Course fee', filter: true, position: 4, add: { sibling: 4 } },
-                { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 5, add: { sibling: 4 } },
-                { field: 'Hour', title: 'Hour', filter: true, position: 6, required: false, add: { sibling: 4 } },
-                { field: 'Version', title: 'Version', filter: true, position: 7, add: false, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 8, },],
+                { field: 'Name', title: 'Name', filter: true, position: 1, add: { sibling: 3 } },
+                { field: 'Class', title: 'Class', filter: true, position: 2, add: { sibling: 3 } },
+                { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 3, required: false, add: { sibling: 3 } },
+                { field: 'CourseFee', title: 'Course fee', filter: true, position: 4, add: { sibling: 2 } },
+                { field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, add: { sibling: 2 } },
+                { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 6, add: { sibling: 2 } },
+                { field: 'Hour', title: 'Hour', filter: true, position: 7, required: false, add: { sibling: 2 } },
+                { field: 'Version', title: 'Version', filter: true, position: 8, add: false, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 9, },],
             dropdownList: [{
                 title: 'Version',
                 Id: 'Version',
@@ -81,7 +80,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
                 ],
                 position: 3,
-                add: { sibling: 4 }
+                add: { sibling: 2 }
 
 
 
@@ -89,10 +88,10 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 title: 'Course Active Status',
                 Id: 'Isactive',
                 dataSource: [
-                    { text: 'yes', value: ACTIVE_STATUS.TRUE },
-                    { text: 'no', value: ACTIVE_STATUS.FALSE },
+                    { text: 'Yes', value: ACTIVE_STATUS.TRUE },
+                    { text: 'No', value: ACTIVE_STATUS.FALSE },
                 ],
-                add: { sibling: 4 },
+                add: { sibling: 2 },
                 position: 4,
 
 
@@ -139,6 +138,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
 
@@ -159,6 +159,21 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
+        Url: 'Get',
+    }
+
+    // Delete tab config
+    const deleteTab = {
+        Id: '6D832F1F-7080-42F4-9080-41E02E23C8B3',
+        Name: 'DELETE_COURSE',
+        Title: 'Deleted',
+        filter: [trashRecord],
+        actions: [],
+        onDataBinding: () => { },
+        rowBound: () => { },
+        columns: columns(),
+        Printable: { container: $('void') },
         Url: 'Get',
     }
 
@@ -168,7 +183,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Base: {
             Url: `/${controller}/`,
         },
-        items: [activeTab, inactiveTab],
+        items: [activeTab, inactiveTab, deleteTab],
         /* periodic: {
             container: '.filter_container',
             type: 'ThisMonth',

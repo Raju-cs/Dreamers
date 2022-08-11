@@ -143,6 +143,9 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Class")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("CoachingPercentange")
+                        .HasColumnType("float");
+
                     b.Property<double>("CourseFee")
                         .HasColumnType("float");
 
@@ -196,6 +199,9 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("ActivityId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<double>("CoachingPercentange")
+                        .HasColumnType("float");
+
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
@@ -246,6 +252,9 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("BloodGroup")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Class")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -258,7 +267,37 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("DreamersId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FathersEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FathersName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FathersOccupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FathersPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Group")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GuardiansEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GuardiansName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GuardiansOccupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GuardiansPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeDistrict")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageURL")
@@ -270,6 +309,18 @@ namespace IqraCommerce.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MothersEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MothersName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MothersOccupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MothersPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -279,7 +330,13 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("NickName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PermanantAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PresentAddress")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Religion")
@@ -288,11 +345,29 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Section")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Shift")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentCollegeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentNameBangla")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentSchoolName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Version")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

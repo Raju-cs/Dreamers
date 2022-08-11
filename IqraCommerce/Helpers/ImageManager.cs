@@ -11,8 +11,7 @@ namespace IqraCommerce.Helpers
 {
     public class ImageManager
     {
-        private string[] sizeNames = { "Original", "Small", "Icon" };
-        private int[] sizes = { 0, 480, 100 };
+        private enum size { Original, Small, Icon };
         private string rootDirectory = "Directories";
         private readonly IConfiguration _config;
 
@@ -23,47 +22,12 @@ namespace IqraCommerce.Helpers
 
         public string Store(IFormFile image, string directory)
         {
-            var path = _config.GetSection(rootDirectory).GetSection(directory);
             var splitedName = image.FileName.Split('.');
             var imageName = Guid.NewGuid().ToString() + "." + splitedName[splitedName.Length - 1];
-            var rootPath = _config.GetSection(rootDirectory)["ROOT_PATH"];
 
-            for (int i = 0; i < 3; ++i)
-            {
-                if (!Directory.Exists(rootPath + path[sizeNames[i]]))
-                    Directory.CreateDirectory(rootPath + path[sizeNames[i]]);
-
-                using (var memoryStream = new MemoryStream())
-                {
-                    image.CopyTo(memoryStream);
-
-                    var fileBytes = memoryStream.ToArray();
-
-                    var imageStream = Image.FromStream(memoryStream);
-
-                    var transformedImage = imageStream;
-
-                    if ((imageStream.Width > sizes[i] || imageStream.Height > sizes[i]) && sizes[i] != 0)
-                    {
-                        var ratioX = (double)sizes[i] / imageStream.Width;
-                        var ratioY = (double)sizes[i] / imageStream.Height;
-
-                        var ratio = Math.Min(ratioX, ratioY);
-
-                        var newWidth = (int)(imageStream.Width * ratio);
-                        var newHeight = (int)(imageStream.Height * ratio);
-
-                        transformedImage = new Bitmap(newWidth, newHeight);
-
-                        using (var graphics = Graphics.FromImage(transformedImage))
-                        {
-                            graphics.DrawImage(imageStream, 0, 0, newWidth, newHeight);
-                        }
-                    }
-
-                    transformedImage.Save(rootPath + path[sizeNames[i]] + imageName);
-                }
-            }
+            Save(image, imageName, directory, size.Original);
+            Save(image, imageName, directory, size.Small, 480);
+            Save(image, imageName, directory, size.Icon, 80);
 
             return imageName;
         }
@@ -95,6 +59,46 @@ namespace IqraCommerce.Helpers
             var url = _config.GetSection(path)[size];
 
             return "/" + url + imageName;
+        }
+
+        private void Save(IFormFile image, string imageName, string dirName, size imageSize, int resulation = 0)
+        {
+            var rootPath = _config.GetSection(rootDirectory)["ROOT_PATH"];
+            var dir = $"/images/{dirName}/{imageSize.ToString()}/";
+
+            if (!Directory.Exists(rootPath + dir))
+                Directory.CreateDirectory(rootPath + dir);
+
+            using (var memoryStream = new MemoryStream())
+            {
+                image.CopyTo(memoryStream);
+
+                var fileBytes = memoryStream.ToArray();
+
+                var imageStream = Image.FromStream(memoryStream);
+
+                var transformedImage = imageStream;
+
+                if ((imageStream.Width > resulation || imageStream.Height > resulation) && resulation != 0)
+                {
+                    var ratioX = (double)resulation / imageStream.Width;
+                    var ratioY = (double)resulation / imageStream.Height;
+
+                    var ratio = Math.Min(ratioX, ratioY);
+
+                    var newWidth = (int)(imageStream.Width * ratio);
+                    var newHeight = (int)(imageStream.Height * ratio);
+
+                    transformedImage = new Bitmap(newWidth, newHeight);
+
+                    using (var graphics = Graphics.FromImage(transformedImage))
+                    {
+                        graphics.DrawImage(imageStream, 0, 0, newWidth, newHeight);
+                    }
+                }
+
+                transformedImage.Save(rootPath + dir + imageName);
+            }
         }
     }
 }

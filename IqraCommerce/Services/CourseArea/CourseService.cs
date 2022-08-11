@@ -32,7 +32,7 @@ namespace IqraCommerce.Services.CourseArea
 
         public override async Task<ResponseList<Pagger<Dictionary<string, object>>>> Get(Page page)
         {
-            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] asc" : page.SortBy;
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[CreatedAt] DESC" : page.SortBy;
             using (var db = new DBService(this))
             {
                 return await db.GetPages(page, CourseQuery.Get());
@@ -66,6 +66,7 @@ namespace IqraCommerce.Services.CourseArea
             ,[crsh].[IsActive]
             ,[crsh].[NumberOfClass]
             ,[crsh].[CourseFee]  
+            ,[crsh].[CoachingPercentange]
             ,ISNULL([crtr].[Name], '') [Creator]
 	        ,ISNULL([pdtr].[Name], '') [Updator]
             FROM [dbo].[Course] [crsh]

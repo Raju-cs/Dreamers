@@ -30,7 +30,7 @@ namespace IqraCommerce.Services.TeacherArea
         }
         public override async Task<ResponseList<Pagger<Dictionary<string, object>>>> Get(Page page)
         {
-            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] asc" : page.SortBy;
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[CreatedAt] DESC" : page.SortBy;
             using (var db = new DBService(this))
             {
                 return await db.GetPages(page, TeacherQuery.Get());
@@ -44,6 +44,16 @@ namespace IqraCommerce.Services.TeacherArea
                 return await db.FirstOrDefault(TeacherQuery.BasicInfo + Id + "'");
             }
         }
+        public async Task<ResponseList<List<Dictionary<string, object>>>> AutoComplete(Page page)
+        {
+            using (DBService db = new DBService())
+            {
+                page.SortBy = page.SortBy ?? "[Name]";
+                page.filter = page.filter ?? new List<FilterModel>();
+                
+                return await db.List(page, TeacherQuery.AutoComplete());
+            }
+        }
 
     }
     public class TeacherQuery
@@ -51,33 +61,57 @@ namespace IqraCommerce.Services.TeacherArea
         public static string Get()
         {
             return @"[tchr].[Id]
-      ,[tchr].[CreatedAt]
-      ,[tchr].[CreatedBy]
-      ,[tchr].[UpdatedAt]
-      ,[tchr].[UpdatedBy]
-      ,[tchr].[IsDeleted]
-      ,ISNULL([tchr].[Remarks], '') [Remarks]
-      ,[tchr].[ActivityId]
-      ,[tchr].[Name]
-      ,[tchr].[PhoneNumber]
-      ,ISNULL([tchr].[Email], '') [Email]
-      ,[tchr].[Gender]
-      ,ISNULL([tchr].[UniversityName], '') [UniversityName]
-      ,ISNULL([tchr].[UniversitySubject], '') [UniversitySubject]
-      ,ISNULL([tchr].[UniversityResult], '') [UniversityResult]
-      ,[tchr].[IsActive]
-      ,ISNULL([tchr].[OptionalPhoneNumber], '') [OptionalPhoneNumber]
-	  ,ISNULL([crtr].[Name], '') [Creator]
-	  ,ISNULL([pdtr].[Name], '') [Updator]
-        FROM [dbo].[Teacher] [tchr]
-        LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [tchr].[CreatedBy]
-        LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [tchr].[UpdatedBy]";
+                    ,[tchr].[CreatedAt]
+                    ,[tchr].[CreatedBy]
+                    ,[tchr].[UpdatedAt]
+                    ,[tchr].[UpdatedBy]
+                    ,[tchr].[IsDeleted]
+                    ,ISNULL([tchr].[Remarks], '') [Remarks]
+                    ,[tchr].[ActivityId]
+                    ,[tchr].[Name]
+                    ,[tchr].[PhoneNumber]
+                    ,ISNULL([tchr].[Email], '') [Email]
+                    ,[tchr].[Gender]
+                    ,ISNULL([tchr].[UniversityName], '') [UniversityName]
+                    ,ISNULL([tchr].[UniversitySubject], '') [UniversitySubject]
+                    ,ISNULL([tchr].[UniversityResult], '') [UniversityResult]
+                    ,[tchr].[IsActive]
+                    ,ISNULL([tchr].[OptionalPhoneNumber], '') [OptionalPhoneNumber]
+	                ,ISNULL([crtr].[Name], '') [Creator]
+	                ,ISNULL([pdtr].[Name], '') [Updator]
+                    FROM [dbo].[Teacher] [tchr]
+                    LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [tchr].[CreatedBy]
+                    LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [tchr].[UpdatedBy]";
         }
         public static string BasicInfo
         {
             get { return @"SELECT " + Get() + " Where tchr.Id = '"; }
         }
-
+        public static string AutoComplete()
+        {
+            return @"
+                    SELECT
+                    [tchr].[Id],
+                    [tchr].[CreatedAt],
+                    [tchr].[CreatedBy],
+                    [tchr].[UpdatedAt],
+                    [tchr].[UpdatedBy],
+                    [tchr].[IsDeleted],
+                    ISNULL([tchr].[Remarks], '') [Remarks],
+                    [tchr].[ActivityId],
+                    [tchr].[Name],
+                    [tchr].[PhoneNumber],
+                    ISNULL([tchr].[Email], '') [Email],
+                    [tchr].[Gender],
+                    ISNULL([tchr].[UniversityName], '') [UniversityName],
+                    ISNULL([tchr].[UniversitySubject], '') [UniversitySubject],
+                    ISNULL([tchr].[UniversityResult], '') [UniversityResult],
+                    [tchr].[IsActive],
+                    ISNULL([tchr].[OptionalPhoneNumber], '') [OptionalPhoneNumber]
+                    FROM TeacherSubject tchrsbjct
+                    LEFT JOIN Teacher tchr ON tchr.Id = tchrsbjct.TeacherId
+            ";
+        }
     }
 
 

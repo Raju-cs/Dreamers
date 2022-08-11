@@ -12,5 +12,6 @@ namespace IqraCommerce.Entities.CourseSubjectTeacherArea
         public Guid SubjectId { get; set; }
         public Guid CourseId { get; set; }
         public double TeacherPercentange { get; set; }
+        public double CoachingPercentange { get; set; }
     }
 }

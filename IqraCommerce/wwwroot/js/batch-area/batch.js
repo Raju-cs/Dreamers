@@ -13,11 +13,10 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'Name', title: 'Name', filter: true, position: 1, },
         { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
         { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
-        { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
-        { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 3 }},
-        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: { sibling: 3 } },
-        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 7, add: { sibling: 3 }},
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false, position: 8, },
+        { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 }},
+        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, add: { sibling: 2 } },
+        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, add: { sibling: 2 }},
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false, position: 7, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -41,12 +40,12 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             }, {
                     Id: 'TeacherId',
                     add: { sibling: 2 },
-                    position: 1,
+                    position: 2,
                     url: '/Teacher/AutoComplete',
                     Type: 'AutoComplete',
                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [] }
 
-                }],
+                },],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
@@ -67,11 +66,10 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             title: 'Edit Batch',
             columns: [
                 { field: 'Name', title: 'Name', filter: true, position: 1, add: { sibling: 3 } },
-                { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, add: { sibling: 2 } },
                 { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 2 } },
                 { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: { sibling: 2 } },
                 { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 7, add: { sibling: 2} },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 8, }
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false, position: 8, }
             ],
             dropdownList: [
                 {
@@ -95,8 +93,8 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                     title: 'Course Active Status',
                     Id: 'Isactive',
                     dataSource: [
-                        { text: 'yes', value: ACTIVE_STATUS.TRUE },
-                        { text: 'no', value: ACTIVE_STATUS.FALSE },
+                        { text: 'Yes', value: ACTIVE_STATUS.TRUE },
+                        { text: 'No', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 2 },
                     position: 4,
@@ -128,7 +126,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
     const activeTab = {
         Id: '97200DB7-8CBC-40A5-8331-CFCA8EDFA83F',
         Name: 'ACTIVE_BATCH',
-        Title: 'Active Batch',
+        Title: 'Active',
         filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL), liveRecord],
         remove: false,
         actions: [{
@@ -143,6 +141,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
 
@@ -163,6 +162,21 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
+        Url: 'Get',
+    }
+
+    // Delete tab config
+    const deleteTab = {
+        Id: 'EC95F233-AE07-4E1D-9AAE-C655483AB340',
+        Name: 'DELETE_BATCH',
+        Title: 'Deleted',
+        filter: [trashRecord],
+        actions: [],
+        onDataBinding: () => { },
+        rowBound: () => { },
+        columns: columns(),
+        Printable: { container: $('void') },
         Url: 'Get',
     }
 
@@ -172,7 +186,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Base: {
             Url: `/${controller}/`,
         },
-        items: [activeTab, inactiveTab],
+        items: [activeTab, inactiveTab, deleteTab],
         /* periodic: {
             container: '.filter_container',
             type: 'ThisMonth',

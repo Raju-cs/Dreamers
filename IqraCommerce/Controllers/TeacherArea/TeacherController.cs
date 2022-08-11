@@ -20,5 +20,9 @@ namespace IqraCommerce.Controllers.TeacherArea
         {
             return Json(await ___service.BasicInfo(id));
         }
+        public override async Task<JsonResult> AutoComplete(Page page)
+        {
+            return Json(await ___service.AutoComplete(page));
+        }
     }
 }

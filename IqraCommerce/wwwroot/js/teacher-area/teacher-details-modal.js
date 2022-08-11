@@ -2,6 +2,7 @@
 var Controller = new function () {
     const teacherFilter = { "field": "TeacherId", "value": '', Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const courseFilter = { "field": "TeacherId", "value": '', Operation: 0 };
 
     var _options;
@@ -22,7 +23,7 @@ var Controller = new function () {
                      position: 1,
                      url: '/Subject/AutoComplete',
                      Type: 'AutoComplete',
-                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter] }
+                     page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
                    
                  }],
             additionalField: [],
@@ -57,7 +58,7 @@ var Controller = new function () {
                 position: 1,
                 url: '/Subject/AutoComplete',
                 Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter] }
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
@@ -83,7 +84,7 @@ var Controller = new function () {
             model: model,
             title: 'Edit Course',
             columns: [
-                { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 3, },
+                { field: 'TeacherPercentange', title: 'Teacher Percentange%', filter: true, position: 3, },
 
             ],
             dropdownList: [{
@@ -92,7 +93,7 @@ var Controller = new function () {
                 position: 1,
                 url: '/Course/AutoComplete',
                 Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter] }
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
             }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
@@ -184,7 +185,7 @@ var Controller = new function () {
                            
                             { field: 'CourseName', title: 'Course', filter: true, position: 1, add: false },
                             { field: 'SubjectName', title: 'Subject', filter: true, position: 2, add: false },
-                            { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 3, },
+                            { field: 'TeacherPercentange', title: 'Teacher Percentange%', filter: true, position: 3, },
                            
 
                         ],
@@ -199,12 +200,7 @@ var Controller = new function () {
 
                             }
                         ],
-                        buttons: [
-                            {
-                                click: [],
-                                html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject"></span> Add course </a>'
-                            }
-                        ],
+                        buttons: [],
                         selector: false,
                         Printable: {
                             container: $('void')

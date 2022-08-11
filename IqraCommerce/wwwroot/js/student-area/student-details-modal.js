@@ -2,7 +2,7 @@
 
 var Controller = new function () {
     const courseFilter = { "field": "CourseId", "value": '', Operation: 0 };
-    const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     
    
     var _options;
@@ -10,46 +10,6 @@ var Controller = new function () {
     this.Show = function (options) {
         _options = options;
         courseFilter.value = _options.Id;
-        
-        function openToCourseSubjectTeacher(page) {
-            Global.Add({
-                name: 'ADD_SUBJECT_AND_TEACHER',
-                model: undefined,
-                title: 'Add Subject and Teacher',
-                columns: [
-                     { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
-                ],
-                dropdownList: [
-                    {
-                        Id: 'SubjectId',
-                        add: { sibling: 2 },
-                        position: 1,
-                        url: '/Subject/AutoComplete',
-                        Type: 'AutoComplete',
-                        page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter]  }
-
-                    }, {
-                        Id: 'TeacherId',
-                        add: { sibling: 2 },
-                        position: 1,
-                        url: '/Teacher/AutoComplete',
-                        Type: 'AutoComplete',
-                        page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter]  }
-
-                    }],
-                additionalField: [],
-                onSubmit: function (formModel, data, model) {
-                    formModel.ActivityId = window.ActivityId;
-                    formModel.CourseId = _options.Id;
-
-                },
-                onSaveSuccess: function () {
-                    page.Grid.Model.Reload();
-                },
-                filter: [],
-                save: `/CourseSubjectTeacher/Create`,
-            });
-        }
 
         Global.Add({
             title: 'Student Information',
@@ -59,15 +19,41 @@ var Controller = new function () {
                     title: 'Student Information',
                    
                             columns : [
-                                { field: 'DreamersId', title: 'Dreamers Id', filter: true, position: 2, add: { sibling: 3 }, },
-                                { field: 'Name', title: 'Full Name', filter: true, position: 3, add: { sibling: 3 }, },
-                                { field: 'NickName', title: 'Nick Name', filter: true, position: 4, add: { sibling: 3 }, required: false },
-                                { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 5, add: { sibling: 3 }, },
-                                { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 6, add: { sibling: 3 }, },
-                                { field: 'Gender', title: 'Gender', filter: true, position: 7, add: { sibling: 3 }, },
-                                { field: 'Religion', title: 'Religion', filter: true, position: 8, add: { sibling: 3 }, },
-                                { field: 'BloodGroup', title: 'Blood Group', filter: true, position: 9, add: { sibling: 3 }, required: false },
-                                { field: 'Nationality', title: 'Nationality', filter: true, position: 10, add: { sibling: 3 }, required: false },
+                              
+                                { field: 'DreamersId', title: 'Dreamers Id', filter: true, position: 2, add: { sibling: 4 }, },
+                                { field: 'NickName', title: 'Nick Name', filter: true, position: 3, add: { sibling: 4 }, required: false },
+                                { field: 'Name', title: 'Full Name', filter: true, position: 4, add: { sibling: 4 }, },
+                                { field: 'StudentNameBangla', title: 'Full Name Bangle', filter: true, position: 5, add: { sibling: 4 }, },
+                                { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 6, add: { sibling: 4 }, },
+                                { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'dd/MM/yyyy hh:mm' },
+                                { field: 'Nationality', title: 'Nationality', filter: true, position: 11, add: { sibling: 4 }, required: false },
+                                { field: 'StudentSchoolName', title: 'School Name', filter: true, position: 12, add: { sibling: 4 }, required: false },
+                                { field: 'StudentCollegeName', title: 'College Name', filter: true, position: 13, add: { sibling: 4 }, required: false },
+                                { field: 'Class', title: 'Class', filter: true, position: 14, add: { sibling: 4 }, required: false },
+                                { field: 'Shift', title: 'Shift', filter: true, position: 15, add: { sibling: 4 }, required: false },
+                                { field: 'Version', title: 'Version', filter: true, position: 16, add: { sibling: 4 }, required: false },
+                                { field: 'Group', title: 'Group', filter: true, position: 17, add: { sibling: 4 }, required: false },
+                                { field: 'BloodGroup', title: 'BloodGroup', filter: true, position: 18, add: { sibling: 4 }, required: false },
+                                { field: 'Gender', title: 'Gender', filter: true, position: 19, add: { sibling: 4 }, required: false },
+                                { field: 'Religion', title: 'Religion', filter: true, position: 20, add: { sibling: 4 }, required: false },
+                                { field: 'HomeDistrict', title: 'Home District', filter: true, position: 21, add: { sibling: 4 }, required: false },
+                                { field: 'Section', title: 'Section', filter: true, position: 22, add: { sibling: 4 }, required: false },
+                                { field: 'FathersName', title: 'Fathers Name', filter: true, position: 23, add: { sibling: 4 }, required: false },
+                                { field: 'FathersOccupation', title: 'Fathers Occupation', filter: true, position: 24, add: { sibling: 4 }, required: false },
+                                { field: 'FathersPhoneNumber', title: 'Fathers Phone Number', filter: true, position: 25, add: { sibling: 4 }, required: false },
+                                { field: 'FathersEmail', title: 'Fathers Email Address', filter: true, position: 26, add: { sibling: 4 }, required: false },
+                                { field: 'MothersName', title: 'Mothers Name', filter: true, position: 27, add: { sibling: 4 }, required: false },
+                                { field: 'MothersOccupation', title: 'Mothers Occupation', filter: true, position: 28, add: { sibling: 4 }, required: false },
+                                { field: 'MothersPhoneNumber', title: 'Mothers Phone Number', filter: true, position: 29, add: { sibling: 4 }, required: false },
+                                { field: 'MothersEmail', title: 'Mothers Email Address', filter: true, position: 30, add: { sibling: 4 }, required: false },
+                                { field: 'GuardiansName', title: 'Guardians Name', filter: true, position: 31, add: { sibling: 4 }, },
+                                { field: 'GuardiansOccupation', title: 'Guardians Occupation', filter: true, position: 32, add: { sibling: 4 }, },
+                                { field: 'GuardiansPhoneNumber', title: 'Guardians Phone Number', filter: true, position: 33, add: { sibling: 4 }, },
+                                { field: 'GuardiansEmail', title: 'Guardians Email Address', filter: true, position: 34, add: { sibling: 4 }, },
+                                { field: 'PresentAddress', title: 'Present Address', filter: true, position: 35, add: { sibling: 4 }, },
+                                { field: 'PermanantAddress', title: 'Permanant Address', filter: true, position: 36, add: { sibling: 4 }, },
+                                { field: 'HomeDistrict', title: 'Home District', filter: true, position: 37, add: { sibling: 4 }, },
+                                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, type: 'textarea' }, required: false },
                            
                         ],
                         
@@ -79,36 +65,34 @@ var Controller = new function () {
                         }
                     
                 }, {
-                    title: ' Subject and Teacher ',
+                    title: 'Batch',
                     Grid: [{
 
-                        Header: 'Subject',
+                        Header: 'Batch',
                         columns: [
-                            { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, },
-                            { field: 'SubjectName', title: 'Subject', filter: true, position: 2, add: false },
-                            { field: 'TeacherPercentange', title: 'Percentange%', filter: true, position: 4, },
+                            { field: 'Name', title: 'Name', filter: true, position: 1, },
+                            { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
+                            { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 } },
+                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, add: { sibling: 2 } },
+                            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, add: { sibling: 2 } },
 
                         ],
 
-                        Url: '/CourseSubjectTeacher/Get/',
-                        filter: [courseFilter],
+                        Url: '/Batch/Get/',
+                        filter: [liveFilter],
                         onDataBinding: function (response) { },
-                        actions: [
-                           
-                        ],
-                        buttons: [
-                            {
-                                click: openToCourseSubjectTeacher,
-                                html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject"></span> </a>'
-                            }
-                        ],
+                        actions: [],
+                        buttons: [],
                         selector: false,
                         Printable: {
                             container: $('void')
                         }
                     }],
 
-                }],
+                },
+
+
+            ],
 
             name: 'Course Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',

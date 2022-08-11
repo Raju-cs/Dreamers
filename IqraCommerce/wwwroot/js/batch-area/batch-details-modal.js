@@ -1,8 +1,6 @@
 
 
 var Controller = new function () {
-    //const courseFilter = { "field": "CourseId", "value": '', Operation: 0 };
-    //const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
    
     var _options;
 

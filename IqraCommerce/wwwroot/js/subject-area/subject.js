@@ -61,7 +61,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             columns: [
                 { field: 'Name', title: 'Name', filter: true, position: 1, },
                 { field: 'Class', title: 'Class', filter: true, position: 2, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 5, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type:"textarea" }, required: false, position: 5, },
             ],
             dropdownList: [{
                 title: 'Version',
@@ -79,8 +79,8 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                     title: 'Subject Active Status',
                     Id: 'IsActive',
                 dataSource: [
-                    { text: 'yes', value: ACTIVE_STATUS.TRUE },
-                    { text: 'no', value: ACTIVE_STATUS.FALSE },
+                    { text: 'Yes', value: ACTIVE_STATUS.TRUE },
+                    { text: 'No', value: ACTIVE_STATUS.FALSE },
                     ],
                 add: { sibling: 2 },
                 position: 4,
@@ -160,7 +160,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'ACTIVE_SUBJECT',
         Title: 'Active',
         filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL), liveRecord],
-        remove: false,
         actions: [{
             click: edit,
             html: editBtn("Edit Information")
@@ -172,6 +171,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
 
@@ -180,14 +180,28 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'INACTIVE_SUBJECT',
         Title: 'Inactive',
         filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL), liveRecord],
-        remove: false,
         actions: [{
             click: inactive,
-            html: flashBtn("Edit Information")
+            html: editBtn("Edit Information")
         }, {
                 click: viewDetails,
                 html: eyeBtn("View Details")
             }],
+        onDataBinding: () => { },
+        rowBound: () => { },
+        columns: columns(),
+        Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
+        Url: 'Get',
+    }
+
+    // Delete tab config
+    const deleteTab = {
+        Id: 'D949CFA4-74CF-41B2-8722-ABFA1149B4AE',
+        Name: 'DELETE_SUBJECT',
+        Title: 'Deleted',
+        filter: [trashRecord],
+        actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),
@@ -201,7 +215,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Base: {
             Url: `/${controller}/`,
         },
-        items: [activeTab, inactiveTab],
+        items: [activeTab, inactiveTab, deleteTab],
     };
 
  
