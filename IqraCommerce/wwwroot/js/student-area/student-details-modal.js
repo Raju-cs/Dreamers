@@ -22,8 +22,8 @@ var Controller = new function () {
                               
                                 { field: 'DreamersId', title: 'Dreamers Id', filter: true, position: 2, add: { sibling: 4 }, },
                                 { field: 'NickName', title: 'Nick Name', filter: true, position: 3, add: { sibling: 4 }, required: false },
-                                { field: 'Name', title: 'Full Name', filter: true, position: 4, add: { sibling: 4 }, },
-                                { field: 'StudentNameBangla', title: 'Full Name Bangle', filter: true, position: 5, add: { sibling: 4 }, },
+                                { field: 'Name', title: 'Full Name(English)', filter: true, position: 4, add: { sibling: 4 }, },
+                                { field: 'StudentNameBangla', title: 'Full Name(Bangla)', filter: true, position: 5, add: { sibling: 4 }, },
                                 { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 6, add: { sibling: 4 }, },
                                 { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'dd/MM/yyyy hh:mm' },
                                 { field: 'Nationality', title: 'Nationality', filter: true, position: 11, add: { sibling: 4 }, required: false },
