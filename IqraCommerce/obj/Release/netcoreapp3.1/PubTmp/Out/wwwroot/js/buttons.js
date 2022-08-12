@@ -1,4 +1,4 @@
-﻿export const statusBtn = '<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Change Status"></i></a>';
+﻿export const statusBtn = (text = 'Change Status') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="${text}"></i></a>`;
 export const eyeBtn = (text = 'View Details') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-eye-open" title="${text}"></i></a>`;
 export const closedEyeBtn = '<a class="action-button info t-white"><i class="glyphicon glyphicon-eye-close" title="Hide From Client"></i></a>';
 export const editBtn = (text = "Edit record") => `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="${text}"></i></a>`;

@@ -207,12 +207,11 @@ a.btn.primary:active, .btn.primary:active {
   background-color: #ff408011;
 }
 .button_container a.btn.btn-white.btn-default.btn-round.pull-left.btn-active {
-  background: #ff4081 !important;
-  color: white;
-  box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024,
-  0 3px 14px 2px #0000001f;
-  border: 1px solid #ff4081;
-  font-weight: bold;
+    background: #673ab7 !important ;
+    color: white;
+    box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f;
+    border: 1px solid #673ab7;
+    font-weight: bold;
 }
 .button_container
   a.btn.btn-white.btn-default.btn-round.pull-left.btn-active:active {

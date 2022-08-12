@@ -57,12 +57,131 @@ export const orderAquiredOfferType =
     Cashback: 0, Coupon: 1, Delivery: 2, Product: 3
 }
 
+export const Religion = {
+    ISLAM: "Islam",
+    HINDUISM: "Hinduism",
+    CHRISTIAN: "Christian"
+};
+
 export const REVIEW_STATUS = {
     PENDING: "PENDING",
     APPROVED: "APPROVED",
     DENIED: "DENIED",
     ON_HOLD: "ON HOLD",
 };
+
+export const Gender = {
+    MALE: "Male",
+    FEMALE: "Female",
+    NON_BINARY: "NonBinary",
+};
+
+export const ACTIVE_STATUS = {
+    TRUE: "true",
+    FALSE: "false"
+}
+
+export const BLOOD_GROUP={
+    A_POSITIVE: "A+",
+    A_NEGATIVE: "A-",
+    B_POSITIVE: "B+",
+    B_NEGATIVE: "B-",
+    O_POSITIVE: "O+",
+    O_NEGATIVE: "O-",
+    AB_POSITIVE: "AB+",
+    AB_NEGATIVE: "AB-"
+
+
+}
+
+export const GROUP = {
+    SCIENCE: "Science",
+    COMMERCE: "commerce",
+
+}
+
+export const SHIFT = {
+    MORNING: "Morning",
+    EVENING: "Evening",
+
+}
+
+export const SUBJECT = {
+    BANGLA: "Bangla",
+    ENGLISH: "English"
+}
+
+export const DISTRICT = {
+
+    DHAKA_CITY: "Dhaka City",
+    BARGUNA: "Barguna",
+    KURIGRAM: "Kurigram",
+    HABIGANJ: "Habiganj",
+    KISHOREGONJ: "Kishoreganj",
+    NOAKHALI: "Noakhali",
+    NILPHAMARI: "Nilphamari",
+    JHENAIDAH: "Jhenaidah",
+    PANCHAGARH: "Panchagarh",
+    CHUADANGA: "Chuadanga",
+    MANIKGANJ: "Manikganj",
+    NARAYANGANJ: "Narayanganj",
+    CHANDPUR: "Chandpur",
+    FENI: "Feni",
+    KHULNA: "Khulna",
+    JOYPURHAT: "Joypurhat",
+    NAOGAON: "Naogaon",
+    MEHERPUR: "Meherpur",
+    MYMENSINGH: "Mymensingh",
+    RAJBARI: "Rajbari",
+    MUNSHIGANJ: "Munshiganj",
+    GOPALGANJ: "Gopalganj",
+    BAGERHAT: "Bagerhat",
+    BANDARBAN: "Bandarban",
+    CHITTAGONG: "Chittagong",
+    GAZIPUR: "Gazipur",
+    GAIBANDHA: "Gaibandha",
+    RANGAMATI: "Rangamati",
+    JHALOKATI: "Jhalokati",
+    JESSORE: "Jessore",
+    RAJSHAHI: "Rajshahi",
+    KUSHTIA: "Kushtia",
+    COMILLA: "Comilla",
+    PABNA: "Pabna",
+    MADARIPUR: "Madaripur",
+    JAMALPUR: "Jamalpur",
+    LAKSHMIPUR: "Lakshmipur",
+    THAKURGAON: "Thakurgaon",
+    COXS_BAZAR: "Cox's Bazar",
+    NARAIL: "Narail",
+    BARISAL: "Barisal",
+    MAGURA: "Magura",
+    PATUAKHALI: "Patuakhali",
+    SIRAJGANJ: "Sirajganj",
+    FARIDPUR: "Faridpur",
+    BHOLA: "Bhola",
+    SYLHET: "Sylhet",
+    NETRAKONA: "Netrakona",
+    RANGPUR: "Rangpur",
+    SATKHIRA: "Satkhira",
+    BOGRA: "Bogra",
+    SHERPUR: "Sherpur",
+    NARSINGDI: "Narsingdi",
+    PIROJPUR: "Pirojpur",
+    DHAKA: "Dhaka",
+    BRAHAMANBARIA: "Brahamanbaria",
+    DINAJPUR: "Dinajpur",
+    SHARIATPUR: "Shariatpur",
+    NAWABGANJ: "Nawabganj",
+    LALMONIRHAT: "Lalmonirhat",
+    MAULVIBAZAR: "Maulvibazar",
+    TANGAIL: "Tangail",
+    KHAGRACHHARI: "Khagrachhari",
+    SUNAMGANJ: "Sunamganj",
+
+}
+
+
+
 
 export const ORDER_STATUS = {
     PENDING: 'PENDING',
