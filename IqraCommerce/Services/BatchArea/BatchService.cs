@@ -55,7 +55,7 @@ namespace IqraCommerce.Services.BatchArea
     {
         public static string Get()
         {
-            return @"  [btch].[Id]
+            return @"[btch].[Id]
                   ,[btch].[CreatedAt]
                   ,[btch].[CreatedBy]
                   ,[btch].[UpdatedAt]
@@ -64,13 +64,18 @@ namespace IqraCommerce.Services.BatchArea
                   ,ISNULL([btch].[Remarks], '') [Remarks]
                   ,[btch].[ActivityId]
                   ,[btch].[Name]
-                  ,[btch].[TeacherId]
-                  ,[btch].[SubjectId]
-                  ,[btch].[TeacherPercentange]
-                  ,[btch].[ChargePerStudent]
-                  ,[btch].[MaxStudent]
-                  ,[btch].[ClassRoomNumber]
+                  ,ISNULL([btch].[TeacherId], '') [TeacherId]
+                  ,ISNULL([btch].[SubjectId], '') [SubjectId]
+                  ,ISNULL([btch].[TeacherPercentange], '') [TeacherPercentange]
+                  ,ISNULL([btch].[ChargePerStudent], '')   [ChargePerStudent]
                   ,[btch].[IsActive]
+                  ,ISNULL([btch].[ScheduleId], '') [ScheduleId]
+				  ,ISNULL([schdl].Name, '')  [Program]
+				  ,ISNULL([schdl].Name, '') [Day]
+				  ,ISNULL([schdl].Name, '') [StartTime]
+				  ,ISNULL([schdl].Name, '') [EndTime]
+				  ,ISNULL([schdl].Name, '') [MaxStudent]
+				  ,ISNULL([schdl].Name, '') [ClassRoomNumber]
                   ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator] 
 	              ,ISNULL([tchr].Name, '')  [TeacherName]
@@ -79,7 +84,8 @@ namespace IqraCommerce.Services.BatchArea
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [btch].[CreatedBy]
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [btch].[UpdatedBy]
               LEFT JOIN [dbo].[Teacher] [tchr] ON [tchr].Id = [btch].[TeacherId]
-              LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [btch].[SubjectId]";
+              LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [btch].[SubjectId]
+              LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [btch].[ScheduleId]";
         }
         public static string BasicInfo
         {

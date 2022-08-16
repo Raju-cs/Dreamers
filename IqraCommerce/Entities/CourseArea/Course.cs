@@ -1,5 +1,6 @@
 ﻿using IqraBase.Data.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace IqraCommerce.Entities.CourseArea
 {
@@ -8,6 +9,7 @@ namespace IqraCommerce.Entities.CourseArea
 
     public class Course: DropDownBaseEntity
     {
+        public Guid ScheduleId { get; set; }
         public string Class { get; set; }
         public int NumberOfClass { get; set; }
         public double CourseFee { get; set; }

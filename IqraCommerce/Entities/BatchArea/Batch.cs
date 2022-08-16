@@ -11,10 +11,9 @@ namespace IqraCommerce.Entities.BatchArea
 
         public Guid TeacherId { get; set; }
         public Guid SubjectId { get; set; }
+        public Guid ScheduleId { get; set; }
         public double TeacherPercentange { get; set; }
         public double ChargePerStudent { get; set; }
-        public string MaxStudent { get; set; }
-        public string ClassRoomNumber { get; set; }
         public bool IsActive { get; set; }
     }
 }

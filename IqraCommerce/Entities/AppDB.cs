@@ -1,5 +1,6 @@
 ﻿using EBonik.Data.Entities.HistoryArea;
 using IqraCommerce.Entities.BatchArea;
+using IqraCommerce.Entities.ScheduleArea;
 using IqraCommerce.Entities.CourseArea;
 using IqraCommerce.Entities.CourseSubjectTeacherArea;
 using IqraCommerce.Entities.StudentArea;
@@ -73,6 +74,11 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Student> Student { get; set; }
         #endregion
 
+        #region Schedule
+        public virtual DbSet<Schedule> Schedule { get; set; }
+        #endregion
+
+    
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

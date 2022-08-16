@@ -81,6 +81,16 @@ export const ACTIVE_STATUS = {
     FALSE: "false"
 }
 
+export const DAY = {
+    SATURDAY: "Saturday",
+    SUNDAY: "Sunday",
+    MONDAY: "Monday",
+    TUESDAY: "Tuesday",
+    WEDNESDAY: "Wednesday",
+    THURSDAY: "Thursday",
+    FRIDAY :  "Friday"
+}
+
 export const BLOOD_GROUP={
     A_POSITIVE: "A+",
     A_NEGATIVE: "A-",
@@ -109,6 +119,11 @@ export const SHIFT = {
 export const SUBJECT = {
     BANGLA: "Bangla",
     ENGLISH: "English"
+}
+
+export const PROGRAM = {
+    BATCH: "Batch",
+    COURSE: "Course"
 }
 
 export const DISTRICT = {
@@ -183,16 +198,5 @@ export const DISTRICT = {
 
 
 
-export const ORDER_STATUS = {
-    PENDING: 'PENDING',
-    CONFIRMED: 'CONFIRMED',
-    PROCESSING: 'PROCESSING',
-    DELIVERING: 'DELIVERING',
-    DELIVERED: 'DELIVERED',
-    CANCELLED_BY_CUSTOMER: 'CANCELLED_BY_CUSTOMER',
-    CANCELLED_BY_ADMIN: 'CANCELLED_BY_ADMIN',
-    CANCELLED: 'CANCELLED',
-    RETURNED: 'RETURNED',
-    ALL: 'ALL'
-};
+
 
