@@ -10,6 +10,7 @@ using IqraCommerce.Entities.TeacherSubjectArea;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using IqraCommerce.Entities.StudentBatchArea;
+using IqraCommerce.Entities.StudentCourseArea;
 
 namespace IqraCommerce.Entities
 {
@@ -83,7 +84,9 @@ namespace IqraCommerce.Entities
         public virtual DbSet<StudentBatch> StudentBatch { get; set; }
         #endregion
 
-
+        #region StudentCourse
+        public virtual DbSet<StudentCourse> StudentCourse { get; set; }
+        #endregion
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -5,6 +5,8 @@ var Controller = new function () {
     const activeTeacherFilter = { "field": "[tchr].[IsActive]", "value": 1, Operation: 0 };
     const liveFilter = { "field": "[tchr].[IsDeleted]", "value": 0, Operation: 0 };
     const liveFilterSubject = { "field": "IsDeleted", "value": 0, Operation: 0 };
+    const trashFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
+    const scheduleFilter = { "field": "ReferenceId", "value": '', Operation: 0 };
     const teacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
  
     var _options;
@@ -21,6 +23,8 @@ var Controller = new function () {
     const modalColumns = [
         { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
     ]
+  
+
 
     const modalDropDowns = [
         {
@@ -45,6 +49,7 @@ var Controller = new function () {
     this.Show = function (options) {
         _options = options;
         courseFilter.value = _options.Id;
+        scheduleFilter.value = _options.Id;
    
         function addSubjectAndTeacher(page) {
             Global.Add({
@@ -84,6 +89,98 @@ var Controller = new function () {
                 },
                 filter: [],
                 saveChange: `/CourseSubjectTeacher/Edit`,
+            });
+
+        }
+   
+
+        function addCourseSchedule(page) {
+            Global.Add({
+                name: 'ADD_COURSE_SCHEDULE',
+                model: undefined,
+                title: 'Add Course Schedule',
+                columns: [
+                    { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
+                    { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
+                    { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 4, },
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 6, },
+                ],
+                dropdownList: [{
+                    title: 'Day',
+                    Id: 'Day',
+                    dataSource: [
+                        { text: 'Saturday', value: 'Saturday' },
+                        { text: 'Sunday', value: 'Sunday' },
+                        { text: 'Monday', value: 'Monday' },
+                        { text: 'Tuesday', value: 'Tuesday' },
+                        { text: 'Wednesday', value: 'Wednesday' },
+                        { text: 'Thursday', value: 'Thursday' },
+                        { text: 'Friday', value: 'Friday' },
+
+                    ],
+                    position: 1,
+                   
+                }],
+                additionalField: [],
+                onSubmit: function (formModel, data, model) {
+                    console.log("Model=>", formModel);
+                    formModel.ActivityId = window.ActivityId;
+                    formModel.ReferenceId = _options.Id;
+                    formModel.Program = "Course";
+                   
+                },
+                onSaveSuccess: function () {
+                    page.Grid.Model.Reload();
+                },
+                filter: [],
+                save: `/Schedule/Create`,
+            });
+
+        }
+
+        function editCourseSchedule(model, grid) {
+            Global.Add({
+                name: 'EDIT_COURSE_SCHEDULE',
+                model: model,
+                title: 'Edit Course Schedule',
+                columns: [
+                    { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
+                    { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
+                    { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
+                    { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, },
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
+                ],
+                dropdownList: [{
+                    title: 'Day',
+                    Id: 'Day',
+                    dataSource: [
+                        { text: 'Saturday', value: 'Saturday' },
+                        { text: 'Sunday', value: 'Sunday' },
+                        { text: 'Monday', value: 'Monday' },
+                        { text: 'Tuesday', value: 'Tuesday' },
+                        { text: 'Wednesday', value: 'Wednesday' },
+                        { text: 'Thursday', value: 'Thursday' },
+                        { text: 'Friday', value: 'Friday' },
+
+                    ],
+                    position: 1,
+
+                }],
+                additionalField: [],
+                onSubmit: function (formModel, data, model) {
+                    formModel.Id = model.Id
+                    formModel.ActivityId = window.ActivityId;
+                    formModel.ReferenceId = _options.Id;
+                    formModel.Program = "Course";
+
+                },
+                onSaveSuccess: function () {
+                    grid?.Reload();
+                },
+                filter: [],
+                saveChange: `/Schedule/Edit`,
             });
 
         }
@@ -137,6 +234,42 @@ var Controller = new function () {
                         buttons: [
                             {
                                 click: addSubjectAndTeacher,
+                                html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
+                            }
+                        ],
+                        selector: false,
+                        Printable: {
+                            container: $('void')
+                        }
+                    }],
+
+                }, {
+                    title: ' Schedule ',
+                    Grid: [{
+
+                        Header: 'Schedule',
+                        columns: [
+                            { field: 'Day', title: 'Day', filter: true, position: 1, },
+                            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
+                            { field: 'EndTime', title: 'End Time', filter: true, position: 3,  },
+                            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 4, },
+                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2,  }, required: false, position: 6, },
+                        ],
+
+                        Url: '/Schedule/Get/',
+                        filter: [scheduleFilter, trashFilter],
+                        onDataBinding: function (response) { },
+                        actions: [
+                            {
+                                click: editCourseSchedule,
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Course Schedule"></i></a>`
+
+                            }
+                        ],
+                        buttons: [
+                            {
+                                click: addCourseSchedule,
                                 html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
                             }
                         ],

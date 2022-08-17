@@ -63,9 +63,7 @@ var Controller = new function () {
                             { field: 'Name', title: 'Name', filter: true, position: 1, },
                             { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
                             { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 } },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, add: { sibling: 2 } },
-                            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, add: { sibling: 2 } },
-
+   
                         ],
 
                         Url: '/Batch/Get/',

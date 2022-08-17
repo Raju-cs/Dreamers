@@ -100,6 +100,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
+                
 
             },
             onSaveSuccess: function () {

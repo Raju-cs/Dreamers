@@ -14,8 +14,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
         { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
         { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 }},
-        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, add: { sibling: 2 } },
-        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, add: { sibling: 2 }},
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false, position: 7, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -67,8 +65,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             columns: [
                 { field: 'Name', title: 'Name', filter: true, position: 1, add: { sibling: 3 } },
                 { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 2 } },
-                { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: { sibling: 2 } },
-                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 7, add: { sibling: 2} },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false, position: 8, }
             ],
             dropdownList: [
