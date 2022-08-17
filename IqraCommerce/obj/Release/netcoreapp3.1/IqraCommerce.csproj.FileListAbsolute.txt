@@ -2357,3 +2357,4 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CourseSubjectTeac
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Batch\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Student\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Schedule\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\StudentBatch\Index.cshtml.g.cs

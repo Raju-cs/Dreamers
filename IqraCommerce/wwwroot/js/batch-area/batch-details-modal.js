@@ -41,11 +41,11 @@ var Controller = new function () {
                 }],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
-                    console.log("Model=>", formModel);
+                    console.log("Data=>", data);
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Batch";
-
+                    formModel.Name = `${model.Day}: ${model.StartTime} - ${model.EndTime}`;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -91,6 +91,7 @@ var Controller = new function () {
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Batch";
+                    formModel.Name = `${data.Day}: ${data.StartTime} - ${data.EndTime}`;
 
                 },
                 onSaveSuccess: function () {

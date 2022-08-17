@@ -13,9 +13,9 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: blue;
+    border-color: #666c69;
 }
 
 .nav-pills .nav-link.active,
@@ -76,7 +76,7 @@ body {
   cursor: pointer;
 }
 .info {
-  background: #286789;
+    background: #666c69;
 }
 .t-white {
   color: white !important;
@@ -125,17 +125,17 @@ td.action {
 }
 
 a.btn.primary, .btn.primary {
-  background: #673ab7 !important;
-  color: white;
-  box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
-  border: 1px solid #673ab7;
-  font-weight: bold;
+    background: #666c69 !important;
+    color: white;
+    box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
+    border: 1px solid #666c69;
+    font-weight: bold;
 }
-a.btn.primary:hover,  .btn.primary:hover{
-  background: #683ab7d3 !important;
-}
+    a.btn.primary:hover, .btn.primary:hover {
+        background: #666c69 !important;
+    }
 a.btn.primary:active, .btn.primary:active {
-  background: #542e94 !important;
+  background: #666c69 !important;
   box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024,
     0 3px 14px 2px #0000001f;
   color: white !important;
@@ -206,20 +206,20 @@ a.btn.primary:active, .btn.primary:active {
 .button_container a.btn.btn-white.btn-default.btn-round.pull-left:hover {
   background-color: #ff408011;
 }
-.button_container a.btn.btn-white.btn-default.btn-round.pull-left.btn-active {
-    background: #673ab7 !important ;
-    color: white;
-    box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f;
-    border: 1px solid #673ab7;
-    font-weight: bold;
-}
-.button_container
-  a.btn.btn-white.btn-default.btn-round.pull-left.btn-active:active {
-  background: #ff3176 !important;
-  box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024,
-    0 3px 14px 2px #0000001f;
-  border: 1px solid #ff4081;
-}
+    .button_container a.btn.btn-white.btn-default.btn-round.pull-left.btn-active {
+        background: #666c69 !important;
+        color: white;
+        box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f;
+        border: 1px solid #666c69;
+        font-weight: bold;
+    }
+    .button_container a.btn.btn-white.btn-default.btn-round.pull-left.btn-active {
+        background: #666c69 !important;
+        color: white;
+        box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f;
+        border: 1px solid #666c69;
+        font-weight: bold;
+    }
 ul.nav.nav-tabs li {
   cursor: pointer;
 }

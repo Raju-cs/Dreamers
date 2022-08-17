@@ -14,10 +14,10 @@ namespace IqraCommerce.Services.BatchArea
             switch (name.ToLower())
             {
                 case "creator":
-                    name = "ctr.Name";
+                    name = "crtr.Name";
                     break;
                 case "updator":
-                    name = "updtr.Name";
+                    name = "pdtr.Name";
                     break; 
                 case "batch":
                     name = "btch.[Name]";

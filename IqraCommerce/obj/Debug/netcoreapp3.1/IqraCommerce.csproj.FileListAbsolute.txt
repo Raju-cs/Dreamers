@@ -2364,3 +2364,4 @@ H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\IqraCommerce.genruntimeconfig.c
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\Batch\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\Student\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\Schedule\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\StudentBatch\Index.cshtml.g.cs

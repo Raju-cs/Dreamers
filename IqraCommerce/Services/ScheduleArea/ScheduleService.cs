@@ -14,10 +14,10 @@ namespace IqraCommerce.Services.ScheduleArea
             switch (name.ToLower())
             {
                 case "creator":
-                    name = "ctr.Name";
+                    name = "crtr.Name";
                     break;
                 case "updator":
-                    name = "updtr.Name";
+                    name = "pdtr.Name";
                     break;
                 case "schedule":
                     name = "schdl.[Name]";
@@ -59,7 +59,7 @@ namespace IqraCommerce.Services.ScheduleArea
                   ,[schdl].[IsDeleted]
                   ,ISNULL([schdl].[Remarks], '') [Remarks]
                   ,[schdl].[ActivityId]
-                  ,[schdl].[Name]
+                  ,ISNULL([schdl].[Name], '') [Name]
                   ,ISNULL([schdl].[Day], '') [Day]
                   ,ISNULL([schdl].[MaxStudent], '') [MaxStudent]
                   ,ISNULL([schdl].[ClassRoomNumber], '') [ClassRoomNumber]
