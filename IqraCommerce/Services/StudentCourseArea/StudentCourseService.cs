@@ -58,12 +58,18 @@ namespace IqraCommerce.Services.StudentCourseArea
 	              ,ISNULL([crsh].Name,  '')  [CourseName]
 	              ,ISNULL([stdnt].Name,  '') [StudentName]
 	              ,ISNULL([stdnt].Name,  '') [ScheduleName]
+                  ,ISNULL([schdl].Day,  '')  [Day]
+                  ,ISNULL([schdl].Program,  '')  [Program]
+	              ,ISNULL([schdl].StartTime,  '')  [StartTime]
+	              ,ISNULL([schdl].EndTime,  '')  [EndTime]
+	              ,ISNULL([schdl].ClassRoomNumber,  '')  [ClassRoomNumber]
+	              ,ISNULL([schdl].MaxStudent,  '')  [MaxStudent]
               FROM [dbo].[StudentCourse] [stdntcrsh]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntcrsh].[CreatedBy]
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntcrsh].[UpdatedBy]
               LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [stdntcrsh].[StudentId]
               LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [stdntcrsh].[CourseId]
-              LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntcrsh].[ScheduleId]";
+              LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntcrsh].[ScheduleId]  And [schdl].IsDeleted = 0 ";
         }
 
 

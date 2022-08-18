@@ -128,6 +128,7 @@ var Controller = new function () {
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Course";
+                    formModel.Name = `${model.Day}: ${model.StartTime} - ${model.EndTime}`;
                    
                 },
                 onSaveSuccess: function () {

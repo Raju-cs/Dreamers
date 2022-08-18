@@ -68,7 +68,7 @@ namespace IqraCommerce.Services.StudentBatchArea
           LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntbtch].[UpdatedBy]
           LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [stdntbtch].[StudentId]
           LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [stdntbtch].[BatchId]
-          LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntbtch].[ScheduleId]";
+          LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntbtch].[ScheduleId] And [schdl].IsDeleted = 0 ";
         }
 
 

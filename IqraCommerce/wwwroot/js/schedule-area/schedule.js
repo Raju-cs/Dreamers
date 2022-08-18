@@ -10,6 +10,7 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
     });
 
     const columns = () => [
+        { field: 'Day', title: 'Day', filter: true, position: 1, add: false },
         { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm' },
         { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm' },
         { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
@@ -31,6 +32,7 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             model: model,
             title: 'Edit Schedule',
             columns: [
+             
                 { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
                 { field: 'EndTime', title: 'End Time', filter: true, position: 3,},
                 { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, },

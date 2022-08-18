@@ -45,6 +45,17 @@ namespace IqraCommerce.Services.ScheduleArea
                 return await db.FirstOrDefault(ScheduleQuery.BasicInfo + Id + "'");
             }
         }
+
+        public async Task<ResponseList<List<Dictionary<string, object>>>> AutoComplete(Page page)
+        {
+            using (DBService db = new DBService())
+            {
+                page.SortBy = page.SortBy ?? "[Name]";
+                page.filter = page.filter ?? new List<FilterModel>();
+
+                return await db.List(page, ScheduleQuery.AutoComplete());
+            }
+        }
     }
 
     public class ScheduleQuery
@@ -78,6 +89,30 @@ namespace IqraCommerce.Services.ScheduleArea
         public static string BasicInfo
         {
             get { return @"SELECT " + Get() + " Where schdl.Id = '"; }
+        }
+
+        public static string AutoComplete()
+        {
+            return @"
+                   SELECT [schdl].[Id]
+                  ,[schdl].[CreatedAt]
+                  ,[schdl].[CreatedBy]
+                  ,[schdl].[UpdatedAt]
+                  ,[schdl].[UpdatedBy]
+                  ,[schdl].[IsDeleted]
+                  ,[schdl].[Remarks]
+                  ,[schdl].[ActivityId]
+                  ,[schdl].[Name]
+                  ,[schdl].[Day]
+                  ,[schdl].[MaxStudent]
+                  ,[schdl].[ClassRoomNumber]
+                  ,[schdl].[Program]
+                  ,[schdl].[IsActive]
+                  ,[schdl].[EndTime]
+                  ,[schdl].[StartTime]
+                  ,[schdl].[ReferenceId]
+              FROM [dbo].[Schedule] [schdl]
+            ";
         }
 
     }

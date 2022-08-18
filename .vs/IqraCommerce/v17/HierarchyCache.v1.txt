@@ -2,10 +2,10 @@
 i:{00000000-0000-0000-0000-000000000000}:IqraCommerce.sln
 ++App.Setup
 i:{00000000-0000-0000-0000-000000000000}:App.Setup
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\app.setup\bin\debug\netcoreapp3.1\app.setup.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\app.setup\app.setup.csproj
 ++Dependencies
-i:{21f5e946-8343-4553-a011-eadfec9e5e62}:>108
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9166
+i:{21f5e946-8343-4553-a011-eadfec9e5e62}:>4808
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9534
 ++LogInArea
 i:{21f5e946-8343-4553-a011-eadfec9e5e62}:h:\dreamers\app.setup\loginarea\
 ++Models
@@ -33,7 +33,7 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\microsoft.netc
 ++IqraCommerce
 i:{00000000-0000-0000-0000-000000000000}:IqraCommerce
 ++Connected Services 
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9167
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9535
 ++Properties
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\properties\
 ++wwwroot
@@ -52,6 +52,10 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\bo
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\bootstrap\css\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\font-awesome\css\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\select2\css\
+++product-images.css
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\css\product-images.css
+++site.css
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\css\site.css
 ++images
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\images\
@@ -65,12 +69,30 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\conten
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\select2\js\
 ++batch-area
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\batch-area\
+++batch.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\batch-area\batch.js
+++batch-details-modal.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\batch-area\batch-details-modal.js
 ++course-area
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\course-area\
+++course.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\course-area\course.js
+++course-details-modal.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\course-area\course-details-modal.js
 ++coursesubjectteacher-area
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\coursesubjectteacher-area\
+++schedule-area
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\schedule-area\
 ++student-area
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\student-area\
+++student.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\student-area\student.js
+++student-details-modal.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\student-area\student-details-modal.js
+++student-form.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\student-area\student-form.js
+++studentbatch-area
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\studentbatch-area\
 ++subject-area
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\subject-area\
 ++teacher-area
@@ -79,14 +101,6 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\tea
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\teachersubject-area\
 ++utils
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\
-++date.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\date.js
-++files-uploader.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\files-uploader.js
-++file-uploader.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\file-uploader.js
-++params.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\params.js
 ++buttons.js
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\buttons.js
 ++dictionaries.js
@@ -113,78 +127,62 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\templa
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\x.json
 ++Controllers
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\
-++BatchArea
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\batcharea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\batcharea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\batcharea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\batcharea\
-++CourseArea
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursearea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\coursearea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\coursearea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\coursearea\
-++CourseSubjectTeacherArea
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursesubjectteacherarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\coursesubjectteacherarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\coursesubjectteacherarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\coursesubjectteacherarea\
-++StudentArea
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\studentarea\
-++StudentController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentarea\studentcontroller.cs
-++SubjectArea
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\subjectarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\subjectarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\subjectarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\subjectarea\
-++TeacherArea
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teacherarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\teacherarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\teacherarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\teacherarea\
-++TeacherSubjectArea
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teachersubjectarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\teachersubjectarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\teachersubjectarea\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\teachersubjectarea\
-++AppController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\appcontroller.cs
-++AppDropDownController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\appdropdowncontroller.cs
-++AuthController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\authcontroller.cs
-++HomeController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\homecontroller.cs
-++MenuController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\menucontroller.cs
 ++Data
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\data\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\iqraservice\data\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\iqraservice\data\
 ++DTOs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\
-++Student
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\student\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\student\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\
-++StudentImageDto.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\student\studentimagedto.cs
-++DeleteDto.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\deletedto.cs
-++ID.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\id.cs
-++ImageUploadDto.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\imageuploaddto.cs
 ++Entities
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\
+++BatchArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\batcharea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\batcharea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\batcharea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\batcharea\
+++CourseArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\coursearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\coursearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\coursearea\
+++CourseSubjectTeacherArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\coursesubjectteacherarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\coursesubjectteacherarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursesubjectteacherarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\coursesubjectteacherarea\
 ++HistoryArea
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\historyarea\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\historyarea\
-++Student.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentarea\student.cs
+++ScheduleArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\schedulearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\schedulearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\schedulearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\schedulearea\
+++StudentArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\studentarea\
+++StudentBatchArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentbatcharea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentbatcharea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentbatcharea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\studentbatcharea\
+++SubjectArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\subjectarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\subjectarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\subjectarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\subjectarea\
+++TeacherArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\teacherarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\teacherarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teacherarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\teacherarea\
+++TeacherSubjectArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\teachersubjectarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\teachersubjectarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teachersubjectarea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\teachersubjectarea\
 ++AliasAttribute.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\aliasattribute.cs
 ++AppDB.cs
@@ -197,47 +195,11 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\middleware\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\
 ++Services
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\
-++StudentService.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentarea\studentservice.cs
-++TeacherService.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\teacherarea\teacherservice.cs
 ++AppBaseService.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\appbaseservice.cs
 ++Views
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\
-++Account
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\account\
-++Auth
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\auth\
-++Batch
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\batch\
-++Course
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\course\
-++CourseSubjectTeacher
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\coursesubjectteacher\
-++Home
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\home\
-++Shared
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\shared\
-++_Layout.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\_layout.cshtml
-++_ValidationScriptsPartial.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\_validationscriptspartial.cshtml
-++Error.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\error.cshtml
-++Subject
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\subject\
-++Teacher
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teacher\
-++TeacherSubject
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teachersubject\
-++_ViewImports.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\_viewimports.cshtml
-++_ViewStart.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\_viewstart.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\_viewstart.cshtml
 ++appsettings.json
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\appsettings.json
 ++Program.cs
@@ -245,7 +207,6 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\program.cs
 ++Startup.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\startup.cs
 ++No service dependencies discovered
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9168
 ++Analyzers
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:analyzers
 ++Assemblies
@@ -286,25 +247,23 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\conten
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\site.css
 ++Style.css
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\style.css
-++product-images.css
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\css\product-images.css
-++site.css
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\css\site.css
-++logo-01.png
-++batch.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\batch-area\batch.js
-++batch-details-modal.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\batch-area\batch-details-modal.js
-++course.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\course-area\course.js
-++course-details-modal.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\course-area\course-details-modal.js
+++Student
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\student\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\student\
+++logo.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\logo.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\images\logo.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\data\option5\logo.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\data\option6\logo.png
 ++coursesubjectteacher.js
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\coursesubjectteacher-area\coursesubjectteacher.js
-++student.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\student-area\student.js
-++student-details-modal.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\student-area\student-details-modal.js
+++schedule.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\schedule-area\schedule.js
+++schedule-details-modal.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\schedule-area\schedule-details-modal.js
+++studentbatch.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\studentbatch-area\studentbatch.js
 ++subject.js
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\subject-area\subject.js
 ++subject-details-modal.js
@@ -315,6 +274,14 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\tea
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\teacher-area\teacher-details-modal.js
 ++teachersubject.js
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\teachersubject-area\teachersubject.js
+++date.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\date.js
+++files-uploader.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\files-uploader.js
+++file-uploader.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\file-uploader.js
+++params.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\utils\params.js
 ++bootstrap
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\bootstrap\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\bootstrap\
@@ -339,20 +306,24 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\templa
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\templates\file-uploader.html
 ++OnDetailsWithTab.html
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\templates\ondetailswithtab.html
-++BatchController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\batcharea\batchcontroller.cs
-++CourseController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursearea\coursecontroller.cs
-++CourseSubjectTeacherController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursesubjectteacherarea\coursesubjectteachercontroller.cs
-++SubjectController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\subjectarea\subjectcontroller.cs
-++TeacherController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teacherarea\teachercontroller.cs
-++TeacherSubjectController.cs
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teachersubjectarea\teachersubjectcontroller.cs
+++AppController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\appcontroller.cs
+++AppDropDownController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\appdropdowncontroller.cs
+++AuthController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\authcontroller.cs
+++HomeController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\homecontroller.cs
+++MenuController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\menucontroller.cs
 ++Enums.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\data\enums.cs
+++DeleteDto.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\deletedto.cs
+++ID.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\id.cs
+++ImageUploadDto.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\imageuploaddto.cs
 ++Batch.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\batcharea\batch.cs
 ++Course.cs
@@ -361,6 +332,12 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\cours
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\coursesubjectteacherarea\coursesubjectteacher.cs
 ++ChangeHistory.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\historyarea\changehistory.cs
+++Schedule.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\schedulearea\schedule.cs
+++Student.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentarea\student.cs
+++StudentBatch.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentbatcharea\studentbatch.cs
 ++Subject.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\subjectarea\subject.cs
 ++Teacher.cs
@@ -411,6 +388,50 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\202
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220806100727_addstudent.cs
 ++20220808065728_addStudent1.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220808065728_addstudent1.cs
+++20220809102756_addStudent3.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220809102756_addstudent3.cs
+++20220810084754_addcourseSubjectteachernew.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220810084754_addcoursesubjectteachernew.cs
+++20220810142803_addcoursenew.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220810142803_addcoursenew.cs
+++20220812094409_removeBatchItem.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812094409_removebatchitem.cs
+++20220812105139_add BacthscheduleInfo1new.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812105139_add bacthscheduleinfo1new.cs
+++20220812120535_add schedule.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812120535_add schedule.cs
+++20220812121526_add schedule1.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812121526_add schedule1.cs
+++20220812122225_add schedule2.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812122225_add schedule2.cs
+++20220812122606_add schedule3.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812122606_add schedule3.cs
+++20220812123050_add schedule4.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812123050_add schedule4.cs
+++20220812135811_add schedule5.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812135811_add schedule5.cs
+++20220813071545_add guiId  schedule.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813071545_add guiid  schedule.cs
+++20220813084938_add EndTime schedule.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813084938_add endtime schedule.cs
+++20220813085251_add EndTime1 schedule.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813085251_add endtime1 schedule.cs
+++20220813094612_add new schedule.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813094612_add new schedule.cs
+++20220813105525_add remove itemId schedule.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813105525_add remove itemid schedule.cs
+++20220813120440_add Schedule id.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813120440_add schedule id.cs
+++20220813133720_add schedule id1.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813133720_add schedule id1.cs
+++20220813145838_add schedule string.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813145838_add schedule string.cs
+++20220816070254_add Batch scheduleId.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220816070254_add batch scheduleid.cs
+++20220816114052_add studentbatch.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220816114052_add studentbatch.cs
+++20220816133122_add studentbatch scheduleId.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220816133122_add studentbatch scheduleid.cs
 ++AppDBModelSnapshot.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\appdbmodelsnapshot.cs
 ++AppDropDownBaseModel.cs
@@ -425,37 +446,56 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\cours
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\coursesubjectteacherarea\coursesubjectteacherservice.cs
 ++ChangeHistoryService.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\historyarea\changehistoryservice.cs
+++ScheduleService.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\schedulearea\scheduleservice.cs
+++StudentService.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentarea\studentservice.cs
+++StudentBatchService.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentbatcharea\studentbatchservice.cs
 ++SubjectService.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\subjectarea\subjectservice.cs
+++TeacherService.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\teacherarea\teacherservice.cs
 ++TeacherSubjectService.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\teachersubjectarea\teachersubjectservice.cs
-++Login.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\account\login.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\auth\login.cshtml
-++Index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\auth\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\batch\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\course\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\coursesubjectteacher\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\home\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\student\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\subject\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teacher\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teachersubject\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\menuaccess\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\menucategory\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\menuitem\index.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\submenuitem\index.cshtml
-++Privacy.cshtml
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\home\privacy.cshtml
+++Account
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\account\
+++Auth
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\auth\
+++Batch
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\batch\
+++Course
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\course\
+++CourseSubjectTeacher
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\coursesubjectteacher\
+++Home
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\home\
+++Schedule
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\schedule\
+++Shared
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\shared\
+++StudentBatch
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\studentbatch\
+++Subject
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\subject\
+++Teacher
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teacher\
+++TeacherSubject
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teachersubject\
+++_ViewImports.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\_viewimports.cshtml
+++_ViewStart.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\_viewstart.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\_viewstart.cshtml
 ++appsettings.Development.json
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\appsettings.development.json
 ++Microsoft.AspNetCore.Analyzers
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\program files\dotnet\sdk\6.0.302\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.analyzers.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\program files\dotnet\sdk\6.0.303\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.analyzers.dll
 ++Microsoft.AspNetCore.Components.Analyzers
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\program files\dotnet\sdk\6.0.302\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.components.analyzers.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\program files\dotnet\sdk\6.0.303\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.components.analyzers.dll
 ++Microsoft.AspNetCore.Mvc.Analyzers
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\program files\dotnet\sdk\6.0.302\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.mvc.analyzers.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\program files\dotnet\sdk\6.0.303\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.mvc.analyzers.dll
 ++Microsoft.CodeAnalysis.Analyzers
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\users\windows 10\.nuget\packages\microsoft.codeanalysis.analyzers\2.9.4\analyzers\dotnet\cs\microsoft.codeanalysis.analyzers.dll
 ++Microsoft.CodeAnalysis.CSharp.Analyzers
@@ -463,43 +503,45 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\users\windows 10\.nuget\packages\mic
 ++Microsoft.EntityFrameworkCore.Analyzers
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:c:\users\windows 10\.nuget\packages\microsoft.entityframeworkcore.analyzers\3.1.5\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
 ++IqraBase.Data
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\dlls\iqrabase.data.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\iqrabase.data
 ++IqraBase.Service
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\dlls\iqrabase.service.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\iqrabase.service
 ++IqraBase.Web
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\dlls\iqrabase.web.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\iqrabase.web
 ++IqraBase.Web.Views
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\dlls\iqrabase.web.views.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\iqrabase.web.views
 ++IqraService.DB
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\dlls\iqraservice.db.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\iqraservice.db
 ++IqraService.Search
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\dlls\iqraservice.search.dll
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\iqraservice.search
 ++Microsoft.AspNetCore.App
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\microsoft.aspnetcore.app
 ++AutoMapper.Extensions.Microsoft.DependencyInjection (7.0.0)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9192
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9557
 ++Microsoft.AspNetCore.Identity.EntityFrameworkCore (3.1.5)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9194
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9559
 ++Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation (3.1.15)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9190
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9555
 ++Microsoft.EntityFrameworkCore.SqlServer (3.1.5)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9191
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9556
 ++Microsoft.EntityFrameworkCore.Tools (3.1.5)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9197
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9562
 ++Microsoft.VisualStudio.Web.CodeGeneration.Design (3.1.5)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9198
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9563
 ++Newtonsoft.Json (13.0.1)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9193
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9558
 ++System.Data.SqlClient (4.8.3)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9196
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9561
 ++System.Drawing.Common (6.0.0)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9189
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9554
 ++System.Management (6.0.0)
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9195
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>9560
 ++FolderProfile.pubxml
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\properties\publishprofiles\folderprofile.pubxml
 ++FolderProfile1.pubxml
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\properties\publishprofiles\folderprofile1.pubxml
+++FolderProfile2.pubxml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\properties\publishprofiles\folderprofile2.pubxml
 ++data
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\data\
 ++fonts
@@ -643,6 +685,26 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\su
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\summernote\trix.css
 ++trix.js
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\summernote\trix.js
+++BatchController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\batcharea\batchcontroller.cs
+++CourseController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursearea\coursecontroller.cs
+++CourseSubjectTeacherController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\coursesubjectteacherarea\coursesubjectteachercontroller.cs
+++ScheduleController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\schedulearea\schedulecontroller.cs
+++StudentController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentarea\studentcontroller.cs
+++StudentBatchController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentbatcharea\studentbatchcontroller.cs
+++SubjectController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\subjectarea\subjectcontroller.cs
+++TeacherController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teacherarea\teachercontroller.cs
+++TeacherSubjectController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\teachersubjectarea\teachersubjectcontroller.cs
+++StudentImageDto.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\dtos\student\studentimagedto.cs
 ++20220726071916_Initial.Designer.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220726071916_initial.designer.cs
 ++20220727111658_addOptionalPhone.Designer.cs
@@ -679,20 +741,96 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\202
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220806100727_addstudent.designer.cs
 ++20220808065728_addStudent1.Designer.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220808065728_addstudent1.designer.cs
+++20220809102756_addStudent3.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220809102756_addstudent3.designer.cs
+++20220810084754_addcourseSubjectteachernew.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220810084754_addcoursesubjectteachernew.designer.cs
+++20220810142803_addcoursenew.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220810142803_addcoursenew.designer.cs
+++20220812094409_removeBatchItem.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812094409_removebatchitem.designer.cs
+++20220812105139_add BacthscheduleInfo1new.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812105139_add bacthscheduleinfo1new.designer.cs
+++20220812120535_add schedule.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812120535_add schedule.designer.cs
+++20220812121526_add schedule1.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812121526_add schedule1.designer.cs
+++20220812122225_add schedule2.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812122225_add schedule2.designer.cs
+++20220812122606_add schedule3.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812122606_add schedule3.designer.cs
+++20220812123050_add schedule4.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812123050_add schedule4.designer.cs
+++20220812135811_add schedule5.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220812135811_add schedule5.designer.cs
+++20220813071545_add guiId  schedule.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813071545_add guiid  schedule.designer.cs
+++20220813084938_add EndTime schedule.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813084938_add endtime schedule.designer.cs
+++20220813085251_add EndTime1 schedule.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813085251_add endtime1 schedule.designer.cs
+++20220813094612_add new schedule.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813094612_add new schedule.designer.cs
+++20220813105525_add remove itemId schedule.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813105525_add remove itemid schedule.designer.cs
+++20220813120440_add Schedule id.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813120440_add schedule id.designer.cs
+++20220813133720_add schedule id1.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813133720_add schedule id1.designer.cs
+++20220813145838_add schedule string.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220813145838_add schedule string.designer.cs
+++20220816070254_add Batch scheduleId.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220816070254_add batch scheduleid.designer.cs
+++20220816114052_add studentbatch.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220816114052_add studentbatch.designer.cs
+++20220816133122_add studentbatch scheduleId.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220816133122_add studentbatch scheduleid.designer.cs
 ++BatchModel.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\batcharea\batchmodel.cs
 ++CourseModel.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\coursearea\coursemodel.cs
 ++CourseSubjectTeacherModel.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\coursesubjectteacherarea\coursesubjectteachermodel.cs
+++ScheduleModel.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\schedulearea\schedulemodel.cs
 ++StudentModel.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\studentarea\studentmodel.cs
+++StudentBatchModel.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\studentbatcharea\studentbatchmodel.cs
 ++SubjectModel.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\subjectarea\subjectmodel.cs
 ++TeacherModel.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\teacherarea\teachermodel.cs
 ++TeacherSubjectModel.cs
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\teachersubjectarea\teachersubjectmodel.cs
+++Login.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\account\login.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\auth\login.cshtml
+++Index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\auth\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\batch\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\course\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\coursesubjectteacher\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\home\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\schedule\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\student\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\studentbatch\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\subject\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teacher\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\teachersubject\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\menuaccess\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\menucategory\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\menuitem\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\views\submenuitem\index.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\studentcourse\index.cshtml
+++Privacy.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\home\privacy.cshtml
+++_Layout.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\_layout.cshtml
+++_ValidationScriptsPartial.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\_validationscriptspartial.cshtml
+++Error.cshtml
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\shared\error.cshtml
 ++MenuAccess
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\areas\menuarea\content\menuaccess\
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\areas\menuarea\content\menuaccess\
@@ -1813,11 +1951,6 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\conten
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\images\list-view-bg.png
 ++logo.jpeg
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\images\logo.jpeg
-++logo.png
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\images\logo.png
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\data\option5\logo.png
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\data\option6\logo.png
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\logo.png
 ++logo2.png
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\images\logo2.png
 ++med.jpg
@@ -2175,14 +2308,62 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\fo
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2
 ++adminlte.min.js
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\theme\js\adminlte.min.js
+++233304b0-013f-4e72-8e5e-3380b53aecff.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\233304b0-013f-4e72-8e5e-3380b53aecff.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\233304b0-013f-4e72-8e5e-3380b53aecff.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\233304b0-013f-4e72-8e5e-3380b53aecff.png
+++33c664ab-6e2e-4923-955c-2632da756cf8.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\33c664ab-6e2e-4923-955c-2632da756cf8.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\33c664ab-6e2e-4923-955c-2632da756cf8.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\33c664ab-6e2e-4923-955c-2632da756cf8.png
+++4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
+++55d9d8f8-171d-43d9-aa9d-1db674d8502d.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\55d9d8f8-171d-43d9-aa9d-1db674d8502d.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\55d9d8f8-171d-43d9-aa9d-1db674d8502d.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\55d9d8f8-171d-43d9-aa9d-1db674d8502d.png
+++5d0bd72e-5e6e-4595-911f-c7bf3e7efde4.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\5d0bd72e-5e6e-4595-911f-c7bf3e7efde4.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\5d0bd72e-5e6e-4595-911f-c7bf3e7efde4.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\5d0bd72e-5e6e-4595-911f-c7bf3e7efde4.png
+++64ec415b-5a29-44b1-9dc1-ab33a95af7af.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\64ec415b-5a29-44b1-9dc1-ab33a95af7af.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\64ec415b-5a29-44b1-9dc1-ab33a95af7af.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\64ec415b-5a29-44b1-9dc1-ab33a95af7af.jpg
+++72158d1a-31ce-42bf-92ac-8bd747cccfc2.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\72158d1a-31ce-42bf-92ac-8bd747cccfc2.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\72158d1a-31ce-42bf-92ac-8bd747cccfc2.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\72158d1a-31ce-42bf-92ac-8bd747cccfc2.png
+++768af1a0-69f7-4715-b35e-ef4b97bfd3ca.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\768af1a0-69f7-4715-b35e-ef4b97bfd3ca.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\768af1a0-69f7-4715-b35e-ef4b97bfd3ca.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\768af1a0-69f7-4715-b35e-ef4b97bfd3ca.jpg
+++76d28a75-3d7c-4893-8e3b-ab53b97e24a0.jpeg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\76d28a75-3d7c-4893-8e3b-ab53b97e24a0.jpeg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\76d28a75-3d7c-4893-8e3b-ab53b97e24a0.jpeg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\76d28a75-3d7c-4893-8e3b-ab53b97e24a0.jpeg
 ++9e1d9f14-0e7b-4f54-925a-809702209480.jpeg
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\9e1d9f14-0e7b-4f54-925a-809702209480.jpeg
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\9e1d9f14-0e7b-4f54-925a-809702209480.jpeg
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\9e1d9f14-0e7b-4f54-925a-809702209480.jpeg
+++a5c9dd37-c07b-4ae7-bca1-0d92f7e433a5.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\a5c9dd37-c07b-4ae7-bca1-0d92f7e433a5.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\a5c9dd37-c07b-4ae7-bca1-0d92f7e433a5.png
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\a5c9dd37-c07b-4ae7-bca1-0d92f7e433a5.png
+++b0d15d96-d194-4f00-9d43-24e429bc7852.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\b0d15d96-d194-4f00-9d43-24e429bc7852.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\b0d15d96-d194-4f00-9d43-24e429bc7852.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\b0d15d96-d194-4f00-9d43-24e429bc7852.jpg
 ++bec03f79-49b3-48b5-9995-5d70a9e7f075.jpeg
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\bec03f79-49b3-48b5-9995-5d70a9e7f075.jpeg
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\bec03f79-49b3-48b5-9995-5d70a9e7f075.jpeg
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\bec03f79-49b3-48b5-9995-5d70a9e7f075.jpeg
+++f6a606d1-6120-4287-81d1-6888e781759b.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\icon\f6a606d1-6120-4287-81d1-6888e781759b.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\original\f6a606d1-6120-4287-81d1-6888e781759b.jpg
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\images\student\small\f6a606d1-6120-4287-81d1-6888e781759b.jpg
 ++bootstrap-theme.css
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\lib\bootstrap\css\bootstrap-theme.css
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\bootstrap\css\bootstrap-theme.css
@@ -3163,5 +3344,31 @@ i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\conten
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\select2\js\select2.min.js
 ++select2.full.min.js
 i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\content\assets\lib\select2\js\select2.full.min.js
-++student-form.js
-i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\student-area\student-form.js
+++SQL Server Database
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>13117
+++SQL Server Database dependency is detected
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:>13118
+++NewFolder
+++StudentCourse
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\views\studentcourse\
+++StudentCourseArea
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentcoursearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\studentcoursearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentcoursearea\
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentcoursearea\
+++StudentCourse.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\entities\studentcoursearea\studentcourse.cs
+++20220817135319_add studentCourse.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220817135319_add studentcourse.cs
+++20220817135319_add studentCourse.Designer.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\migrations\20220817135319_add studentcourse.designer.cs
+++StudentCourseModel.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\models\studentcoursearea\studentcoursemodel.cs
+++StudentCourseService.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\services\studentcoursearea\studentcourseservice.cs
+++StudentCourseController.cs
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\controllers\studentcoursearea\studentcoursecontroller.cs
+++studentcourse-area
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\studentcourse-area\
+++studentcourse.js
+i:{19f4f0b6-cf01-493e-b503-73685812ea26}:h:\dreamers\iqracommerce\wwwroot\js\studentcourse-area\studentcourse.js
