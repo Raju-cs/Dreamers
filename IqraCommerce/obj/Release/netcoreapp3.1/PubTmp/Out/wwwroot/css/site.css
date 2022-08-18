@@ -14,8 +14,8 @@ a {
 
 .btn-primary {
     color: #fff;
-    background-color: blue;
-    border-color: #666c69;
+    background-color: #3b5998;
+    border-color: #3b5998;
 }
 
 .nav-pills .nav-link.active,
@@ -76,7 +76,7 @@ body {
   cursor: pointer;
 }
 .info {
-    background: #666c69;
+    background: #3b5998;
 }
 .t-white {
   color: white !important;
@@ -125,10 +125,10 @@ td.action {
 }
 
 a.btn.primary, .btn.primary {
-    background: #666c69 !important;
+    background: #3b5998 !important;
     color: white;
     box-shadow: 0 3px 1px -2px #0003, 0 2px 2px #00000024, 0 1px 5px #0000001f;
-    border: 1px solid #666c69;
+    border: 1px solid #3b5998;
     font-weight: bold;
 }
     a.btn.primary:hover, .btn.primary:hover {

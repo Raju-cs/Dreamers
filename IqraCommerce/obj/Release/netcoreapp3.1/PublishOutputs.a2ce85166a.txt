@@ -1171,6 +1171,7 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student-area\student-form.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student-area\student.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentbatch-area\studentbatch.js
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentcourse-area\studentcourse.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\subject-area\subject-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\subject-area\subject.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\teacher-area\teacher-details-modal.js

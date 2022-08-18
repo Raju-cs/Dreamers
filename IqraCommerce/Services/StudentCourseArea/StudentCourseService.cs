@@ -21,6 +21,24 @@ namespace IqraCommerce.Services.StudentCourseArea
                 case "studentcourse":
                     name = "stdntcrsh.[Name]";
                     break;
+                case "coursename":
+                    name = "crsh.[Name]";
+                    break;
+                case "day":
+                    name = "schdl.[Name]";
+                    break;
+                case "starttime":
+                    name = "schdl.[Name]";
+                    break;
+                case "endtime":
+                    name = "schdl.[Name]";
+                    break;
+                case "classroomnumber":
+                    name = "schdl.[Name]";
+                    break;
+                case "maxstudent":
+                    name = "schdl.[Name]";
+                    break;
                 default:
                     name = "stdntcrsh." + name;
                     break;
