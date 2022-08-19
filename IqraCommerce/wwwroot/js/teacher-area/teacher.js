@@ -222,7 +222,6 @@ import { imageBound } from '../utils.js';
         Name: 'DELETE_TEACHER',
         Title: 'Deleted',
         filter: [trashRecord],
-        actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

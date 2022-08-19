@@ -165,7 +165,6 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'DELETE_SCHEDULE',
         Title: 'Deleted',
         filter: [trashRecord],
-        actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

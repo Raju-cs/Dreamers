@@ -66,13 +66,13 @@ namespace IqraCommerce.Services.TeacherSubjectArea
               ,[tchrsbjct].[Charge]
 	          ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator]
-			  ,[tchr].Name  [TeacherName]
-			  ,[sbjct].Name [SubjectName]
+			  ,ISNULL([tchr].Name, '')  [TeacherName]
+			  ,ISNULL([sbjct].Name, '') [SubjectName]
           FROM [dbo].[TeacherSubject] [tchrsbjct]
           LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [tchrsbjct].[CreatedBy]
           LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [tchrsbjct].[UpdatedBy]
 		  LEFT JOIN [dbo].[Teacher] [tchr] ON [tchr].Id = [tchrsbjct].[TeacherId]
-		  LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [tchrsbjct].[SubjectId]";
+		  LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [tchrsbjct].[SubjectId] And [sbjct].IsDeleted = 0";
         }
         
 

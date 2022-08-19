@@ -3,6 +3,43 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
 (function () {
+
+    const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const teacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
+    const liveFilter = { "field": "[tchr].[IsDeleted]", "value": 0, Operation: 0 };
+    const liveFilterSubject = { "field": "IsDeleted", "value": 0, Operation: 0 };
+    const activeTeacherFilter = { "field": "[tchr].[IsActive]", "value": 1, Operation: 0 };
+
+
+    let teacherDropdownMat;
+
+    const subjectSelectHandler = (data) => {
+
+        teacherFilterBySubject.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
+
+        teacherDropdownMat.Reload();
+    }
+
+    const modalDropDowns = [
+        {
+            Id: 'SubjectId',
+            add: { sibling: 2 },
+            position: 1,
+            url: '/Subject/AutoComplete',
+            Type: 'AutoComplete',
+            onchange: subjectSelectHandler,
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] }
+        },
+        teacherDropdownMat = {
+            Id: 'TeacherId',
+            add: { sibling: 2 },
+            position: 1,
+            url: '/Teacher/AutoComplete',
+            Type: 'AutoComplete',
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeTeacherFilter, liveFilter, teacherFilterBySubject] }
+
+        }];
+
     const controller = 'Batch';
 
     $(document).ready(() => {
@@ -15,10 +52,12 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
         { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 }},
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false, position: 7, },
-        { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
-        { field: 'Updator', title: 'Updator', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
+        { field: 'Creator', title: 'Creator', add: false },
+        { field: 'Updator', title: 'Updator', add: false },
+
+
     ];
 
     function add() {
@@ -27,23 +66,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             model: undefined,
             title: 'Add Batch',
             columns: columns(),
-            dropdownList: [{
-                Id: 'SubjectId',
-                add: { sibling: 2 },
-                position: 1,
-                url: '/Subject/AutoComplete',
-                Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [] }
-
-            }, {
-                    Id: 'TeacherId',
-                    add: { sibling: 2 },
-                    position: 2,
-                    url: '/Teacher/AutoComplete',
-                    Type: 'AutoComplete',
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [] }
-
-                },],
+            dropdownList: modalDropDowns,
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
@@ -168,7 +191,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'DELETE_BATCH',
         Title: 'Deleted',
         filter: [trashRecord],
-        actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),
