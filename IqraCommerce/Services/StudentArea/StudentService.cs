@@ -92,7 +92,6 @@ namespace IqraCommerce.Services.StudentArea
             return DateTime.Now.ToString("yyMMdd") + count.ToString().PadLeft(4, '0');
         }
     }
-
     public class StudentQuery
     {
         public static string Get()
@@ -145,12 +144,10 @@ namespace IqraCommerce.Services.StudentArea
                 FROM [dbo].[Student] [stdnt]
                 LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdnt].[CreatedBy]
                 LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdnt].[UpdatedBy]";
-
         }
         public static string BasicInfo
         {
             get { return @"SELECT " + Get() + " Where stdnt.Id = '"; }
         }
     }
-
 }

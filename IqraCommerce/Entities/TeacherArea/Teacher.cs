@@ -8,7 +8,6 @@ namespace IqraCommerce.Entities.TeacherArea
     [Alias("tchr")]
     public class Teacher: DropDownBaseEntity
     {
-      
         public string PhoneNumber { get; set; }
         public string OptionalPhoneNumber { get; set; }    
         public string Email { get; set; }
@@ -17,9 +16,5 @@ namespace IqraCommerce.Entities.TeacherArea
         public string UniversitySubject { get; set; }
         public double   UniversityResult { get; set; }
         public bool IsActive { get; set; }  
-
-
-
-
     }
 }

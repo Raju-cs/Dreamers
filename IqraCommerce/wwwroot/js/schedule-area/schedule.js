@@ -1,6 +1,6 @@
 import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn, statusBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
-import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
+import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
 
 (function () {
     const controller = 'Schedule';
@@ -10,21 +10,15 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
     });
 
     const columns = () => [
-        { field: 'Day', title: 'Day', filter: true, position: 1, add: false },
-        { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm' },
-        { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm' },
-        { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
-        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, },
-        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 7, },
+        { field: 'ScheduleName', title: 'Day', filter: true, position: 1, add: false },
+        { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
+        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 4, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
-
-
-
 
     function edit(model) {
         Global.Add({
@@ -32,22 +26,29 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             model: model,
             title: 'Edit Schedule',
             columns: [
-             
-                { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-                { field: 'EndTime', title: 'End Time', filter: true, position: 3,},
-                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, },
-                { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
+
+                { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 6, },
             ],
             dropdownList: [{
+                title: 'ScheduleName',
+                Id: 'ScheduleName',
+                dataSource: [
+                    { text: 'Sat-Mon-Wed', value: SHEDULENAME.SCHEDULE_ONE },
+                    { text: 'Sun-Tue-Thu', value: SHEDULENAME.SCHEDULE_TWO },
+
+                ],
+                position: 1,
+                add: { sibling: 2 }
+            } ,{
                 title: 'Program',
                 Id: 'Program',
                 dataSource: [
-                    { text: 'Batch', value: PROGRAM.BATCH },
+                    { text: 'Module', value: PROGRAM.MODULE },
                     { text: 'Course', value: PROGRAM.COURSE },
 
                 ],
-                position: 4,
+                position: 2,
             }, {
                     title: 'Active Status',
                     Id: 'IsActive',
@@ -56,30 +57,14 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
                         { text: 'no', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 2 },
-                    position: 6,
-
-
-                }, {
-                    title: 'Day',
-                    Id: 'Day',
-                    dataSource: [
-                        { text: 'Saturday', value: 'Saturday' },
-                        { text: 'Sunday', value: 'Sunday' },
-                        { text: 'Monday', value: 'Monday' },
-                        { text: 'Tuesday', value: 'Tuesday' },
-                        { text: 'Wednesday', value: 'Wednesday' },
-                        { text: 'Thursday', value: 'Thursday' },
-                        { text: 'Friday', value: 'Friday' },
-
-                    ],
-                    position: 1,
+                    position: 4,
 
                 }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-                formModel.Name = `${data.Day}: ${data.StartTime} - ${data.EndTime}`;
+                formModel.Name = `${data.ClassRoomNumber}: ${data.MaxStudent}`;
 
             },
             onSaveSuccess: function () {
@@ -97,7 +82,6 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         });
 
     }
-
 
     const allTab = {
         Id: 'BBC23DC6-A099-494D-BEB4-E8B98993A27D',
@@ -121,9 +105,9 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
 
     const batchTab = {
         Id: 'ECF99BB4-3896-443E-A3CF-AB7978964810',
-        Name: 'BATCH_SCHEDULE',
-        Title: 'Btach',
-        filter: [{ "field": "Program", "value": "Batch", Operation: 0 }, liveRecord],
+        Name: 'MODULE_SCHEDULE',
+        Title: 'Module',
+        filter: [{ "field": "Program", "value": "Module", Operation: 0 }, liveRecord],
         actions: [{
             click: edit,
             html: editBtn("Edit Information")

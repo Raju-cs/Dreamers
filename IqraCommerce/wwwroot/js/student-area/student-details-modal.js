@@ -4,21 +4,31 @@ var Controller = new function () {
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const studentFilter = { "field": "StudentId", "value": '', Operation: 0 };
-    const programBatchFilter = { "field": "Program", "value": "Batch", Operation: 0 }
+    const programModuleFilter = { "field": "Program", "value": "Module", Operation: 0 }
+    const programCourseFilter = { "field": "Program", "value": "Course", Operation: 0 }
     const scheduleFilterByCourse = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
-    const scheduleFilterBybatch = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
-    
+    const scheduleEditFilterByCourse = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
+    const scheduleFilterBymodule = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
+    const scheduleEditFilterBymodule = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
    
     var _options;
 
-    let scheduleBatchDropdownMat;
+    let scheduleModuleDropdownMat;
+    let scheduleEditModuleDropdownMat;
     let scheduleCourseDropdownMat;
+    let scheduleEditCourseDropdownMat;
 
-    const batchSelectHandler = (data) => {
+    const moduleSelectHandler = (data) => {
 
-        scheduleFilterBybatch.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
+        scheduleFilterBymodule.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
 
-        scheduleBatchDropdownMat.Reload();
+        scheduleModuleDropdownMat.Reload();
+    }
+    const moduleEditSelectHandler = (data) => {
+
+        scheduleEditFilterBymodule.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
+
+        scheduleEditModuleDropdownMat.Reload();
     }
     const courseSelectHandler = (data) => {
 
@@ -26,25 +36,53 @@ var Controller = new function () {
 
         scheduleCourseDropdownMat.Reload();
     }
+    const courseEditSelectHandler = (data) => {
 
-    const modalBatchDropDowns = [
+        scheduleEditFilterByCourse.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
+
+        scheduleEditCourseDropdownMat.Reload();
+    }
+   
+
+    const modalModuleDropDowns = [
         {
-            Id: 'BatchId',
+            Id: 'ModuleId',
             add: { sibling: 2 },
             position: 1,
-            url: '/Batch/AutoComplete',
+            url: '/Module/AutoComplete',
             Type: 'AutoComplete',
-            onchange: batchSelectHandler,
+            onchange: moduleSelectHandler,
             page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter] }
 
         },
-        scheduleBatchDropdownMat = {
+        scheduleModuleDropdownMat = {
             Id: 'ScheduleId',
             add: { sibling: 2 },
             position: 2,
             url: '/Schedule/AutoComplete',
             Type: 'AutoComplete',
-            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleFilterBybatch, programBatchFilter] }
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleFilterBymodule, programModuleFilter] }
+
+        }];
+
+    const modalEditModuleDropDowns = [
+        {
+            Id: 'ModuleId',
+            add: { sibling: 2 },
+            position: 1,
+            url: '/Module/AutoComplete',
+            Type: 'AutoComplete',
+            onchange: moduleEditSelectHandler,
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter] }
+
+        },
+        scheduleEditModuleDropdownMat = {
+            Id: 'ScheduleId',
+            add: { sibling: 2 },
+            position: 2,
+            url: '/Schedule/AutoComplete',
+            Type: 'AutoComplete',
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleEditFilterBymodule, programModuleFilter] }
 
         }];
 
@@ -68,13 +106,33 @@ var Controller = new function () {
             page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleFilterByCourse] }
 
         }];
+
+    const modalEditCourseDropDowns = [
+        {
+            Id: 'CourseId',
+            add: { sibling: 2 },
+            position: 1,
+            url: '/Course/AutoComplete',
+            Type: 'AutoComplete',
+            onchange: courseEditSelectHandler,
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter] }
+
+        },
+        scheduleEditCourseDropdownMat = {
+            Id: 'ScheduleId',
+            add: { sibling: 2 },
+            position: 2,
+            url: '/Schedule/AutoComplete',
+            Type: 'AutoComplete',
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleEditFilterByCourse, programCourseFilter] }
+
+        }];
  
     this.Show = function (options) {
         _options = options;
-      
         studentFilter.value = _options.Id;
        
-        function addStudentInbatch(page) {
+        function addStudentInModule(page) {
             Global.Add({
                 name: 'ADD_STUDENT_BATCH',
                 model: undefined,
@@ -82,26 +140,24 @@ var Controller = new function () {
                 columns: [
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },
                 ],
-                dropdownList: modalBatchDropDowns,
+                dropdownList: modalModuleDropDowns,
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     console.log("Model=>", formModel);
                     formModel.ActivityId = window.ActivityId;
                     formModel.StudentId = _options.Id;
                     
-                   
-
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
                 },
                 filter: [],
-                save: `/StudentBatch/Create`,
+                save: `/StudentModule/Create`,
             });
 
         }
 
-        function editStudentBatch(model, grid) {
+        function editStudentModule(model, grid) {
             Global.Add({
                 name: 'EDIT_STUDENT_BATCH',
                 model: model,
@@ -110,23 +166,7 @@ var Controller = new function () {
                
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
                 ],
-                dropdownList: [{
-                    Id: 'BatchId',
-                    add: { sibling: 2 },
-                    position: 1,
-                    url: '/Batch/AutoComplete',
-                    Type: 'AutoComplete',
-                    onchange: batchSelectHandler,
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter] }
-
-                }, {
-                        Id: 'ScheduleId',
-                        add: { sibling: 2 },
-                        position: 2,
-                        url: '/Schedule/AutoComplete',
-                        Type: 'AutoComplete',
-                        page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleFilterBybatch, programBatchFilter] }
-                    }],
+                dropdownList: modalEditModuleDropDowns,
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
@@ -138,11 +178,10 @@ var Controller = new function () {
                     grid?.Reload();
                 },
                 filter: [],
-                saveChange: `/StudentBatch/Edit`,
+                saveChange: `/StudentModule/Edit`,
             });
 
         }
-
 
         function addStudentInCourse(page) {
             Global.Add({
@@ -180,24 +219,7 @@ var Controller = new function () {
 
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
                 ],
-                dropdownList: [{
-                    Id: 'CourseId',
-                    add: { sibling: 2 },
-                    position: 1,
-                    url: '/Course/AutoComplete',
-                    Type: 'AutoComplete',
-                    onchange: courseSelectHandler,
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter] }
-
-                }, {
-                        Id: 'ScheduleId',
-                        add: { sibling: 2 },
-                        position: 2,
-                        url: '/Schedule/AutoComplete',
-                        Type: 'AutoComplete',
-                        page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleFilterByCourse] }
-
-                    }],
+                dropdownList: modalEditCourseDropDowns ,
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
@@ -213,7 +235,6 @@ var Controller = new function () {
             });
 
         }
-
         Global.Add({
             title: 'Student Information',
             selected: 0,
@@ -268,30 +289,27 @@ var Controller = new function () {
                         }
                     
                 }, {
-                    title: 'Batch',
+                    title: 'Module',
                     Grid: [{
 
-                        Header: 'Batch',
+                        Header: 'Module',
                         columns: [
-                            { field: 'BatchName', title: 'Batch Name', filter: true, position: 1, add: false },
-                            { field: 'Day', title: 'Day', filter: true, position: 2, add: false },
-                            { field: 'StartTime', title: 'Start Time', filter: true, position: 3, add: false },
-                            { field: 'EndTime', title: 'End Time', filter: true, position: 4, add: false },
-                            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, add: false },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: false },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },
+                            { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
+                            { field: 'ScheduleName', title: 'Day', filter: true, position: 2, add: false },
+                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, add: false },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                        ],
 
-                        Url: '/StudentBatch/Get/',
+                        Url: '/StudentModule/Get/',
                         filter: [studentFilter],
                         onDataBinding: function (response) { },
                         actions: [{
-                            click: editStudentBatch,
+                            click: editStudentModule,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Student Batch"></i></a>`
 
                         }],
                         buttons: [{
-                            click: addStudentInbatch,
+                            click: addStudentInModule,
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
                         }],
                         selector: false,
@@ -300,20 +318,16 @@ var Controller = new function () {
                         }
                     }],
 
-                },
-                {
+                },{
                     title: 'Course',
                     Grid: [{
 
                         Header: 'Course',
                         columns: [
                             { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
-                            { field: 'Day', title: 'Day', filter: true, position: 2, add: false },
-                            { field: 'StartTime', title: 'Start Time', filter: true, position: 3, add: false },
-                            { field: 'EndTime', title: 'End Time', filter: true, position: 4, add: false },
-                            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, add: false },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: false },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },
+                            { field: 'ScheduleName', title: 'Day', filter: true, position: 2, add: false },
+                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, add: false },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                         ],
 
                         Url: '/StudentCourse/Get/',
@@ -333,17 +347,12 @@ var Controller = new function () {
                             container: $('void')
                         }
                     }],
-
                 },
-
-
             ],
 
             name: 'Course Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
           
         });
-
-
     }
 };

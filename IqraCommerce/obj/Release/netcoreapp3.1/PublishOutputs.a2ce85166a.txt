@@ -1117,6 +1117,7 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\log
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\233304b0-013f-4e72-8e5e-3380b53aecff.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\33c664ab-6e2e-4923-955c-2632da756cf8.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\5509ef30-fb47-423b-9485-9421a1b8208e.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\55d9d8f8-171d-43d9-aa9d-1db674d8502d.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\5d0bd72e-5e6e-4595-911f-c7bf3e7efde4.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\64ec415b-5a29-44b1-9dc1-ab33a95af7af.jpg
@@ -1131,6 +1132,7 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Stu
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\233304b0-013f-4e72-8e5e-3380b53aecff.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\33c664ab-6e2e-4923-955c-2632da756cf8.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\5509ef30-fb47-423b-9485-9421a1b8208e.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\55d9d8f8-171d-43d9-aa9d-1db674d8502d.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\5d0bd72e-5e6e-4595-911f-c7bf3e7efde4.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\64ec415b-5a29-44b1-9dc1-ab33a95af7af.jpg
@@ -1145,6 +1147,7 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Stu
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\233304b0-013f-4e72-8e5e-3380b53aecff.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\33c664ab-6e2e-4923-955c-2632da756cf8.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\5509ef30-fb47-423b-9485-9421a1b8208e.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\55d9d8f8-171d-43d9-aa9d-1db674d8502d.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\5d0bd72e-5e6e-4595-911f-c7bf3e7efde4.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\64ec415b-5a29-44b1-9dc1-ab33a95af7af.jpg
@@ -1164,12 +1167,15 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\course-
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\coursesubjectteacher-area\coursesubjectteacher.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\dictionaries.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\filters.js
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\routine-area\routine-details-modal.js
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\routine-area\routine.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\schedule-area\schedule-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\schedule-area\schedule.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\site.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student-area\student-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student-area\student-form.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student-area\student.js
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentbatch-area\studentbatch-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentbatch-area\studentbatch.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentcourse-area\studentcourse.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\subject-area\subject-details-modal.js

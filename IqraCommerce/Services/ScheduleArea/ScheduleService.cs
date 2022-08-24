@@ -71,14 +71,12 @@ namespace IqraCommerce.Services.ScheduleArea
                   ,ISNULL([schdl].[Remarks], '') [Remarks]
                   ,[schdl].[ActivityId]
                   ,ISNULL([schdl].[Name], '') [Name]
-                  ,ISNULL([schdl].[Day], '') [Day]
                   ,ISNULL([schdl].[MaxStudent], '') [MaxStudent]
                   ,ISNULL([schdl].[ClassRoomNumber], '') [ClassRoomNumber]
                   ,ISNULL([schdl].[Program], '') [Program]
                   ,[schdl].[IsActive]
-                  ,ISNULL([schdl].[EndTime], '') [EndTime]
-                  ,ISNULL([schdl].[StartTime], '') [StartTime]
                   ,[schdl].[ReferenceId]
+                  ,ISNULL([schdl].[ScheduleName], '') [ScheduleName]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator] 
               FROM [dbo].[Schedule] [schdl]
@@ -103,17 +101,13 @@ namespace IqraCommerce.Services.ScheduleArea
                   ,[schdl].[Remarks]
                   ,[schdl].[ActivityId]
                   ,[schdl].[Name]
-                  ,[schdl].[Day]
                   ,[schdl].[MaxStudent]
                   ,[schdl].[ClassRoomNumber]
                   ,[schdl].[Program]
                   ,[schdl].[IsActive]
-                  ,[schdl].[EndTime]
-                  ,[schdl].[StartTime]
                   ,[schdl].[ReferenceId]
-              FROM [dbo].[Schedule] [schdl]
-            ";
+                  ,[schdl].[ScheduleName]
+              FROM [dbo].[Schedule] [schdl] ";
         }
-
     }
 }

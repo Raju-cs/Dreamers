@@ -132,14 +132,13 @@ a.btn.primary, .btn.primary {
     font-weight: bold;
 }
     a.btn.primary:hover, .btn.primary:hover {
-        background: #666c69 !important;
+        background: #3b5998 !important;
     }
-a.btn.primary:active, .btn.primary:active {
-  background: #666c69 !important;
-  box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024,
-    0 3px 14px 2px #0000001f;
-  color: white !important;
-}
+  a.btn.primary:active, .btn.primary:active {
+        background: #3b5998 !important;
+        box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f;
+        color: white !important;
+    }
 
 .btn.warn {
   background: #f44336 !important;

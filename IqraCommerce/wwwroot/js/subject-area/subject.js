@@ -20,7 +20,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
     ];
 
-
     function add() {
         Global.Add({
             name: 'ADD_SUBJECT',
@@ -36,16 +35,11 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                     
                 ],
                 position: 3,
-              }
-
-
-            ],
+              } ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
-                
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -70,13 +64,9 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 dataSource: [
                     { text: 'Bangla', value: SUBJECT.BANGLA },
                     { text: 'English', value: SUBJECT.ENGLISH },
-
                 ],
                 position: 3,
-
-
-
-            }, {
+               }, {
                     title: 'Subject Active Status',
                     Id: 'IsActive',
                 dataSource: [
@@ -85,14 +75,11 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                     ],
                 add: { sibling: 2 },
                 position: 4,
-
-
                 },],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -126,9 +113,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
 
                 ],
                 position: 3,
-
-
-
             }, {
                 title: 'Subject Active Status',
                 Id: 'IsActive',
@@ -138,21 +122,17 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 ],
                 add: { sibling: 2 },
                 position: 4,
-
-
             },],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
             },
             saveChange: `/${controller}/Edit`,
         });
-
     };
 
 

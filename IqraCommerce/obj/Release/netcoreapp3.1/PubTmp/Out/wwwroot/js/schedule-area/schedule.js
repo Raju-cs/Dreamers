@@ -10,13 +10,10 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
     });
 
     const columns = () => [
-        { field: 'Day', title: 'Day', filter: true, position: 1, add: false },
-        { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm' },
-        { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm' },
-        { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
-        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, },
-        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 7, },
+        { field: 'ScheduleName', title: 'Day', filter: true, position: 1, add: false },
+        { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
+        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 4, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -32,12 +29,10 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             model: model,
             title: 'Edit Schedule',
             columns: [
-             
-                { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-                { field: 'EndTime', title: 'End Time', filter: true, position: 3,},
-                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, },
-                { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
+
+                { field: 'ScheduleName', title: 'Day', filter: true, position: 1, add: false },
+                { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 6, },
             ],
             dropdownList: [{
                 title: 'Program',
@@ -47,7 +42,7 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
                     { text: 'Course', value: PROGRAM.COURSE },
 
                 ],
-                position: 4,
+                position: 2,
             }, {
                     title: 'Active Status',
                     Id: 'IsActive',
@@ -56,30 +51,15 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
                         { text: 'no', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 2 },
-                    position: 6,
+                    position: 4,
 
-
-                }, {
-                    title: 'Day',
-                    Id: 'Day',
-                    dataSource: [
-                        { text: 'Saturday', value: 'Saturday' },
-                        { text: 'Sunday', value: 'Sunday' },
-                        { text: 'Monday', value: 'Monday' },
-                        { text: 'Tuesday', value: 'Tuesday' },
-                        { text: 'Wednesday', value: 'Wednesday' },
-                        { text: 'Thursday', value: 'Thursday' },
-                        { text: 'Friday', value: 'Friday' },
-
-                    ],
-                    position: 1,
 
                 }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-                formModel.Name = `${data.Day}: ${data.StartTime} - ${data.EndTime}`;
+                formModel.Name = `${data.ClassRoomNumber}: ${data.MaxStudent}`;
 
             },
             onSaveSuccess: function () {
@@ -165,7 +145,6 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'DELETE_SCHEDULE',
         Title: 'Deleted',
         filter: [trashRecord],
-        actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

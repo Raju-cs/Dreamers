@@ -8,11 +8,8 @@ namespace IqraCommerce.Entities.SubjectArea
     [Alias("sbjct")]
     public class Subject: DropDownBaseEntity
     {
-        
         public string Class { get; set; }
         public string Version { get; set; } 
         public bool IsActive { get; set; }
-
-
     }
 }

@@ -13,10 +13,11 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'Name', title: 'Name', filter: true, position: 1, },
         { field: 'Class', title: 'Class', filter: true, position: 2, },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 5, },
-        { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
-        { field: 'Updator', title: 'Updator', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
+        { field: 'Creator', title: 'Creator', add: false },
+        { field: 'Updator', title: 'Updator', add: false },
+
     ];
 
 
@@ -201,7 +202,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'DELETE_SUBJECT',
         Title: 'Deleted',
         filter: [trashRecord],
-        actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

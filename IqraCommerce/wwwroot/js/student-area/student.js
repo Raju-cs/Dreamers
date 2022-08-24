@@ -458,8 +458,6 @@ import { print } from "./student-form.js";
         print(row);
     }
 
-
-
     // Active Tab Config
     const activeTab = {
         Id: 'CB6E13253-1C50-467B-A26F-D51343FBE8A3',
@@ -529,7 +527,6 @@ import { print } from "./student-form.js";
         Printable: { container: $('void') },
         Url: 'Get',
     }
-
 
     //Tabs config
     const tabs = {

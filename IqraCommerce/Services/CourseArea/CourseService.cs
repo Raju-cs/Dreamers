@@ -9,7 +9,6 @@ namespace IqraCommerce.Services.CourseArea
 {
     public class CourseService : IqraCommerce.Services.AppBaseService<Course>
     {
-
         public override string GetName(string name)
         {
             switch (name.ToLower())
@@ -29,7 +28,6 @@ namespace IqraCommerce.Services.CourseArea
             }
             return base.GetName(name);
         }
-
         public override async Task<ResponseList<Pagger<Dictionary<string, object>>>> Get(Page page)
         {
             page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[CreatedAt] DESC" : page.SortBy;
@@ -69,9 +67,6 @@ namespace IqraCommerce.Services.CourseArea
             ,ISNULL([crsh].[CoachingPercentange], '') [CoachingPercentange]
             ,[crsh].[ScheduleId]
             ,ISNULL([schdl].Name, '')  [Program]
-	        ,ISNULL([schdl].Name, '') [Day]
-	        ,ISNULL([schdl].Name, '') [StartTime]
-	        ,ISNULL([schdl].Name, '') [EndTime]
 	        ,ISNULL([schdl].Name, '') [MaxStudent]
 	        ,ISNULL([schdl].Name, '') [ClassRoomNumber]
             ,ISNULL([crtr].[Name], '') [Creator]
@@ -86,9 +81,5 @@ namespace IqraCommerce.Services.CourseArea
         {
             get { return @"SELECT " + Get() + " Where crsh.Id = '"; }
         }
-
-
-
     }
-
 }

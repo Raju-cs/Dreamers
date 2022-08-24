@@ -46,12 +46,13 @@ var Controller = new function () {
                         Url: '/TeacherSubject/Get/',
                         filter: [subjectFilter],
                         onDataBinding: function (response) { },
-                        actions: [],
-                        buttons: [],
+                        //actions: [],
+                        //buttons: [],
                         selector: false,
                         Printable: {
                             container: $('void')
-                        }
+                        },
+                        
                     }],
 
                 }, {
@@ -69,8 +70,8 @@ var Controller = new function () {
                         Url: '/Batch/Get/',
                         filter: [batchFilter, liveFilter],
                         onDataBinding: function (response) { },
-                        actions: [],
-                        buttons: [],
+                        //actions: [],
+                        //buttons: [],
                         selector: false,
                         Printable: {
                             container: $('void')

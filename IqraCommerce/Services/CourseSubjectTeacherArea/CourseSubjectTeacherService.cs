@@ -75,10 +75,6 @@ namespace IqraCommerce.Services.CourseSubjectTeacherArea
                 LEFT JOIN [dbo].[Teacher] [tchr] ON [tchr].Id = [crsbjctchr].[TeacherId]
 		        LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [crsbjctchr].[SubjectId]
                 LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [crsbjctchr].[CourseId]";
-
-
         }
-      
-
     }
 }

@@ -211,7 +211,6 @@
   <ItemGroup>
     <Folder Include="Areas\MenuArea\Models\" />
     <Folder Include="Areas\MenuArea\Views\Shared\" />
-    <Folder Include="Entities\NewFolder\" />
   </ItemGroup>
 
 </Project>

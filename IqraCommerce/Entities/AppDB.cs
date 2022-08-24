@@ -1,5 +1,4 @@
 ﻿using EBonik.Data.Entities.HistoryArea;
-using IqraCommerce.Entities.BatchArea;
 using IqraCommerce.Entities.ScheduleArea;
 using IqraCommerce.Entities.CourseArea;
 using IqraCommerce.Entities.CourseSubjectTeacherArea;
@@ -9,8 +8,10 @@ using IqraCommerce.Entities.TeacherArea;
 using IqraCommerce.Entities.TeacherSubjectArea;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using IqraCommerce.Entities.StudentBatchArea;
 using IqraCommerce.Entities.StudentCourseArea;
+using IqraCommerce.Entities.RoutineArea;
+using IqraCommerce.Entities.ModuleArea;
+using IqraCommerce.Entities.StudentModuleArea;
 
 namespace IqraCommerce.Entities
 {
@@ -69,7 +70,7 @@ namespace IqraCommerce.Entities
         #endregion
 
         #region Batch
-        public virtual DbSet<Batch> Batch { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
         #endregion
 
         #region Student
@@ -80,13 +81,19 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Schedule> Schedule { get; set; }
         #endregion
 
-        #region StudentBatch
-        public virtual DbSet<StudentBatch> StudentBatch { get; set; }
+        #region StudentModule
+        public virtual DbSet<StudentModule> StudentModule { get; set; }
         #endregion
 
         #region StudentCourse
         public virtual DbSet<StudentCourse> StudentCourse { get; set; }
         #endregion
+
+        #region Routine
+        public virtual DbSet<Routine> Routine { get; set; }
+        #endregion
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

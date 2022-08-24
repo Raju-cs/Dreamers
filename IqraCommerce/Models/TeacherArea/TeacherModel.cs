@@ -5,7 +5,6 @@ namespace IqraCommerce.Models.TeacherArea
 {
     public class TeacherModel: AppDropDownBaseModel
     {
-        
         public string PhoneNumber { get; set; }
         public string OptionalPhoneNumber { get; set; }
         public string Email { get; set; }

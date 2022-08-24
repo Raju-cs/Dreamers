@@ -40,8 +40,6 @@ var Controller = new function () {
         });
     }
    
-
-
     function editSubject(model, grid) {
       
         Global.Add({
@@ -65,9 +63,6 @@ var Controller = new function () {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
                 formModel.TeacherId = _options.Id;
-                
-                
-
             },
             onSaveSuccess: function () {
                 grid?.Reload();
@@ -100,8 +95,6 @@ var Controller = new function () {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
                 formModel.TeacherId = _options.Id;
-
-
             },
             onSaveSuccess: function () {
                 grid?.Reload();
@@ -142,8 +135,7 @@ var Controller = new function () {
                         onLoaded: function (tab, data) {
 
                         }
-                    
-                }, {
+                    }, {
                     title: 'Teachers Subject',
                     Grid: [{
                         
@@ -186,8 +178,6 @@ var Controller = new function () {
                             { field: 'CourseName', title: 'Course', filter: true, position: 1, add: false },
                             { field: 'SubjectName', title: 'Subject', filter: true, position: 2, add: false },
                             { field: 'TeacherPercentange', title: 'Teacher Percentange%', filter: true, position: 3, },
-                           
-
                         ],
 
                         Url: '/CourseSubjectTeacher/Get/',
@@ -213,7 +203,5 @@ var Controller = new function () {
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
           
         });
-
-
     }
 };

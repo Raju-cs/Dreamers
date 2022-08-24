@@ -59,7 +59,7 @@ namespace IqraCommerce.Services.StudentCourseArea
     {
         public static string Get()
         {
-            return @" [stdntcrsh].[Id]
+            return @"[stdntcrsh].[Id]
                   ,[stdntcrsh].[CreatedAt]
                   ,[stdntcrsh].[CreatedBy]
                   ,[stdntcrsh].[UpdatedAt]
@@ -71,15 +71,13 @@ namespace IqraCommerce.Services.StudentCourseArea
                   ,[stdntcrsh].[StudentId]
                   ,[stdntcrsh].[CourseId]
                   ,[stdntcrsh].[ScheduleId]
+                  ,[stdntcrsh].[RoutineId]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator]
 	              ,ISNULL([crsh].Name,  '')  [CourseName]
 	              ,ISNULL([stdnt].Name,  '') [StudentName]
-	              ,ISNULL([stdnt].Name,  '') [ScheduleName]
-                  ,ISNULL([schdl].Day,  '')  [Day]
+	              ,ISNULL([schdl].ScheduleName,  '')  [ScheduleName]
                   ,ISNULL([schdl].Program,  '')  [Program]
-	              ,ISNULL([schdl].StartTime,  '')  [StartTime]
-	              ,ISNULL([schdl].EndTime,  '')  [EndTime]
 	              ,ISNULL([schdl].ClassRoomNumber,  '')  [ClassRoomNumber]
 	              ,ISNULL([schdl].MaxStudent,  '')  [MaxStudent]
               FROM [dbo].[StudentCourse] [stdntcrsh]
@@ -87,9 +85,8 @@ namespace IqraCommerce.Services.StudentCourseArea
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntcrsh].[UpdatedBy]
               LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [stdntcrsh].[StudentId]
               LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [stdntcrsh].[CourseId]
-              LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntcrsh].[ScheduleId]  And [schdl].IsDeleted = 0 ";
+              LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntcrsh].[ScheduleId]  And [schdl].IsDeleted = 0
+              LEFT JOIN [dbo].[Routine] [rtn] ON [rtn].Id = [stdntcrsh].[RoutineId] And [rtn].IsDeleted = 0";
         }
-
-
     }
 }

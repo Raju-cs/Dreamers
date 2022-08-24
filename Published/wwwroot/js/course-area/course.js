@@ -170,7 +170,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'DELETE_COURSE',
         Title: 'Deleted',
         filter: [trashRecord],
-        actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

@@ -9,43 +9,24 @@ var Controller = new function () {
     this.Show = function (options) {
         _options = options;
         scheduleFilter.value = _options.Id;
-
-
         function addBatchSchedule(page) {
             Global.Add({
                 name: 'ADD_BATCH_SCHEDULE',
                 model: undefined,
                 title: 'Add Batch Schedule',
                 columns: [
-                    { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-                    { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
-                    { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 4, },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 6, },
+                    { field: 'ScheduleName', title: 'Schedule Day', filter: true, position: 1},
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 5, },
                 ],
-                dropdownList: [{
-                    title: 'Day',
-                    Id: 'Day',
-                    dataSource: [
-                        { text: 'Saturday', value: 'Saturday' },
-                        { text: 'Sunday', value: 'Sunday' },
-                        { text: 'Monday', value: 'Monday' },
-                        { text: 'Tuesday', value: 'Tuesday' },
-                        { text: 'Wednesday', value: 'Wednesday' },
-                        { text: 'Thursday', value: 'Thursday' },
-                        { text: 'Friday', value: 'Friday' },
-
-                    ],
-                    position: 1,
-
-                }],
+                dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
-                    console.log("Data=>", data);
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Batch";
-                    formModel.Name = `${model.Day}: ${model.StartTime} - ${model.EndTime}`;
+                    formModel.Name = `${model.ScheduleName}: ClassRoomNumber: ${model.ClassRoomNumber} `;
+                    
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -62,36 +43,18 @@ var Controller = new function () {
                 model: model,
                 title: 'Edit Batch Schedule',
                 columns: [
-                    { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-                    { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
-                    { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
-                    { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
+                    { field: 'ScheduleName', title: 'Schedule Day', filter: true, position: 1},
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
                 ],
-                dropdownList: [{
-                    title: 'Day',
-                    Id: 'Day',
-                    dataSource: [
-                        { text: 'Saturday', value: 'Saturday' },
-                        { text: 'Sunday', value: 'Sunday' },
-                        { text: 'Monday', value: 'Monday' },
-                        { text: 'Tuesday', value: 'Tuesday' },
-                        { text: 'Wednesday', value: 'Wednesday' },
-                        { text: 'Thursday', value: 'Thursday' },
-                        { text: 'Friday', value: 'Friday' },
-
-                    ],
-                    position: 1,
-
-                }],
+                dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Batch";
-                    formModel.Name = `${data.Day}: ${data.StartTime} - ${data.EndTime}`;
+                    formModel.Name = `${model.ScheduleName}: ClassRoomNumber: ${model.ClassRoomNumber} `;
 
                 },
                 onSaveSuccess: function () {
@@ -101,6 +64,17 @@ var Controller = new function () {
                 saveChange: `/Schedule/Edit`,
             });
 
+        }
+
+        const viewDetails = (row, model) => {
+            console.log("Update Schedule");
+            Global.Add({
+                Id: row.Id,
+                name: 'Schedule Information ' + row.Id,
+                url: '/js/schedule-area/schedule-details-modal.js',
+                updateSchedule: model.Reload,
+               
+            });
         }
     
         Global.Add({
@@ -133,12 +107,9 @@ var Controller = new function () {
 
                         Header: 'Schedule',
                         columns: [
-                            { field: 'Day', title: 'Day', filter: true, position: 1, },
-                            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-                            { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
-                            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 4, },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 6, },
+                            { field: 'ScheduleName', title: 'Day', filter: true, position: 1, add: false },
+                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
                         ],
 
                         Url: '/Schedule/Get/',
@@ -148,6 +119,11 @@ var Controller = new function () {
                             {
                                 click: editBatchSchedule,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Batch Schedule"></i></a>`
+
+                            },
+                            {
+                                click: viewDetails,
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-eye-open" title="View Schedule"></i></a>`
 
                             }
                         ],
@@ -163,10 +139,10 @@ var Controller = new function () {
                         }
                     }],
 
-                }],
+                },],
 
             name: 'Batch Information',
-            url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
+            url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=' + Math.random(),
           
         });
 

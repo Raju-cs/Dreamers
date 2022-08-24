@@ -7,12 +7,7 @@
     });
 
     const columns = () => [
-
-
         { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
-        { field: 'Day', title: 'Day', filter: true, position: 2, add: false },
-        { field: 'StartTime', title: 'Start Time', filter: true, position: 3, add: false },
-        { field: 'EndTime', title: 'End Time', filter: true, position: 4, add: false },
         { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, add: false },
         { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: false },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },
