@@ -69,11 +69,11 @@ namespace IqraCommerce.Services.ModuleArea
                   ,ISNULL([mdl].[TeacherPercentange], '') [TeacherPercentange]
                   ,ISNULL([mdl].[ChargePerStudent], '')   [ChargePerStudent]
                   ,[mdl].[IsActive]
-                  ,ISNULL([mdl].[ScheduleId], '') [ScheduleId]
+                  ,ISNULL([mdl].[BatchId], '') [BatchId]
                   ,ISNULL([mdl].[Class], '') [Class]
-				  ,ISNULL([schdl].Name, '')  [Program]
-				  ,ISNULL([schdl].Name, '') [MaxStudent]
-				  ,ISNULL([schdl].Name, '') [ClassRoomNumber]
+				  ,ISNULL([btch].Name, '')  [Program]
+				  ,ISNULL([btch].Name, '') [MaxStudent]
+				  ,ISNULL([btch].Name, '') [ClassRoomNumber]
                   ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator] 
 	              ,ISNULL([tchr].Name, '')  [TeacherName]
@@ -83,7 +83,7 @@ namespace IqraCommerce.Services.ModuleArea
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [mdl].[UpdatedBy]
               LEFT JOIN [dbo].[Teacher] [tchr] ON [tchr].Id = [mdl].[TeacherId]
               LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [mdl].[SubjectId]
-              LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [mdl].[ScheduleId]";
+              LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [mdl].[BatchId]";
         }
         public static string BasicInfo
         {

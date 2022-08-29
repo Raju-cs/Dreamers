@@ -25,19 +25,19 @@ namespace IqraCommerce.Services.StudentCourseArea
                     name = "crsh.[Name]";
                     break;
                 case "day":
-                    name = "schdl.[Name]";
+                    name = "btch.[Name]";
                     break;
                 case "starttime":
-                    name = "schdl.[Name]";
+                    name = "btch.[Name]";
                     break;
                 case "endtime":
-                    name = "schdl.[Name]";
+                    name = "btch.[Name]";
                     break;
                 case "classroomnumber":
-                    name = "schdl.[Name]";
+                    name = "btch.[Name]";
                     break;
                 case "maxstudent":
-                    name = "schdl.[Name]";
+                    name = "btch.[Name]";
                     break;
                 default:
                     name = "stdntcrsh." + name;
@@ -59,7 +59,7 @@ namespace IqraCommerce.Services.StudentCourseArea
     {
         public static string Get()
         {
-            return @"[stdntcrsh].[Id]
+            return @" [stdntcrsh].[Id]
                   ,[stdntcrsh].[CreatedAt]
                   ,[stdntcrsh].[CreatedBy]
                   ,[stdntcrsh].[UpdatedAt]
@@ -70,22 +70,22 @@ namespace IqraCommerce.Services.StudentCourseArea
                   ,ISNULL([stdntcrsh].[Name], '') [Name]
                   ,[stdntcrsh].[StudentId]
                   ,[stdntcrsh].[CourseId]
-                  ,[stdntcrsh].[ScheduleId]
+                  ,[stdntcrsh].[BatchId]
                   ,[stdntcrsh].[RoutineId]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator]
 	              ,ISNULL([crsh].Name,  '')  [CourseName]
 	              ,ISNULL([stdnt].Name,  '') [StudentName]
-	              ,ISNULL([schdl].ScheduleName,  '')  [ScheduleName]
-                  ,ISNULL([schdl].Program,  '')  [Program]
-	              ,ISNULL([schdl].ClassRoomNumber,  '')  [ClassRoomNumber]
-	              ,ISNULL([schdl].MaxStudent,  '')  [MaxStudent]
+	              ,ISNULL([btch].Name,  '')  [BatchName]
+                  ,ISNULL([btch].Program,  '')  [Program]
+	              ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]
+	              ,ISNULL([btch].MaxStudent,  '')  [MaxStudent]
               FROM [dbo].[StudentCourse] [stdntcrsh]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntcrsh].[CreatedBy]
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntcrsh].[UpdatedBy]
               LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [stdntcrsh].[StudentId]
               LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [stdntcrsh].[CourseId]
-              LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntcrsh].[ScheduleId]  And [schdl].IsDeleted = 0
+              LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [stdntcrsh].[BatchId]  And [btch].IsDeleted = 0
               LEFT JOIN [dbo].[Routine] [rtn] ON [rtn].Id = [stdntcrsh].[RoutineId] And [rtn].IsDeleted = 0";
         }
     }

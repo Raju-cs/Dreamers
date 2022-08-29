@@ -71,7 +71,7 @@ namespace IqraCommerce.Services.RoutineArea
               ,ISNULL([rtn].[Remarks], '') [Remarks]
               ,[rtn].[ActivityId]
               ,[rtn].[Name]
-              ,[rtn].[RoutineId]
+              ,[rtn].[BatchId]
               ,ISNULL([rtn].[ClassRoomNumber], '') [ClassRoomNumber]
               ,ISNULL([rtn].[Program], '') [Program]
               ,ISNULL([rtn].[Day], '') [Day]

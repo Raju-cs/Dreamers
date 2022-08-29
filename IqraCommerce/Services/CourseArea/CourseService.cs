@@ -65,16 +65,16 @@ namespace IqraCommerce.Services.CourseArea
             ,ISNULL([crsh].[NumberOfClass], '') [NumberOfClass]
             ,ISNULL([crsh].[CourseFee], '') [CourseFee]
             ,ISNULL([crsh].[CoachingPercentange], '') [CoachingPercentange]
-            ,[crsh].[ScheduleId]
-            ,ISNULL([schdl].Name, '')  [Program]
-	        ,ISNULL([schdl].Name, '') [MaxStudent]
-	        ,ISNULL([schdl].Name, '') [ClassRoomNumber]
+            ,[crsh].[BatchId]
+            ,ISNULL([btch].Name, '')  [Program]
+	        ,ISNULL([btch].Name, '') [MaxStudent]
+	        ,ISNULL([btch].Name, '') [ClassRoomNumber]
             ,ISNULL([crtr].[Name], '') [Creator]
 	        ,ISNULL([pdtr].[Name], '') [Updator]
             FROM [dbo].[Course] [crsh]
             LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [crsh].[CreatedBy]
             LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [crsh].[UpdatedBy]
-            LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [crsh].[ScheduleId]";
+            LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [crsh].[BatchId]";
 
         }
         public static string BasicInfo

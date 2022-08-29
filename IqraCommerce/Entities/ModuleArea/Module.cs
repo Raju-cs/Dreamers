@@ -11,7 +11,7 @@ namespace IqraCommerce.Entities.ModuleArea
 
         public Guid TeacherId { get; set; }
         public Guid SubjectId { get; set; }
-        public Guid ScheduleId { get; set; }
+        public Guid BatchId { get; set; }
         public double TeacherPercentange { get; set; }
         public double ChargePerStudent { get; set; }
         public string Class { get; set; }

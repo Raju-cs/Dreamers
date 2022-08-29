@@ -1,6 +1,5 @@
 import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
-import { imageBound } from '../utils.js';
 
 (function () {
     const controller = 'TeacherSubject';
@@ -57,15 +56,6 @@ import { imageBound } from '../utils.js';
         });
     };
 
-    /*const viewDetails = (row) => {
-        Global.Add({
-            Id: row.Id,
-            name: 'Subject Information' + row.Id,
-            url: '/js/subject-area/subject-details-modal.js',
-        });
-
-    }*/
-
     const teacherSubjectTab = {
         Id: 'C3885B13-46B7-4B91-B722-7C7EBECFDD4A',
         Name: 'ACTIVE_SUBJECT_ID',
@@ -83,7 +73,6 @@ import { imageBound } from '../utils.js';
         Url: 'Get',
     }
 
-
     //Tabs config
     const tabs = {
         container: $('#page_container'),
@@ -96,7 +85,6 @@ import { imageBound } from '../utils.js';
             type: 'ThisMonth',
         }
     };
-
 
     //Initialize Tabs
     Global.Tabs(tabs);

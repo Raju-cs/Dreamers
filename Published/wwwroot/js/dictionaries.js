@@ -76,6 +76,11 @@ export const Gender = {
     NON_BINARY: "NonBinary",
 };
 
+export const SHEDULENAME = {
+    SCHEDULE_ONE: "Sat-Mon-Wed",
+    SCHEDULE_TWO: "Sun-Tue-Thu",
+};
+
 export const ACTIVE_STATUS = {
     TRUE: "true",
     FALSE: "false"
@@ -122,7 +127,7 @@ export const SUBJECT = {
 }
 
 export const PROGRAM = {
-    BATCH: "Batch",
+    MODULE: "Module",
     COURSE: "Course"
 }
 

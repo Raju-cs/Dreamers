@@ -120,57 +120,73 @@ var Controller = new function () {
    
         function addCourseSchedule(page) {
             Global.Add({
-                name: 'ADD_COURSE_SCHEDULE',
+                name: 'ADD_COURSE_BATCH',
                 model: undefined,
-                title: 'Add Course Schedule',
+                title: 'Add Course Batch',
                 columns: [
-                    { field: 'ScheduleName', title: 'Day', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
                 ],
-                dropdownList: [],
+                dropdownList: [{
+                    title: 'BatchName',
+                    Id: 'BatchName',
+                    dataSource: [
+                        { text: 'Sat-Mon-Wed', value: "Sat-Mon-Wed" },
+                        { text: 'Sun-Tue-Thu', value: "Sun-Tue-Thu" },
+                    ],
+                    position: 1,
+                    add: { sibling: 2 }
+                }],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Course";
-                    formModel.Name = `${model.ScheduleName}: ClassRoomNumber: ${model.ClassRoomNumber} `;
+                    formModel.Name = `${model.BatchName} `;
                    
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
                 },
                 filter: [],
-                save: `/Schedule/Create`,
+                save: `/Batch/Create`,
             });
 
         }
 
         function editCourseSchedule(model, grid) {
             Global.Add({
-                name: 'EDIT_COURSE_SCHEDULE',
+                name: 'EDIT_COURSE_BATCH',
                 model: model,
-                title: 'Edit Course Schedule',
+                title: 'Edit Course Batch',
                 columns: [
-                    { field: 'ScheduleName', title: 'Day', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
                 ],
-                dropdownList: [],
+                dropdownList: [{
+                    title: 'BatchName',
+                    Id: 'BatchName',
+                    dataSource: [
+                        { text: 'Sat-Mon-Wed', value: "Sat-Mon-Wed" },
+                        { text: 'Sun-Tue-Thu', value: "Sun-Tue-Thu" },
+                    ],
+                    position: 1,
+                    add: { sibling: 2 }
+                }],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Course";
-                    formModel.Name = `${model.ScheduleName}: ClassRoomNumber: ${model.ClassRoomNumber} `;
+                    formModel.Name = `${model.BatchName} `;
 
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
                 },
                 filter: [],
-                saveChange: `/Schedule/Edit`,
+                saveChange: `/Batch/Edit`,
             });
 
         }
@@ -178,8 +194,8 @@ var Controller = new function () {
         const viewDetails = (row) => {
             Global.Add({
                 Id: row.Id,
-                name: 'Schedule Information ' + row.Id,
-                url: '/js/schedule-area/schedule-details-modal.js',
+                name: 'Course Information ' + row.Id,
+                url: '/js/batch-area/course-batch-details-modal.js',
             });
         }
 
@@ -242,17 +258,17 @@ var Controller = new function () {
                     }],
 
                 }, {
-                    title: ' Schedule ',
+                    title: ' Batch ',
                     Grid: [{
 
                         Header: 'Schedule',
                         columns: [
-                            { field: 'ScheduleName', title: 'Day', filter: true, position: 1 },
+                            { field: 'Name', title: 'BatchName', filter: true, position: 1 },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
                         ],
 
-                        Url: '/Schedule/Get/',
+                        Url: '/Batch/Get/',
                         filter: [scheduleFilter, trashFilter],
                         onDataBinding: function (response) { },
                         actions: [
@@ -282,7 +298,7 @@ var Controller = new function () {
                 }],
 
             name: 'Course Information',
-            url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
+            url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails ' + Math.random(),
           
         });
     }

@@ -8,6 +8,8 @@
 
     const columns = () => [
         { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
+        { field: 'StudentName', title: 'Student Name', filter: true, position: 1, add: false },
+        { field: 'BatchName', title: 'Name', filter: true, position: 1 },
         { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, add: false },
         { field: 'MaxStudent', title: 'Max Student', filter: true, position: 6, add: false },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },

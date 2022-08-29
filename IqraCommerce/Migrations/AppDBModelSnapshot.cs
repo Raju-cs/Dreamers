@@ -75,6 +75,59 @@ namespace IqraCommerce.Migrations
                     b.ToTable("ChangeHistory");
                 });
 
+            modelBuilder.Entity("IqraCommerce.Entities.BatchArea.Batch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ActivityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BtachName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClassRoomNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MaxStudent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Program")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ReferenceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Batch");
+                });
+
             modelBuilder.Entity("IqraCommerce.Entities.CourseArea.Course", b =>
                 {
                     b.Property<Guid>("Id")
@@ -82,6 +135,9 @@ namespace IqraCommerce.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ActivityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BatchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Class")
@@ -119,9 +175,6 @@ namespace IqraCommerce.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ScheduleId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -196,6 +249,9 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("ActivityId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("BatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<double>("ChargePerStudent")
                         .HasColumnType("float");
 
@@ -219,9 +275,6 @@ namespace IqraCommerce.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ScheduleId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SubjectId")
                         .HasColumnType("uniqueidentifier");
@@ -252,6 +305,9 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("ActivityId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("BatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ClassRoomNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -264,8 +320,8 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Day")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("EndTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -279,11 +335,8 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoutineId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("StartTime")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -294,59 +347,6 @@ namespace IqraCommerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Routine");
-                });
-
-            modelBuilder.Entity("IqraCommerce.Entities.ScheduleArea.Schedule", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ActivityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ClassRoomNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MaxStudent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Program")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ReferenceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ScheduleName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Schedule");
                 });
 
             modelBuilder.Entity("IqraCommerce.Entities.StudentArea.Student", b =>
@@ -492,6 +492,9 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("ActivityId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("BatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier");
 
@@ -511,9 +514,6 @@ namespace IqraCommerce.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("RoutineId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ScheduleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("StudentId")
@@ -539,11 +539,17 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("ActivityId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("BatchId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -554,13 +560,13 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ReferenceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("RoutineId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ScheduleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("StudentId")

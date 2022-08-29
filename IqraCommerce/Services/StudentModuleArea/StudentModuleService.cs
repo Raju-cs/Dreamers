@@ -3,6 +3,7 @@ using IqraCommerce.Entities.StudentModuleArea;
 using IqraService.Search;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace IqraCommerce.Services.StudentModuleArea
 {
@@ -27,6 +28,12 @@ namespace IqraCommerce.Services.StudentModuleArea
                 case "maxstudent":
                     name = "schdl.[Name]";
                     break;
+                case "studentisdeleted":
+                    name = "[stdnt].IsDeleted";
+                    break;
+                case "studentisactive":
+                    name = "[stdnt].IsActive";
+                    break;
                 default:
                     name = "stdntmdl." + name;
                     break;
@@ -41,6 +48,15 @@ namespace IqraCommerce.Services.StudentModuleArea
                 return await db.GetPages(page, StudentModuleQuery.Get());
             }
         }
+        public async Task<ResponseList<Dictionary<string, object>>> BasicInfo(Guid Id)
+        {
+            using (var db = new DBService(this))
+            {
+                return await db.FirstOrDefault(StudentModuleQuery.BasicInfo + Id + "'");
+            }
+        }
+
+        
     }
 
     public class StudentModuleQuery
@@ -58,25 +74,29 @@ namespace IqraCommerce.Services.StudentModuleArea
               ,[stdntmdl].[Name]
               ,[stdntmdl].[StudentId]
               ,[stdntmdl].[ModuleId]
-              ,[stdntmdl].[ScheduleId]
+              ,[stdntmdl].[BatchId]
               ,[stdntmdl].[RoutineId]
+			  ,[stdntmdl].[ReferenceId]
+			  ,[stdntmdl].[IsActive]
 	          ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator]
 	          ,ISNULL([mdl].Name,  '')  [ModuleName]
 	          ,ISNULL([stdnt].Name,  '')  [StudentName]
-	          ,ISNULL([schdl].ScheduleName,  '')  [ScheduleName]
-	          ,ISNULL([schdl].ClassRoomNumber,  '')  [ClassRoomNumber]
-	          ,ISNULL([schdl].MaxStudent,  '')  [MaxStudent]
-              ,ISNULL([rtn].Day,  '')  [Day]
-	          ,ISNULL([rtn].StartTime,  '')  [StartTime]
-	          ,ISNULL([rtn].EndTime,  '')  [EndTime]
+	          ,ISNULL([stdnt].IsDeleted,  '')  [StudentIsDeleted]
+	          ,ISNULL([stdnt].IsActive,  '')  [StudentIsActive]
+	          ,ISNULL([btch].Name,  '')  [BatchName]
+	          ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]
+	          ,ISNULL([btch].MaxStudent,  '')  [MaxStudent]
           FROM [dbo].[StudentModule] [stdntmdl]
           LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntmdl].[CreatedBy]
           LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntmdl].[UpdatedBy]
           LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [stdntmdl].[StudentId]
           LEFT JOIN [dbo].[Module] [mdl] ON [mdl].Id = [stdntmdl].[ModuleId]
-          LEFT JOIN [dbo].[Schedule] [schdl] ON [schdl].Id = [stdntmdl].[ScheduleId] And [schdl].IsDeleted = 0 
-          LEFT JOIN [dbo].[Routine] [rtn] ON [rtn].Id = [stdntmdl].[RoutineId] And [rtn].IsDeleted = 0 ";
+          LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [stdntmdl].[BatchId] And [btch].IsDeleted = 0";
+        }
+        public static string BasicInfo
+        {
+            get { return @"SELECT " + Get() + " Where rtn.Id = '"; }
         }
     }
 }

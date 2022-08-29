@@ -9,7 +9,7 @@ namespace IqraCommerce.Entities.CourseArea
 
     public class Course: DropDownBaseEntity
     {
-        public Guid ScheduleId { get; set; }
+        public Guid BatchId { get; set; }
         public string Class { get; set; }
         public int NumberOfClass { get; set; }
         public double CourseFee { get; set; }

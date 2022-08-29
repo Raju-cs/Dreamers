@@ -2,9 +2,6 @@ import { editBtn, eyeBtn, statusBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashB
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
 
-import { imageBound } from '../utils.js';
-
-
 (function () {
     const controller = 'Teacher';
 
@@ -44,16 +41,12 @@ import { imageBound } from '../utils.js';
                         { text: 'Non-Binary', value: Gender.NON_BINARY },
                     ],
                     position: 8,
-                   
-                   
                 }
             ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
-              
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -99,8 +92,6 @@ import { imageBound } from '../utils.js';
                     ],
                     position: 10,
                     add: { sibling: 2 },
-
-
                 }
             ],
             additionalField: [],
@@ -144,8 +135,6 @@ import { imageBound } from '../utils.js';
                         { text: 'Non-Binary', value: Gender.NON_BINARY },
                     ],
                     position: 10,
-
-
                 }
             ],
             additionalField: [],
@@ -153,8 +142,6 @@ import { imageBound } from '../utils.js';
                 formModel.Id = model.Id;
                 formModel.ActivityId = window.ActivityId;
                 console.log("formModel =>", formModel);
-            
-            
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -163,14 +150,12 @@ import { imageBound } from '../utils.js';
         });
     };
     
-
     const viewDetails = (row) => {
         Global.Add({
            Id: row.Id,
             name: 'Teachers Information' + row.Id,
             url: '/js/teacher-area/teacher-details-modal.js',
         });
-        
     }
 
     // Active Tab Config
@@ -228,7 +213,6 @@ import { imageBound } from '../utils.js';
         Printable: { container: $('void') },
         Url: 'Get',
     }
-  
 
     //Tabs config
     const tabs = {
@@ -237,12 +221,6 @@ import { imageBound } from '../utils.js';
             Url: `/${controller}/`,
         },
         items: [activeTab, inactiveTab, deleteTab],
-        /*
-        periodic: {
-            container: '.filter_container',
-            type: 'ThisMonth',
-        }
-        */
     };
 
     //Initialize Tabs

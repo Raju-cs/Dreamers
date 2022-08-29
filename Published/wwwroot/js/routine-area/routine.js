@@ -6,15 +6,11 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
 
     const controller = 'Routine';
 
-    $(document).ready(() => {
-        $('#add-record').click(add);
-    });
-
     const columns = () => [
         { field: 'Name', title: 'Name', filter: true, position: 1, },
         { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
         { field: 'Day', title: 'Day', filter: true, position: 3, },
-        { field: 'StartTime', title: 'Start Time', filter: true, position: 4, },
+        { field: 'StartTime', title: 'Start Time', filter: true, position: 4,},
         { field: 'EndTime', title: 'End Time', filter: true, position: 5, },
         { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
@@ -34,7 +30,7 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
                 { field: 'StartTime', title: 'Start Time', filter: true, position: 4, },
                 { field: 'EndTime', title: 'End Time', filter: true, position: 5, },
                 { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, }
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea"  }, required: false, position: 7, }
             ],
             dropdownList: [{
                 title: 'Day',
@@ -54,8 +50,8 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             }, {
                     title: 'Program',
                     Id: 'Program',
-                    dataSource: [
-                        { text: 'Batch', value: PROGRAM.BATCH },
+                dataSource: [
+                        { text: 'Module', value: PROGRAM.MODULE },
                         { text: 'Course', value: PROGRAM.COURSE },
 
                     ],
@@ -65,8 +61,6 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-                formModel.Name = `${data.ClassRoomNumber}: ${data.MaxStudent}`;
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -78,23 +72,23 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         console.log("row=>", row);
         Global.Add({
             Id: row.Id,
-            name: 'BatchRoutine Information' + row.Id,
+            name: 'Routine Information' + row.Id,
             url: '/js/routine-area/routine-details-modal.js',
         });
     }
 
     const allTab = {
         Id: 'FC380B85-5899-427B-97C2-FFB7BA538301',
-        Name: 'ALL_SCHEDULE',
+        Name: 'ALL_ROUTINE',
         Title: 'All',
         filter: [liveRecord],
         actions: [{
             click: edit,
             html: editBtn("Edit Information")
-        }, {
-            click: [],
-            html: eyeBtn("View Details")
-        }],
+        },{
+                click: viewDetails,
+                html: eyeBtn("Edit Information")
+            }],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),
@@ -105,16 +99,16 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
 
     const batchTab = {
         Id: 'AA7EC29A-9FA9-49B6-9AC3-08F93E3D1329',
-        Name: 'BATCH_SCHEDULE',
-        Title: 'Btach',
-        filter: [{ "field": "Program", "value": "Batch", Operation: 0 }, liveRecord],
+        Name: 'MODULE_ROUTINE',
+        Title: 'Module',
+        filter: [{ "field": "Program", "value": "Module", Operation: 0 }, liveRecord],
         actions: [{
             click: edit,
             html: editBtn("Edit Information")
-        }, {
-            click: [],
-            html: eyeBtn("View Details")
-        }],
+        },{
+                click: viewDetails,
+                html: eyeBtn("Edit Information")
+            }],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),
@@ -125,16 +119,16 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
 
     const courseTab = {
         Id: 'AE348625-E69C-4B54-BAA5-7CD7FB400644',
-        Name: 'COURSE_SCHEDULE',
+        Name: 'COURSE_ROUTINE',
         Title: 'Course',
         filter: [{ "field": "Program", "value": "Course", Operation: 0 }, liveRecord],
         actions: [{
             click: edit,
             html: editBtn("Edit Information")
         }, {
-            click: [],
-            html: eyeBtn("View Details")
-        }],
+               click: viewDetails,
+               html: eyeBtn("Edit Information")
+            },],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

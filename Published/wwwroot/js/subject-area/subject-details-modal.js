@@ -1,15 +1,13 @@
 ﻿
 
 var Controller = new function () {
-    const subjectFilter = { "field": "SubjectId", "value": '', Operation: 0 }
-    const batchFilter = { "field": "SubjectId", "value": '', Operation: 0 }
+    const subjectbatchFilter = { "field": "SubjectId", "value": '', Operation: 0 }
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     var _options;
 
     this.Show = function (options) {
         _options = options;
-        subjectFilter.value = _options.Id;
-        batchFilter.value = _options.Id;
+        subjectbatchFilter.value = _options.Id;
 
         Global.Add({
             title: 'Subject Information',
@@ -31,7 +29,6 @@ var Controller = new function () {
                         onLoaded: function (tab, data) {
 
                         }
-                    
                 }, {
                     title: 'Teachers',
                     Grid: [{
@@ -40,11 +37,10 @@ var Controller = new function () {
                         columns: [
                             { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, add: false },
                             { field: 'Charge', title: 'Charge', filter: true, position: 3, },
-
                         ],
 
                         Url: '/TeacherSubject/Get/',
-                        filter: [subjectFilter],
+                        filter: [subjectbatchFilter],
                         onDataBinding: function (response) { },
                         //actions: [],
                         //buttons: [],
@@ -56,19 +52,17 @@ var Controller = new function () {
                     }],
 
                 }, {
-                    title: 'Batches',
+                    title: 'Module',
                     Grid: [{
 
-                        Header: 'Batches',
+                        Header: 'Module',
                         columns: [
                             { field: 'Name', title: 'Name', filter: true, position: 1, },
                             { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
                             { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 } },
-   
                         ],
-
-                        Url: '/Batch/Get/',
-                        filter: [batchFilter, liveFilter],
+                        Url: '/Module/Get/',
+                        filter: [subjectbatchFilter, liveFilter],
                         onDataBinding: function (response) { },
                         //actions: [],
                         //buttons: [],
@@ -77,19 +71,12 @@ var Controller = new function () {
                             container: $('void')
                         }
                     }],
-
                 },
-
-
-
-               
             ],
 
             name: 'Subject Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
           
         });
-
-
     }
 };

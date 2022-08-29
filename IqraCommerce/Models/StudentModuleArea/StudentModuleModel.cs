@@ -6,8 +6,10 @@ namespace IqraCommerce.Models.StudentModuleArea
     {
         public Guid StudentId { get; set; }
         public Guid ModuleId { get; set; }
-        public Guid ScheduleId { get; set; }
+        public Guid BatchId { get; set; }
         public Guid RoutineId { get; set; }
+        public Guid ReferenceId { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

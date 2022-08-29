@@ -77,14 +77,11 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 dataSource: [
                     { text: 'Bangla', value: SUBJECT.BANGLA },
                     { text: 'English', value: SUBJECT.ENGLISH },
-
                 ],
                 position: 3,
                 add: { sibling: 2 }
 
-
-
-            }, {
+               }, {
                 title: 'Course Active Status',
                 Id: 'Isactive',
                 dataSource: [
@@ -94,14 +91,11 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 add: { sibling: 2 },
                 position: 4,
 
-
             },],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-                
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -117,9 +111,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             name: 'Course Information' + row.Id,
             url: '/js/course-area/course-details-modal.js',
         });
-        
-      
-
     }
 
     const activeTab = {
