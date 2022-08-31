@@ -12,13 +12,12 @@ var Controller = new function () {
                     {
                         title: 'Basic Information',
                         columns: [
-                            { field: 'Name', title: 'Name', filter: true, position: 1, },
                             { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
                             { field: 'Day', title: 'Day', filter: true, position: 3, },
                             { field: 'StartTime', title: 'Start Time', filter: true, position: 4, },
                             { field: 'EndTime', title: 'End Time', filter: true, position: 5, },
                             { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
                         ],
 
                         DetailsUrl: function () {

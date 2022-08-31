@@ -10,31 +10,24 @@ var Controller = new function () {
         _options = options;
         scheduleFilter.value = _options.Id;
         studentFilter.value = _options.Id;
+        console.log("options=>", _options);
         function addModuleSchedule(page) {
             Global.Add({
                 name: 'ADD_MODULE_BATCH',
                 model: undefined,
                 title: 'Add Module Batch',
                 columns: [
+                    { field: 'Name', title: 'Batch Name', filter: true, position: 1,  },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
                 ],
-                dropdownList: [{
-                    title: 'BatchName',
-                    Id: 'BatchName',
-                    dataSource: [
-                        { text: 'Sat-Mon-Wed', value: "Sat-Mon-Wed" },
-                        { text: 'Sun-Tue-Thu', value: "Sun-Tue-Thu" },
-                    ],
-                    position: 1,
-                    add: { sibling: 2 }
-                }],
+                dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Module";
-                    formModel.Name = `${model.BatchName} `;
+                    formModel.Name = `${model.Name} `;
                     
                 },
                 onSaveSuccess: function () {
@@ -51,27 +44,18 @@ var Controller = new function () {
                 model: model,
                 title: 'Edit Module Batch',
                 columns: [
+                    { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea"  }, required: false, position: 5, },
                 ],
-                dropdownList: [{
-                    title: 'BatchName',
-                    Id: 'BatchName',
-                    dataSource: [
-                        { text: 'Sat-Mon-Wed', value: "Sat-Mon-Wed" },
-                        { text: 'Sun-Tue-Thu', value: "Sun-Tue-Thu" },
-                    ],
-                    position: 1,
-                    add: { sibling: 2 }
-                }],
+                dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Module";
-                    formModel.Name = `${model.BatchName} `;
-
+                    formModel.Name = `${model.Name} `;
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -81,17 +65,15 @@ var Controller = new function () {
             });
 
         }
-
-       
-
         const viewDetails = (row, model) => {
-            console.log("Update Schedule");
+            console.log("row=>",row);
             Global.Add({
                 Id: row.Id,
                 name: 'Schedule Information ' + row.Id,
                 url: '/js/batch-area/module-batch-details-modal.js',
                 updateSchedule: model.Reload,
-               
+                ModuleId: _options.Id,
+
             });
         }
 

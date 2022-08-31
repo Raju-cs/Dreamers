@@ -220,9 +220,9 @@ import { print } from "./student-form.js";
 
     function edit(model) {
         Global.Add({
-            name: 'EDIT_TEACHER_INFORMATION',
+            name: 'EDIT_STUDENT_INFORMATION',
             model: model,
-            title: 'Edit Teacher Information',
+            title: 'Edit Student Information',
             columns: [
                 { field: 'ImageURL', title: 'Image', filter: false, position: 1, add: false, bound: imageBound },
                 { field: 'NickName', title: 'Nick Name', filter: true, position: 3, add: { sibling: 4 }, required: false },

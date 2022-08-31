@@ -7,7 +7,6 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
     const controller = 'Routine';
 
     const columns = () => [
-        { field: 'Name', title: 'Name', filter: true, position: 1, },
         { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
         { field: 'Day', title: 'Day', filter: true, position: 3, },
         { field: 'StartTime', title: 'Start Time', filter: true, position: 4,},
@@ -26,28 +25,13 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             model: model,
             title: 'Edit Routine',
             columns: [
-                { field: 'Name', title: 'Name', filter: true, position: 1, },
+                { field: 'Day', title: 'Day', filter: true, position: 3, },
                 { field: 'StartTime', title: 'Start Time', filter: true, position: 4, },
                 { field: 'EndTime', title: 'End Time', filter: true, position: 5, },
                 { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea"  }, required: false, position: 7, }
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, }
             ],
             dropdownList: [{
-                title: 'Day',
-                Id: 'Day',
-                dataSource: [
-                    { text: 'Saturday', value: 'Saturday' },
-                    { text: 'Sunday', value: 'Sunday' },
-                    { text: 'Monday', value: 'Monday' },
-                    { text: 'Tuesday', value: 'Tuesday' },
-                    { text: 'Wednesday', value: 'Wednesday' },
-                    { text: 'Thursday', value: 'Thursday' },
-                    { text: 'Friday', value: 'Friday' },
-
-                ],
-                position: 3,
-
-            }, {
                     title: 'Program',
                     Id: 'Program',
                 dataSource: [
@@ -108,7 +92,7 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         },{
                 click: viewDetails,
                 html: eyeBtn("Edit Information")
-            }],
+       }],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

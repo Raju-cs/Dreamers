@@ -95,6 +95,13 @@ export const DAY = {
     THURSDAY: "Thursday",
     FRIDAY :  "Friday"
 }
+export const CLASS = {
+    NINE: "9",
+    TEN: "10",
+    ELEVEN: "11",
+    TWELVE: "12",
+    
+}
 
 export const BLOOD_GROUP={
     A_POSITIVE: "A+",

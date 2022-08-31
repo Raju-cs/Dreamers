@@ -22,6 +22,9 @@ namespace IqraCommerce.Services.TeacherArea
                 case "teacher":
                     name = "tchr.[Name]";
                     break;
+                case "id":
+                    name = "tchr.[Id]";
+                    break;
                 default:
                     name = "tchr." + name;
                     break;
@@ -54,7 +57,6 @@ namespace IqraCommerce.Services.TeacherArea
                 return await db.List(page, TeacherQuery.AutoComplete());
             }
         }
-
     }
     public class TeacherQuery
     {
@@ -91,7 +93,8 @@ namespace IqraCommerce.Services.TeacherArea
         {
             return @"
                     SELECT
-                    [tchr].[Id],
+                    [tchr].[Id] [Id],
+                    tchrsbjct.Id [TecherSubjectId],
                     [tchr].[CreatedAt],
                     [tchr].[CreatedBy],
                     [tchr].[UpdatedAt],

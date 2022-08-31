@@ -26,13 +26,19 @@ namespace IqraCommerce.Services.StudentModuleArea
                     name = "mdl.[Name]";
                     break;
                 case "maxstudent":
-                    name = "schdl.[Name]";
+                    name = "btch.[Name]";
                     break;
                 case "studentisdeleted":
                     name = "[stdnt].IsDeleted";
                     break;
                 case "studentisactive":
                     name = "[stdnt].IsActive";
+                    break;
+                case "batchname":
+                    name = "[btch].Name";
+                    break;
+                case "studentname":
+                    name = "[stdnt].Name";
                     break;
                 default:
                     name = "stdntmdl." + name;

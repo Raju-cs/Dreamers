@@ -39,6 +39,12 @@ namespace IqraCommerce.Services.StudentCourseArea
                 case "maxstudent":
                     name = "btch.[Name]";
                     break;
+                case "studentisdeleted":
+                    name = "[stdnt].IsDeleted";
+                    break;
+                case "studentisactive":
+                    name = "[stdnt].IsActive";
+                    break;
                 default:
                     name = "stdntcrsh." + name;
                     break;
@@ -76,6 +82,8 @@ namespace IqraCommerce.Services.StudentCourseArea
 	              ,ISNULL([pdtr].Name, '') [Updator]
 	              ,ISNULL([crsh].Name,  '')  [CourseName]
 	              ,ISNULL([stdnt].Name,  '') [StudentName]
+				  ,ISNULL([stdnt].IsDeleted,  '')  [StudentIsDeleted]
+	              ,ISNULL([stdnt].IsActive,  '')  [StudentIsActive]
 	              ,ISNULL([btch].Name,  '')  [BatchName]
                   ,ISNULL([btch].Program,  '')  [Program]
 	              ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]

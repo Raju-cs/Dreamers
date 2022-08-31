@@ -26,21 +26,11 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             model: model,
             title: 'Edit Batch',
             columns: [
-
+                { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                 { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 6, },
             ],
             dropdownList: [{
-                title: 'Name',
-                Id: 'Name',
-                dataSource: [
-                    { text: 'Sat-Mon-Wed', value: SHEDULENAME.SCHEDULE_ONE },
-                    { text: 'Sun-Tue-Thu', value: SHEDULENAME.SCHEDULE_TWO },
-
-                ],
-                position: 1,
-                add: { sibling: 2 }
-            } ,{
                 title: 'Program',
                 Id: 'Program',
                 dataSource: [

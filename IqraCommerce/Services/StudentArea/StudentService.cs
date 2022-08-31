@@ -91,6 +91,17 @@ namespace IqraCommerce.Services.StudentArea
 
             return DateTime.Now.ToString("yyMMdd") + count.ToString().PadLeft(4, '0');
         }
+
+        public async Task<ResponseList<List<Dictionary<string, object>>>> AutoComplete(Page page)
+        {
+            using (DBService db = new DBService())
+            {
+                page.SortBy = page.SortBy ?? "[Name]";
+                page.filter = page.filter ?? new List<FilterModel>();
+
+                return await db.List(page, StudentQuery.AutoComplete());
+            }
+        }
     }
     public class StudentQuery
     {
@@ -148,6 +159,53 @@ namespace IqraCommerce.Services.StudentArea
         public static string BasicInfo
         {
             get { return @"SELECT " + Get() + " Where stdnt.Id = '"; }
+        }
+        public static string AutoComplete()
+        {
+            return @"
+                   SELECT  [stdnt].[Id]
+                  ,[stdnt].[CreatedAt]
+                  ,[stdnt].[CreatedBy]
+                  ,[stdnt].[UpdatedAt]
+                  ,[stdnt].[UpdatedBy]
+                  ,[stdnt].[IsDeleted]
+                  ,[stdnt].[Remarks]
+                  ,[stdnt].[ActivityId]
+                  ,[stdnt].[Name]
+                  ,[stdnt].[ImageURL]
+                  ,[stdnt].[DreamersId]
+                  ,[stdnt].[NickName]
+                  ,[stdnt].[PhoneNumber]
+                  ,[stdnt].[DateOfBirth]
+                  ,[stdnt].[Gender]
+                  ,[stdnt].[BloodGroup]
+                  ,[stdnt].[Religion]
+                  ,[stdnt].[Nationality]
+                  ,[stdnt].[IsActive]
+                  ,[stdnt].[Class]
+                  ,[stdnt].[FathersEmail]
+                  ,[stdnt].[FathersName]
+                  ,[stdnt].[FathersOccupation]
+                  ,[stdnt].[FathersPhoneNumber]
+                  ,[stdnt].[Group]
+                  ,[stdnt].[GuardiansEmail]
+                  ,[stdnt].[GuardiansName]
+                  ,[stdnt].[GuardiansOccupation]
+                  ,[stdnt].[GuardiansPhoneNumber]
+                  ,[stdnt].[MothersEmail]
+                  ,[stdnt].[MothersName]
+                  ,[stdnt].[MothersOccupation]
+                  ,[stdnt].[MothersPhoneNumber]
+                  ,[stdnt].[PermanantAddress]
+                  ,[stdnt].[PresentAddress]
+                  ,[stdnt].[Section]
+                  ,[stdnt].[Shift]
+                  ,[stdnt].[StudentCollegeName]
+                  ,[stdnt].[StudentSchoolName]
+                  ,[stdnt].[Version]
+                  ,[stdnt].[HomeDistrict]
+                  ,[stdnt].[StudentNameBangla]
+                   FROM [dbo].[Student] [stdnt]";
         }
     }
 }

@@ -289,7 +289,7 @@ var Controller = new function () {
                         Header: 'Module',
                         columns: [
                             { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
-                            { field: 'BatchName', title: 'Day', filter: true, position: 2, add: false },
+                            { field: 'BatchName', title: 'Batch Name', filter: true, position: 2, add: false },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, add: false },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                        ],
@@ -319,7 +319,7 @@ var Controller = new function () {
                         Header: 'Course',
                         columns: [
                             { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
-                            { field: 'BatchName', title: 'Day', filter: true, position: 2, add: false },
+                            { field: 'BatchName', title: 'Batch Name', filter: true, position: 2, add: false },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, add: false },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                         ],

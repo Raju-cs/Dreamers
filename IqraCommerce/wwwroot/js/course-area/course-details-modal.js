@@ -124,25 +124,17 @@ var Controller = new function () {
                 model: undefined,
                 title: 'Add Course Batch',
                 columns: [
+                    { field: 'Name', title: 'BatchName', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
                 ],
-                dropdownList: [{
-                    title: 'BatchName',
-                    Id: 'BatchName',
-                    dataSource: [
-                        { text: 'Sat-Mon-Wed', value: "Sat-Mon-Wed" },
-                        { text: 'Sun-Tue-Thu', value: "Sun-Tue-Thu" },
-                    ],
-                    position: 1,
-                    add: { sibling: 2 }
-                }],
+                dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Course";
-                    formModel.Name = `${model.BatchName} `;
+                    formModel.Name = `${model.Name} `;
                    
                 },
                 onSaveSuccess: function () {
@@ -160,26 +152,18 @@ var Controller = new function () {
                 model: model,
                 title: 'Edit Course Batch',
                 columns: [
+                    { field: 'Name', title: 'BatchName', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
                 ],
-                dropdownList: [{
-                    title: 'BatchName',
-                    Id: 'BatchName',
-                    dataSource: [
-                        { text: 'Sat-Mon-Wed', value: "Sat-Mon-Wed" },
-                        { text: 'Sun-Tue-Thu', value: "Sun-Tue-Thu" },
-                    ],
-                    position: 1,
-                    add: { sibling: 2 }
-                }],
+                dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Course";
-                    formModel.Name = `${model.BatchName} `;
+                    formModel.Name = `${model.Name} `;
 
                 },
                 onSaveSuccess: function () {
@@ -191,11 +175,13 @@ var Controller = new function () {
 
         }
 
-        const viewDetails = (row) => {
+        const viewDetails = (row, model) => {
             Global.Add({
                 Id: row.Id,
                 name: 'Course Information ' + row.Id,
                 url: '/js/batch-area/course-batch-details-modal.js',
+                updateSchedule: model.Reload,
+                CourseId: _options.Id
             });
         }
 

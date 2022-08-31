@@ -19,7 +19,8 @@ var Controller = new function () {
                             columns : [
                                 { field: 'Name', title: 'Name', filter: true, position: 1, },
                                 { field: 'Class', title: 'Class', filter: true, position: 2, },
-                                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
+                                { field: 'Version', title: 'Version', filter: true, position: 3, },
+                                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 4, },
                            
                         ],
                         
