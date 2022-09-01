@@ -12,8 +12,8 @@ var Controller = new function () {
         studentBatchFilter.value = _options.Id;
         console.log("options=>", _options);
         const modalColumns = [
-            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-            { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
+            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm'  },
+            { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm'  },
             { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 4, },
             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
         ]
@@ -50,6 +50,8 @@ var Controller = new function () {
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Module";
                     formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
+                    formModel.StartTime = ` ${model.StartTime}`;
+                    formModel.EndTime = ` ${model.EndTime}`;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -75,7 +77,8 @@ var Controller = new function () {
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Module";
                     formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
-
+                    formModel.StartTime = ` ${model.StartTime}`;
+                    formModel.EndTime = ` ${model.EndTime}`;
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -114,7 +117,6 @@ var Controller = new function () {
                 filter: [],
                 save: `/StudentModule/Create`,
             });
-
         }
 
         function editModuleBatchStudent(model, grid) {
@@ -173,8 +175,8 @@ var Controller = new function () {
                         Header: 'Routine',
                         columns: [
                             { field: 'Day', title: 'Day', filter: true, position: 3, },
-                            { field: 'StartTime', title: 'Start Time', filter: true, position: 4, },
-                            { field: 'EndTime', title: 'End Time', filter: true, position: 5, },
+                            { field: 'StartTime', title: 'Start Time', filter: true, position: 4, dateFormat: 'hh:mm' },
+                            { field: 'EndTime', title: 'End Time', filter: true, position: 5, dateFormat: 'hh:mm' },
                             { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
                         ],

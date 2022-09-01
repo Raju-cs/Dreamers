@@ -1,4 +1,3 @@
-
 var Controller = new function () {
     const courseFilter = { "field": "CourseId", "value": '', Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
@@ -172,7 +171,6 @@ var Controller = new function () {
                 filter: [],
                 saveChange: `/Batch/Edit`,
             });
-
         }
 
         const viewDetails = (row, model) => {
@@ -190,7 +188,7 @@ var Controller = new function () {
             selected: 0,
             Tabs: [
                 {
-                    title: 'Course Information',
+                    title: 'Basic Information',
                    
                             columns : [
                                 { field: 'Name', title: 'Name', filter: true, position: 1, },
@@ -200,20 +198,16 @@ var Controller = new function () {
                                 { field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, add: { sibling: 2 } },
                                 { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 6, },
                                 { field: 'Hour', title: 'Hour', filter: true, position: 7 },
-                           
-                        ],
+                               ],
                         
                         DetailsUrl: function () {
                             return '/Course/BasicInfo?Id=' + _options.Id;
                         },
                         onLoaded: function (tab, data) {
-
                         }
-                    
                 }, {
                     title: ' Subject and Teacher ',
                     Grid: [{
-
                         Header: 'Subject',
                         columns: [
                             { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, },
@@ -280,12 +274,9 @@ var Controller = new function () {
                             container: $('void')
                         }
                     }],
-
                 }],
-
             name: 'Course Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails ' + Math.random(),
-          
         });
     }
 };

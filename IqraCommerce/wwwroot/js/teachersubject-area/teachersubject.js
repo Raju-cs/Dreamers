@@ -47,7 +47,6 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();

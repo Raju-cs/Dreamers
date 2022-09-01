@@ -33,7 +33,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 dataSource: [
                     { text: 'Bangla', value: SUBJECT.BANGLA },
                     { text: 'English', value: SUBJECT.ENGLISH },
-                    
                 ],
                 position: 3,
               } ],
@@ -95,7 +94,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             name: 'Subject Information' + row.Id,
             url: '/js/subject-area/subject-details-modal.js',
         });
-        
     }
 
     function inactive(model) {
@@ -111,7 +109,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 dataSource: [
                     { text: 'Bangla', value: SUBJECT.BANGLA },
                     { text: 'English', value: SUBJECT.ENGLISH },
-
                 ],
                 position: 3,
             }, {
@@ -199,8 +196,8 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         items: [activeTab, inactiveTab, deleteTab],
     };
 
- 
     //Initialize Tabs
     Global.Tabs(tabs);
     tabs.items[0].set(tabs.items[0]);
+
 })();

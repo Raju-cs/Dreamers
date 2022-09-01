@@ -49,11 +49,18 @@ namespace IqraCommerce.Services.TeacherArea
         }
         public async Task<ResponseList<List<Dictionary<string, object>>>> AutoComplete(Page page)
         {
+            page.SortBy = page.SortBy ?? "[Name]";
+            page.filter = page.filter ?? new List<FilterModel>();
+
+            var spoilIndex = page.filter.FindIndex(f => f.field == "Id");
+
+            if(spoilIndex != -1)
+            {
+                page.filter.RemoveAt(spoilIndex);
+            }
+            
             using (DBService db = new DBService())
             {
-                page.SortBy = page.SortBy ?? "[Name]";
-                page.filter = page.filter ?? new List<FilterModel>();
-                
                 return await db.List(page, TeacherQuery.AutoComplete());
             }
         }
@@ -112,11 +119,7 @@ namespace IqraCommerce.Services.TeacherArea
                     [tchr].[IsActive],
                     ISNULL([tchr].[OptionalPhoneNumber], '') [OptionalPhoneNumber]
                     FROM TeacherSubject tchrsbjct
-                    LEFT JOIN Teacher tchr ON tchr.Id = tchrsbjct.TeacherId
-            ";
+                    LEFT JOIN Teacher tchr ON tchr.Id = tchrsbjct.TeacherId ";
         }
     }
-
-
-
 }

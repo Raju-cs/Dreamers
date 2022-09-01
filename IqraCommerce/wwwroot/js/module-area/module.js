@@ -27,9 +27,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
         subjectCode = data?.Name?.slice(0, 3).toUpperCase() || '';
         generateModuleCode();
         //page.filter = [activeTeacherFilter, liveFilter, teacherFilterBySubject];
-        console.log(['page.filter.length', page.filter.length]);
         teacherDropdownMat.Reload();
-        console.log(['page.filter.length1', page.filter.length]);
     }
 
     const teacherSelectHandler = (data) => {
@@ -121,9 +119,8 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             model: model,
             title: 'Edit Module',
             columns: [
-                { field: 'Name', title: 'Name', filter: true, position: 1, add: { sibling: 2 } },
                 { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 6, add: { sibling: 2 } },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 7, }
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 7, }
             ],
             dropdownList: [{
                 Id: 'SubjectId',

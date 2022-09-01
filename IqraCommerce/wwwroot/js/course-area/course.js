@@ -37,7 +37,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
                 dataSource: [
                     { text: 'Bangla', value: SUBJECT.BANGLA },
                     { text: 'English', value: SUBJECT.ENGLISH },
-
                 ],
                 position: 5,
                 add: { sibling: 2 }
@@ -46,8 +45,6 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
-
-
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -175,13 +172,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             Url: `/${controller}/`,
         },
         items: [activeTab, inactiveTab, deleteTab],
-        /* periodic: {
-            container: '.filter_container',
-            type: 'ThisMonth',
-        }
-        */
     };
-
 
     //Initialize Tabs
     Global.Tabs(tabs);

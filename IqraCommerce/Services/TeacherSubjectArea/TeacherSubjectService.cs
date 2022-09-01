@@ -43,9 +43,6 @@ namespace IqraCommerce.Services.TeacherSubjectArea
                 return await db.GetPages(page, TeacherSubjectQuery.Get());
             }
         }
-
-       
-
     }
 
     public class TeacherSubjectQuery

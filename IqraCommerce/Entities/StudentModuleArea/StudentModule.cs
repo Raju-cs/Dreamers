@@ -14,6 +14,5 @@ namespace IqraCommerce.Entities.StudentModuleArea
         public Guid RoutineId  { get; set; }
         public Guid ReferenceId  { get; set; }
         public bool IsActive { get; set; }
-
     }
 }

@@ -11,6 +11,5 @@ namespace IqraCommerce.Entities.TeacherSubjectArea
         public Guid TeacherId { get; set; }
         public Guid SubjectId { get; set; }
         public double Charge { get; set; }
-
     }
 }

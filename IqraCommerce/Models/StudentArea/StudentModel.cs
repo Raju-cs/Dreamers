@@ -7,7 +7,7 @@ namespace IqraCommerce.Models.StudentArea
         public string NickName { get; set; }
         public string StudentNameBangla { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string BloodGroup { get; set; }
         public string Religion { get; set; }

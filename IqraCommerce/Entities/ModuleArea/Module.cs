@@ -8,7 +8,6 @@ namespace IqraCommerce.Entities.ModuleArea
     [Alias("mdl")]
     public class Module: DropDownBaseEntity
     {
-
         public Guid TeacherId { get; set; }
         public Guid SubjectId { get; set; }
         public Guid BatchId { get; set; }

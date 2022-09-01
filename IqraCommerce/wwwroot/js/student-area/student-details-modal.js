@@ -234,7 +234,7 @@ var Controller = new function () {
             selected: 0,
             Tabs: [
                 {
-                    title: 'Student Information',
+                    title: 'Basic Information',
                    
                             columns : [
                               

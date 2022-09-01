@@ -71,7 +71,6 @@ import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false },
             ],
             dropdownList: [
-                
                 {
                     title: 'Teacher Active Status',
                     Id: 'IsActive',
@@ -108,7 +107,6 @@ import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
     };
 
     function inactive(model) {
-        
         Global.Add({
             name: 'EDIT_TEACHER_ACTIVE_STATUS',
             model: model,

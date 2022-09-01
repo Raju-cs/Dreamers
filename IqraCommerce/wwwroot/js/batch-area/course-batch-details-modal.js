@@ -12,8 +12,8 @@
         scheduleFilter.value = _options.Id;
 
         const modalColumns = [
-            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-            { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
+            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm '  },
+            { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm'  },
             { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 4, },
             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
         ]
@@ -47,6 +47,8 @@
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Course";
                     formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
+                    formModel.StartTime = ` ${model.StartTime}`;
+                    formModel.EndTime = ` ${model.EndTime}`;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -72,6 +74,8 @@
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Course";
                     formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
+                    formModel.StartTime = ` ${model.StartTime}`;
+                    formModel.EndTime = ` ${model.EndTime}`;
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -152,7 +156,6 @@
                         { field: 'Name', title: 'Batch Name', filter: true, position: 1, add: false },
                         { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
-
                     ],
                     DetailsUrl: function () {
                         return '/Batch/BasicInfo?Id=' + _options.Id;
@@ -167,8 +170,8 @@
                         Header: 'Routine',
                         columns: [
                             { field: 'Day', title: 'Day', filter: true, position: 3, },
-                            { field: 'StartTime', title: 'Start Time', filter: true, position: 4, },
-                            { field: 'EndTime', title: 'End Time', filter: true, position: 5, },
+                            { field: 'StartTime', title: 'Start Time', filter: true, position: 4, dateFormat: 'hh:mm'  },
+                            { field: 'EndTime', title: 'End Time', filter: true, position: 5, dateFormat: 'hh:mm' },
                             { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
                         ],
