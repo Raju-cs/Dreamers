@@ -1114,7 +1114,9 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\Th
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\product-images.css
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\site.css
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\logo.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\1d4286db-bfed-4321-ac39-84b1f34d1eec.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\233304b0-013f-4e72-8e5e-3380b53aecff.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\23362b51-3a4b-47bc-a367-22938c96f504.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\33c664ab-6e2e-4923-955c-2632da756cf8.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\5509ef30-fb47-423b-9485-9421a1b8208e.png
@@ -1128,9 +1130,14 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Stu
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\9e1d9f14-0e7b-4f54-925a-809702209480.jpeg
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\a5c9dd37-c07b-4ae7-bca1-0d92f7e433a5.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\b0d15d96-d194-4f00-9d43-24e429bc7852.jpg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\b6c950d8-9f05-462d-ac9a-3f75a4114810.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\bec03f79-49b3-48b5-9995-5d70a9e7f075.jpeg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\cc9c7868-50b2-437f-bd91-2e0e7e013579.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\f6627802-8ab5-4fba-ab28-cda4c6638e30.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Icon\f6a606d1-6120-4287-81d1-6888e781759b.jpg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\1d4286db-bfed-4321-ac39-84b1f34d1eec.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\233304b0-013f-4e72-8e5e-3380b53aecff.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\23362b51-3a4b-47bc-a367-22938c96f504.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\33c664ab-6e2e-4923-955c-2632da756cf8.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\5509ef30-fb47-423b-9485-9421a1b8208e.png
@@ -1144,9 +1151,14 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Stu
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\9e1d9f14-0e7b-4f54-925a-809702209480.jpeg
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\a5c9dd37-c07b-4ae7-bca1-0d92f7e433a5.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\b0d15d96-d194-4f00-9d43-24e429bc7852.jpg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\b6c950d8-9f05-462d-ac9a-3f75a4114810.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\bec03f79-49b3-48b5-9995-5d70a9e7f075.jpeg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\cc9c7868-50b2-437f-bd91-2e0e7e013579.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\f6627802-8ab5-4fba-ab28-cda4c6638e30.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Original\f6a606d1-6120-4287-81d1-6888e781759b.jpg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\1d4286db-bfed-4321-ac39-84b1f34d1eec.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\233304b0-013f-4e72-8e5e-3380b53aecff.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\23362b51-3a4b-47bc-a367-22938c96f504.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\33c664ab-6e2e-4923-955c-2632da756cf8.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\4ac82eda-64d0-43b8-a0cb-45278d7cc580.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\5509ef30-fb47-423b-9485-9421a1b8208e.png
@@ -1160,7 +1172,10 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Stu
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\9e1d9f14-0e7b-4f54-925a-809702209480.jpeg
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\a5c9dd37-c07b-4ae7-bca1-0d92f7e433a5.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\b0d15d96-d194-4f00-9d43-24e429bc7852.jpg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\b6c950d8-9f05-462d-ac9a-3f75a4114810.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\bec03f79-49b3-48b5-9995-5d70a9e7f075.jpeg
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\cc9c7868-50b2-437f-bd91-2e0e7e013579.png
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\f6627802-8ab5-4fba-ab28-cda4c6638e30.png
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\images\Student\Small\f6a606d1-6120-4287-81d1-6888e781759b.jpg
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\batch-area\batch.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\batch-area\course-batch-details-modal.js
@@ -1175,6 +1190,7 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\module-
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\module-area\module-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\module-area\module.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\module-area\student-selector.js
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\payment-area\payment.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\routine-area\routine-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\routine-area\routine.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\site.js
@@ -1182,7 +1198,6 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student-area\student-form.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\student-area\student.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentcourse-area\studentcourse.js
-H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentmodule-area\studentmodule-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\studentmodule-area\studentmodule.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\subject-area\subject-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\subject-area\subject.js

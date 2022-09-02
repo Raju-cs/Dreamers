@@ -1,5 +1,5 @@
 var Controller = new function () {
-    const routineFilter = { "field": "BatchId", "value": '', Operation: 0 };
+    const studentBatchFilter = { "field": "BatchId", "value": '', Operation: 0 };
     const liveStudentFilterTwo = { "field": "StudentIsDeleted", "value": 0, Operation: 0 };
     const activeStudentFilterTwo = { "field": "StudentIsActive", "value": 1, Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
@@ -9,11 +9,11 @@ var Controller = new function () {
 
     this.Show = function (options) {
         _options = options;
-        routineFilter.value = _options.Id;
+        studentBatchFilter.value = _options.Id;
         console.log("options=>", _options);
         const modalColumns = [
-            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, },
-            { field: 'EndTime', title: 'End Time', filter: true, position: 3, },
+            { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm'  },
+            { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm'  },
             { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 4, },
             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
         ]
@@ -38,9 +38,9 @@ var Controller = new function () {
         function addModuleRoutine(page) {
             console.log("options=>", options);
             Global.Add({
-                name: 'ADD_BATCH_ROUTINE',
+                name: 'ADD_ROUTINE',
                 model: undefined,
-                title: 'Add Batch Routine',
+                title: 'Add Routine',
                 columns: modalColumns,
                 dropdownList: modalDropDowns,
                 additionalField: [],
@@ -50,6 +50,8 @@ var Controller = new function () {
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Module";
                     formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
+                    formModel.StartTime = ` ${model.StartTime}`;
+                    formModel.EndTime = ` ${model.EndTime}`;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -63,9 +65,9 @@ var Controller = new function () {
         }
         function editModuleRoutine(model, grid) {
             Global.Add({
-                name: 'EDIT_BATCH_ROUTINE',
+                name: 'EDIT_ROUTINE',
                 model: model,
-                title: 'Edit Batch Routine',
+                title: 'Edit Routine',
                 columns: modalColumns,
                 dropdownList: modalDropDowns,
                 additionalField: [],
@@ -75,7 +77,8 @@ var Controller = new function () {
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Module";
                     formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
-
+                    formModel.StartTime = ` ${model.StartTime}`;
+                    formModel.EndTime = ` ${model.EndTime}`;
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -85,13 +88,13 @@ var Controller = new function () {
             });
         }
 
-        function addStudent(page) {
+        function addModuleBatchStudent(page) {
             Global.Add({
                 name: 'ADD_STUDENT',
                 model: undefined,
                 title: 'Add Student',
                 columns: [
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 3, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },
                 ],
                 dropdownList: [{
                     Id: 'StudentId',
@@ -114,15 +117,14 @@ var Controller = new function () {
                 filter: [],
                 save: `/StudentModule/Create`,
             });
-
         }
 
-        function editStudent(model, grid) {
+        function editModuleBatchStudent(model, grid) {
             Global.Add({
                 name: 'EDIT_STUDENT',
                 model: model,
                 title: 'Edit Student',
-                columns: [{ field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 3, },],
+                columns: [{ field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },],
                 dropdownList: [{
                     Id: 'StudentId',
                     add: { sibling: 2 },
@@ -173,14 +175,14 @@ var Controller = new function () {
                         Header: 'Routine',
                         columns: [
                             { field: 'Day', title: 'Day', filter: true, position: 3, },
-                            { field: 'StartTime', title: 'Start Time', filter: true, position: 4, },
-                            { field: 'EndTime', title: 'End Time', filter: true, position: 5, },
+                            { field: 'StartTime', title: 'Start Time', filter: true, position: 4, dateFormat: 'hh:mm' },
+                            { field: 'EndTime', title: 'End Time', filter: true, position: 5, dateFormat: 'hh:mm' },
                             { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
                         ],
 
                         Url: '/Routine/Get/',
-                        filter: [routineFilter],
+                        filter: [studentBatchFilter],
                         onDataBinding: function (response) { },
                         actions: [
                             {
@@ -208,19 +210,19 @@ var Controller = new function () {
                         Header: 'Student',
                         columns: [
                             { field: 'StudentName', title: 'Student Name', filter: true, position: 1, add: false },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 2, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 2, },
                         ],
 
                         Url: '/StudentModule/Get/',
-                        filter: [routineFilter, liveStudentFilterTwo, activeStudentFilterTwo],
+                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo],
                         onDataBinding: function (response) { },
                         actions: [{
-                            click: editStudent,
+                            click: editModuleBatchStudent,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject and Teacher"></i></a>`
 
                         }],
                         buttons: [{
-                            click: addStudent,
+                            click: addModuleBatchStudent,
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
                         }],
                         selector: false,

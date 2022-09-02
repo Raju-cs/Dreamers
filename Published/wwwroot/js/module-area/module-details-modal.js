@@ -2,8 +2,6 @@ var Controller = new function () {
     const scheduleFilter = { "field": "ReferenceId", "value": '', Operation: 0 };
     const studentFilter = { "field": "StudentId", "value": '', Operation: 0 };
     const trashFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
-    const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
-   
     var _options;
 
     this.Show = function (options) {
@@ -11,6 +9,7 @@ var Controller = new function () {
         scheduleFilter.value = _options.Id;
         studentFilter.value = _options.Id;
         console.log("options=>", _options);
+
         function addModuleSchedule(page) {
             Global.Add({
                 name: 'ADD_MODULE_BATCH',
@@ -73,7 +72,6 @@ var Controller = new function () {
                 url: '/js/batch-area/module-batch-details-modal.js',
                 updateSchedule: model.Reload,
                 ModuleId: _options.Id,
-
             });
         }
 
@@ -82,7 +80,7 @@ var Controller = new function () {
             selected: 0,
             Tabs: [
                 {
-                    title: 'Module Information',
+                    title: 'Basic Information',
                    
                             columns : [
                                 { field: 'Name', title: 'Name', filter: true, position: 1, },
@@ -140,7 +138,6 @@ var Controller = new function () {
 
             name: 'Batch Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=' + Math.random(),
-          
         });
     }
 };

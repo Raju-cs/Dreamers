@@ -1,7 +1,6 @@
 var Controller = new function () {
     var _options;
    
-
         this.Show = function (options) {
             _options = options;
 

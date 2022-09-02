@@ -234,7 +234,7 @@ var Controller = new function () {
             selected: 0,
             Tabs: [
                 {
-                    title: 'Student Information',
+                    title: 'Basic Information',
                    
                             columns : [
                               
@@ -243,7 +243,7 @@ var Controller = new function () {
                                 { field: 'Name', title: 'Full Name(English)', filter: true, position: 4, add: { sibling: 4 }, },
                                 { field: 'StudentNameBangla', title: 'Full Name(Bangla)', filter: true, position: 5, add: { sibling: 4 }, },
                                 { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 6, add: { sibling: 4 }, },
-                                { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'dd/MM/yyyy hh:mm' },
+                                { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }},
                                 { field: 'Nationality', title: 'Nationality', filter: true, position: 11, add: { sibling: 4 }, required: false },
                                 { field: 'StudentSchoolName', title: 'School Name', filter: true, position: 12, add: { sibling: 4 }, required: false },
                                 { field: 'StudentCollegeName', title: 'College Name', filter: true, position: 13, add: { sibling: 4 }, required: false },
@@ -254,7 +254,6 @@ var Controller = new function () {
                                 { field: 'BloodGroup', title: 'BloodGroup', filter: true, position: 18, add: { sibling: 4 }, required: false },
                                 { field: 'Gender', title: 'Gender', filter: true, position: 19, add: { sibling: 4 }, required: false },
                                 { field: 'Religion', title: 'Religion', filter: true, position: 20, add: { sibling: 4 }, required: false },
-                                { field: 'HomeDistrict', title: 'Home District', filter: true, position: 21, add: { sibling: 4 }, required: false },
                                 { field: 'Section', title: 'Section', filter: true, position: 22, add: { sibling: 4 }, required: false },
                                 { field: 'FathersName', title: 'Fathers Name', filter: true, position: 23, add: { sibling: 4 }, required: false },
                                 { field: 'FathersOccupation', title: 'Fathers Occupation', filter: true, position: 24, add: { sibling: 4 }, required: false },
@@ -289,7 +288,7 @@ var Controller = new function () {
                         Header: 'Module',
                         columns: [
                             { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
-                            { field: 'BatchName', title: 'Day', filter: true, position: 2, add: false },
+                            { field: 'BatchName', title: 'Batch Name', filter: true, position: 2, add: false },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, add: false },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                        ],
@@ -319,7 +318,7 @@ var Controller = new function () {
                         Header: 'Course',
                         columns: [
                             { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
-                            { field: 'BatchName', title: 'Day', filter: true, position: 2, add: false },
+                            { field: 'BatchName', title: 'Batch Name', filter: true, position: 2, add: false },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, add: false },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                         ],
@@ -345,7 +344,7 @@ var Controller = new function () {
             ],
 
             name: 'Course Information',
-            url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
+            url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails' + _options.Id,
           
         });
     }

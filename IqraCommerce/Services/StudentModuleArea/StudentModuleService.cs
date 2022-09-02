@@ -81,7 +81,6 @@ namespace IqraCommerce.Services.StudentModuleArea
               ,[stdntmdl].[StudentId]
               ,[stdntmdl].[ModuleId]
               ,[stdntmdl].[BatchId]
-              ,[stdntmdl].[RoutineId]
 			  ,[stdntmdl].[ReferenceId]
 			  ,[stdntmdl].[IsActive]
 	          ,ISNULL([crtr].Name, '') [Creator]

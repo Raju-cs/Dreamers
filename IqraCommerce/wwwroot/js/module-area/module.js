@@ -26,7 +26,6 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
 
         subjectCode = data?.Name?.slice(0, 3).toUpperCase() || '';
         generateModuleCode();
-        //page.filter = [activeTeacherFilter, liveFilter, teacherFilterBySubject];
         teacherDropdownMat.Reload();
     }
 
@@ -254,7 +253,6 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
         }
         */
     };
-
 
     //Initialize Tabs
     Global.Tabs(tabs);

@@ -69,7 +69,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<CourseSubjectTeacher> CourseSubjectTeacher { get; set; }
         #endregion
 
-        #region Batch
+        #region Module
         public virtual DbSet<Module> Module { get; set; }
         #endregion
 
@@ -77,8 +77,8 @@ namespace IqraCommerce.Entities
         public virtual DbSet<Student> Student { get; set; }
         #endregion
 
-        #region Schedule
-        public virtual DbSet<Batch> Schedule { get; set; }
+        #region Batch
+        public virtual DbSet<Batch> Batch { get; set; }
         #endregion
 
         #region StudentModule

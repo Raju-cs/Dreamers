@@ -7,6 +7,5 @@ namespace IqraCommerce.Models.StudentCourseArea
         public Guid StudentId { get; set; }
         public Guid CourseId { get; set; }
         public Guid BatchId { get; set; }
-        public Guid RoutineId { get; set; }
     }
 }

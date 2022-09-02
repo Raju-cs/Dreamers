@@ -1,5 +1,4 @@
-﻿
-var Controller = new function () {
+﻿var Controller = new function () {
     const teacherFilter = { "field": "TeacherId", "value": '', Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
@@ -38,7 +37,7 @@ var Controller = new function () {
              filter: [activeFilter],
              save: `/TeacherSubject/Create`,
         });
-    }
+    };
    
     function editSubject(model, grid) {
       
@@ -73,7 +72,6 @@ var Controller = new function () {
     };
 
     function editCourse(model, grid) {
-        console.log({ model, grid });
         Global.Add({
             name: 'EDIT_COURSE',
             model: model,
@@ -125,8 +123,6 @@ var Controller = new function () {
                             { field: 'UniversityName', title: 'Unitversity Name', filter: true, position: 5, required: false },
                             { field: 'UniversitySubject', title: 'Unitversity Subject', filter: true, position: 6, required: false },
                             { field: 'UniversityResult', title: 'Unitversity Result', filter: true, position: 7, required: false },
-                           
-                           
                         ],
                         
                         DetailsUrl: function () {
@@ -143,7 +139,6 @@ var Controller = new function () {
                         columns:[
                             { field: 'SubjectName', title: 'Subject', filter: true, position: 1, },
                             { field: 'Charge', title: 'Charge', filter: true, position: 3, },
-                            
                         ],
 
                         Url: '/TeacherSubject/Get/',
@@ -153,7 +148,6 @@ var Controller = new function () {
                             {
                                 click: editSubject,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject"></i></a>`
-                                
                             }
                         ],
                         buttons: [
@@ -187,7 +181,6 @@ var Controller = new function () {
                             {
                                 click: editCourse,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject"></i></a>`
-
                             }
                         ],
                         buttons: [],
@@ -197,7 +190,6 @@ var Controller = new function () {
                         }
                     }],
                 },
-               
             ],
             name: 'Teachers Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',

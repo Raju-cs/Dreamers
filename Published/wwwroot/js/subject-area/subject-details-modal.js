@@ -1,6 +1,4 @@
-﻿
-
-var Controller = new function () {
+﻿var Controller = new function () {
     const subjectbatchFilter = { "field": "SubjectId", "value": '', Operation: 0 }
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     var _options;
@@ -14,14 +12,13 @@ var Controller = new function () {
             selected: 0,
             Tabs: [
                 {
-                    title: 'Subject Information',
+                    title: 'Basic Information',
                    
                             columns : [
                                 { field: 'Name', title: 'Name', filter: true, position: 1, },
                                 { field: 'Class', title: 'Class', filter: true, position: 2, },
                                 { field: 'Version', title: 'Version', filter: true, position: 3, },
                                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 4, },
-                           
                         ],
                         
                         DetailsUrl: function () {
@@ -49,7 +46,6 @@ var Controller = new function () {
                         Printable: {
                             container: $('void')
                         },
-                        
                     }],
 
                 }, {
@@ -77,7 +73,6 @@ var Controller = new function () {
 
             name: 'Subject Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
-          
         });
     }
 };

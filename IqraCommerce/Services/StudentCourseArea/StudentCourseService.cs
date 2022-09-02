@@ -45,6 +45,9 @@ namespace IqraCommerce.Services.StudentCourseArea
                 case "studentisactive":
                     name = "[stdnt].IsActive";
                     break;
+                case "batchname":
+                    name = "[btch].Name";
+                    break;
                 default:
                     name = "stdntcrsh." + name;
                     break;
@@ -77,7 +80,6 @@ namespace IqraCommerce.Services.StudentCourseArea
                   ,[stdntcrsh].[StudentId]
                   ,[stdntcrsh].[CourseId]
                   ,[stdntcrsh].[BatchId]
-                  ,[stdntcrsh].[RoutineId]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator]
 	              ,ISNULL([crsh].Name,  '')  [CourseName]
@@ -93,8 +95,7 @@ namespace IqraCommerce.Services.StudentCourseArea
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntcrsh].[UpdatedBy]
               LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [stdntcrsh].[StudentId]
               LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [stdntcrsh].[CourseId]
-              LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [stdntcrsh].[BatchId]  And [btch].IsDeleted = 0
-              LEFT JOIN [dbo].[Routine] [rtn] ON [rtn].Id = [stdntcrsh].[RoutineId] And [rtn].IsDeleted = 0";
+              LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [stdntcrsh].[BatchId]  And [btch].IsDeleted = 0";
         }
     }
 }

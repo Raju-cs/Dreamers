@@ -513,9 +513,6 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoutineId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
@@ -565,9 +562,6 @@ namespace IqraCommerce.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("RoutineId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
