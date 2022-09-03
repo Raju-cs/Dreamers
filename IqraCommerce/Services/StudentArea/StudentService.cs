@@ -87,11 +87,11 @@ namespace IqraCommerce.Services.StudentArea
    
         private string GenerateCode()
         {
-            var Code = "Dreamers";
+           // var Code = "Dreamers";
             var count = Entity.Count(e => e.IsActive && !e.IsDeleted);
 
-           // return DateTime.Now.ToString("yyMMdd") + count.ToString().PadLeft(4, '0');
-            return Code.ToString() + count.ToString().PadLeft(4, '0');
+            return DateTime.Now.ToString("yyMMdd") + count.ToString().PadLeft(4, '0');
+            //return Code.ToString() + count.ToString().PadLeft(4, '0');
         }
 
         public async Task<ResponseList<List<Dictionary<string, object>>>> AutoComplete(Page page)

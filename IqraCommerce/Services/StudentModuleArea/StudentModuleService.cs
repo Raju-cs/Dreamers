@@ -87,6 +87,7 @@ namespace IqraCommerce.Services.StudentModuleArea
 	          ,ISNULL([pdtr].Name, '') [Updator]
 	          ,ISNULL([mdl].Name,  '')  [ModuleName]
 	          ,ISNULL([stdnt].Name,  '')  [StudentName]
+	          ,ISNULL([stdnt].DateOfBirth,  '')  [DateOfBirth]
 	          ,ISNULL([stdnt].IsDeleted,  '')  [StudentIsDeleted]
 	          ,ISNULL([stdnt].IsActive,  '')  [StudentIsActive]
 	          ,ISNULL([btch].Name,  '')  [BatchName]

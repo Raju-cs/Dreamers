@@ -229,6 +229,7 @@ var Controller = new function () {
             });
         }
 
+
         Global.Add({
             title: 'Student Information',
             selected: 0,
@@ -301,10 +302,10 @@ var Controller = new function () {
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Student Batch"></i></a>`
 
                         }],
-                        buttons: [{
-                            click: addStudentInModule,
+                        buttons: [/*{
+                            click: () => {},
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
-                        }],
+                        }*/],
                         selector: false,
                         Printable: {
                             container: $('void')
@@ -331,16 +332,16 @@ var Controller = new function () {
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Student Batch"></i></a>`
 
                         }],
-                        buttons: [{
+                        buttons: [/*{
                             click: addStudentInCourse,
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
-                        }],
+                        }*/],
                         selector: false,
                         Printable: {
                             container: $('void')
                         }
                     }],
-                },
+                }, 
             ],
 
             name: 'Course Information',

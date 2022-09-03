@@ -210,7 +210,8 @@ var Controller = new function () {
                         Header: 'Student',
                         columns: [
                             { field: 'StudentName', title: 'Student Name', filter: true, position: 1, add: false },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 2, },
+                            { field: 'DateOfBirth', title: 'DateOfBirth', filter: true, position: 2, add: false, dateFormat: 'MM/dd/yyyy' },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },
                         ],
 
                         Url: '/StudentModule/Get/',

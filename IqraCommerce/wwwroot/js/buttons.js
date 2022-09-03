@@ -12,3 +12,5 @@ export const warnBtn = (text = 'Send Notification') => `<a class="action-button 
 export const flashBtn = (text = 'Change Status') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-flash" title="${text}"></i></a>`;
 export const cashBtn = (text = 'Make payment') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-usd" title="${text}"></i></a>`;
 export const printBtn = (text = 'Print') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-print" title="${text}"></i></a>`;
+export const listBtn = (text = 'List') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-list-alt" title="${text}"></i></a>`;
+export const userBtn = (text = 'Person') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-user" title="${text}"></i></a>`;
