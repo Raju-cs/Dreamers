@@ -77,6 +77,7 @@ namespace IqraCommerce.Services.ScheduleArea
                   ,[btch].[IsActive]
                   ,[btch].[ReferenceId]
                   ,ISNULL([btch].[BtachName], '') [BtachName]
+                  ,ISNULL([BTCH].[Charge], '') [Charge]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator] 
               FROM [dbo].[Batch] [btch]

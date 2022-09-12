@@ -210,7 +210,7 @@ import { print } from "./student-form.js";
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
-                formModel.DateOfBirth = ` ${model.DateOfBirth}`;
+                //formModel.DateOfBirth = ` ${model.DateOfBirth}`;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -422,7 +422,7 @@ import { print } from "./student-form.js";
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
                 formModel.DreamersId = data.DreamersId;
-                formModel.DateOfBirth = ` ${model.DateOfBirth}`;
+                //formModel.DateOfBirth = ` ${model.DateOfBirth}`;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();

@@ -95,6 +95,21 @@ export const DAY = {
     THURSDAY: "Thursday",
     FRIDAY :  "Friday"
 }
+
+export const MONTH = {
+    JANUARY: "January",
+    FEBRUARY: "February",
+    MARCH: "March",
+    APRIL: "April",
+    MAY: "May",
+    JUNE: "June",
+    JULY: "July",
+    AUGUST: "August",
+    SEPTEMBER: "September",
+    OCTOBER: "October",
+    NOVEMBER: "November",
+    DECEMBER: "December"
+}
 export const CLASS = {
     NINE: "9",
     TEN: "10",

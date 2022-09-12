@@ -2,6 +2,7 @@ var Controller = new function () {
     const studentBatchFilter = { "field": "BatchId", "value": '', Operation: 0 };
     const liveStudentFilterTwo = { "field": "StudentIsDeleted", "value": 0, Operation: 0 };
     const activeStudentFilterTwo = { "field": "StudentIsActive", "value": 1, Operation: 0 };
+    const studentClassFilter = { "field": "Class", "value": '', Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     var _options;
@@ -10,7 +11,8 @@ var Controller = new function () {
     this.Show = function (options) {
         _options = options;
         studentBatchFilter.value = _options.Id;
-        console.log("options=>", _options);
+        studentClassFilter.value = _options.ModuleClass;
+
         const modalColumns = [
             { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm'  },
             { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm'  },
@@ -102,12 +104,13 @@ var Controller = new function () {
                     position: 1,
                     url: '/Student/AutoComplete',
                     Type: 'AutoComplete',
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
+                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter, studentClassFilter] }
                 },],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     console.log("model", model);
                     formModel.ActivityId = window.ActivityId;
+                    formModel.IsActive = true;
                     formModel.BatchId = _options.Id;
                     formModel.ModuleId = _options.ModuleId;
                 },
@@ -124,15 +127,15 @@ var Controller = new function () {
                 name: 'EDIT_STUDENT',
                 model: model,
                 title: 'Edit Student',
-                columns: [{ field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },],
+                columns: [{ field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 3, },],
                 dropdownList: [{
                     Id: 'StudentId',
                     add: { sibling: 2 },
                     position: 1,
                     url: '/Student/AutoComplete',
                     Type: 'AutoComplete',
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
-                },],
+                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter, studentClassFilter] }
+                }],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
@@ -215,13 +218,32 @@ var Controller = new function () {
                         ],
 
                         Url: '/StudentModule/Get/',
-                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo],
+                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo, activeFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editModuleBatchStudent,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject and Teacher"></i></a>`
 
-                        }],
+                        }, {
+                            click: (data, grid) => {
+                                Global.Controller.Call({
+                                    url: IqraConfig.Url.Js.WarningController,
+                                    functionName: 'Show',
+                                    options: {
+                                        name: 'Student',
+                                        title: 'Remove Student',
+                                        save: `/StudentModule/Drop`,
+                                        msg: 'Do you want to Remove this Student From Batch?',
+                                        data: { Id: data.Id },
+                                        onsavesuccess: function () {
+                                            grid.Reload();
+                                        }
+                                    }
+                                });
+                            } ,
+                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-trash" title="Remove"></i></a>`
+
+                            }],
                         buttons: [{
                             click: addModuleBatchStudent,
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
@@ -240,3 +262,5 @@ var Controller = new function () {
         });
     }
 };
+
+

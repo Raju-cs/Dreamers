@@ -1,9 +1,11 @@
+import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 (function () {
+    
     const controller = 'StudentModule';
 
-    $(document).ready(() => {
+    /*$(document).ready(() => {
         $('#add-record').click(add);
-    });
+    });*/
 
     const columns = () => [
         { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
@@ -12,7 +14,8 @@
         { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, add: false },
         { field: 'DateOfBirth', title: 'DateOfBirth', filter: true, position: 6, add: false, dateFormat: 'MM/dd/yyyy' },
         { field: 'MaxStudent', title: 'Max Student', filter: true, position: 7, add: false },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 8, },
+        { field: 'ActiveStatusChangedAt', title: 'ActiveStatusChangedAt', filter: true, position: 8, add: false, dateFormat: 'MM/dd/yyyy' },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 9, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -23,7 +26,22 @@
         Id: 'BBC23DC6-A099-494D-BEB4-E8B98993A27D',
         Name: 'ADD_STUDENT_BATCH',
         Title: 'Student Batch',
-        filter: [],
+        filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL),],
+        actions: [],
+        onDataBinding: () => { },
+        rowBound: () => { },
+        columns: columns(),
+        Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
+        Url: 'Get',
+    }
+
+    const inactiveTab = {
+        Id: 'A523A1FF-B599-41B9-88BC-6DFD1062A68F',
+        Name: 'INACTIVE_STUDENT_IN_MODULE',
+        Title: 'Inactive',
+        filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL)],
+        remove: false,
         actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
@@ -39,7 +57,7 @@
         Base: {
             Url: `/${controller}/`,
         },
-        items: [studentBatchTab],
+        items: [studentBatchTab, inactiveTab],
     };
 
     //Initialize Tabs

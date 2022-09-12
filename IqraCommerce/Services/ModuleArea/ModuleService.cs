@@ -28,6 +28,7 @@ namespace IqraCommerce.Services.ModuleArea
                 case "subjectname":
                     name = "[sbjct].Name";
                     break;
+                
                 default:
                     name = "mdl." + name;
                     break;

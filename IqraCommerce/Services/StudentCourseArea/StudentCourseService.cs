@@ -45,8 +45,17 @@ namespace IqraCommerce.Services.StudentCourseArea
                 case "studentisactive":
                     name = "[stdnt].IsActive";
                     break;
+                case "courseisactive":
+                    name = "[crsh].IsActive";
+                    break;
+                case "courseisdeleted":
+                    name = "[crsh].IsDeleted";
+                    break;
                 case "batchname":
                     name = "[btch].Name";
+                    break;
+                case "class":
+                    name = "[stdnt].Class";
                     break;
                 default:
                     name = "stdntcrsh." + name;
@@ -83,13 +92,17 @@ namespace IqraCommerce.Services.StudentCourseArea
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator]
 	              ,ISNULL([crsh].Name,  '')  [CourseName]
+	              ,ISNULL([crsh].IsDeleted,  '')  [CourseIsDeleted]
+	              ,ISNULL([crsh].IsActive,  '')  [CourseIsActive]
 	              ,ISNULL([stdnt].Name,  '') [StudentName]
 				  ,ISNULL([stdnt].IsDeleted,  '')  [StudentIsDeleted]
 	              ,ISNULL([stdnt].IsActive,  '')  [StudentIsActive]
+                  ,ISNULL([stdnt].DateOfBirth,  '')  [DateOfBirth]
 	              ,ISNULL([btch].Name,  '')  [BatchName]
                   ,ISNULL([btch].Program,  '')  [Program]
 	              ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]
 	              ,ISNULL([btch].MaxStudent,  '')  [MaxStudent]
+                  ,ISNULL([stdnt].Class,  '')  [Class]
               FROM [dbo].[StudentCourse] [stdntcrsh]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntcrsh].[CreatedBy]
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntcrsh].[UpdatedBy]

@@ -43,6 +43,8 @@ namespace IqraCommerce.Services.StudentArea
             }
         }
 
+    
+
         public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
         {
             var studentModel = (StudentModel)model;
@@ -90,7 +92,7 @@ namespace IqraCommerce.Services.StudentArea
            // var Code = "Dreamers";
             var count = Entity.Count(e => e.IsActive && !e.IsDeleted);
 
-            return DateTime.Now.ToString("yyMMdd") + count.ToString().PadLeft(4, '0');
+            return "S" + DateTime.Now.ToString("yyMMdd") + count.ToString().PadLeft(4, '0');
             //return Code.ToString() + count.ToString().PadLeft(4, '0');
         }
 
@@ -209,5 +211,7 @@ namespace IqraCommerce.Services.StudentArea
                   ,[stdnt].[StudentNameBangla]
                    FROM [dbo].[Student] [stdnt]";
         }
+    
+       
     }
 }

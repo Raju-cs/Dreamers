@@ -13,6 +13,7 @@ using IqraCommerce.Entities.ModuleArea;
 using IqraCommerce.Entities.StudentModuleArea;
 using IqraCommerce.Entities.BatchArea;
 using IqraCommerce.Entities.PeriodArea;
+using IqraCommerce.Entities.FeesArea;
 
 namespace IqraCommerce.Entities
 {
@@ -96,6 +97,10 @@ namespace IqraCommerce.Entities
 
         #region Period
         public virtual DbSet<Period> Period { get; set; }
+        #endregion
+
+        #region Fees
+        public virtual DbSet<Fees> Fees { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder builder)

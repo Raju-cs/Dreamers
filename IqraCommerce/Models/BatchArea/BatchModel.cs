@@ -9,6 +9,7 @@ namespace IqraCommerce.Models.BatchArea
         public string BtachName { get; set; }
         public string MaxStudent { get; set; }
         public string ClassRoomNumber { get; set; }
+        public double Charge { get; set; }
         public bool IsActive { get; set; }
     }
 }

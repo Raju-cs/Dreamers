@@ -14,6 +14,7 @@ namespace IqraCommerce.Entities.BatchArea
         public string Program { get; set; }
         public string MaxStudent { get; set; }
         public string ClassRoomNumber { get; set; }
+        public double Charge { get; set; }
         public bool IsActive { get; set; }
     }
 }

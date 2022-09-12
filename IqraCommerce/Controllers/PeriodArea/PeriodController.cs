@@ -4,6 +4,7 @@ using IqraCommerce.Services.PeriodArea;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
+using IqraService.Search;
 
 namespace IqraCommerce.Controllers.PeriodArea
 {
@@ -20,5 +21,18 @@ namespace IqraCommerce.Controllers.PeriodArea
         {
             return Json(await ___service.BasicInfo(id));
         }
+
+        public override ActionResult Create([FromForm] PeriodModel recordToCreate)
+        {
+            return base.Create(recordToCreate);
+        }
+
+        public async Task<JsonResult> ForPayment(Page page)
+        {
+            return Json(await ___service.ForPayment(page));
+        }
+
+
+
     }
 }

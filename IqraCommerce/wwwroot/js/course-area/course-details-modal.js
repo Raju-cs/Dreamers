@@ -117,15 +117,16 @@ var Controller = new function () {
 
         }
    
-        function addCourseSchedule(page) {
+        function addCourseBatch(page) {
             Global.Add({
                 name: 'ADD_COURSE_BATCH',
                 model: undefined,
                 title: 'Add Course Batch',
                 columns: [
                     { field: 'Name', title: 'BatchName', filter: true, position: 1 },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -134,7 +135,6 @@ var Controller = new function () {
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Course";
                     formModel.Name = `${model.Name} `;
-                   
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -145,15 +145,16 @@ var Controller = new function () {
 
         }
 
-        function editCourseSchedule(model, grid) {
+        function editCourseBatch(model, grid) {
             Global.Add({
                 name: 'EDIT_COURSE_BATCH',
                 model: model,
                 title: 'Edit Course Batch',
                 columns: [
                     { field: 'Name', title: 'BatchName', filter: true, position: 1 },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -163,7 +164,6 @@ var Controller = new function () {
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Course";
                     formModel.Name = `${model.Name} `;
-
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -179,7 +179,8 @@ var Controller = new function () {
                 name: 'Course Information ' + row.Id,
                 url: '/js/batch-area/course-batch-details-modal.js',
                 updateSchedule: model.Reload,
-                CourseId: _options.Id
+                CourseId: _options.Id,
+                CourseClass: _options.CourseClass,
             });
         }
 
@@ -241,11 +242,12 @@ var Controller = new function () {
                     title: ' Batch ',
                     Grid: [{
 
-                        Header: 'Schedule',
+                        Header: 'Batch',
                         columns: [
                             { field: 'Name', title: 'BatchName', filter: true, position: 1 },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 5, },
+                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                            { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                         ],
 
                         Url: '/Batch/Get/',
@@ -253,7 +255,7 @@ var Controller = new function () {
                         onDataBinding: function (response) { },
                         actions: [
                             {
-                                click: editCourseSchedule,
+                                click: editCourseBatch,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Course Schedule"></i></a>`
 
                             },
@@ -265,7 +267,7 @@ var Controller = new function () {
                         ],
                         buttons: [
                             {
-                                click: addCourseSchedule,
+                                click: addCourseBatch,
                                 html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
                             }
                         ],

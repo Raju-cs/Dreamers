@@ -2368,3 +2368,5 @@ H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\Module\Index.cshtml
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\StudentModule\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\Batch\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\Period\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\Fees\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\CoachingAccount\Index.cshtml.g.cs

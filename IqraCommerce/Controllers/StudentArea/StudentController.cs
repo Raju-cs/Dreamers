@@ -35,9 +35,12 @@ namespace IqraCommerce.Controllers.StudentArea
 
             return Json(___service.UploadImage(fileName, imageUpload.Id, Guid.Empty, imageUpload.ActivityId));
         }
+        
         public override async Task<JsonResult> AutoComplete(Page page)
         {
             return Json(await ___service.AutoComplete(page));
         }
+   
+        
     }
 }

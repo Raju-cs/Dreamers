@@ -1,20 +1,34 @@
 ﻿import { editBtn, eyeBtn, listBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
-import { ACTIVE_STATUS } from "../dictionaries.js";
+import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
 (function () {
     const controller = 'Period';
+
+    const months = ['January', 'February', 'March ', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 
     $(document).ready(() => {
         $('#add-record').click(add);
     });
 
+    // Input: date/Month/year
+    // output: month/date/year
+    const dateForSQLServer = (enDate = '01/01/1970') => {
+        const dateParts = enDate.split('/');
+
+        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+    }
+
     const columns = () => [
-        { field: 'StartDate', title: 'Start Date', filter: true, position: 1, add: false, dateFormat: 'yyyy/dd/MM', required: false },
-        { field: 'EndDate', title: 'End Date', filter: true, position: 2, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
+        { field: 'Name', title: 'Month', filter: true, required: false, position: 1, add: false },
+        { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false },
+        { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false },
+        { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false },
+       
  /*       { field: 'TotalCollected', title: 'Total Collected', filter: true, position: 2, required: true, add: { sibling: 2 } },
         { field: 'InCome', title: 'Income', filter: true, position: 3, add: { sibling: 2 } },
         { field: 'OutCome', title: 'Outcome', filter: true, position: 5, add: { sibling: 2 } },*/
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 6, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5 },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -27,12 +41,42 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             model: undefined,
             title: 'Add Period',
             columns: columns(),
-            dropdownList: [],
+            dropdownList: [{
+                title: 'Name',
+                Id: 'Name',
+                dataSource: [
+                    { text: 'January', value: MONTH.JANUARY },
+                    { text: 'February', value: MONTH.FEBRUARY },
+                    { text: 'March', value: MONTH.MARCH },
+                    { text: 'April', value: MONTH.APRIL },
+                    { text: 'May', value: MONTH.MAY },
+                    { text: 'June', value: MONTH.JUNE },
+                    { text: 'July', value: MONTH.JULY },
+                    { text: 'August', value: MONTH.AUGUST },
+                    { text: 'September', value: MONTH.SEPTEMBER },
+                    { text: 'October', value: MONTH.OCTOBER },
+                    { text: 'November', value: MONTH.NOVEMBER },
+                    { text: 'December', value: MONTH.DECEMBER },
+                ],
+                position: 1,
+            }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
+                console.log({ model, formModel})
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
+                formModel.EndDate = dateForSQLServer(model.EndDate);
+                formModel.StartDate = dateForSQLServer(model.StartDate);
+                formModel.RegularPaymentDate = dateForSQLServer(model.RegularPaymentDate);
             },
+            onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                const monthIndex = new Date().getMonth();
+                const year = new Date().getFullYear();
+                formModel.StartDate = new Date(year, monthIndex, 1).format('dd/MM/yyyy');
+                formModel.EndDate = new Date(year, monthIndex + 1, 0).format('dd/MM/yyyy');
+                formModel.RegularPaymentDate = new Date(year, monthIndex , 7).format('dd/MM/yyyy');
+                formModel.Name = months[monthIndex];
+            }, 
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
             },
@@ -45,13 +89,34 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             name: 'EDIT_PERIOD',
             model: model,
             title: 'Edit Period',
-            columns: [{ field: 'StartDate', title: 'Start Date', filter: true, position: 1, dateFormat: 'yyyy/dd/MM'},
-                { field: 'EndDate', title: 'End Date', filter: true, position: 2, add: { sibling: 2 }, dateFormat: 'yyyy/dd/MM' },
+            columns: [
+                { field: 'Name', title: 'Month', filter: true, required: false, position: 1, add: false },
+                { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false },
+                { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false },
+                { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false },
           /*      { field: 'TotalCollected', title: 'Total Collected', filter: true, position: 2, required: false, add: { sibling: 2 } },
                 { field: 'InCome', title: 'Income', filter: true, position: 3, add: { sibling: 2 } },
                 { field: 'OutCome', title: 'Outcome', filter: true, position: 5, add: { sibling: 2 } },*/
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },],
             dropdownList: [{
+                title: 'Name',
+                Id: 'Name',
+                dataSource: [
+                    { text: 'January', value: MONTH.JANUARY },
+                    { text: 'February', value: MONTH.FEBRUARY },
+                    { text: 'March', value: MONTH.MARCH },
+                    { text: 'April', value: MONTH.APRIL },
+                    { text: 'May', value: MONTH.MAY },
+                    { text: 'June', value: MONTH.JUNE },
+                    { text: 'July', value: MONTH.JULY },
+                    { text: 'August', value: MONTH.AUGUST },
+                    { text: 'September', value: MONTH.SEPTEMBER },
+                    { text: 'October', value: MONTH.OCTOBER },
+                    { text: 'November', value: MONTH.NOVEMBER },
+                    { text: 'December', value: MONTH.DECEMBER },
+                ],
+                position: 1,
+            },{
                 title: 'Period Active Status',
                 Id: 'IsActive',
                 dataSource: [
@@ -65,8 +130,9 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
-                formModel.StartDate = `${model.StartDate}`;
-                formModel.EndDate = `${model.EndDate}`;
+                formModel.StartDate = model.StartDate;
+                formModel.EndDate = model.EndDate;
+                formModel.RegularPaymentDate = model.RegularPaymentDate;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -76,6 +142,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
     };
 
     const viewDetails = (row) => {
+        
         Global.Add({
             Id: row.Id,
             name: 'Period Information' + row.Id,
@@ -83,11 +150,13 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         });
     }
 
-    const studentFeesList = (row) => {
+    const studentFeesList = (row, model) => {
+        console.log("row=>", row);
         Global.Add({
             Id: row.Id,
             name: 'Period Information' + row.Id,
-            url: '/js/period-area/studentlist-details-modal.js',
+            url: '/js/period-area/period-studentlist-modal.js',
+            updatePayment: model.Reload,
         });
     }
 

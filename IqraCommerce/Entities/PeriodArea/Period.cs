@@ -10,6 +10,7 @@ namespace IqraCommerce.Entities.PeriodArea
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTime RegularPaymentDate { get; set; }
         public double TotalCollected { get; set; }
         public double InCome { get; set; }
         public double OutCome { get; set; }

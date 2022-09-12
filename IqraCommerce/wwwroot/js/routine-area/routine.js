@@ -1,6 +1,6 @@
 import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
-import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
+import { PROGRAM} from "../dictionaries.js";
 
 (function () {
 
@@ -45,6 +45,8 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
+                formModel.StartTime = ` ${model.StartTime}`;
+                formModel.EndTime = ` ${model.EndTime}`;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -58,6 +60,7 @@ import { PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             Id: row.Id,
             name: 'Routine Information' + row.Id,
             url: '/js/routine-area/routine-details-modal.js',
+
         });
     }
 

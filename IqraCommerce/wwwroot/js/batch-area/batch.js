@@ -13,7 +13,8 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'Name', title: 'Batch Name', filter: true, position: 1, add: false },
         { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
         { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 4, },
+        { field: 'Charge', title: 'Charge', filter: true, position: 4, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -28,7 +29,8 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             columns: [
                 { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                 { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 6, },
+                { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
             ],
             dropdownList: [{
                 title: 'Program',

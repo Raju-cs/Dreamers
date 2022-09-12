@@ -87,6 +87,9 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("BtachName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Charge")
+                        .HasColumnType("float");
+
                     b.Property<string>("ClassRoomNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -240,6 +243,68 @@ namespace IqraCommerce.Migrations
                     b.ToTable("CourseSubjectTeacher");
                 });
 
+            modelBuilder.Entity("IqraCommerce.Entities.FeesArea.Fees", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ActivityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("CourseFee")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Fee")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("ModuleFee")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PaidFee")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("PeriodId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("RestFee")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("TotalFee")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fees");
+                });
+
             modelBuilder.Entity("IqraCommerce.Entities.ModuleArea.Module", b =>
                 {
                     b.Property<Guid>("Id")
@@ -329,14 +394,14 @@ namespace IqraCommerce.Migrations
                     b.Property<double>("OutCome")
                         .HasColumnType("float");
 
+                    b.Property<DateTime>("RegularPaymentDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("TotalCollected")
                         .HasColumnType("float");
@@ -426,8 +491,8 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("DateOfBirth")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DreamersId")
                         .HasColumnType("nvarchar(max)");
@@ -588,6 +653,9 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ActiveStatusChangedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("ActivityId")
                         .HasColumnType("uniqueidentifier");

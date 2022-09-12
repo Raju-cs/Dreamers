@@ -5,6 +5,8 @@ using IqraCommerce.Services.StudentModuleArea;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
+using IqraService.Search;
 
 namespace IqraCommerce.Controllers.StudentModuleArea
 {
@@ -22,5 +24,40 @@ namespace IqraCommerce.Controllers.StudentModuleArea
             return Json(await ___service.BasicInfo(id));
         }
 
+        public JsonResult Drop([FromBody] IdDto dto)
+        {
+            var studentModuleFromDb = ___service.Entity.FirstOrDefault(sm => sm.Id == dto.Id && !sm.IsDeleted);
+
+            if(studentModuleFromDb == null)
+            {
+                return Json(new ResponseJson()
+                {
+                    Id = -3,
+                    IsError = true,
+                    Msg = "Student in the module not found!"
+                });
+            }
+
+            studentModuleFromDb.IsActive = false;
+            studentModuleFromDb.ActiveStatusChangedAt = DateTime.Now;
+            studentModuleFromDb.UpdatedAt = DateTime.Now;
+            studentModuleFromDb.UpdatedBy = Guid.Empty;
+
+            ___service.SaveChange();
+
+            return Json(new ResponseJson()
+            {
+                Data = studentModuleFromDb,
+                Id = dto.Id,
+                IsError = false
+            });
+        }
+
+    }
+
+    public class IdDto
+    {
+        public Guid Id { get; set; }
+        public Guid ActivityId { get; set; }
     }
 }

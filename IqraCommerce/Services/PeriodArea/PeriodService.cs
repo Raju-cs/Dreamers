@@ -4,8 +4,7 @@ using IqraService.Search;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
-using IqraBase.Data.Models;
-using IqraCommerce.Models.PeriodArea;
+using System.Linq;
 
 namespace IqraCommerce.Services.PeriodArea
 {
@@ -24,7 +23,9 @@ namespace IqraCommerce.Services.PeriodArea
                 case "prd":
                     name = "prd.[Name]";
                     break;
-
+                case "startdate":
+                    name = "[prd].[StartDate]";
+                    break;
                 default:
                     name = "prd." + name;
                     break;
@@ -40,6 +41,21 @@ namespace IqraCommerce.Services.PeriodArea
                 return await db.GetPages(page, PeriodQuery.Get());
             }
         }
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> ForPayment(Page page)
+        {
+            var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
+            var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
+
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] ASC" : page.SortBy;
+            using (var db = new DBService())
+            {
+                page.filter = innerFilters;
+                var query = GetWhereClause(page);
+
+                page.filter = outerFilters;
+                return await db.GetPages(page, PeriodQuery.ForPayment(query));
+            }
+        }
 
         public async Task<ResponseList<Dictionary<string, object>>> BasicInfo(Guid Id)
         {
@@ -47,19 +63,6 @@ namespace IqraCommerce.Services.PeriodArea
             {
                 return await db.FirstOrDefault(PeriodQuery.BasicInfo + Id + "'");
             }
-        }
-
-        public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
-        {
-
-            var periodModel = (PeriodModel)model;
-
-            DateTime now = DateTime.Now;
-            var startDate = new DateTime(now.Year, now.Month, 1);
-            var endDate = startDate.AddMonths(1).AddDays(-1);
-            periodModel.StartDate = startDate;
-            periodModel.EndDate = endDate;
-            return base.OnCreate(model, userId, isValid);
         }
     }
 
@@ -82,6 +85,7 @@ namespace IqraCommerce.Services.PeriodArea
               ,ISNULL([prd].[InCome], '') [InCome]
               ,ISNULL([prd].[OutCome], '') [OutCome]
               ,[prd].[IsActive]
+              ,[prd].[RegularPaymentDate]
               ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator] 
              FROM [dbo].[Period] [prd]
@@ -93,5 +97,49 @@ namespace IqraCommerce.Services.PeriodArea
         {
             get { return @"SELECT " + Get() + " Where prd.Id = '"; }
         }
+
+        public static string ForPayment(string innerCondition)
+        {
+            return @" * 
+               
+                from ( 
+                   select  stdnt.[Id]
+      ,stdnt.[IsDeleted]
+      ,stdnt.[Name]
+      ,stdnt.[DreamersId]
+      ,stdnt.[NickName]
+      ,stdnt.[PhoneNumber]
+      ,stdnt.[DateOfBirth]
+      ,stdnt.[Gender]
+      ,stdnt.[BloodGroup]
+      ,stdnt.[IsActive]
+      ,stdnt.[Class]
+      ,stdnt.[Group]
+      ,stdnt.[Version]
+      ,count(btch.Id) [NumberOfModule]
+      ,ISNULL(sum(btch.Charge), '') [Charge] 
+from Student Stdnt
+left join StudentModule stdntmdl on stdntmdl.StudentId = stdnt.Id
+left join Batch btch on btch.ReferenceId = stdntmdl.ModuleId 
+ where 
+	   stdntmdl.CreatedAt <= (select Prd.EndDate from Period Prd where Prd.Id = 'bee55f13-5586-404d-906e-084c43f44954') 
+	  and stdntmdl.IsDeleted = 0 
+	  and stdntmdl.ActiveStatusChangedAt <= (select Prd.EndDate from Period Prd where Prd.Id = '797935c3-159e-4d9f-bf52-9e734b9fef95')
+group by stdnt.[Id]
+      ,stdnt.[IsDeleted]
+      ,stdnt.[Name]
+      ,stdnt.[DreamersId]
+      ,stdnt.[NickName]
+      ,stdnt.[PhoneNumber]
+      ,stdnt.[DateOfBirth]
+      ,stdnt.[Gender]
+      ,stdnt.[BloodGroup]
+      ,stdnt.[IsActive]
+      ,stdnt.[Class]
+      ,stdnt.[Group]
+      ,stdnt.[Version]) item";
+        }
+
+
     }
 }

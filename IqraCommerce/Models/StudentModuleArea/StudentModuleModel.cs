@@ -9,6 +9,7 @@ namespace IqraCommerce.Models.StudentModuleArea
         public Guid BatchId { get; set; }
         public Guid ReferenceId { get; set; }
         public bool IsActive { get; set; }
+        public DateTime ActiveStatusChangedAt { get; set; } = DateTime.Now; 
 
     }
 }

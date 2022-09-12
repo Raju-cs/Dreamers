@@ -34,11 +34,20 @@ namespace IqraCommerce.Services.StudentModuleArea
                 case "studentisactive":
                     name = "[stdnt].IsActive";
                     break;
+                case "class":
+                    name = "[stdnt].Class";
+                    break;
                 case "batchname":
                     name = "[btch].Name";
                     break;
                 case "studentname":
                     name = "[stdnt].Name";
+                    break;
+                case "moduleisdeleted":
+                    name = "[mdl].IsDeleted";
+                    break;
+                case "moduleisactive":
+                    name = "[mdl].IsActive";
                     break;
                 default:
                     name = "stdntmdl." + name;
@@ -69,7 +78,7 @@ namespace IqraCommerce.Services.StudentModuleArea
     {
         public static string Get()
         {
-               return @"  [stdntmdl].[Id]
+               return @"[stdntmdl].[Id]
               ,[stdntmdl].[CreatedAt]
               ,[stdntmdl].[CreatedBy]
               ,[stdntmdl].[UpdatedAt]
@@ -83,9 +92,12 @@ namespace IqraCommerce.Services.StudentModuleArea
               ,[stdntmdl].[BatchId]
 			  ,[stdntmdl].[ReferenceId]
 			  ,[stdntmdl].[IsActive]
+			  ,[stdntmdl].[ActiveStatusChangedAt]
 	          ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator]
 	          ,ISNULL([mdl].Name,  '')  [ModuleName]
+	          ,ISNULL([mdl].[IsDeleted],  '')  [ModuleIsDeleted]
+	          ,ISNULL([mdl].IsActive,  '')  [ModuleIsActive]
 	          ,ISNULL([stdnt].Name,  '')  [StudentName]
 	          ,ISNULL([stdnt].DateOfBirth,  '')  [DateOfBirth]
 	          ,ISNULL([stdnt].IsDeleted,  '')  [StudentIsDeleted]
@@ -93,6 +105,8 @@ namespace IqraCommerce.Services.StudentModuleArea
 	          ,ISNULL([btch].Name,  '')  [BatchName]
 	          ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]
 	          ,ISNULL([btch].MaxStudent,  '')  [MaxStudent]
+	          ,ISNULL([btch].Charge,  '')  [Charge]
+	          ,ISNULL([stdnt].Class,  '')  [Class]
           FROM [dbo].[StudentModule] [stdntmdl]
           LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntmdl].[CreatedBy]
           LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdntmdl].[UpdatedBy]
