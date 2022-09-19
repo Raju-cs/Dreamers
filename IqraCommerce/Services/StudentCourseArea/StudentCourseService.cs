@@ -1,6 +1,9 @@
-﻿using IqraBase.Service;
+﻿using IqraBase.Data.Models;
+using IqraBase.Service;
 using IqraCommerce.Entities.StudentCourseArea;
+using IqraCommerce.Models.StudentCourseArea;
 using IqraService.Search;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -71,6 +74,15 @@ namespace IqraCommerce.Services.StudentCourseArea
                 return await db.GetPages(page, StudentCourseQuery.Get());
             }
         }
+
+        public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
+        {
+            var studentCourse = (StudentCourseModel)model;
+
+            studentCourse.Name = DateTime.Now.ToString("MMMM");
+
+            return base.OnCreate(model, userId, isValid);
+        }
     }
 
     public class StudentCourseQuery
@@ -102,6 +114,7 @@ namespace IqraCommerce.Services.StudentCourseArea
                   ,ISNULL([btch].Program,  '')  [Program]
 	              ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]
 	              ,ISNULL([btch].MaxStudent,  '')  [MaxStudent]
+                  ,ISNULL([btch].Charge,  '')  [Charge]
                   ,ISNULL([stdnt].Class,  '')  [Class]
               FROM [dbo].[StudentCourse] [stdntcrsh]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntcrsh].[CreatedBy]

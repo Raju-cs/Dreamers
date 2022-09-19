@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using IqraCommerce.Models.PeriodArea;
+using IqraCommerce.Entities.ModulePeriodArea;
+using IqraCommerce.Entities.StudentModuleArea;
 
 namespace IqraCommerce.Services.PeriodArea
 {
@@ -102,7 +105,7 @@ namespace IqraCommerce.Services.PeriodArea
         {
             return @" * 
                
-                from ( 
+                 from ( 
                    select  stdnt.[Id]
       ,stdnt.[IsDeleted]
       ,stdnt.[Name]
@@ -120,11 +123,12 @@ namespace IqraCommerce.Services.PeriodArea
       ,ISNULL(sum(btch.Charge), '') [Charge] 
 from Student Stdnt
 left join StudentModule stdntmdl on stdntmdl.StudentId = stdnt.Id
+left join StudentCourse stdntcrsh on stdntcrsh.StudentId = stdnt.Id
 left join Batch btch on btch.ReferenceId = stdntmdl.ModuleId 
  where 
 	   stdntmdl.CreatedAt <= (select Prd.EndDate from Period Prd where Prd.Id = 'bee55f13-5586-404d-906e-084c43f44954') 
 	  and stdntmdl.IsDeleted = 0 
-	  and stdntmdl.ActiveStatusChangedAt <= (select Prd.EndDate from Period Prd where Prd.Id = '797935c3-159e-4d9f-bf52-9e734b9fef95')
+	  and stdntmdl.ActiveStatusChangedAt <= (select Prd.EndDate from Period Prd where Prd.Id = 'bee55f13-5586-404d-906e-084c43f44954')
 group by stdnt.[Id]
       ,stdnt.[IsDeleted]
       ,stdnt.[Name]
@@ -139,7 +143,5 @@ group by stdnt.[Id]
       ,stdnt.[Group]
       ,stdnt.[Version]) item";
         }
-
-
     }
 }

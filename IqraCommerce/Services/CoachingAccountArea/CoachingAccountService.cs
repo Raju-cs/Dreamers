@@ -18,12 +18,12 @@ namespace IqraCommerce.Services.CoachingAccountArea
                 case "updator":
                     name = "pdtr.Name";
                     break;
-                case "batch":
-                    name = "btch.[Name]";
+                case "coachingaccount":
+                    name = "cchngaccnt.[Name]";
                     break;
 
                 default:
-                    name = "btch." + name;
+                    name = "cchngaccnt." + name;
                     break;
             }
             return base.GetName(name);
@@ -43,32 +43,38 @@ namespace IqraCommerce.Services.CoachingAccountArea
     {
         public static string Get()
         {
-            return @" [btch].[Id]
-                  ,[btch].[CreatedAt]
-                  ,[btch].[CreatedBy]
-                  ,[btch].[UpdatedAt]
-                  ,[btch].[UpdatedBy]
-                  ,[btch].[IsDeleted]
-                  ,ISNULL([btch].[Remarks], '') [Remarks]
-                  ,[btch].[ActivityId]
-                  ,ISNULL([btch].[Name], '') [Name]
-                  ,ISNULL([btch].[MaxStudent], '') [MaxStudent]
-                  ,ISNULL([btch].[ClassRoomNumber], '') [ClassRoomNumber]
-                  ,ISNULL([btch].[Program], '') [Program]
-                  ,[btch].[IsActive]
-                  ,[btch].[ReferenceId]
-                  ,ISNULL([btch].[BtachName], '') [BtachName]
-                  ,ISNULL([BTCH].[Charge], '') [Charge]
-	              ,ISNULL([crtr].Name, '') [Creator]
-	              ,ISNULL([pdtr].Name, '') [Updator] 
-              FROM [dbo].[Batch] [btch]
-              LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [btch].[CreatedBy]
-              LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [btch].[UpdatedBy]";
+            return @"[cchngaccnt].[Id]
+              ,[cchngaccnt].[CreatedAt]
+              ,[cchngaccnt].[CreatedBy]
+              ,[cchngaccnt].[UpdatedAt]
+              ,[cchngaccnt].[UpdatedBy]
+              ,[cchngaccnt].[IsDeleted]
+              ,[cchngaccnt].[Remarks]
+              ,[cchngaccnt].[ActivityId]
+              ,[cchngaccnt].[Name]
+              ,[cchngaccnt].[IsActive]
+              ,[cchngaccnt].[CourseIncome]
+              ,[cchngaccnt].[ModuleIncome]
+              ,[cchngaccnt].[BatchId]
+              ,[cchngaccnt].[StudentId]
+              ,[cchngaccnt].[ModuleId]
+	          ,[stdnt].Name [StudentName] 
+	          ,[btch].Name [BatchName] 
+	          ,[mdl].Name [ModuleName] 
+	          ,[btch].MaxStudent [MaxStudent]
+          ,ISNULL([crtr].[Name], '') [Creator]
+          ,ISNULL([pdtr].[Name], '') [Updator]
+	        FROM [dbo].[CoachingAccount] [cchngaccnt]
+	        LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [cchngaccnt].[CreatedBy]
+	        LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [cchngaccnt].[UpdatedBy]
+	        LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [cchngaccnt].[BatchId]
+	        LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [cchngaccnt].[StudentId]
+	        LEFT JOIN [dbo].[Module] [mdl] ON [mdl].Id = [cchngaccnt].[ModuleId]";
         }
 
         public static string BasicInfo
         {
-            get { return @"SELECT " + Get() + " Where btch.Id = '"; }
+            get { return @"SELECT " + Get() + " Where cchngaccnt.Id = '"; }
         }
     }
 }

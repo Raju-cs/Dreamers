@@ -1,5 +1,4 @@
-﻿
-using IqraCommerce.Entities.StudentModuleArea;
+﻿using IqraCommerce.Entities.StudentModuleArea;
 using IqraCommerce.Models.StudentModuleArea;
 using IqraCommerce.Services.StudentModuleArea;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +27,7 @@ namespace IqraCommerce.Controllers.StudentModuleArea
         {
             var studentModuleFromDb = ___service.Entity.FirstOrDefault(sm => sm.Id == dto.Id && !sm.IsDeleted);
 
-            if(studentModuleFromDb == null)
+            if (studentModuleFromDb == null)
             {
                 return Json(new ResponseJson()
                 {
@@ -38,10 +37,10 @@ namespace IqraCommerce.Controllers.StudentModuleArea
                 });
             }
 
-            studentModuleFromDb.IsActive = false;
-            studentModuleFromDb.ActiveStatusChangedAt = DateTime.Now;
-            studentModuleFromDb.UpdatedAt = DateTime.Now;
-            studentModuleFromDb.UpdatedBy = Guid.Empty;
+            studentModuleFromDb.IsDeleted = true;
+            studentModuleFromDb.DischargeDate = DateTime.Now;
+           /* studentModuleFromDb.UpdatedAt = DateTime.Now;
+            studentModuleFromDb.UpdatedBy = Guid.Empty;*/
 
             ___service.SaveChange();
 

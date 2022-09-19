@@ -2363,4 +2363,4 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Batch\Index.cshtm
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Period\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Fees\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CoachingAccount\Index.cshtml.g.cs
-H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Demo\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\ModulePeriod\Index.cshtml.g.cs

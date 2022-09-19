@@ -98,6 +98,8 @@ namespace IqraCommerce.Services.StudentArea
 
         public async Task<ResponseList<List<Dictionary<string, object>>>> AutoComplete(Page page)
         {
+           
+
             using (DBService db = new DBService())
             {
                 page.SortBy = page.SortBy ?? "[Name]";

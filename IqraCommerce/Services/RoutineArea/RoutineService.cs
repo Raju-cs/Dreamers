@@ -62,7 +62,7 @@ namespace IqraCommerce.Services.RoutineArea
     {
         public static string Get()
         {
-            return @"  [rtn].[Id]
+            return @" [rtn].[Id]
               ,[rtn].[CreatedAt]
               ,[rtn].[CreatedBy]
               ,[rtn].[UpdatedAt]
@@ -77,11 +77,14 @@ namespace IqraCommerce.Services.RoutineArea
               ,ISNULL([rtn].[Day], '') [Day]
               ,ISNULL([rtn].[StartTime], '') [StartTime]
               ,ISNULL([rtn].[EndTime], '') [EndTime]
+			  ,ISNULL([rtn].[Module], '') [Module]
+              ,ISNULL([btch].[Name], '') [BatchName]
 	          ,ISNULL([crtr].Name, '') [Creator]
               ,ISNULL([pdtr].Name, '') [Updator] 
              FROM [dbo].[Routine] [rtn]
            LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [rtn].[CreatedBy]
-           LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [rtn].[UpdatedBy]";
+           LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [rtn].[UpdatedBy]
+		   LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [rtn].[BatchId]";
         }
 
         public static string BasicInfo

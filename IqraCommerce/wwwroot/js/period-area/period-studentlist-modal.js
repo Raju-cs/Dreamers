@@ -1,11 +1,12 @@
 ﻿var Controller = new function () {
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
-    const StartDateFilter = { "field": "StartDate", "value": '', Operation: 0 };
+    const StudentDateFilter = { "field": "Name", "value": '', Operation: 0 };
     var _options;
 
     this.Show = function (options) {
         _options = options;
+        StudentDateFilter.value = _options.PeriodMonth;
         console.log("options=>", _options);
         function studentPayment(page, gird) {
             console.log("Page=>", page);
@@ -14,19 +15,29 @@
                 model: undefined,
                 title: 'Student Payment',
                 columns: [
-                    { field: 'ModuleFee', title: 'ModuleFee', filter: true, position: 1, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 2, },
+                    { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 3, add: false },
+                    { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 4, add: false },
+                    { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, },
+                    { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 6, },
+                    { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 7, add: false },
+                    { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, add: false },
+                    { field: 'IsActive', title: 'IsActive', filter: true, add: { sibling: 2, }, position: 8, add: false },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 9, },
                 ],
                 dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     console.log("formModel=>", formModel);
                     formModel.ActivityId = window.ActivityId;
-                    formModel.StudentId = page.Id;
+                    formModel.IsActive = page.IsActive;
+                    formModel.StudentId = page.StudentId;
                     formModel.PeriodId = _options.Id;
+                    formModel.TotalFee = (parseFloat(model.ModuleFee) + parseFloat(model.CourseFee)).toFixed(2);
                 },
+           
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
                     formModel.ModuleFee = page.Charge;
+                    formModel.CourseFee = 0;
                 },
                 onSaveSuccess: function () {
                     _options.updatePayment();
@@ -45,14 +56,14 @@
                     Grid: [{
                         Header: 'Student',
                         columns: [
-                            { field: 'DreamersId', title: 'Dreamers Id', filter: true, position: 1, add: { sibling: 1 }, },
-                            { field: 'Name', title: 'Full Name', filter: true, position: 2, add: { sibling: 2 }, },
-                            { field: 'Charge', title: 'Module Charge', filter: true, position: 3, add: { sibling: 2 }, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false },
+                            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 1 },
+                            { field: 'StudentName', title: 'Student Name', filter: true, position: 2, add: { sibling: 4 }, },
+                            { field: 'Charge', title: 'Module Charge', filter: true, position: 3 },
                         ],
 
-                        Url: '/Period/ForPayment/',
-                        filter: [ activeFilter ],
+                         //Url: '/Period/ForPayment/',
+                        Url: '/StudentModule/Get',
+                        filter: [StudentDateFilter, liveFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: studentPayment,

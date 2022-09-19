@@ -1,4 +1,4 @@
-import { editBtn, eyeBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
+import { editBtn, eyeBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { PROGRAM} from "../dictionaries.js";
 
@@ -7,12 +7,14 @@ import { PROGRAM} from "../dictionaries.js";
     const controller = 'Routine';
 
     const columns = () => [
-        { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
-        { field: 'Day', title: 'Day', filter: true, position: 3, },
-        { field: 'StartTime', title: 'Start Time', filter: true, position: 4, dateFormat: 'hh:tt'},
-        { field: 'EndTime', title: 'End Time', filter: true, position: 5, dateFormat: 'hh:tt'},
-        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
+        { field: 'Name', title: 'Teacher Name', filter: true, position: 1, add: false },
+        { field: 'Module', title: 'ModuleName', filter: true, position: 3, add: false },
+        { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
+        { field: 'Day', title: 'Day', filter: true, position: 5, },
+        { field: 'StartTime', title: 'Start Time', filter: true, position: 6, dateFormat: 'hh:tt'},
+        { field: 'EndTime', title: 'End Time', filter: true, position: 7, dateFormat: 'hh:tt'},
+        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 8, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 9, },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
         { field: 'Creator', title: 'Creator', add: false },
@@ -25,11 +27,14 @@ import { PROGRAM} from "../dictionaries.js";
             model: model,
             title: 'Edit Routine',
             columns: [
-                { field: 'Day', title: 'Day', filter: true, position: 3, },
-                { field: 'StartTime', title: 'Start Time', filter: true, position: 4, dateFormat: 'hh:mm' },
-                { field: 'EndTime', title: 'End Time', filter: true, position: 5, dateFormat: 'hh:mm' },
-                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 6, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, }
+                { field: 'Name', title: 'Teacher Name', filter: true, position: 1},
+                { field: 'Module', title: 'ModuleName', filter: true, position: 3},
+                { field: 'BatchName', title: 'Batch Name', filter: true, position: 4},
+                { field: 'Day', title: 'Day', filter: true, position: 5 },
+                { field: 'StartTime', title: 'Start Time', filter: true, position: 6, dateFormat: 'hh:tt' },
+                { field: 'EndTime', title: 'End Time', filter: true, position: 7, dateFormat: 'hh:tt' },
+                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 8, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 9, },
             ],
             dropdownList: [{
                     title: 'Program',
@@ -37,7 +42,6 @@ import { PROGRAM} from "../dictionaries.js";
                 dataSource: [
                         { text: 'Module', value: PROGRAM.MODULE },
                         { text: 'Course', value: PROGRAM.COURSE },
-
                     ],
                     position: 2,
                 }],

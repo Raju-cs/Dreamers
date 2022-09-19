@@ -3,6 +3,7 @@ using IqraCommerce.Entities.FeesArea;
 using IqraService.Search;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace IqraCommerce.Services.FeesArea
 {
@@ -48,6 +49,14 @@ namespace IqraCommerce.Services.FeesArea
                 return await db.GetPages(page, FeesQuery.Get());
             }
         }
+
+        public async Task<ResponseList<Dictionary<string, object>>> BasicInfo(Guid Id)
+        {
+            using (var db = new DBService(this))
+            {
+                return await db.FirstOrDefault(FeesQuery.BasicInfo + Id + "'");
+            }
+        }
     }
 
     public class FeesQuery
@@ -85,6 +94,11 @@ namespace IqraCommerce.Services.FeesArea
                LEFT JOIN [dbo].[Period] [prd] ON [prd].Id = [fs].[PeriodId]";
         }
 
-      
+        public static string BasicInfo
+        {
+            get { return @"SELECT " + Get() + " Where fs.Id = '"; }
+        }
+
+
     }
 }

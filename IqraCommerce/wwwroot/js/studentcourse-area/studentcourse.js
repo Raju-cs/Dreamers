@@ -10,6 +10,7 @@
         { field: 'CourseName', title: 'Course Name', filter: true, position: 1, add: false },
         { field: 'StudentName', title: 'Student Name', filter: true, position: 1, add: false },
         { field: 'BatchName', title: 'Name', filter: true, position: 1 },
+        { field: 'Charge', title: 'Charge', filter: true, position: 4 },
         { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 5, add: false },
         { field: 'DateOfBirth', title: 'DateOfBirth', filter: true, position: 6, add: false, dateFormat: 'MM/dd/yyyy' },
         { field: 'MaxStudent', title: 'Max Student', filter: true, position: 7, add: false },

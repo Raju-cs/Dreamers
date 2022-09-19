@@ -5,6 +5,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
 (function () {
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const teacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
+    const editTeacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
     const liveFilter = { "field": "[tchr].[IsDeleted]", "value": 0, Operation: 0 };
     const liveFilterSubject = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeTeacherFilter = { "field": "[tchr].[IsActive]", "value": 1, Operation: 0 };
@@ -16,19 +17,28 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
     let classCode = "";
     let selectedRow = {};
 
-    let teacherDropdownMat;
-
+    let moduleTeacherDropdownMat;
+    let editmoduleTeacherDropdownMat;
 
     const generateModuleCode = () => {
         selectedRow.Name = `${subjectCode}-${classCode}-${teacherCode}`;
     }
 
-    const subjectSelectHandler = (data, model) => {
-        teacherFilterBySubject.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
+    const subjectSelectHandler = (data) => {
 
+        teacherFilterBySubject.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
         subjectCode = data?.Name?.slice(0, 3).toUpperCase();
         generateModuleCode();
-        teacherDropdownMat.Reload();
+
+        moduleTeacherDropdownMat.Reload();
+    }
+    const editSubjectSelectHandler = (data) => {
+
+        editTeacherFilterBySubject.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
+        subjectCode = data?.Name?.slice(0, 3).toUpperCase();
+        generateModuleCode();
+
+        editmoduleTeacherDropdownMat.Reload();
     }
 
     const teacherSelectHandler = (data) => {
@@ -41,7 +51,6 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
         generateModuleCode();
     }
 
-
     const modalDropDowns = [
         {
             Id: 'SubjectId',
@@ -52,7 +61,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             onchange: subjectSelectHandler,
             page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] }
         },
-        teacherDropdownMat = {
+        moduleTeacherDropdownMat = {
             Id: 'TeacherId',
             add: { sibling: 2 },
             position: 1,
@@ -61,7 +70,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             onchange: teacherSelectHandler,
             page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeTeacherFilter, liveFilter, teacherFilterBySubject] }
 
-        },{
+        }, {
             title: 'Class',
             Id: 'Class',
             dataSource: [
@@ -73,6 +82,48 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             position: 4,
             onchange: classSelectHandler,
 
+        }];
+
+    const editmodalDropDowns = [
+        {
+            Id: 'SubjectId',
+            add: { sibling: 2 },
+            position: 1,
+            url: '/Subject/AutoComplete',
+            Type: 'AutoComplete',
+            onchange: editSubjectSelectHandler,
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] }
+        },
+        editmoduleTeacherDropdownMat = {
+            Id: 'TeacherId',
+            add: { sibling: 2 },
+            position: 1,
+            url: '/Teacher/AutoComplete',
+            Type: 'AutoComplete',
+            onchange: teacherSelectHandler,
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeTeacherFilter, liveFilter, editTeacherFilterBySubject] }
+
+        }, {
+            title: 'Class',
+            Id: 'Class',
+            dataSource: [
+                { text: '9', value: CLASS.NINE },
+                { text: '10', value: CLASS.TEN },
+                { text: '11', value: CLASS.ELEVEN },
+                { text: '12', value: CLASS.TWELVE },
+            ],
+            position: 4,
+            onchange: classSelectHandler,
+
+        }, {
+            title: 'Module Active Status',
+            Id: 'IsActive',
+            dataSource: [
+                { text: 'Yes', value: ACTIVE_STATUS.TRUE },
+                { text: 'No', value: ACTIVE_STATUS.FALSE },
+            ],
+            add: { sibling: 2 },
+            position: 5,
         }];
 
     const controller = 'Module';
@@ -126,48 +177,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
                 { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 6, add: { sibling: 2 } },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 7, }
             ],
-            dropdownList: [
-                {
-                    Id: 'SubjectId',
-                    add: { sibling: 2 },
-                    position: 1,
-                    url: '/Subject/AutoComplete',
-                    Type: 'AutoComplete',
-                    onchange: subjectSelectHandler,
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] }
-                },
-                teacherDropdownMat = {
-                    Id: 'TeacherId',
-                    add: { sibling: 2 },
-                    position: 1,
-                    url: '/Teacher/AutoComplete',
-                    Type: 'AutoComplete',
-                    onchange: teacherSelectHandler,
-                    page: page,
-
-                }, {
-                    title: 'Class',
-                    Id: 'Class',
-                    dataSource: [
-                        { text: '9', value: CLASS.NINE },
-                        { text: '10', value: CLASS.TEN },
-                        { text: '11', value: CLASS.ELEVEN },
-                        { text: '12', value: CLASS.TWELVE },
-                    ],
-                    position: 4,
-                    onchange: classSelectHandler,
-
-                },{
-                    title: 'Module Active Status',
-                    Id: 'IsActive',
-                    dataSource: [
-                        { text: 'Yes', value: ACTIVE_STATUS.TRUE },
-                        { text: 'No', value: ACTIVE_STATUS.FALSE },
-                    ],
-                    add: { sibling: 2 },
-                    position: 5,
-                }],
-
+            dropdownList: editmodalDropDowns,
             additionalField: [],
             onviewcreated: (windowModel, formInputs, dropDownList, IsNew, formModel) => {
                 selectedRow = formModel;
@@ -193,6 +203,8 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             url: '/js/module-area/module-details-modal.js',
             ModuleClass: row.Class,
             ModuleCharge: row.ChargePerStudent,
+            ModuleTeacher: row.TeacherName,
+            ModuleName: row.Name
         });
      }
 

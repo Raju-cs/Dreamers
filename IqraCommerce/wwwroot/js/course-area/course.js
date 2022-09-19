@@ -108,6 +108,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             name: 'Course Information' + row.Id,
             url: '/js/course-area/course-details-modal.js',
             CourseClass: row.Class,
+            CourseCharge: row.CourseFee,
         });
     }
 

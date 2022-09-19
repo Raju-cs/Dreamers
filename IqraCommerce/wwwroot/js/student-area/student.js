@@ -1,4 +1,4 @@
-import { editBtn, eyeBtn, statusBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn, printBtn } from "../buttons.js";
+import { editBtn, eyeBtn, imageBtn, printBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { Gender, ACTIVE_STATUS, Religion, BLOOD_GROUP, GROUP, SHIFT, SUBJECT, DISTRICT } from "../dictionaries.js";
 import { imageBound, url } from '../utils.js';

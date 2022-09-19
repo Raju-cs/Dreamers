@@ -6,10 +6,16 @@ var Controller = new function () {
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     var _options;
-  
+    const dateForSQLServer = (enDate = '01/01/1970') => {
+        const dateParts = enDate.split('/');
+
+        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+    }
 
     this.Show = function (options) {
+        
         _options = options;
+        console.log("options=>", _options);
         studentBatchFilter.value = _options.Id;
         studentClassFilter.value = _options.ModuleClass;
 
@@ -31,14 +37,13 @@ var Controller = new function () {
                 { text: 'Wednesday', value: 'Wednesday' },
                 { text: 'Thursday', value: 'Thursday' },
                 { text: 'Friday', value: 'Friday' },
-
             ],
             position: 1,
 
         }];
 
         function addModuleRoutine(page) {
-            console.log("options=>", options);
+            console.log("options=>", _options);
             Global.Add({
                 name: 'ADD_ROUTINE',
                 model: undefined,
@@ -47,13 +52,13 @@ var Controller = new function () {
                 dropdownList: modalDropDowns,
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
-                   
                     formModel.ActivityId = window.ActivityId;
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Module";
-                    formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
+                    formModel.Name = _options.ModuleTeacher;
                     formModel.StartTime = ` ${model.StartTime}`;
                     formModel.EndTime = ` ${model.EndTime}`;
+                    formModel.Module = _options.ModuleName;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -91,6 +96,7 @@ var Controller = new function () {
         }
 
         function addModuleBatchStudent(page) {
+            console.log("Page=>", page);
             Global.Add({
                 name: 'ADD_STUDENT',
                 model: undefined,
@@ -148,6 +154,39 @@ var Controller = new function () {
                 },
                 filter: [],
                 saveChange: `/StudentModule/Edit`,
+            });
+        }
+
+        function deleteBatchStudent(page) {
+            console.log("Page=>", page);
+            Global.Add({
+              
+                name: 'DELETE_STUDENT',
+                model: undefined,
+                title: 'Delete Student',
+                columns: [
+                    { field: 'DischargeDate', title: 'DischargeDate', filter: true, position: 1,  dateFormat: 'dd/MM/yyyy' },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 2, },
+                ],
+                dropdownList: [],
+                additionalField: [],
+                onSubmit: function (formModel, data, model) {
+                    console.log("model", model);
+                    formModel.ActivityId = window.ActivityId;
+                    formModel.StudentId = page.StudentId;
+                    formModel.BatchId = page.BatchId;
+                    formModel.ModuleId = page.ModuleId;
+                    formModel.DischargeDate = dateForSQLServer(model.DischargeDate);
+                },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    formModel.DischargeDate = new Date().format('dd/MM/yyyy');
+                },
+                onSaveSuccess: function () {
+                   // page.Grid.Model.Reload();
+                    _options.updateSchedule();
+                },
+                filter: [],
+                save: `/StudentModule/Remove`,
             });
         }
 
@@ -218,14 +257,14 @@ var Controller = new function () {
                         ],
 
                         Url: '/StudentModule/Get/',
-                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo, activeFilter],
+                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo, liveFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editModuleBatchStudent,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject and Teacher"></i></a>`
 
                         }, {
-                            click: (data, grid) => {
+                            click:  (data, grid) => {
                                 Global.Controller.Call({
                                     url: IqraConfig.Url.Js.WarningController,
                                     functionName: 'Show',
@@ -240,8 +279,8 @@ var Controller = new function () {
                                         }
                                     }
                                 });
-                            } ,
-                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-trash" title="Remove"></i></a>`
+                            },
+                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="Remove"></i></a>`
 
                             }],
                         buttons: [{

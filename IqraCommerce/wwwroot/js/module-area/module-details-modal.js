@@ -78,6 +78,9 @@ var Controller = new function () {
                 updateSchedule: model.Reload,
                 ModuleId: _options.Id,
                 ModuleClass: _options.ModuleClass,
+                ModuleTeacher: _options.ModuleTeacher,
+                ModuleName: _options.ModuleName,
+                ModuleCharge: _options.ModuleCharge
             });
         }
 

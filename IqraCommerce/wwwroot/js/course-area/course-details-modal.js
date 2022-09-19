@@ -136,6 +136,9 @@ var Controller = new function () {
                     formModel.Program = "Course";
                     formModel.Name = `${model.Name} `;
                 },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    formModel.Charge = _options.CourseCharge;
+                },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
                 },
@@ -181,6 +184,7 @@ var Controller = new function () {
                 updateSchedule: model.Reload,
                 CourseId: _options.Id,
                 CourseClass: _options.CourseClass,
+                CourseCharge: _options.CourseCharge,
             });
         }
 

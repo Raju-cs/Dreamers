@@ -4,6 +4,8 @@ using IqraService.Search;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using IqraBase.Data.Models;
+using IqraCommerce.Models.StudentModuleArea;
 
 namespace IqraCommerce.Services.StudentModuleArea
 {
@@ -71,14 +73,21 @@ namespace IqraCommerce.Services.StudentModuleArea
             }
         }
 
-        
+        public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
+        {
+            var studentModule = (StudentModuleModel)model;
+
+            studentModule.Name = DateTime.Now.ToString("MMMM");
+
+            return base.OnCreate(model, userId, isValid);
+        }
     }
 
     public class StudentModuleQuery
     {
         public static string Get()
         {
-               return @"[stdntmdl].[Id]
+               return @" [stdntmdl].[Id]
               ,[stdntmdl].[CreatedAt]
               ,[stdntmdl].[CreatedBy]
               ,[stdntmdl].[UpdatedAt]
@@ -91,8 +100,7 @@ namespace IqraCommerce.Services.StudentModuleArea
               ,[stdntmdl].[ModuleId]
               ,[stdntmdl].[BatchId]
 			  ,[stdntmdl].[ReferenceId]
-			  ,[stdntmdl].[IsActive]
-			  ,[stdntmdl].[ActiveStatusChangedAt]
+			  ,ISNULL([stdntmdl].[DischargeDate], '') [DischargeDate]
 	          ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator]
 	          ,ISNULL([mdl].Name,  '')  [ModuleName]
@@ -100,6 +108,7 @@ namespace IqraCommerce.Services.StudentModuleArea
 	          ,ISNULL([mdl].IsActive,  '')  [ModuleIsActive]
 	          ,ISNULL([stdnt].Name,  '')  [StudentName]
 	          ,ISNULL([stdnt].DateOfBirth,  '')  [DateOfBirth]
+	          ,ISNULL([stdnt].DreamersId,  '')  [DreamersId]
 	          ,ISNULL([stdnt].IsDeleted,  '')  [StudentIsDeleted]
 	          ,ISNULL([stdnt].IsActive,  '')  [StudentIsActive]
 	          ,ISNULL([btch].Name,  '')  [BatchName]

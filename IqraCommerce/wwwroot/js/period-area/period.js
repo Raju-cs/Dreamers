@@ -1,5 +1,5 @@
 ﻿import { editBtn, eyeBtn, listBtn } from "../buttons.js";
-import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
+import { filter, liveRecord, trashRecord } from '../filters.js';
 import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
 (function () {
     const controller = 'Period';
@@ -147,6 +147,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             Id: row.Id,
             name: 'Period Information' + row.Id,
             url: '/js/period-area/period-details-modal.js',
+            
         });
     }
 
@@ -157,6 +158,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             name: 'Period Information' + row.Id,
             url: '/js/period-area/period-studentlist-modal.js',
             updatePayment: model.Reload,
+            PeriodMonth: row.Name,
         });
     }
 
