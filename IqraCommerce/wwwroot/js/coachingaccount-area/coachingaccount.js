@@ -15,6 +15,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'BatchName', title: 'Batch Name', filter: true,  position: 2, },
         { field: 'MaxStudent', title: 'MaxStudent', filter: true, position: 3, add: { sibling: 2, } },
         { field: 'ModuleIncome', title: 'Income', filter: true, position: 3, add: { sibling: 2, } },
+        { field: 'Charge', title: 'Charge per student', filter: true, position: 4, add: { sibling: 2, } },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 9, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },

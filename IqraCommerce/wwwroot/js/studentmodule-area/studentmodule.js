@@ -25,9 +25,9 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 
     const studentBatchTab = {
         Id: 'BBC23DC6-A099-494D-BEB4-E8B98993A27D',
-        Name: 'ADD_STUDENT_BATCH',
-        Title: 'Student Batch',
-        filter: [],
+        Name: 'ADD_STUDENT_MODULE',
+        Title: 'Student Module',
+        filter: [liveRecord],
         actions: [],
         onDataBinding: () => { },
         rowBound: () => { },
@@ -37,11 +37,11 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Url: 'Get',
     }
 
-    const inactiveTab = {
+    const deleteTab = {
         Id: 'A523A1FF-B599-41B9-88BC-6DFD1062A68F',
         Name: 'INACTIVE_STUDENT_IN_MODULE',
-        Title: 'Inactive',
-        filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL)],
+        Title: 'Delete',
+        filter: [trashRecord],
         remove: false,
         actions: [],
         onDataBinding: () => { },
@@ -58,7 +58,7 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Base: {
             Url: `/${controller}/`,
         },
-        items: [studentBatchTab, inactiveTab],
+        items: [studentBatchTab, deleteTab],
     };
 
     //Initialize Tabs

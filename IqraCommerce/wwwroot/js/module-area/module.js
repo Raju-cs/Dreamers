@@ -9,7 +9,6 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
     const liveFilter = { "field": "[tchr].[IsDeleted]", "value": 0, Operation: 0 };
     const liveFilterSubject = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeTeacherFilter = { "field": "[tchr].[IsActive]", "value": 1, Operation: 0 };
-    const page = { 'PageNumber': 1, 'PageSize': 20, filter: [activeTeacherFilter, liveFilter, teacherFilterBySubject], Id: null };
 
     //add generate code
     let subjectCode = "";

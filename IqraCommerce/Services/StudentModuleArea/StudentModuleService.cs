@@ -73,14 +73,14 @@ namespace IqraCommerce.Services.StudentModuleArea
             }
         }
 
-        public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
+    /*    public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
         {
             var studentModule = (StudentModuleModel)model;
 
             studentModule.Name = DateTime.Now.ToString("MMMM");
 
             return base.OnCreate(model, userId, isValid);
-        }
+        }*/
     }
 
     public class StudentModuleQuery

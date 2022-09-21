@@ -1,12 +1,11 @@
 ﻿var Controller = new function () {
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
-    const StudentDateFilter = { "field": "Name", "value": '', Operation: 0 };
+    
     var _options;
 
     this.Show = function (options) {
         _options = options;
-        StudentDateFilter.value = _options.PeriodMonth;
         console.log("options=>", _options);
         function studentPayment(page, gird) {
             console.log("Page=>", page);
@@ -29,12 +28,12 @@
                 onSubmit: function (formModel, data, model) {
                     console.log("formModel=>", formModel);
                     formModel.ActivityId = window.ActivityId;
-                    formModel.IsActive = page.IsActive;
+                    formModel.IsActive = page.ModuleIsActive;
                     formModel.StudentId = page.StudentId;
                     formModel.PeriodId = _options.Id;
                     formModel.TotalFee = (parseFloat(model.ModuleFee) + parseFloat(model.CourseFee)).toFixed(2);
+                    formModel.PaidFee = (parseFloat(model.ModuleFee) + parseFloat(model.CourseFee)).toFixed(2);
                 },
-           
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
                     formModel.ModuleFee = page.Charge;
                     formModel.CourseFee = 0;
@@ -61,9 +60,9 @@
                             { field: 'Charge', title: 'Module Charge', filter: true, position: 3 },
                         ],
 
-                         //Url: '/Period/ForPayment/',
+                        /*Url: '/Period/ForPayment/',*/
                         Url: '/StudentModule/Get',
-                        filter: [StudentDateFilter, liveFilter],
+                        filter: [liveFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: studentPayment,

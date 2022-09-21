@@ -70,6 +70,7 @@ var Controller = new function () {
             });
 
         }
+
         function editModuleRoutine(model, grid) {
             Global.Add({
                 name: 'EDIT_ROUTINE',
@@ -116,7 +117,6 @@ var Controller = new function () {
                 onSubmit: function (formModel, data, model) {
                     console.log("model", model);
                     formModel.ActivityId = window.ActivityId;
-                    formModel.IsActive = true;
                     formModel.BatchId = _options.Id;
                     formModel.ModuleId = _options.ModuleId;
                 },
@@ -133,7 +133,7 @@ var Controller = new function () {
                 name: 'EDIT_STUDENT',
                 model: model,
                 title: 'Edit Student',
-                columns: [{ field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 3, },],
+                columns: [{ field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },],
                 dropdownList: [{
                     Id: 'StudentId',
                     add: { sibling: 2 },
@@ -157,38 +157,36 @@ var Controller = new function () {
             });
         }
 
-        function deleteBatchStudent(page) {
-            console.log("Page=>", page);
+        function deleteModuleBatchStudent(model, grid) {
+            console.log("model=", model);
             Global.Add({
-              
                 name: 'DELETE_STUDENT',
-                model: undefined,
+                model: model,
                 title: 'Delete Student',
-                columns: [
-                    { field: 'DischargeDate', title: 'DischargeDate', filter: true, position: 1,  dateFormat: 'dd/MM/yyyy' },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 2, },
-                ],
+                columns: [{ field: 'DischargeDate', title: 'DischargeDate', filter: true, position: 1, dateFormat: 'dd/MM/yyyy' },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 2, },],
                 dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     console.log("model", model);
                     formModel.ActivityId = window.ActivityId;
-                    formModel.StudentId = page.StudentId;
-                    formModel.BatchId = page.BatchId;
-                    formModel.ModuleId = page.ModuleId;
+                    formModel.IsDeleted = true;
                     formModel.DischargeDate = dateForSQLServer(model.DischargeDate);
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
                     formModel.DischargeDate = new Date().format('dd/MM/yyyy');
+                    formModel.StudentId = model.StudentId;
+                    formModel.BatchId = model.BatchId;
+                    formModel.ModuleId = model.ModuleId;
                 },
                 onSaveSuccess: function () {
-                   // page.Grid.Model.Reload();
-                    _options.updateSchedule();
+                    grid?.Reload();
                 },
                 filter: [],
-                save: `/StudentModule/Remove`,
+                saveChange: `/StudentModule/Edit`,
             });
         }
+
 
         Global.Add({
             title: 'Batch Information',
@@ -209,7 +207,6 @@ var Controller = new function () {
                         onLoaded: function (tab, data) {
 
                         }
-                    
                 }, {
                     title: ' Routine ',
                     Grid: [{
@@ -230,7 +227,6 @@ var Controller = new function () {
                             {
                                 click: editModuleRoutine ,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Batch Schedule"></i></a>`
-
                             }
                         ],
                         buttons: [
@@ -264,22 +260,7 @@ var Controller = new function () {
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject and Teacher"></i></a>`
 
                         }, {
-                            click:  (data, grid) => {
-                                Global.Controller.Call({
-                                    url: IqraConfig.Url.Js.WarningController,
-                                    functionName: 'Show',
-                                    options: {
-                                        name: 'Student',
-                                        title: 'Remove Student',
-                                        save: `/StudentModule/Drop`,
-                                        msg: 'Do you want to Remove this Student From Batch?',
-                                        data: { Id: data.Id },
-                                        onsavesuccess: function () {
-                                            grid.Reload();
-                                        }
-                                    }
-                                });
-                            },
+                            click: deleteModuleBatchStudent,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="Remove"></i></a>`
 
                             }],
@@ -292,7 +273,6 @@ var Controller = new function () {
                             container: $('void')
                         },
                     }],
-
                 }],
 
             name: 'Batch Information',

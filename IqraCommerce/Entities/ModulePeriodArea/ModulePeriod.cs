@@ -1,7 +1,6 @@
 ﻿using IqraBase.Data.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
-using IqraCommerce.Services.PeriodArea;
 
 namespace IqraCommerce.Entities.ModulePeriodArea
 {
@@ -11,7 +10,5 @@ namespace IqraCommerce.Entities.ModulePeriodArea
     {
         public Guid PriodId { get; set; }
         public Guid StudentModuleId { get; set; }
-
-       
     }
 }

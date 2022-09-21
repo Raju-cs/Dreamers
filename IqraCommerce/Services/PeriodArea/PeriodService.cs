@@ -8,6 +8,7 @@ using System.Linq;
 using IqraCommerce.Models.PeriodArea;
 using IqraCommerce.Entities.ModulePeriodArea;
 using IqraCommerce.Entities.StudentModuleArea;
+using IqraBase.Data.Models;
 
 namespace IqraCommerce.Services.PeriodArea
 {

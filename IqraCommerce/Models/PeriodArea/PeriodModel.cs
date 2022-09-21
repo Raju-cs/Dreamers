@@ -11,4 +11,5 @@ namespace IqraCommerce.Models.PeriodArea
         public double OutCome { get; set; }
         public bool IsActive { get; set; }
     }
+
 }

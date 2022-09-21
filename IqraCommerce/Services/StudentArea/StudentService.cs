@@ -98,13 +98,11 @@ namespace IqraCommerce.Services.StudentArea
 
         public async Task<ResponseList<List<Dictionary<string, object>>>> AutoComplete(Page page)
         {
-           
-
+            page.SortBy = page.SortBy ?? "[Name]";
+            page.filter = page.filter ?? new List<FilterModel>();
+            
             using (DBService db = new DBService())
             {
-                page.SortBy = page.SortBy ?? "[Name]";
-                page.filter = page.filter ?? new List<FilterModel>();
-
                 return await db.List(page, StudentQuery.AutoComplete());
             }
         }

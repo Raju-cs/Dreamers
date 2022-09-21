@@ -23,7 +23,7 @@ namespace IqraCommerce.Controllers.StudentModuleArea
             return Json(await ___service.BasicInfo(id));
         }
 
-        public JsonResult Drop([FromBody] IdDto dto)
+        public JsonResult Drop([FromForm] IdDto dto)
         {
             var studentModuleFromDb = ___service.Entity.FirstOrDefault(sm => sm.Id == dto.Id && !sm.IsDeleted);
 
@@ -38,7 +38,7 @@ namespace IqraCommerce.Controllers.StudentModuleArea
             }
 
             studentModuleFromDb.IsDeleted = true;
-            studentModuleFromDb.DischargeDate = DateTime.Now;
+         /*   studentModuleFromDb.DischargeDate = DateTime.Now;*/
            /* studentModuleFromDb.UpdatedAt = DateTime.Now;
             studentModuleFromDb.UpdatedBy = Guid.Empty;*/
 

@@ -1,4 +1,4 @@
-﻿import { editBtn, eyeBtn, listBtn } from "../buttons.js";
+﻿import { editBtn, eyeBtn} from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { ACTIVE_STATUS } from "../dictionaries.js";
 
@@ -12,7 +12,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
 
     const columns = () => [
         
-        { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
+        { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, required: false, },
         { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 2, },
         { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 3, },
         { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 4, },

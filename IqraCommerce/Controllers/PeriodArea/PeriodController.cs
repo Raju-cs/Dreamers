@@ -29,12 +29,14 @@ namespace IqraCommerce.Controllers.PeriodArea
 
         public override ActionResult Create([FromForm] PeriodModel  recordToCreate)
         {
-            /*var modulePeriodList = ___service.GetEntity<ModulePeriod>();
-            var StudentModuleAll = ___service.GetEntity<StudentModule>();
-
-
-            modulePeriodList.FirstOrDefault().StudentModuleId = StudentModuleAll.FirstOrDefault().StudentId;
-            modulePeriodList.FirstOrDefault().PriodId = recordToCreate.Id;*/
+            ModulePeriod modulePeriod = new ModulePeriod();
+            StudentModule studentModule = new StudentModule();
+            var modulePeriodList = ___service.GetEntity<ModulePeriod>();
+            var studentModuleList = ___service.GetEntity<StudentModule>();
+           
+            modulePeriod.StudentModuleId = studentModuleList.FirstOrDefault().Id;
+            modulePeriod.PriodId = recordToCreate.Id;
+            modulePeriodList.Add(modulePeriod);
             return base.Create(recordToCreate );
         }
 

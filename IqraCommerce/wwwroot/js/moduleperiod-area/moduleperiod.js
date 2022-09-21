@@ -10,8 +10,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
     });
     const columns = () => [
         { field: 'PeriodName', title: 'Period Name', filter: true, position: 1, },
-        { field: 'StudentModuleName', title: 'Student Module Name', filter: true, position: 2, add: false },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 2, },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
         { field: 'Creator', title: 'Creator', add: false },
