@@ -1,11 +1,13 @@
 ﻿var Controller = new function () {
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+    const studentDateFilter = { "field": "Name", "value": '', Operation: 0 };
     
     var _options;
 
     this.Show = function (options) {
         _options = options;
+        studentDateFilter.value = _options.PeriodMonth;
         console.log("options=>", _options);
         function studentPayment(page, gird) {
             console.log("Page=>", page);
@@ -37,6 +39,7 @@
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
                     formModel.ModuleFee = page.Charge;
                     formModel.CourseFee = 0;
+                    formModel.RestFee = 10;
                 },
                 onSaveSuccess: function () {
                     _options.updatePayment();
@@ -60,9 +63,9 @@
                             { field: 'Charge', title: 'Module Charge', filter: true, position: 3 },
                         ],
 
-                        /*Url: '/Period/ForPayment/',*/
+                       /* Url: '/Period/ForPayment/',*/
                         Url: '/StudentModule/Get',
-                        filter: [liveFilter],
+                        filter: [studentDateFilter,liveFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: studentPayment,

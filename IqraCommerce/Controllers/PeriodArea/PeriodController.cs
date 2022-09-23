@@ -8,14 +8,14 @@ using IqraService.Search;
 using System.Linq;
 using IqraCommerce.Entities.ModulePeriodArea;
 using IqraCommerce.Entities.StudentModuleArea;
-using IqraCommerce.Services.DemoArea;
+using System.Collections.Generic;
 
 namespace IqraCommerce.Controllers.PeriodArea
 {
     public class PeriodController: AppDropDownController<Period, PeriodModel>
     {
         PeriodService ___service;
-       
+
         public PeriodController()
         {
             service = __service = ___service = new PeriodService();
@@ -27,17 +27,25 @@ namespace IqraCommerce.Controllers.PeriodArea
             return Json(await ___service.BasicInfo(id));
         }
 
+
         public override ActionResult Create([FromForm] PeriodModel  recordToCreate)
         {
-            ModulePeriod modulePeriod = new ModulePeriod();
-            StudentModule studentModule = new StudentModule();
+              ModulePeriod modulePeriod = new ModulePeriod();
             var modulePeriodList = ___service.GetEntity<ModulePeriod>();
             var studentModuleList = ___service.GetEntity<StudentModule>();
-           
-            modulePeriod.StudentModuleId = studentModuleList.FirstOrDefault().Id;
-            modulePeriod.PriodId = recordToCreate.Id;
-            modulePeriodList.Add(modulePeriod);
-            return base.Create(recordToCreate );
+             List<StudentModule> ListStudentModule = new List<StudentModule>();
+
+            ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false).ToList();
+            var getData = from getdata in ListStudentModule select new {getdata.Id};
+            foreach(var module in getData)
+            {
+                modulePeriod = new ModulePeriod();
+                modulePeriod.StudentModuleId = module.Id;
+                modulePeriod.PriodId = recordToCreate.Id;
+                modulePeriodList.Add(modulePeriod);
+            }
+ 
+            return base.Create(recordToCreate);
         }
 
         public async Task<JsonResult> ForPayment(Page page)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IqraCommerce.Entities.ModulePeriodArea;
+using Microsoft.EntityFrameworkCore;
+using System;
 namespace IqraCommerce.Models.PeriodArea
 {
     public class PeriodModel: AppDropDownBaseModel
@@ -11,5 +13,7 @@ namespace IqraCommerce.Models.PeriodArea
         public double OutCome { get; set; }
         public bool IsActive { get; set; }
     }
+
+  
 
 }

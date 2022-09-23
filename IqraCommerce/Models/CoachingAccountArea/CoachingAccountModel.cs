@@ -8,6 +8,7 @@ namespace IqraCommerce.Models.CoachingAccountArea
         public Guid BatchId { get; set; }
         public double ModuleIncome { get; set; }
         public double CourseIncome { get; set; }
+        public double TotalIncome { get; set; }
         public bool IsActive { get; set; }
     }
 }

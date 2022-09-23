@@ -16,6 +16,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'MaxStudent', title: 'MaxStudent', filter: true, position: 3, add: { sibling: 2, } },
         { field: 'ModuleIncome', title: 'Income', filter: true, position: 3, add: { sibling: 2, } },
         { field: 'Charge', title: 'Charge per student', filter: true, position: 4, add: { sibling: 2, } },
+        { field: 'TotalIncome', title: 'TotalIncome', filter: true, position: 4, add: { sibling: 2, } },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 9, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -34,6 +35,10 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
+            },
+
+            onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -63,6 +68,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
             },
+           
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
             },

@@ -58,6 +58,7 @@ namespace IqraCommerce.Services.CoachingAccountArea
               ,[cchngaccnt].[BatchId]
               ,[cchngaccnt].[StudentId]
               ,[cchngaccnt].[ModuleId]
+              ,[cchngaccnt].[TotalIncome]
 	          ,ISNULL([stdnt].Name, '') [StudentName] 
 	          ,ISNULL([btch].Name, '') [BatchName] 
 	          ,ISNULL([mdl].Name, '') [ModuleName] 

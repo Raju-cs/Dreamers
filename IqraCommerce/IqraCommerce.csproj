@@ -211,6 +211,7 @@
   <ItemGroup>
     <Folder Include="Areas\MenuArea\Models\" />
     <Folder Include="Areas\MenuArea\Views\Shared\" />
+    <Folder Include="wwwroot\js\demo-area\" />
   </ItemGroup>
 
 </Project>
