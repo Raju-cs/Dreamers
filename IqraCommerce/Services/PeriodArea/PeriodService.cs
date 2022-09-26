@@ -121,7 +121,7 @@ left join StudentModule stdntmdl on mdlprd.StudentModuleId = stdntmdl.Id
 left join Module mdl on mdl.Id = stdntmdl.ModuleId
 left join Student stdnt on stdnt.Id = stdntmdl.StudentId
 left join Batch btch on btch.ReferenceId = stdntmdl.ModuleId 
-where mdlprd.PriodId = prd.Id  and  
+where  
 stdntmdl.IsDeleted = 0 
 group by stdnt.[Id]
       ,stdnt.[IsDeleted]
