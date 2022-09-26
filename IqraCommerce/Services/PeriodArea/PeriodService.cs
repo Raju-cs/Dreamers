@@ -5,10 +5,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
-using IqraCommerce.Models.PeriodArea;
-using IqraCommerce.Entities.ModulePeriodArea;
-using IqraCommerce.Entities.StudentModuleArea;
-using IqraBase.Data.Models;
 
 namespace IqraCommerce.Services.PeriodArea
 {
@@ -104,9 +100,7 @@ namespace IqraCommerce.Services.PeriodArea
 
         public static string ForPayment(string innerCondition)
         {
-            return @" * 
-               
-                 from ( 
+            return @" * from ( 
                    select  stdnt.[Id]
       ,stdnt.[IsDeleted]
       ,stdnt.[Name]
@@ -121,15 +115,14 @@ namespace IqraCommerce.Services.PeriodArea
       ,stdnt.[Group]
       ,stdnt.[Version]
       ,count(btch.Id) [NumberOfModule]
-      ,ISNULL(sum(btch.Charge), '') [Charge] 
-from Student Stdnt
-left join StudentModule stdntmdl on stdntmdl.StudentId = stdnt.Id
-left join StudentCourse stdntcrsh on stdntcrsh.StudentId = stdnt.Id
+      ,ISNULL(sum(btch.Charge), '') [Charge]
+ from[dbo].[ModulePeriod] [mdlprd]
+left join StudentModule stdntmdl on mdlprd.StudentModuleId = stdntmdl.Id
+left join Module mdl on mdl.Id = stdntmdl.ModuleId
+left join Student stdnt on stdnt.Id = stdntmdl.StudentId
 left join Batch btch on btch.ReferenceId = stdntmdl.ModuleId 
- where 
-	   stdntmdl.CreatedAt <= (select Prd.EndDate from Period Prd where Prd.Id = 'bee55f13-5586-404d-906e-084c43f44954') 
-	  and stdntmdl.IsDeleted = 0 
-	  and stdntmdl.ActiveStatusChangedAt <= (select Prd.EndDate from Period Prd where Prd.Id = 'bee55f13-5586-404d-906e-084c43f44954')
+where mdlprd.PriodId = prd.Id  and  
+stdntmdl.IsDeleted = 0 
 group by stdnt.[Id]
       ,stdnt.[IsDeleted]
       ,stdnt.[Name]

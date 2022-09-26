@@ -55,7 +55,7 @@ namespace IqraCommerce.Services.DemoArea
       ,[mdlprd].[PriodId]
       ,[mdlprd].[StudentModuleId]
 	  ,ISNULL([prd].Name, '')  [PeriodName]
-      ,Isnull([stdntmdl], Name) [StudentModuleName]
+      ,Isnull([stdntmdl].Name, '') [StudentModuleName]
 	  ,ISNULL([crtr].Name, '') [Creator]
 	  ,ISNULL([pdtr].Name, '') [Updator]
   FROM [dbo].[ModulePeriod] [mdlprd]

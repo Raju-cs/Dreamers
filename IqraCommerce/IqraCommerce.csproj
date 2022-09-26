@@ -29,6 +29,7 @@
     <Compile Remove="Controllers\ReviewArea\**" />
     <Compile Remove="Controllers\UrgentOrderArea\**" />
     <Compile Remove="Controllers\WishListArea\**" />
+    <Compile Remove="wwwroot\js\demo-area\**" />
     <Compile Remove="wwwroot\js\EmployeeArea\**" />
     <Content Remove="Controllers\AddressArea\**" />
     <Content Remove="Controllers\AppArea\**" />
@@ -53,6 +54,7 @@
     <Content Remove="Controllers\ReviewArea\**" />
     <Content Remove="Controllers\UrgentOrderArea\**" />
     <Content Remove="Controllers\WishListArea\**" />
+    <Content Remove="wwwroot\js\demo-area\**" />
     <Content Remove="wwwroot\js\EmployeeArea\**" />
     <EmbeddedResource Remove="Controllers\AddressArea\**" />
     <EmbeddedResource Remove="Controllers\AppArea\**" />
@@ -77,6 +79,7 @@
     <EmbeddedResource Remove="Controllers\ReviewArea\**" />
     <EmbeddedResource Remove="Controllers\UrgentOrderArea\**" />
     <EmbeddedResource Remove="Controllers\WishListArea\**" />
+    <EmbeddedResource Remove="wwwroot\js\demo-area\**" />
     <EmbeddedResource Remove="wwwroot\js\EmployeeArea\**" />
     <None Remove="Controllers\AddressArea\**" />
     <None Remove="Controllers\AppArea\**" />
@@ -101,6 +104,7 @@
     <None Remove="Controllers\ReviewArea\**" />
     <None Remove="Controllers\UrgentOrderArea\**" />
     <None Remove="Controllers\WishListArea\**" />
+    <None Remove="wwwroot\js\demo-area\**" />
     <None Remove="wwwroot\js\EmployeeArea\**" />
   </ItemGroup>
 
@@ -211,7 +215,6 @@
   <ItemGroup>
     <Folder Include="Areas\MenuArea\Models\" />
     <Folder Include="Areas\MenuArea\Views\Shared\" />
-    <Folder Include="wwwroot\js\demo-area\" />
   </ItemGroup>
 
 </Project>

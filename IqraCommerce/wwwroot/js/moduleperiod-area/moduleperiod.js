@@ -1,7 +1,4 @@
 ﻿import { editBtn, eyeBtn } from "../buttons.js";
-import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
-import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
-
 (function () {
     const controller = 'ModulePeriod';
 
@@ -10,6 +7,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
     });
     const columns = () => [
         { field: 'PeriodName', title: 'Period Name', filter: true, position: 1, },
+        { field: 'StudentModuleName', title: 'Student Module Name', filter: true, position: 1, },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 2, },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },

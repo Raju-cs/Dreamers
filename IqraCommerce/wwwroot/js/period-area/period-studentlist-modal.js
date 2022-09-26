@@ -23,7 +23,7 @@
                     { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 7, add: false },
                     { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, add: false },
                     { field: 'IsActive', title: 'IsActive', filter: true, add: { sibling: 2, }, position: 8, add: false },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 9, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 9, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -59,12 +59,12 @@
                         Header: 'Student',
                         columns: [
                             { field: 'DreamersId', title: 'DreamersId', filter: true, position: 1 },
-                            { field: 'StudentName', title: 'Student Name', filter: true, position: 2, add: { sibling: 4 }, },
+                            { field: 'Name', title: 'Student Name', filter: true, position: 2, add: { sibling: 4 }, },
                             { field: 'Charge', title: 'Module Charge', filter: true, position: 3 },
                         ],
 
-                       /* Url: '/Period/ForPayment/',*/
-                        Url: '/StudentModule/Get',
+                        Url: '/Period/ForPayment/',
+                        //Url: '/StudentModule/Get',
                         filter: [studentDateFilter,liveFilter],
                         onDataBinding: function (response) { },
                         actions: [{

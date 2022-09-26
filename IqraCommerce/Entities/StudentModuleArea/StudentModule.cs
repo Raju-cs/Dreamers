@@ -13,5 +13,10 @@ namespace IqraCommerce.Entities.StudentModuleArea
         public Guid BatchId { get; set; }
         public Guid ReferenceId  { get; set; }
         public DateTime? DischargeDate { get; set; } = null;
+
+        internal static object Where(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace IqraCommerce.Controllers
             return View();
         }
 
+
+
         public override async Task<JsonResult> Get([FromBody] Page page)
         {
             return Json(await __service.Get(page));
