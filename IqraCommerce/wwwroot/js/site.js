@@ -3,5 +3,5 @@
 
 // Write your JavaScript code.
 
-export const READ_URL = "https://shoppersperk.com";
+export const READ_URL = "https://dreamers.boniksoftware.com";
 // export const READ_URL = "D:/P%20R%20O%20J%20E%20C%20T%20S/Jasmine/Client/IqraCommerce.API/wwwroot";

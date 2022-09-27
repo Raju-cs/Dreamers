@@ -19,7 +19,6 @@ namespace IqraCommerce.Controllers.PeriodArea
         public PeriodController()
         {
             service = __service = ___service = new PeriodService();
-           
         }
 
         public async Task<JsonResult> BasicInfo([FromQuery] Guid id)
@@ -30,22 +29,21 @@ namespace IqraCommerce.Controllers.PeriodArea
         // Add Data in ModulePeriod Table
         public override ActionResult Create([FromForm] PeriodModel  recordToCreate)
         {
-              ModulePeriod modulePeriod = new ModulePeriod();
+            ModulePeriod modulePeriod = new ModulePeriod();
             var modulePeriodList = ___service.GetEntity<ModulePeriod>();
             var studentModuleList = ___service.GetEntity<StudentModule>();
-             List<StudentModule> ListStudentModule = new List<StudentModule>();
+            List<StudentModule> ListStudentModule = new List<StudentModule>();
             Period period = new Period();
 
-            ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false && x.Id != modulePeriod.StudentModuleId && period.Id != modulePeriod.PriodId).ToList();
+            ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false).ToList();
             var getData = from getdata in ListStudentModule select new {getdata.Id};
             
             foreach(var module in getData)
             {
                 modulePeriod = new ModulePeriod();
-              
-                    modulePeriod.StudentModuleId = module.Id;
-                    modulePeriod.PriodId = recordToCreate.Id;
-                    modulePeriodList.Add(modulePeriod);
+                modulePeriod.StudentModuleId = module.Id;
+                modulePeriod.PriodId = recordToCreate.Id;
+                modulePeriodList.Add(modulePeriod);
             }
             return base.Create(recordToCreate);
         }

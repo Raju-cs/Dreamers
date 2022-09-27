@@ -64,7 +64,6 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 console.log({ model, formModel})
                 formModel.ActivityId = window.ActivityId;
-                formModel.IsActive = true;
                 formModel.EndDate = dateForSQLServer(model.EndDate);
                 formModel.StartDate = dateForSQLServer(model.StartDate);
                 formModel.RegularPaymentDate = dateForSQLServer(model.RegularPaymentDate);

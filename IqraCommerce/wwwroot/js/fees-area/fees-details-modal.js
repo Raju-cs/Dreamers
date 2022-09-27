@@ -14,10 +14,15 @@
                     title: 'Fees Information',
 
                     columns: [
-                        { field: 'Name', title: 'Name', filter: true, position: 1, },
-                        { field: 'Class', title: 'Class', filter: true, position: 2, },
-                        { field: 'Version', title: 'Version', filter: true, position: 3, },
-                        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 4, },
+                        { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, required: false, },
+                        { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 2, },
+                        { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 3, },
+                        { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 4, },
+                        { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 5, },
+                        { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 6, },
+                        { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 7, },
+                        { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 8, },
+                        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 9, },
                     ],
 
                     DetailsUrl: function () {
@@ -29,7 +34,7 @@
                 }
             ],
 
-            name: 'Subject Information',
+            name: 'Fees Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails',
         });
     }

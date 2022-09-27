@@ -262,7 +262,6 @@ var Controller = new function () {
                         }, {
                             click: deleteModuleBatchStudent,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="Remove"></i></a>`
-
                             }],
                         buttons: [{
                             click: addModuleBatchStudent,
