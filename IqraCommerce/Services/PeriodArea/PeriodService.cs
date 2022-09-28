@@ -116,13 +116,13 @@ namespace IqraCommerce.Services.PeriodArea
       ,stdnt.[Version]
       ,count(btch.Id) [NumberOfModule]
       ,ISNULL(sum(btch.Charge), '') [Charge]
- from[dbo].[ModulePeriod] [mdlprd]
-left join StudentModule stdntmdl on mdlprd.StudentModuleId = stdntmdl.Id
+ from[dbo].[StudentModule] [stdntmdl]
+left join ModulePeriod [mdlprd] on mdlprd.Id = stdntmdl.Id
 left join Module mdl on mdl.Id = stdntmdl.ModuleId
 left join Student stdnt on stdnt.Id = stdntmdl.StudentId
 left join Batch btch on btch.ReferenceId = stdntmdl.ModuleId 
-where  
-stdntmdl.IsDeleted = 0 
+left join Period prd on prd.Id = [mdlprd].Id 
+where stdntmdl.IsDeleted = 0 
 group by stdnt.[Id]
       ,stdnt.[IsDeleted]
       ,stdnt.[Name]

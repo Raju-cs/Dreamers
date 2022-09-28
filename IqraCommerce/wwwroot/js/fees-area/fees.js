@@ -81,7 +81,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             dropdownList: [{
                 Id: 'StudentId',
                 add: { sibling: 2 },
-                position: 1,
+                position: 2,
                 url: '/Student/AutoComplete',
                 Type: 'AutoComplete',
                 page: { 'PageNumber': 1, 'PageSize': 20, filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL),liveRecord] }
@@ -91,7 +91,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
                     position: 1,
                     url: '/Period/AutoComplete',
                     Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL),liveRecord] },
+                page: { 'PageNumber': 1, 'PageSize': 20, filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL),liveRecord] },
 
                 }, {
                     title: 'Active Status',
@@ -107,22 +107,26 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-                formModel.IsActive = true;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
+               
             },
             saveChange: `/${controller}/Edit`,
         });
     };
 
     const viewDetails = (row) => {
-        console.log("row=>", row);
+       
         Global.Add({
             Id: row.Id,
             name: 'Fees Information' + row.Id,
             url: '/js/fees-area/fees-details-modal.js',
         });
+    }
+
+    function rowBound(row) {
+        row.css({ color: 'red' });
     }
 
     const activeTab = {
@@ -139,7 +143,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             html: eyeBtn("View Details")
         }],
         onDataBinding: () => { },
-        rowBound: () => { },
+        rowBound: rowBound,
         columns: columns(),
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
@@ -160,7 +164,9 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
                 html: eyeBtn("View Details")
             }],
         onDataBinding: () => { },
-        rowBound: () => { },
+        rowBound: (row) => {
+            row.css({ background: 'red' });
+        },
         columns: columns(),
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
@@ -182,6 +188,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
     //Tabs config
     const tabs = {
         container: $('#page_container'),
+
         Base: {
             Url: `/${controller}/`,
         },

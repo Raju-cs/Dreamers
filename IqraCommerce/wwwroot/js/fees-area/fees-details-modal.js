@@ -5,7 +5,7 @@
 
     this.Show = function (options) {
         _options = options;
-
+        console.log("options=>", _options);
         Global.Add({
             title: 'Fees Information',
             selected: 0,

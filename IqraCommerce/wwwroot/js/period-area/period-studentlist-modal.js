@@ -1,4 +1,5 @@
-﻿var Controller = new function () {
+﻿
+var Controller = new function () {
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const studentDateFilter = { "field": "Name", "value": '', Operation: 0 };
@@ -39,7 +40,7 @@
                     formModel.PaidFee = (parseFloat(page.Charge) - parseFloat(model.ModuleFee));
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
-                        formModel.ModuleFee = page.Charge;
+                    formModel.ModuleFee = page.Charge;
                    },
                 onSaveSuccess: function () {
                     _options.updatePayment();
@@ -50,13 +51,8 @@
             });
         }
 
-        function rowBound(row) {
-            console.log("Fee=>", this.Charge);
-            if (this.Charge == 1200) {
-                row.css({ background: 'red' });
-            }
-        }
-
+       
+      
         Global.Add({
             title: 'All Student List',
             selected: 0,
@@ -80,7 +76,6 @@
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-usd" title="Make Full Payment"></i></a>`
                         }],
                         buttons: [],
-                        rowBound: rowBound,
                         selector: false,
                         Printable: {
                             container: $('void')
