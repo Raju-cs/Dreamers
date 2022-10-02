@@ -5,11 +5,13 @@
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const scheduleFilter = { "field": "ReferenceId", "value": '', Operation: 0 };
+    const studentClassFilter = { "field": "Class", "value": '', Operation: 0 };
     var _options;
     this.Show = function (options) {
         _options = options;
         studentCourseFilter.value = _options.Id;
         scheduleFilter.value = _options.Id;
+        studentClassFilter.value = _options.CourseClass;
 
         const modalColumns = [
             { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm '  },
@@ -99,7 +101,7 @@
                     position: 1,
                     url: '/Student/AutoComplete',
                     Type: 'AutoComplete',
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
+                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter, studentClassFilter] }
                 },],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
@@ -204,7 +206,8 @@
                         Header: 'Student',
                         columns: [
                             { field: 'StudentName', title: 'Student Name', filter: true, position: 1, add: false },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 2, },
+                            { field: 'DateOfBirth', title: 'DateOfBirth', filter: true, position: 2, add: false, dateFormat: 'MM/dd/yyyy' },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },
                         ],
 
                         Url: '/StudentCourse/Get/',

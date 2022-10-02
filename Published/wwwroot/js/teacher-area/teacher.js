@@ -1,4 +1,4 @@
-import { editBtn, eyeBtn, statusBtn, imageBtn, menuBtn, plusBtn, warnBtn, flashBtn } from "../buttons.js";
+import { editBtn, eyeBtn } from "../buttons.js";
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
 
@@ -97,7 +97,6 @@ import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-    
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();

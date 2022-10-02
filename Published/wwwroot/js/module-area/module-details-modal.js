@@ -10,15 +10,17 @@ var Controller = new function () {
         studentFilter.value = _options.Id;
         console.log("options=>", _options);
 
-        function addModuleSchedule(page) {
+        function addModuleBatch(page, gird) {
+            console.log("page=>", page);
             Global.Add({
                 name: 'ADD_MODULE_BATCH',
                 model: undefined,
                 title: 'Add Module Batch',
                 columns: [
-                    { field: 'Name', title: 'Batch Name', filter: true, position: 1,  },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
+                    { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -27,7 +29,9 @@ var Controller = new function () {
                     formModel.ReferenceId = _options.Id;
                     formModel.Program = "Module";
                     formModel.Name = `${model.Name} `;
-                    
+                },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    formModel.Charge = _options.ModuleCharge;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -37,15 +41,16 @@ var Controller = new function () {
             });
         }
 
-        function editModuleSchedule(model, grid) {
+        function editModuleBatch(model, grid) {
             Global.Add({
                 name: 'EDIT_MODULE_BATCH',
                 model: model,
                 title: 'Edit Module Batch',
                 columns: [
                     { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea"  }, required: false, position: 5, },
+                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -62,8 +67,8 @@ var Controller = new function () {
                 filter: [],
                 saveChange: `/Batch/Edit`,
             });
-
         }
+
         const viewDetails = (row, model) => {
             console.log("row=>",row);
             Global.Add({
@@ -72,6 +77,10 @@ var Controller = new function () {
                 url: '/js/batch-area/module-batch-details-modal.js',
                 updateSchedule: model.Reload,
                 ModuleId: _options.Id,
+                ModuleClass: _options.ModuleClass,
+                ModuleTeacher: _options.ModuleTeacher,
+                ModuleName: _options.ModuleName,
+                ModuleCharge: _options.ModuleCharge
             });
         }
 
@@ -83,11 +92,12 @@ var Controller = new function () {
                     title: 'Basic Information',
                    
                             columns : [
-                                { field: 'Name', title: 'Name', filter: true, position: 1, },
-                                { field: 'TeacherName', title: 'Teacher', filter: true, position: 2, },
+                                { field: 'Name', title: 'Name', filter: true, position: 1, add: false },
+                                { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
                                 { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
-                                { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
-                                { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 3 } },
+                                { field: 'Class', title: 'Class', filter: true, position: 4, add: false },
+                                { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 2 } },
+                                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 6, },
                         ],
                         
                         DetailsUrl: function () {
@@ -102,9 +112,10 @@ var Controller = new function () {
 
                         Header: 'Batch',
                         columns: [
-                            { field: 'Name', title: 'Batch Name', filter: true, position: 1, add: false },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
+                            { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
+                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
+                            { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                         ],
 
                         Url: '/Batch/Get/',
@@ -112,7 +123,7 @@ var Controller = new function () {
                         onDataBinding: function (response) { },
                         actions: [
                             {
-                                click: editModuleSchedule,
+                                click: editModuleBatch,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Batch Schedule"></i></a>`
 
                             },
@@ -124,7 +135,7 @@ var Controller = new function () {
                         ],
                         buttons: [
                             {
-                                click: addModuleSchedule,
+                                click: addModuleBatch,
                                 html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
                             }
                         ],

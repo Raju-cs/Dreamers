@@ -48,7 +48,8 @@ namespace IqraCommerce.Controllers.PeriodArea
             return base.Create(recordToCreate);
         }
 
-        public async Task<JsonResult> ForPayment(Page page)
+        [HttpPost]
+        public async Task<JsonResult> ForPayment([FromBody] Page page)
         {
             return Json(await ___service.ForPayment(page));
         }

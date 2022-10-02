@@ -1,16 +1,19 @@
 ﻿
 var Controller = new function () {
-    const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
-    const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
+
     const studentDateFilter = { "field": "Name", "value": '', Operation: 0 };
     
     var _options;
-
+    var hidden = false;
+      
     this.Show = function (options) {
         _options = options;
         studentDateFilter.value = _options.PeriodMonth;
         console.log("options=>", _options);
+
+
         function studentPayment(page, gird) {
+        
             console.log("page=>", page);
             Global.Add({
                 name: 'STUDENT_PAYMENT',
@@ -29,15 +32,16 @@ var Controller = new function () {
                 dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
-                    console.log("Model=>", model);
+                    console.log("formModel=>", formModel);
                     formModel.ActivityId = window.ActivityId;
-                    formModel.IsActive = true;
                     formModel.StudentId = page.Id;
                     formModel.PeriodId = _options.Id;
+                    formModel.IsActive = true;
                     formModel.ModuleFee = page.Charge;
                     formModel.TotalFee = page.Charge;
                     formModel.Fee = model.ModuleFee
                     formModel.PaidFee = (parseFloat(page.Charge) - parseFloat(model.ModuleFee));
+                 
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
                     formModel.ModuleFee = page.Charge;
@@ -45,14 +49,20 @@ var Controller = new function () {
                 onSaveSuccess: function () {
                     _options.updatePayment();
                 },
-               
-                filter: [],
                 save: `/Fees/Create`,
             });
         }
-
-       
-      
+        const viewDetails = (row, model) => {
+            console.log("row=>", row);
+            Global.Add({
+                Id: row.Id,
+                name: 'Fees Information' + row.Id,
+                url: '/js/period-area/Period-Student-Payment-Details-modal.js',
+                Charge: row.Charge,
+                updatePayment: model.Reload,
+            });
+        }
+        
         Global.Add({
             title: 'All Student List',
             selected: 0,
@@ -68,18 +78,28 @@ var Controller = new function () {
                         ],
 
                         Url: '/Period/ForPayment/',
-                        //Url: '/StudentModule/Get',
-                        filter: [studentDateFilter, liveFilter],
+                        filter: [
+                            { "field": 'smIsDeleted', "value": 0, Operation: 0, Type: "INNER" },
+                            { "field": 'PriodId', "value": _options.Id, Operation: 0, Type: "INNER" }
+                        ],
                         onDataBinding: function (response) { },
-                        actions: [{
-                            click: studentPayment,
-                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-usd" title="Make Full Payment"></i></a>`
-                        }],
+                        rowBound: () => { },
+                        
+                            actions: [{
+                                click: studentPayment,
+                                html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-usd" title="Make Payment"></i></a>'
+                            }, {
+                                click: viewDetails,
+                                html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
+                            }],
+                        
                         buttons: [],
+                       
                         selector: false,
                         Printable: {
                             container: $('void')
                         }
+
                     }],
                 }],
 

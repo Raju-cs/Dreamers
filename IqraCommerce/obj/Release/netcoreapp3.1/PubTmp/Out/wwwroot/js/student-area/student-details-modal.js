@@ -2,6 +2,10 @@
 
 var Controller = new function () {
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
+    const moduleLiveFilter = { "field": "ModuleIsDeleted", "value": 0, Operation: 0 };
+    const moduleActiveFilter = { "field": "ModuleIsActive", "value": 1, Operation: 0 };
+    const activeCourseFilter = { "field": "CourseIsActive", "value": 1, Operation: 0 };
+    const liveCourseFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const studentFilter = { "field": "StudentId", "value": '', Operation: 0 };
     const programModuleFilter = { "field": "Program", "value": "Module", Operation: 0 }
@@ -138,7 +142,8 @@ var Controller = new function () {
                 model: undefined,
                 title: 'Add Student Module',
                 columns: [
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 4, },
                 ],
                 dropdownList: modalModuleDropDowns,
                 additionalField: [],
@@ -161,8 +166,7 @@ var Controller = new function () {
                 model: model,
                 title: 'Edit Student Module',
                 columns: [
-               
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 4, },
                 ],
                 dropdownList: modalEditModuleDropDowns,
                 additionalField: [],
@@ -170,7 +174,6 @@ var Controller = new function () {
                     formModel.Id = model.Id
                     formModel.ActivityId = window.ActivityId;
                     formModel.StudentId = _options.Id;
-                   
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -228,6 +231,7 @@ var Controller = new function () {
                 saveChange: `/StudentCourse/Edit`,
             });
         }
+
 
         Global.Add({
             title: 'Student Information',
@@ -289,22 +293,22 @@ var Controller = new function () {
                         columns: [
                             { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
                             { field: 'BatchName', title: 'Batch Name', filter: true, position: 2, add: false },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, add: false },
+                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                        ],
 
                         Url: '/StudentModule/Get/',
-                        filter: [studentFilter],
+                        filter: [studentFilter, moduleActiveFilter, moduleLiveFilter, activeFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editStudentModule,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Student Batch"></i></a>`
 
                         }],
-                        buttons: [{
+                       /* buttons: [{
                             click: addStudentInModule,
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
-                        }],
+                        }],*/
                         selector: false,
                         Printable: {
                             container: $('void')
@@ -324,7 +328,7 @@ var Controller = new function () {
                         ],
 
                         Url: '/StudentCourse/Get/',
-                        filter: [studentFilter, liveFilter],
+                        filter: [studentFilter, activeCourseFilter, liveCourseFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editStudentCourse,
@@ -340,7 +344,7 @@ var Controller = new function () {
                             container: $('void')
                         }
                     }],
-                },
+                }, 
             ],
 
             name: 'Course Information',

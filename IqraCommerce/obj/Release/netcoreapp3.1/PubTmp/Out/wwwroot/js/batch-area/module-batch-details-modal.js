@@ -2,15 +2,23 @@ var Controller = new function () {
     const studentBatchFilter = { "field": "BatchId", "value": '', Operation: 0 };
     const liveStudentFilterTwo = { "field": "StudentIsDeleted", "value": 0, Operation: 0 };
     const activeStudentFilterTwo = { "field": "StudentIsActive", "value": 1, Operation: 0 };
+    const studentClassFilter = { "field": "Class", "value": '', Operation: 0 };
     const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     var _options;
-  
+    const dateForSQLServer = (enDate = '01/01/1970') => {
+        const dateParts = enDate.split('/');
+
+        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+    }
 
     this.Show = function (options) {
+        
         _options = options;
-        studentBatchFilter.value = _options.Id;
         console.log("options=>", _options);
+        studentBatchFilter.value = _options.Id;
+        studentClassFilter.value = _options.ModuleClass;
+
         const modalColumns = [
             { field: 'StartTime', title: 'Start Time', filter: true, position: 2, dateFormat: 'hh:mm'  },
             { field: 'EndTime', title: 'End Time', filter: true, position: 3, dateFormat: 'hh:mm'  },
@@ -29,14 +37,13 @@ var Controller = new function () {
                 { text: 'Wednesday', value: 'Wednesday' },
                 { text: 'Thursday', value: 'Thursday' },
                 { text: 'Friday', value: 'Friday' },
-
             ],
             position: 1,
 
         }];
 
         function addModuleRoutine(page) {
-            console.log("options=>", options);
+            console.log("options=>", _options);
             Global.Add({
                 name: 'ADD_ROUTINE',
                 model: undefined,
@@ -45,13 +52,13 @@ var Controller = new function () {
                 dropdownList: modalDropDowns,
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
-                   
                     formModel.ActivityId = window.ActivityId;
                     formModel.BatchId = _options.Id;
                     formModel.Program = "Module";
-                    formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
+                    formModel.Name = _options.ModuleTeacher;
                     formModel.StartTime = ` ${model.StartTime}`;
                     formModel.EndTime = ` ${model.EndTime}`;
+                    formModel.Module = _options.ModuleName;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -63,6 +70,7 @@ var Controller = new function () {
             });
 
         }
+
         function editModuleRoutine(model, grid) {
             Global.Add({
                 name: 'EDIT_ROUTINE',
@@ -89,6 +97,7 @@ var Controller = new function () {
         }
 
         function addModuleBatchStudent(page) {
+            console.log("Page=>", page);
             Global.Add({
                 name: 'ADD_STUDENT',
                 model: undefined,
@@ -102,7 +111,7 @@ var Controller = new function () {
                     position: 1,
                     url: '/Student/AutoComplete',
                     Type: 'AutoComplete',
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
+                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter, studentClassFilter] }
                 },],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
@@ -131,8 +140,8 @@ var Controller = new function () {
                     position: 1,
                     url: '/Student/AutoComplete',
                     Type: 'AutoComplete',
-                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter] }
-                },],
+                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilter, studentClassFilter] }
+                }],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.Id = model.Id
@@ -147,6 +156,37 @@ var Controller = new function () {
                 saveChange: `/StudentModule/Edit`,
             });
         }
+
+        function deleteModuleBatchStudent(model, grid) {
+            console.log("model=", model);
+            Global.Add({
+                name: 'DELETE_STUDENT',
+                model: model,
+                title: 'Delete Student',
+                columns: [{ field: 'DischargeDate', title: 'DischargeDate', filter: true, position: 1, dateFormat: 'dd/MM/yyyy' },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 2, },],
+                dropdownList: [],
+                additionalField: [],
+                onSubmit: function (formModel, data, model) {
+                    console.log("model", model);
+                    formModel.ActivityId = window.ActivityId;
+                    formModel.IsDeleted = true;
+                    formModel.DischargeDate = dateForSQLServer(model.DischargeDate);
+                },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    formModel.DischargeDate = new Date().format('dd/MM/yyyy');
+                    formModel.StudentId = model.StudentId;
+                    formModel.BatchId = model.BatchId;
+                    formModel.ModuleId = model.ModuleId;
+                },
+                onSaveSuccess: function () {
+                    grid?.Reload();
+                },
+                filter: [],
+                saveChange: `/StudentModule/Edit`,
+            });
+        }
+
 
         Global.Add({
             title: 'Batch Information',
@@ -167,7 +207,6 @@ var Controller = new function () {
                         onLoaded: function (tab, data) {
 
                         }
-                    
                 }, {
                     title: ' Routine ',
                     Grid: [{
@@ -188,7 +227,6 @@ var Controller = new function () {
                             {
                                 click: editModuleRoutine ,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Batch Schedule"></i></a>`
-
                             }
                         ],
                         buttons: [
@@ -210,17 +248,21 @@ var Controller = new function () {
                         Header: 'Student',
                         columns: [
                             { field: 'StudentName', title: 'Student Name', filter: true, position: 1, add: false },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 2, },
+                            { field: 'DateOfBirth', title: 'DateOfBirth', filter: true, position: 2, add: false, dateFormat: 'MM/dd/yyyy' },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },
                         ],
 
                         Url: '/StudentModule/Get/',
-                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo],
+                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo, liveFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editModuleBatchStudent,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject and Teacher"></i></a>`
 
-                        }],
+                        }, {
+                            click: deleteModuleBatchStudent,
+                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-remove" title="Remove"></i></a>`
+                            }],
                         buttons: [{
                             click: addModuleBatchStudent,
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
@@ -230,7 +272,6 @@ var Controller = new function () {
                             container: $('void')
                         },
                     }],
-
                 }],
 
             name: 'Batch Information',
@@ -239,3 +280,5 @@ var Controller = new function () {
         });
     }
 };
+
+

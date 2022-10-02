@@ -38,16 +38,17 @@ namespace IqraCommerce.Controllers.StudentModuleArea
             StudentModule ListStudentModule = new StudentModule();
             List<Period> periodList = new List<Period>();
 
-            modulePeriodList = modulePeriodEntity.Where(x => x.Id != ListStudentModule.Id && modulePeriod.PriodId != period.Id).ToList();
+            modulePeriodList = modulePeriodEntity.Where(x => x.Id != ListStudentModule.Id).ToList();
             var getData = from getdata in modulePeriodList select new { getdata.Id };
+            periodList = periodEntity.Where(p => p.Id != modulePeriodEntity.FirstOrDefault().PriodId).ToList();
+            var getPeriod = from getperiod in periodList select new { getperiod.Id };
             foreach (var studentmoduleId in getData)
             {
-                modulePeriod = new ModulePeriod();
-                modulePeriod.PriodId = period.Id;
-                modulePeriod.StudentModuleId = recordToCreate.Id;
+                    modulePeriod = new ModulePeriod();
+                    modulePeriod.PriodId = periodEntity.FirstOrDefault().Id;
+                    modulePeriod.StudentModuleId = recordToCreate.Id;
             }
             modulePeriodEntity.Add(modulePeriod);
-
             return base.Create(recordToCreate);
         }
     }
