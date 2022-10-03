@@ -10,45 +10,6 @@ var Controller = new function () {
         studentDateFilter.value = _options.PeriodMonth;
         console.log("options=>", _options);
 
-        function studentPayment(page, gird) {
-            console.log("page=>", page);
-            Global.Add({
-                name: 'STUDENT_PAYMENT',
-                model: undefined,
-                title: 'Student Payment',
-                columns: [
-                    { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 3, add: false },
-                    { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 4, add: false },
-                    { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, add:false },
-                    { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 6, },
-                    { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 7, add: false },
-                    { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, add: false },
-                    { field: 'IsActive', title: 'IsActive', filter: true, add: { sibling: 2, }, position: 8, add: false },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 9, },
-                ],
-                dropdownList: [],
-                additionalField: [],
-                onSubmit: function (formModel, data, model) {
-                    console.log("formModel=>", formModel);
-                    formModel.ActivityId = window.ActivityId;
-                    formModel.StudentId = page.Id;
-                    formModel.PeriodId = _options.Id;
-                    formModel.IsActive = true;
-                    formModel.ModuleFee = page.Charge;
-                    formModel.TotalFee = page.Charge;
-                    formModel.Fee = model.ModuleFee
-                    formModel.PaidFee = (parseFloat(page.Charge) - parseFloat(model.ModuleFee));
-                 
-                },
-                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
-                    formModel.ModuleFee = page.Charge;
-                   },
-                onSaveSuccess: function () {
-                    _options.updatePayment();
-                },
-                save: `/Fees/Create`,
-            });
-        }
         const viewDetails = (row, model) => {
             console.log("row=>", row);
             Global.Add({
@@ -57,6 +18,7 @@ var Controller = new function () {
                 url: '/js/period-area/Period-Student-Payment-Details-modal.js',
                 Charge: row.Charge,
                 updatePayment: model.Reload,
+                PeriodId: _options.Id,
             });
         }
         
@@ -81,16 +43,15 @@ var Controller = new function () {
                         ],
                         onDataBinding: function (response) { },
                         rowBound: () => { },
-                       
-                            actions: [{
+                        
+                            actions: [/*{
                                 click: studentPayment,
-                                html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-usd" title="Make Payment"></i></a >'
-                            }, {
+                                html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-usd" title="Make Payment"></i></a>'
+                            },*/ {
                                 click: viewDetails,
                                 html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
                             }],
                         
-                      
                         buttons: [],
                        
                         selector: false,

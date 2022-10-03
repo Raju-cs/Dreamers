@@ -4,14 +4,16 @@ using IqraCommerce.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IqraCommerce.Migrations
 {
     [DbContext(typeof(AppDB))]
-    partial class AppDBModelSnapshot : ModelSnapshot
+    [Migration("20221003132649_Add Coaching account")]
+    partial class AddCoachingaccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,6 +148,12 @@ namespace IqraCommerce.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("FeesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("InCome")
+                        .HasColumnType("float");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -155,11 +163,14 @@ namespace IqraCommerce.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PeriodId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<double>("OutCome")
+                        .HasColumnType("float");
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("TotalCollected")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");

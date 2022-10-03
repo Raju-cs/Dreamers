@@ -40,8 +40,6 @@ namespace IqraCommerce.Controllers.StudentModuleArea
 
             modulePeriodList = modulePeriodEntity.Where(x => x.Id != ListStudentModule.Id).ToList();
             var getData = from getdata in modulePeriodList select new { getdata.Id };
-            periodList = periodEntity.Where(p => p.Id != modulePeriodEntity.FirstOrDefault().PriodId).ToList();
-            var getPeriod = from getperiod in periodList select new { getperiod.Id };
             foreach (var studentmoduleId in getData)
             {
                     modulePeriod = new ModulePeriod();
@@ -51,11 +49,5 @@ namespace IqraCommerce.Controllers.StudentModuleArea
             modulePeriodEntity.Add(modulePeriod);
             return base.Create(recordToCreate);
         }
-    }
-
-    public class IdDto
-    {
-        public Guid Id { get; set; }
-        public Guid ActivityId { get; set; }
     }
 }

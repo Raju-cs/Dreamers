@@ -28,6 +28,11 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
     ];
 
 
+    function rowBound(row) {
+        console.log("row");
+        row.css({ background: 'red' });
+    }
+
     function add() {
         Global.Add({
             name: 'ADD_FEES',
@@ -124,9 +129,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         });
     }
 
-    function rowBound(row)  {
-        row.css({ color: 'red' });
-    }
+   
 
     const activeTab = {
         Id: '5EF1DA6B-86ED-4DE8-8154-9A851937E804',

@@ -113,6 +113,7 @@ namespace IqraCommerce.Entities
         public virtual DbSet<CoachingAccount> CoachingAccount { get; set; }
         #endregion
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -11,12 +11,10 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
     });
 
     const columns = () => [
-        { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: { sibling: 2, } },
-        { field: 'BatchName', title: 'Batch Name', filter: true,  position: 2, },
-        { field: 'MaxStudent', title: 'MaxStudent', filter: true, position: 3, add: { sibling: 2, } },
-        { field: 'ModuleIncome', title: 'Income', filter: true, position: 3, add: { sibling: 2, } },
-        { field: 'Charge', title: 'Charge per student', filter: true, position: 4, add: { sibling: 2, } },
-        { field: 'TotalIncome', title: 'TotalIncome', filter: true, position: 4, add: { sibling: 2, } },
+        { field: 'PeriodName', title: 'Period Name', filter: true, position: 1, add: { sibling: 2, } },
+        { field: 'InCome', title: 'InCome', filter: true,  position: 2, },
+        { field: 'OutCome', title: 'OutCome', filter: true, position: 3, add: { sibling: 2, } },
+        { field: 'TotalCollected', title: 'TotalCollected', filter: true, position: 3, add: { sibling: 2, } },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 9, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
