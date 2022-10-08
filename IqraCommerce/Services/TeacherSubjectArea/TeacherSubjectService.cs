@@ -28,6 +28,9 @@ namespace IqraCommerce.Services.TeacherSubjectArea
                 case "subjectname":
                     name = "[sbjct].Name";
                     break;
+                case "isactive":
+                    name = "[tchr].IsActive";
+                    break;
                 default:
                     name = "tchrsbjct." + name;
                     break;
@@ -64,6 +67,7 @@ namespace IqraCommerce.Services.TeacherSubjectArea
 	          ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator]
 			  ,ISNULL([tchr].Name, '')  [TeacherName]
+			  ,ISNULL([tchr].IsActive, '')  [IsActive]
 			  ,ISNULL([sbjct].Name, '') [SubjectName]
           FROM [dbo].[TeacherSubject] [tchrsbjct]
           LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [tchrsbjct].[CreatedBy]

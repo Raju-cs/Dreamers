@@ -4,6 +4,7 @@ using IqraService.Search;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 
 namespace IqraCommerce.Services.FeesArea
 {
@@ -25,6 +26,9 @@ namespace IqraCommerce.Services.FeesArea
                 case "studentname":
                     name = "[stdnt].Name";
                     break;
+                case "dreamersid":
+                    name = "[stdnt].DreamersId";
+                    break;
                 case "startdate":
                     name = "[prd].StartDate";
                     break;
@@ -34,11 +38,32 @@ namespace IqraCommerce.Services.FeesArea
                 case "period":
                     name = "[prd].Name";
                     break;
+                case "fsisdeleted":
+                    name = "[fs].[IsDeleted]";
+                    break;
+                case "id":
+                    name = "[prd].[Id]";
+                    break;
                 default:
                     name = "fs." + name;
                     break;
             }
             return base.GetName(name);
+        }
+
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> TotalFee(Page page)
+        {
+            var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
+            var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
+
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] ASC" : page.SortBy;
+            using (var db = new DBService())
+            {
+                page.filter = innerFilters;
+                var query = GetWhereClause(page);
+                page.filter = outerFilters;
+                return await db.GetPages(page, FeesQuery.TotalFee(query));
+            }
         }
 
         public override async Task<ResponseList<Pagger<Dictionary<string, object>>>> Get(Page page)
@@ -84,6 +109,7 @@ namespace IqraCommerce.Services.FeesArea
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator]
 	              ,ISNULL([stdnt].Name, '') [StudentName]
+	              ,ISNULL([stdnt].DreamersId, '') [DreamersId]
 	              ,ISNULL([prd].Name, '') [Period]
 	              ,ISNULL([prd].StartDate, '') [StartDate]
 	              ,ISNULL([prd].EndDate, '') [EndDate]
@@ -98,7 +124,32 @@ namespace IqraCommerce.Services.FeesArea
         {
             get { return @"SELECT " + Get() + " Where fs.Id = '"; }
         }
-
+        public static string TotalFee(string innerCondition)
+        {
+            return @" * from ( 
+       select  prd.[Id]
+      ,prd.[CreatedAt]
+      ,prd.[CreatedBy]
+      ,prd.[UpdatedAt]
+      ,prd.[UpdatedBy]
+      ,prd.[IsDeleted]
+      ,prd.[Remarks]
+      ,prd.[ActivityId]
+      ,prd.[Name]
+	  ,SUM(TotalFee) as Total_Fee
+ FROM [dbo].Period prd
+ left join Fees fs on fs.PeriodId = prd.Id
+" + innerCondition + @"
+ group by prd.[Id]
+      ,prd.[CreatedAt]
+      ,prd.[CreatedBy]
+      ,prd.[UpdatedAt]
+      ,prd.[UpdatedBy]
+      ,prd.[IsDeleted]
+      ,prd.[Remarks]
+      ,prd.[ActivityId]
+      ,prd.[Name]) item";
+        }
 
     }
 }

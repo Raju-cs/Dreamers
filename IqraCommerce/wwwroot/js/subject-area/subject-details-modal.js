@@ -1,6 +1,7 @@
 ﻿var Controller = new function () {
     const subjectbatchFilter = { "field": "SubjectId", "value": '', Operation: 0 }
     const liveFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
+    const activeFilter = { "field": "IsActive", "value": 1, Operation: 0 };
     var _options;
 
     this.Show = function (options) {
@@ -38,7 +39,7 @@
                         ],
 
                         Url: '/TeacherSubject/Get/',
-                        filter: [subjectbatchFilter],
+                        filter: [subjectbatchFilter, activeFilter],
                         onDataBinding: function (response) { },
                         //actions: [],
                         //buttons: [],
@@ -59,7 +60,7 @@
                             { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 } },
                         ],
                         Url: '/Module/Get/',
-                        filter: [subjectbatchFilter, liveFilter],
+                        filter: [subjectbatchFilter, liveFilter, activeFilter],
                         onDataBinding: function (response) { },
                         //actions: [],
                         //buttons: [],

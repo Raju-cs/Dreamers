@@ -2,8 +2,7 @@
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { ACTIVE_STATUS } from "../dictionaries.js";
 
-(function () {
-
+(function (option) {
     const controller = 'Fees';
 
     $(document).ready(() => {
@@ -13,14 +12,15 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
     const columns = () => [
         
         { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, required: false, },
-        { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 2, },
-        { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 3, },
-        { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 4, },
-        { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 5, },
-        { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 6, },
-        { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 7, },
-        { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 8,  },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 9, },
+        { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
+        { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
+        { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 4, },
+        { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, },
+        { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 6, },
+        { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 7, },
+        { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, },
+        { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 9,  },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 10, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -74,14 +74,15 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             title: 'Edit Fees',
             columns: [
                 { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
-                { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 2, },
-                { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 3, },
-                { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 4, },
-                { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 5, },
-                { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 6, },
-                { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 7, },
-                { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 8, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 10, },
+                { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
+                { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
+                { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 4, },
+                { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, },
+                { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 6, },
+                { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 7, },
+                { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, },
+                { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 10, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 11, },
             ],
             dropdownList: [{
                 Id: 'StudentId',
@@ -128,8 +129,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             url: '/js/fees-area/fees-details-modal.js',
         });
     }
-
-   
+    
 
     const activeTab = {
         Id: '5EF1DA6B-86ED-4DE8-8154-9A851937E804',
@@ -143,7 +143,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         }, {
             click: viewDetails,
             html: eyeBtn("View Details")
-        }],
+            }],
         onDataBinding: () => { },
         rowBound: rowBound,
         columns: columns(),

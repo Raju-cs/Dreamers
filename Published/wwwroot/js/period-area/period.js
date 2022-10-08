@@ -142,7 +142,6 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
     };
 
     const viewDetails = (row) => {
-        console.log("row=>", row);
         Global.Add({
             Id: row.Id,
             name: 'Period Information' + row.Id,
@@ -158,7 +157,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             name: 'Period Information' + row.Id,
             url: '/js/period-area/period-studentlist-modal.js',
             updatePayment: model.Reload,
-            PeriodMonth: row.Name,
+            PeriodId: row.Id,
         });
     }
 

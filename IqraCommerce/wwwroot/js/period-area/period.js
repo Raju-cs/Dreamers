@@ -1,4 +1,4 @@
-﻿import { editBtn, eyeBtn, listBtn } from "../buttons.js";
+﻿import { editBtn, eyeBtn, listBtn, userBtn, briefcaseBtn } from "../buttons.js";
 import { filter, liveRecord, trashRecord, OPERATION_TYPE } from '../filters.js';
 import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
 (function () {
@@ -142,12 +142,10 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
     };
 
     const viewDetails = (row) => {
-        console.log("row=>", row);
         Global.Add({
             Id: row.Id,
             name: 'Period Information' + row.Id,
             url: '/js/period-area/period-details-modal.js',
-            
         });
     }
 
@@ -158,7 +156,16 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             name: 'Period Information' + row.Id,
             url: '/js/period-area/period-studentlist-modal.js',
             updatePayment: model.Reload,
-            PeriodMonth: row.Name,
+            PeriodId: row.Id,
+        });
+    }
+
+    const totalFeeList = (row) => {
+        Global.Add({
+            Id: row.Id,
+            name: 'Fees Information' + row.Id,
+            url: '/js/fees-area/fees-totalfee-modal.js',
+            PeriodId: row.Id,
         });
     }
 
@@ -177,7 +184,11 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             }, {
             click: studentFeesList,
             html: listBtn("View Student List")
-            }],
+            }, {
+            click: totalFeeList,
+            html: briefcaseBtn("Monthly Income")
+            }
+        ],
       
         onDataBinding: () => { },
         rowBound: () => { },

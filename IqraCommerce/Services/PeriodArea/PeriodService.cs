@@ -52,7 +52,7 @@ namespace IqraCommerce.Services.PeriodArea
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
             var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
 
-            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] ASC" : page.SortBy;
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] DESC" : page.SortBy;
             using (var db = new DBService())
             {
                 page.filter = innerFilters;
@@ -105,7 +105,7 @@ namespace IqraCommerce.Services.PeriodArea
 
         public static string ForPayment(string innerCondition)
         {
-            return @"* from ( 
+            return @" * from ( 
        select  stdnt.[Id]
       ,stdnt.[Name]
       ,stdnt.[DreamersId]
@@ -120,11 +120,13 @@ namespace IqraCommerce.Services.PeriodArea
       ,stdnt.[Version]
       ,count(btch.Id) [NumberOfModule]
       ,ISNULL(sum(btch.Charge), '') [Charge]
+	  ,ISNULL(sum(fs.Fee), '') [Fee]
  from [ModulePeriod] [mdlprd]
 left join StudentModule [stdntmdl] on mdlprd.StudentModuleId = stdntmdl.Id
 left join Module mdl on mdl.Id = stdntmdl.ModuleId
 left join Student stdnt on stdnt.Id = stdntmdl.StudentId
 left join Batch btch on btch.ReferenceId = stdntmdl.ModuleId 
+left join Fees fs on fs.StudentId = stdntmdl.StudentId
 " + innerCondition + @"
 group by stdnt.[Id]
       ,stdnt.[Name]

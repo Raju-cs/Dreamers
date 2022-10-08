@@ -35,7 +35,7 @@ namespace IqraCommerce.Controllers.PeriodArea
             List<StudentModule> ListStudentModule = new List<StudentModule>();
             Period period = new Period();
 
-            ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false).ToList();
+            ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false ).ToList();
             var getData = from getdata in ListStudentModule select new {getdata.Id};
             
             foreach(var module in getData)

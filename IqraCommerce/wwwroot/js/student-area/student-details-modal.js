@@ -298,7 +298,7 @@ var Controller = new function () {
                        ],
 
                         Url: '/StudentModule/Get/',
-                        filter: [studentFilter, moduleActiveFilter, moduleLiveFilter, activeFilter],
+                        filter: [studentFilter, moduleActiveFilter, moduleLiveFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editStudentModule,

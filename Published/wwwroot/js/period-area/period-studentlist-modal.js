@@ -7,8 +7,8 @@ var Controller = new function () {
       
     this.Show = function (options) {
         _options = options;
+        console.log("options=>", options);
         studentDateFilter.value = _options.PeriodMonth;
-        console.log("options=>", _options);
 
         const viewDetails = (row, model) => {
             console.log("row=>", row);
@@ -21,7 +21,7 @@ var Controller = new function () {
                 PeriodId: _options.Id,
             });
         }
-        
+
         Global.Add({
             title: 'All Student List',
             selected: 0,
@@ -42,12 +42,9 @@ var Controller = new function () {
                             { "field": 'PriodId', "value": _options.Id, Operation: 0, Type: "INNER" }
                         ],
                         onDataBinding: function (response) { },
-                        rowBound: () => { },
+                        //rowBound: rowBound,
                         
-                            actions: [/*{
-                                click: studentPayment,
-                                html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-usd" title="Make Payment"></i></a>'
-                            },*/ {
+                            actions: [{
                                 click: viewDetails,
                                 html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
                             }],

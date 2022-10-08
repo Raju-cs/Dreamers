@@ -2,8 +2,7 @@
 import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
 import { ACTIVE_STATUS } from "../dictionaries.js";
 
-(function () {
-
+(function (option) {
     const controller = 'Fees';
 
     $(document).ready(() => {
@@ -27,6 +26,11 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
 
+
+    function rowBound(row) {
+        console.log("row");
+        row.css({ background: 'red' });
+    }
 
     function add() {
         Global.Add({
@@ -124,9 +128,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         });
     }
 
-    function rowBound(row)  {
-        row.css({ color: 'red' });
-    }
+   
 
     const activeTab = {
         Id: '5EF1DA6B-86ED-4DE8-8154-9A851937E804',

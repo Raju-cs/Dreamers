@@ -9,23 +9,24 @@
         studentFilter.value = _options.Id;
         periodFilter.value = _options.PeriodId;
 
-        function rowBound(row) {
-            console.log("Fee=>", this.Fee);
+        function rowBound(elm) {
+            console.log("rowbound=>", elm);
             console.log("Charge=>", _options.Charge);
             if (_options.Charge == this.Fee) {
-                row.css({ background: "#fff" });
+                elm.css({ background: "#fff" }).find('td.action').css({ display: "none", });
+                elm.css({ background: "#fff" }).find('.btn-primary').css({ display: none, });
             } else {
-                row.css({ background: 'red' });
+                elm.css({ background: 'red' });
             }
         }
 
         function studentPayment(page, gird) {
-
-            console.log("page=>", page);
+            console.log("fee=>", page.Fee);
+            console.log("page=>", gird);
             Global.Add({
                 name: 'STUDENT_PAYMENT',
                 model: undefined,
-                title: 'Student Payment',
+                title: 'Payment',
                 columns: [
                     { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 3, add: false },
                     { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 4, add: false },
@@ -64,16 +65,16 @@
         function studentEditPayment(model, grid) {
             console.log("model=>", model);
             Global.Add({
-                name: 'Payment',
+                name: 'PAYMENT',
                 model: model,
                 title: 'Payment',
                 columns: [
                     { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 3, add: false },
                     { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 4, add: false },
                     { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, add: false },
-                    { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 6, },
+                    { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 6,add:false },
                     { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 7, add: false },
-                    { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, add: false },
+                    { field: 'PaidFee', title: 'Due', filter: true, add: { sibling: 2, }, position: 8 },
                     { field: 'IsActive', title: 'IsActive', filter: true, add: { sibling: 2, }, position: 8, add: false },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 9, },
                 ],
@@ -91,7 +92,7 @@
                     formModel.PaidFee = data.ModuleFee - formModel.Fee;
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
-                    formModel.ModuleFee = model.PaidFee;
+                    formModel.PaidFee = model.PaidFee;
                     formModel.Fee = (parseFloat(model.Fee) + parseFloat(model.PaidFee));
                 },
                 onSaveSuccess: function () {

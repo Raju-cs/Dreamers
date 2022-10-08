@@ -115,7 +115,7 @@ var Controller = new function () {
                 },],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
-                    console.log("model", model);
+                    console.log("model", formModel);
                     formModel.ActivityId = window.ActivityId;
                     formModel.BatchId = _options.Id;
                     formModel.ModuleId = _options.ModuleId;
@@ -187,7 +187,6 @@ var Controller = new function () {
             });
         }
 
-
         Global.Add({
             title: 'Batch Information',
             selected: 0,
@@ -199,7 +198,7 @@ var Controller = new function () {
                                 { field: 'Name', title: 'Batch Name', filter: true, position: 1, add: false },
                                 { field: 'MaxStudent', title: 'Max Student', filter: true, position: 4, },
                                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
-                        ],
+                                      ],
                         
                         DetailsUrl: function () {
                             return '/Batch/BasicInfo?Id=' + _options.Id;
