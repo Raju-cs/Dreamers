@@ -2372,3 +2372,4 @@ H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\IqraCommerce.csproj.CopyComplet
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\IqraCommerce.dll
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\IqraCommerce.pdb
 H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\IqraCommerce.genruntimeconfig.cache
+H:\Dreamers\IqraCommerce\obj\Debug\netcoreapp3.1\Razor\Views\TeacherFee\Index.cshtml.g.cs

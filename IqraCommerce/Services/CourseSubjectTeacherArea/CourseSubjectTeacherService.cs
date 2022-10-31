@@ -30,6 +30,15 @@ namespace IqraCommerce.Services.CourseSubjectTeacherArea
                 case "coursename":
                     name = "[crsh].Name";
                     break;
+                case "subjectisdeleted":
+                    name = "[sbjct].IsDeleted";
+                    break;
+                case "subjectisactive":
+                    name = "[sbjct].IsActive";
+                    break;
+                case "class":
+                    name = "[sbjct].Class";
+                    break;
                 default:
                     name = "crsbjctchr." + name;
                     break;
@@ -50,7 +59,7 @@ namespace IqraCommerce.Services.CourseSubjectTeacherArea
     {
         public static string Get()
         {
-            return @"[crsbjctchr].[Id]
+            return @" [crsbjctchr].[Id]
                   ,[crsbjctchr].[CreatedAt]
                   ,[crsbjctchr].[CreatedBy]
                   ,[crsbjctchr].[UpdatedAt]
@@ -69,6 +78,9 @@ namespace IqraCommerce.Services.CourseSubjectTeacherArea
 				  ,[tchr].Name  [TeacherName]
 			      ,[sbjct].Name [SubjectName]
 				  ,[crsh].Name  [CourseName]
+				  ,ISNULL([sbjct].Class, '') [Class]
+				  ,ISNULL([sbjct].IsActive, '') [SubjectIsActive]
+				  ,ISNULL([sbjct].IsDeleted, '') [SubjectIsDeleted]
                 FROM [dbo].[CourseSubjectTeacher] [crsbjctchr]
                 LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [crsbjctchr].[CreatedBy]
                 LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [crsbjctchr].[UpdatedBy]

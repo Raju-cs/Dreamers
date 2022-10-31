@@ -1,7 +1,9 @@
 ﻿using IqraBase.Data.Models;
 using IqraBase.Service;
+using IqraCommerce.Controllers.FeesArea;
 using IqraCommerce.DTOs;
 using IqraCommerce.Entities;
+using IqraCommerce.Entities.FeesArea;
 using IqraCommerce.Services.HistoryArea;
 using IqraService.DB;
 using IqraService.Search;
@@ -41,7 +43,8 @@ namespace IqraCommerce.Services
             SaveChange();
             return response;
         }
-        
+
+
         public virtual ResponseJson Update(AppBaseModel model, string changeType, Guid userId)
         {
 
@@ -92,6 +95,10 @@ namespace IqraCommerce.Services
             }
             return response;
         }
-        
+
+        internal void Update(DbSet<Fees> fees, object feesModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

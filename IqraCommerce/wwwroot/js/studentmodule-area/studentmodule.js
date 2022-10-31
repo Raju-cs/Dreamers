@@ -3,9 +3,9 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
     
     const controller = 'StudentModule';
 
-    /*$(document).ready(() => {
+    $(document).ready(() => {
         $('#add-record').click(add);
-    });*/
+    });
 
     const columns = () => [
         { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },

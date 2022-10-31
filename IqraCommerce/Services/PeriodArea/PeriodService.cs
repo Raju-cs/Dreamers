@@ -29,9 +29,23 @@ namespace IqraCommerce.Services.PeriodArea
                 case "smisdeleted":
                     name = "[stdntmdl].[IsDeleted]";
                     break;
+                case "scisdeleted":
+                    name = "[stdntcrsh].[IsDeleted]";
+                    break;
                 case "priodid":
                     name = "[mdlprd].[PriodId]";
                     break;
+                case "cpriodid":
+                    name = "[crshprd].[PriodId]";
+                    break;
+                
+                
+                case "charge":
+                    name = "Charge";
+                    break;
+                /* case "fsperiodid":
+                     name = "[fs].[PeriodId]";
+                     break;*/
                 default:
                     name = "prd." + name;
                     break;
@@ -52,13 +66,28 @@ namespace IqraCommerce.Services.PeriodArea
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
             var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
 
-            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] DESC" : page.SortBy;
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Charge] ASC" : page.SortBy;
             using (var db = new DBService())
             {
                 page.filter = innerFilters;
                 var query = GetWhereClause(page);
                 page.filter = outerFilters;
-                return await db.GetPages(page, PeriodQuery.ForPayment(query));
+                return await db.GetPages(page,PeriodQuery.ForPayment(query, page.Id?.ToString()));
+            }
+        }
+
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> ForCoursePayment(Page page)
+        {
+            var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
+            var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
+
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] " : page.SortBy;
+            using (var db = new DBService())
+            {
+                page.filter = innerFilters;
+                var query = GetWhereClause(page);
+                page.filter = outerFilters;
+                return await db.GetPages(page, PeriodQuery.ForCoursePayment(query));
             }
         }
 
@@ -93,7 +122,7 @@ namespace IqraCommerce.Services.PeriodArea
               ,[prd].[RegularPaymentDate]
               ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator] 
-             FROM [dbo].[Period] [prd]
+             FROM [dbo].[Period] [prd] 
              LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [prd].[CreatedBy]
              LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [prd].[UpdatedBy]";
         }
@@ -103,9 +132,33 @@ namespace IqraCommerce.Services.PeriodArea
             get { return @"SELECT " + Get() + " Where prd.Id = '"; }
         }
 
-        public static string ForPayment(string innerCondition)
+        public static string ForPayment(string innerCondition, string periodId)
         {
             return @" * from ( 
+                        select 
+                            distinct stdnt.Id [StudentId], 
+							stdnt.DreamersId [DreamersId],
+                            stdnt.Name as [StudentName], 
+                            sum(stdntmdl.Charge) [Charge], 
+                            (SELECT 
+                                ISNULL( SUM(fs.Fee), 0) 
+                            FROM Fees fs 
+                            WHERE PeriodId = '" + periodId + @"' 
+                            and fs.StudentId = stdnt.Id ) [Paid]
+                        from ModulePeriod mdlprd
+                        left join StudentModule stdntmdl on stdntmdl.Id = mdlprd.StudentModuleId
+                        left join Student stdnt on stdnt.Id = stdntmdl.StudentId
+                        left join Period prd on prd.Id = mdlprd.PriodId
+                        where mdlprd.PriodId = '" + periodId + @"' and stdntmdl.IsDeleted = 0
+                        group by stdnt.Id, 
+                                 stdnt.Name,
+								 stdnt.DreamersId) 
+                    item";
+        }
+
+        public static string ForCoursePayment(string innerCondition)
+        {
+            return @"  * from ( 
        select  stdnt.[Id]
       ,stdnt.[Name]
       ,stdnt.[DreamersId]
@@ -119,14 +172,15 @@ namespace IqraCommerce.Services.PeriodArea
       ,stdnt.[Group]
       ,stdnt.[Version]
       ,count(btch.Id) [NumberOfModule]
-      ,ISNULL(sum(btch.Charge), '') [Charge]
-	  ,ISNULL(sum(fs.Fee), '') [Fee]
- from [ModulePeriod] [mdlprd]
-left join StudentModule [stdntmdl] on mdlprd.StudentModuleId = stdntmdl.Id
-left join Module mdl on mdl.Id = stdntmdl.ModuleId
-left join Student stdnt on stdnt.Id = stdntmdl.StudentId
-left join Batch btch on btch.ReferenceId = stdntmdl.ModuleId 
-left join Fees fs on fs.StudentId = stdntmdl.StudentId
+      ,ISNULL(avg(fs.PaidFee), '') [Due]
+      ,ISNULL(sum(stdntmdl.Charge) , '') [Charge]
+	  ,ISNULL(avg (fs.Fee), '') [Fee]
+ from [CoursePeriod] [crshprd]
+left join StudentCourse [stdntcrsh] on crshprd.StudentCourseId = stdntcrsh.Id
+left join Course crsh on crsh.Id = stdntcrsh.CourseId
+left join Student stdnt on stdnt.Id = stdntcrsh.StudentId
+left join Batch btch on btch.ReferenceId = stdntcrsh.CourseId 
+left join Fees fs on fs.StudentId = stdntcrsh.StudentId
 " + innerCondition + @"
 group by stdnt.[Id]
       ,stdnt.[Name]

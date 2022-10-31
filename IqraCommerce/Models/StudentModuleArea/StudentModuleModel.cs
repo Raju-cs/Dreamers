@@ -8,6 +8,7 @@ namespace IqraCommerce.Models.StudentModuleArea
         public Guid ModuleId { get; set; }
         public Guid BatchId { get; set; }
         public Guid ReferenceId { get; set; }
+        public double Charge { get; set; }
         public DateTime? DischargeDate { get; set; } = null;
 
     }

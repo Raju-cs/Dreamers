@@ -73,14 +73,14 @@ namespace IqraCommerce.Services.StudentModuleArea
             }
         }
 
-        public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
+      /*  public override ResponseJson OnCreate(AppBaseModel model, Guid userId, bool isValid)
         {
             var studentModule = (StudentModuleModel)model;
 
             studentModule.Name = DateTime.Now.ToString("MMMM");
 
             return base.OnCreate(model, userId, isValid);
-        }
+        }*/
     }
 
     public class StudentModuleQuery
@@ -101,6 +101,7 @@ namespace IqraCommerce.Services.StudentModuleArea
               ,[stdntmdl].[BatchId]
 			  ,[stdntmdl].[ReferenceId]
 			  ,[stdntmdl].[DischargeDate] [DischargeDate]
+			  ,[stdntmdl].[Charge]
 	          ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator]
 	          ,ISNULL([mdl].Name,  '')  [ModuleName]
@@ -114,7 +115,6 @@ namespace IqraCommerce.Services.StudentModuleArea
 	          ,ISNULL([btch].Name,  '')  [BatchName]
 	          ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]
 	          ,ISNULL([btch].MaxStudent,  '')  [MaxStudent]
-	          ,ISNULL([btch].Charge,  '')  [Charge]
 	          ,ISNULL([stdnt].Class,  '')  [Class]
           FROM [dbo].[StudentModule] [stdntmdl]
           LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntmdl].[CreatedBy]

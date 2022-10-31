@@ -19,8 +19,8 @@ var Controller = new function () {
                 columns: [
                     { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
+                    //{ field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -49,8 +49,8 @@ var Controller = new function () {
                 columns: [
                     { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
+                   // { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -114,7 +114,7 @@ var Controller = new function () {
                         columns: [
                             { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                            //{ field: 'Charge', title: 'Charge', filter: true, position: 5, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                         ],
 

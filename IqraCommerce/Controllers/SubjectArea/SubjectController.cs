@@ -18,5 +18,17 @@ namespace IqraCommerce.Controllers.SubjectArea
         {
             return Json(await ___service.BasicInfo(id));
         }
+
+        public override ActionResult Create([FromForm] SubjectModel recordToCreate)
+        {
+            recordToCreate.Name = recordToCreate.SearchName + " " + recordToCreate.Class + " " + recordToCreate.Version;
+            return base.Create(recordToCreate);
+        }
+
+        public override ActionResult Edit([FromForm] SubjectModel recordToCreate)
+        {
+            recordToCreate.Name = recordToCreate.SearchName + " " + recordToCreate.Class + " " + recordToCreate.Version;
+            return base.Edit(recordToCreate);
+        }
     }
 }

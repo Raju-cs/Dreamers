@@ -1,7 +1,10 @@
 ﻿using IqraCommerce.Entities.CoachingAccountArea;
 using IqraCommerce.Models.CoachingAccountArea;
 using IqraCommerce.Services.CoachingAccountArea;
+using IqraService.Search;
+using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace IqraCommerce.Controllers.CoachingAccountArea
 {
@@ -14,6 +17,9 @@ namespace IqraCommerce.Controllers.CoachingAccountArea
             service = __service = ___service = new CoachingAccountService();
         }
 
-      
+        public async Task<JsonResult> ToatalAmount([FromBody] Page page)
+        {
+            return Json(await ___service.ToatalAmount(page));
+        }
     }
 }

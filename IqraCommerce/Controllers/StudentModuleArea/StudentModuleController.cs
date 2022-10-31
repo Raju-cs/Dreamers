@@ -5,11 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
-using IqraService.Search;
 using IqraCommerce.Entities.ModulePeriodArea;
 using System.Collections.Generic;
 using IqraCommerce.Entities.PeriodArea;
-using Microsoft.EntityFrameworkCore.Internal;
+using IqraCommerce.Entities.BatchArea;
+using IqraCommerce.Entities.StudentArea;
+using IqraCommerce.Helpers;
 
 namespace IqraCommerce.Controllers.StudentModuleArea
 {
@@ -31,23 +32,37 @@ namespace IqraCommerce.Controllers.StudentModuleArea
         {
             ModulePeriod modulePeriod = new ModulePeriod();
             Period period = new Period();
+
             var modulePeriodEntity = ___service.GetEntity<ModulePeriod>();
             var periodEntity = ___service.GetEntity<Period>();
             var studentModuleEntity = ___service.GetEntity<StudentModule>();
-            List<ModulePeriod> modulePeriodList = new List<ModulePeriod>();
+            var batchEntity = ___service.GetEntity<Batch>();
+
             StudentModule ListStudentModule = new StudentModule();
+            List<ModulePeriod> modulePeriodList = new List<ModulePeriod>();
             List<Period> periodList = new List<Period>();
 
             modulePeriodList = modulePeriodEntity.Where(x => x.Id != ListStudentModule.Id).ToList();
+            
             var getData = from getdata in modulePeriodList select new { getdata.Id };
+            
             foreach (var studentmoduleId in getData)
             {
-                    modulePeriod = new ModulePeriod();
-                    modulePeriod.PriodId = periodEntity.FirstOrDefault().Id;
+                    modulePeriod.PriodId = periodEntity.OrderByDescending(x => x.StartDate).FirstOrDefault().Id;
                     modulePeriod.StudentModuleId = recordToCreate.Id;
+                    modulePeriod.Name = period.Name;
+                    modulePeriodEntity.Add(modulePeriod);
             }
-            modulePeriodEntity.Add(modulePeriod);
-            return base.Create(recordToCreate);
+
+            var studentModuleFromDb = ___service.GetEntity<StudentModule>()
+                                         .FirstOrDefault(sm => sm.StudentId == recordToCreate.StudentId
+                                                            && sm.IsDeleted == false
+                                                            && sm.ModuleId == recordToCreate.ModuleId);
+
+            if(studentModuleFromDb != null)
+                return Json(new Response(-4, null, true, "Student Already Exist!"));
+            
+            return  base.Create(recordToCreate);
         }
     }
 }

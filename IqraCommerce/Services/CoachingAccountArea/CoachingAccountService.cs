@@ -2,6 +2,7 @@
 using IqraCommerce.Entities.CoachingAccountArea;
 using IqraService.Search;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IqraCommerce.Services.CoachingAccountArea
@@ -21,6 +22,9 @@ namespace IqraCommerce.Services.CoachingAccountArea
                 case "coachingaccount":
                     name = "cchngaccnt.[Name]";
                     break;
+                case "prdname":
+                    name = "prd.[Name]";
+                    break;
 
                 default:
                     name = "cchngaccnt." + name;
@@ -34,12 +38,27 @@ namespace IqraCommerce.Services.CoachingAccountArea
             page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[CreatedAt] DESC" : page.SortBy;
             using (var db = new DBService(this))
             {
-                return await db.GetPages(page, ScheduleQuery.Get());
+                return await db.GetPages(page, CoachingAccountQuery.Get());
+            }
+        }
+
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> ToatalAmount(Page page)
+        {
+            var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
+            var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
+
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] " : page.SortBy;
+            using (var db = new DBService())
+            {
+                page.filter = innerFilters;
+                var query = GetWhereClause(page);
+                page.filter = outerFilters;
+                return await db.GetPages(page, CoachingAccountQuery.ToatalAmount(query));
             }
         }
     }
 
-    public class ScheduleQuery
+    public class CoachingAccountQuery
     {
         public static string Get()
         {
@@ -49,24 +68,42 @@ namespace IqraCommerce.Services.CoachingAccountArea
       ,[cchngaccnt].[UpdatedAt]
       ,[cchngaccnt].[UpdatedBy]
       ,[cchngaccnt].[IsDeleted]
-      ,[cchngaccnt].[Remarks]
+      ,ISNULL([cchngaccnt].[Remarks], '') [Remarks]
       ,[cchngaccnt].[ActivityId]
-      ,[cchngaccnt].[Name]
+      ,ISNULL([cchngaccnt].[Name], '') [Name]
 	  ,ISNULL([prd].Name, '') [PeriodName]
-	  ,ISNULL([prd].[InCome], '') [InCome]
-	  ,ISNULL([prd].[OutCome], '') [OutCome]
-	  ,ISNULL([prd].[TotalCollected], '') [TotalCollected]
+	  ,ISNULL([stdnt].Name, '') [StudentName]
+	  ,ISNULL([mdl].Name, '') [ModuleName]
       ,[cchngaccnt].[IsActive]
-      ,[cchngaccnt].[PeriodId]
+      ,ISNULL([cchngaccnt].[PeriodId], '') [PeriodId]
+      ,ISNULL([cchngaccnt].[Amount], '') [Amount]
+      ,ISNULL([cchngaccnt].[ModuleId], '') [ModuleId]
+      ,ISNULL([cchngaccnt].[PaymentId], '') [PaymentId]
+      ,ISNULL([cchngaccnt].[Percentage], '') [Percentage]
+      ,ISNULL([cchngaccnt].[StudentId], '') [StudentId]
+      ,ISNULL([cchngaccnt].[Total], '') [Total]
   FROM [dbo].[CoachingAccount] [cchngaccnt]
   LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [cchngaccnt].[CreatedBy]
   LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [cchngaccnt].[UpdatedBy]
-  LEFT JOIN [dbo].[Period] [prd] ON [prd].Id = [cchngaccnt].[PeriodId]";
+  LEFT JOIN [dbo].[Period] [prd] ON [prd].Id = [cchngaccnt].[PeriodId]
+  LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [cchngaccnt].[StudentId]
+  LEFT JOIN [dbo].[Module] [mdl] ON [mdl].Id = [cchngaccnt].[ModuleId]";
         }
 
         public static string BasicInfo
         {
             get { return @"SELECT " + Get() + " Where cchngaccnt.Id = '"; }
+        }
+
+        public static string ToatalAmount(string innerCondition)
+        {
+            return @" * from ( 
+          select  [prd].[Name]
+       ,SUM(cchngaccnt.Amount) Amount 
+	  from CoachingAccount cchngaccnt
+
+      left join Period prd on prd.Id = cchngaccnt.PeriodId
+      group by cchngaccnt.PeriodId, prd.Name) item";
         }
     }
 }

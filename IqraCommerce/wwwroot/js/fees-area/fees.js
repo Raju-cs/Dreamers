@@ -60,6 +60,9 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
             },
+            onrequest: (page, studentId) => {
+                page.Id = _options.Id;
+            },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
             },
@@ -129,13 +132,32 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             url: '/js/fees-area/fees-details-modal.js',
         });
     }
-    
 
-    const activeTab = {
+    const allTab = {
+        Id: 'BBC23DC6-A099-494D-BEB4-E8B98993A27D',
+        Name: 'ALL_FEES',
+        Title: 'All',
+        filter: [liveRecord],
+        actions: [{
+            click: edit,
+            html: editBtn("Edit Information")
+        }, {
+            click: viewDetails,
+            html: eyeBtn("View Details")
+        }],
+        onDataBinding: () => { },
+        rowBound: () => { },
+        columns: columns(),
+        Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
+        Url: 'Get',
+    }
+
+    const moiduleTab = {
         Id: '5EF1DA6B-86ED-4DE8-8154-9A851937E804',
-        Name: 'ACTIVE_FEES',
-        Title: 'Active',
-        filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL), liveRecord],
+        Name: 'MODULE',
+        Title: 'Module',
+        filter: [ liveRecord],
         remove: false,
         actions: [{
             click: edit,
@@ -146,17 +168,28 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             }],
         onDataBinding: () => { },
         rowBound: rowBound,
-        columns: columns(),
+        columns: [
+            { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
+            { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
+            { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
+            { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 4, },
+            { field: 'Fee', title: 'Paid', filter: true, add: { sibling: 2, }, position: 7, },
+            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 11, },
+            { field: 'Creator', title: 'Creator', add: false },
+            { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
+            { field: 'Updator', title: 'Updator', add: false },
+            { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
+        ],
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
 
-    const inactiveTab = {
+    const courseTab = {
         Id: 'EF823F95-804C-496A-B010-2C37257E8356',
-        Name: 'INACTIVE_FEES',
-        Title: 'Inactive',
-        filter: [filter('IsActive', 0, OPERATION_TYPE.EQUAL), liveRecord],
+        Name: 'COURSE',
+        Title: 'Course',
+        filter: [{ "field": "Name", "value": "Course", Operation: 0 }, liveRecord],
         remove: false,
         actions: [{
             click: edit,
@@ -169,7 +202,17 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         rowBound: (row) => {
             row.css({ background: 'red' });
         },
-        columns: columns(),
+        columns: [
+            { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
+            { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
+            { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
+            { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 4, },
+            { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 6, },
+            { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 7, },
+            { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, },
+            { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 10, },
+            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 11, },
+        ],
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
         Url: 'Get',
@@ -194,7 +237,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         Base: {
             Url: `/${controller}/`,
         },
-        items: [activeTab, inactiveTab, deleteTab],
+        items: [ moiduleTab, courseTab, deleteTab],
     };
 
     //Initialize Tabs

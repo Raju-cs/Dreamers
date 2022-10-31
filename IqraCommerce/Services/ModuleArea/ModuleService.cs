@@ -78,7 +78,7 @@ namespace IqraCommerce.Services.ModuleArea
                   ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator] 
 	              ,ISNULL([tchr].Name, '')  [TeacherName]
-	              ,ISNULL([sbjct].Name, '') [SubjectName]
+	              ,ISNULL([sbjct].SearchName, '') [SubjectName]
               FROM [dbo].[Module] [mdl]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [mdl].[CreatedBy]
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [mdl].[UpdatedBy]

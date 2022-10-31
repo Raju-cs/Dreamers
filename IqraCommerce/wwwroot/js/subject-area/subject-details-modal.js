@@ -35,7 +35,7 @@
                         Header: 'Subject',
                         columns: [
                             { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, add: false },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                            //{ field: 'Charge', title: 'Charge', filter: true, position: 3, },
                         ],
 
                         Url: '/TeacherSubject/Get/',
@@ -57,7 +57,7 @@
                         columns: [
                             { field: 'Name', title: 'Name', filter: true, position: 1, },
                             { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
-                            { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 } },
+                            //{ field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 4, add: { sibling: 2 } },
                         ],
                         Url: '/Module/Get/',
                         filter: [subjectbatchFilter, liveFilter, activeFilter],

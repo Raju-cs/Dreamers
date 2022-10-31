@@ -21,7 +21,7 @@ var Controller = new function () {
                     { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 3, add: false },
                     { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 4, add: false },
                     { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, add: false },
-                    { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 6, },
+                    { field: 'ModuleFee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 6,},
                     { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 7, add: false },
                     { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, add: false },
                     { field: 'IsActive', title: 'IsActive', filter: true, add: { sibling: 2, }, position: 8, add: false },
@@ -29,29 +29,27 @@ var Controller = new function () {
                 ],
                 dropdownList: [],
                 additionalField: [],
+                
                 onSubmit: function (formModel, data, model) {
-                    console.log("model=>", model);
                     formModel.ActivityId = window.ActivityId;
-                    formModel.StudentId = page.Id;
+                    formModel.StudentId = page.StudentId;
                     formModel.PeriodId = _options.PeriodId;
                     formModel.IsActive = true;
                     formModel.ModuleFee = page.Charge;
                     formModel.TotalFee = model.ModuleFee;
                     formModel.Fee = model.ModuleFee
                     formModel.PaidFee = (parseFloat(page.Charge) - parseFloat(formModel.Fee));
-
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
-                    formModel.ModuleFee = page.Charge;
+                   // formModel.ModuleFee = page.Charge;
                 },
                 onSaveSuccess: function () {
                     _options.updatePayment();
                     grid?.Reload();
                 },
-                save: `/Fees/Create`,
+                save: `/Fees/PayFees`,
             });
         }
-
 
         const viewDetails = (row, model) => {
             console.log("row=>", row);
@@ -59,20 +57,21 @@ var Controller = new function () {
                 Id: row.Id,
                 name: 'Fees Information' + row.Id,
                 url: '/js/period-area/Period-Student-Payment-Details-modal.js',
-                Charge: row.Charge,
                 updatePayment: model.Reload,
                 PeriodId: _options.Id,
+                ModuleCharge: row.Charge,
+                StudentId: row.StudentId
             });
         }
+
         function rowBound(elm) {
-            console.log("rowbound=>", elm);
-            console.log("Charge=>",this.Charge);
-            console.log("Fee=>", this.Fee);
-            if (this.Fee > 0) {
-                elm.css({ background: "#fff" }).find('.glyphicon-usd').css({ display: "none"});
-                elm.css({ background: "#fff" }).find('.glyphicon-eye-open').css({ padding: 5 });
-                elm.css({ background: "#fff" }).find('.action a').css({ padding: 0});
-            }
+            if (this.Paid >= this.Charge ) {
+                elm.css({ background: "#00800040" });
+            } 
+        }
+
+        function dueBound(td) {
+            td.html(this.Charge - this.Paid);
         }
 
         Global.Add({
@@ -84,9 +83,11 @@ var Controller = new function () {
                     Grid: [{
                         Header: 'Student',
                         columns: [
-                            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 1, },
-                            { field: 'Name', title: 'Student Name', filter: true, position: 2, add: { sibling: 4 }, },
-                            { field: 'Charge', title: 'Module Charge', filter: true, position: 3 },
+                            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 2, add: { sibling: 4 }, },
+                            { field: 'StudentName', title: 'Student Name', filter: true, position: 3 },
+                            { field: 'Charge', title: 'Fee', filter: true, position: 4 },
+                            { field: 'Paid', title: 'Paid', filter: true, position: 5 },
+                            { field: 'Due', title: 'Due', filter: true, position: 5, bound: dueBound  },
                         ],
 
                         Url: '/Period/ForPayment/',
@@ -95,6 +96,9 @@ var Controller = new function () {
                             { "field": 'PriodId', "value": _options.Id, Operation: 0, Type: "INNER" }
                         ],
                         onDataBinding: function (response) { },
+                        onrequest: (page) => {
+                            page.Id = _options.Id;
+                        },
                         rowBound: rowBound,
                         actions: [{
                             click: studentPayment,
@@ -103,14 +107,11 @@ var Controller = new function () {
                              click: viewDetails,
                              html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
                         }],
-                        
                         buttons: [],
-                       
                         selector: false,
                         Printable: {
                             container: $('void')
                         }
-
                     }],
                 }],
 

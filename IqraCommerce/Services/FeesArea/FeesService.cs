@@ -1,14 +1,15 @@
 ﻿using IqraBase.Service;
 using IqraCommerce.Entities.FeesArea;
+using IqraCommerce.Models.FeesArea;
 using IqraService.Search;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace IqraCommerce.Services.FeesArea
 {
-    public class FeesService: IqraCommerce.Services.AppBaseService<Fees>
+    public class FeesService : IqraCommerce.Services.AppBaseService<Fees>
     {
         public override string GetName(string name)
         {
@@ -51,6 +52,16 @@ namespace IqraCommerce.Services.FeesArea
             return base.GetName(name);
         }
 
+        public async Task<List<ModuleForFeeModel>> GetModules(Guid studentId, Guid periodId)
+        {
+            using (var db = new DBService())
+            {
+                var res = await db.List<ModuleForFeeModel>(FeesQuery.GetModules(studentId.ToString(), periodId.ToString()));
+
+                return res.Data;
+            }
+        }
+
         public async Task<ResponseList<Pagger<Dictionary<string, object>>>> TotalFee(Page page)
         {
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
@@ -82,13 +93,15 @@ namespace IqraCommerce.Services.FeesArea
                 return await db.FirstOrDefault(FeesQuery.BasicInfo + Id + "'");
             }
         }
+
+
     }
 
     public class FeesQuery
     {
         public static string Get()
         {
-               return @" [fs].[Id]
+            return @" [fs].[Id]
                   ,[fs].[CreatedAt]
                   ,[fs].[CreatedBy]
                   ,[fs].[UpdatedAt]
@@ -113,7 +126,7 @@ namespace IqraCommerce.Services.FeesArea
 	              ,ISNULL([prd].Name, '') [Period]
 	              ,ISNULL([prd].StartDate, '') [StartDate]
 	              ,ISNULL([prd].EndDate, '') [EndDate]
-              FROM [dbo].[Fees] [fs]
+               FROM [dbo].[Fees] [fs]
                LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [fs].[CreatedBy]
                LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [fs].[UpdatedBy]
                LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [fs].[StudentId]
@@ -136,7 +149,7 @@ namespace IqraCommerce.Services.FeesArea
       ,prd.[Remarks]
       ,prd.[ActivityId]
       ,prd.[Name]
-	  ,SUM(TotalFee) as Total_Fee
+	  ,SUM(Fee) as Total_Fee
  FROM [dbo].Period prd
  left join Fees fs on fs.PeriodId = prd.Id
 " + innerCondition + @"
@@ -151,5 +164,16 @@ namespace IqraCommerce.Services.FeesArea
       ,prd.[Name]) item";
         }
 
+
+        public static string GetModules(string studentId, string periodId)
+        {
+            return @"select mdl.Id Id,
+                mdlprd.Name PeriodName, mdl.Name ModuleName, stdntmdl.Charge ModuleFees from [Period] prd
+                left join [ModulePeriod] mdlprd on mdlprd.PriodId = prd.Id
+                left join [StudentModule] stdntmdl on mdlprd.StudentModuleId = stdntmdl.Id
+                left join [Module] mdl on mdl.Id = stdntmdl.ModuleId
+                left join [Student] stdnt on stdnt.Id = stdntmdl.StudentId
+                where prd.Id = '" + periodId + @"' and stdnt.Id = '" + studentId + @"'";
+        }
     }
 }

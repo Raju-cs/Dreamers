@@ -74,7 +74,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
                 const year = new Date().getFullYear();
                 formModel.StartDate = new Date(year, monthIndex, 1).format('dd/MM/yyyy');
                 formModel.EndDate = new Date(year, monthIndex + 1, 0).format('dd/MM/yyyy');
-                formModel.RegularPaymentDate = new Date(year, monthIndex , 7).format('dd/MM/yyyy');
+                formModel.RegularPaymentDate = new Date(year, monthIndex , 10).format('dd/MM/yyyy');
                 formModel.Name = months[monthIndex];
             }, 
             onSaveSuccess: function () {
@@ -157,6 +157,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             url: '/js/period-area/period-studentlist-modal.js',
             updatePayment: model.Reload,
             PeriodId: row.Id,
+            PeriodName: row.Name
         });
     }
 
@@ -166,6 +167,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             name: 'Fees Information' + row.Id,
             url: '/js/fees-area/fees-totalfee-modal.js',
             PeriodId: row.Id,
+
         });
     }
 

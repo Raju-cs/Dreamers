@@ -103,7 +103,8 @@ var Controller = new function () {
                 model: undefined,
                 title: 'Add Student',
                 columns: [
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 2 },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 3, },
                 ],
                 dropdownList: [{
                     Id: 'StudentId',
@@ -120,6 +121,9 @@ var Controller = new function () {
                     formModel.BatchId = _options.Id;
                     formModel.ModuleId = _options.ModuleId;
                 },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    formModel.Charge = _options.ModuleCharge;
+                },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
                 },
@@ -133,7 +137,10 @@ var Controller = new function () {
                 name: 'EDIT_STUDENT',
                 model: model,
                 title: 'Edit Student',
-                columns: [{ field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },],
+                columns: [
+                    { field: 'Charge', title: 'Charge', filter: true, position: 2 },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 3, },
+                ],
                 dropdownList: [{
                     Id: 'StudentId',
                     add: { sibling: 2 },
@@ -248,7 +255,8 @@ var Controller = new function () {
                         columns: [
                             { field: 'StudentName', title: 'Student Name', filter: true, position: 1, add: false },
                             { field: 'DateOfBirth', title: 'DateOfBirth', filter: true, position: 2, add: false, dateFormat: 'MM/dd/yyyy' },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 3, },
+                            { field: 'Charge', title: 'Charge', filter: true, position: 3 },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 4, },
                         ],
 
                         Url: '/StudentModule/Get/',

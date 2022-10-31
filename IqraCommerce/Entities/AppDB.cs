@@ -16,6 +16,8 @@ using IqraCommerce.Entities.PeriodArea;
 using IqraCommerce.Entities.FeesArea;
 using IqraCommerce.Entities.ModulePeriodArea;
 using IqraCommerce.Entities.CoachingAccountArea;
+using IqraCommerce.Entities.CoursePeriodArea;
+using IqraCommerce.Entities.TeacherFeeArea;
 
 namespace IqraCommerce.Entities
 {
@@ -113,7 +115,13 @@ namespace IqraCommerce.Entities
         public virtual DbSet<CoachingAccount> CoachingAccount { get; set; }
         #endregion
 
+        #region CoursePeriod
+        public virtual DbSet<CoursePeriod> CoursePeriod { get; set; }
+        #endregion
 
+        #region TeacherFee
+        public virtual DbSet<TeacherFee> TeacherFee { get; set; }
+        #endregion
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

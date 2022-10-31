@@ -22,13 +22,13 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
     const generateModuleCode = () => {
         selectedRow.Name = `${subjectCode}-${classCode}-${teacherCode}`;
     }
-
+    const generateSearchName = () => {
+        selectedRow.SearchName = `${subjectCode}-${classCode}`;
+    }
     const subjectSelectHandler = (data) => {
-
         teacherFilterBySubject.value = data ? data.Id : '00000000-0000-0000-0000-000000000000';
         subjectCode = data?.Name?.slice(0, 3).toUpperCase();
         generateModuleCode();
-
         moduleTeacherDropdownMat.Reload();
     }
     const editSubjectSelectHandler = (data) => {
@@ -91,7 +91,8 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             url: '/Subject/AutoComplete',
             Type: 'AutoComplete',
             onchange: editSubjectSelectHandler,
-            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] }
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] },
+
         },
         editmoduleTeacherDropdownMat = {
             Id: 'TeacherId',
@@ -136,8 +137,9 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
         { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
         { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
         { field: 'Class', title: 'Class', filter: true, position: 4, add: false },
-        { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 5, add: { sibling: 2 }},
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 6, },
+        { field: 'TeacherPercentange', title: 'TeacherPercentange', filter: true, position: 5, add: { sibling: 2 }},
+        { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 6, add: { sibling: 2 } },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 7, },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
         { field: 'Creator', title: 'Creator', add: false },
@@ -173,8 +175,9 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             title: 'Edit Module',
             columns: [
                 { field: 'Name', title: 'Name', filter: true, position: 1, },
+                { field: 'TeacherPercentange', title: 'TeacherPercentange', filter: true, position: 5, add: { sibling: 2 }},
                 { field: 'ChargePerStudent', title: 'Charge Per Student', filter: true, position: 6, add: { sibling: 2 } },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 7, }
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 7, }
             ],
             dropdownList: editmodalDropDowns,
             additionalField: [],

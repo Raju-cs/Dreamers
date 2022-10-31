@@ -8,7 +8,9 @@ var Controller = new function () {
     const scheduleFilter = { "field": "ReferenceId", "value": '', Operation: 0 };
     const teacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
     const editTeacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
- 
+    const subjectClassFilter = { "field": "Class", "value": '', Operation: 0 };
+    const liveSubjectFilterTwo = { "field": "SubjectIsDeleted", "value": 0, Operation: 0 };
+    const activeSubjectFilterTwo = { "field": "SubjectIsActive", "value": 1, Operation: 0 };
     var _options;
 
     let courseTeacherDropdownMat;
@@ -27,7 +29,8 @@ var Controller = new function () {
         editcourseTeacherDropdownMat.Reload();
     }
     const modalColumns = [
-        { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
+        { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, add: { sibling: 2 } },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
     ]
   
     const modalDropDowns = [
@@ -38,7 +41,7 @@ var Controller = new function () {
             url: '/Subject/AutoComplete',
             Type: 'AutoComplete',
             onchange: subjectSelectHandler,
-            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] }
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject, subjectClassFilter] }
         },
         courseTeacherDropdownMat = {
             Id: 'TeacherId',
@@ -74,6 +77,8 @@ var Controller = new function () {
         _options = options;
         courseFilter.value = _options.Id;
         scheduleFilter.value = _options.Id;
+        subjectClassFilter.value = _options.CourseClass;
+        console.log("options=>", _options);
    
         function addSubjectAndTeacher(page) {
             Global.Add({
@@ -218,10 +223,11 @@ var Controller = new function () {
                             { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, },
                             { field: 'SubjectName', title: 'Subject', filter: true, position: 2, add: false },
                             { field: 'TeacherPercentange', title: 'Teacher Percentange%', filter: true, position: 4, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                         ],
 
                         Url: '/CourseSubjectTeacher/Get/',
-                        filter: [courseFilter],
+                        filter: [courseFilter, subjectClassFilter, liveSubjectFilterTwo, activeSubjectFilterTwo, trashFilter ],
                         onDataBinding: function (response) { },
                         actions: [
                             {
