@@ -27,12 +27,6 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
 
-
-    function rowBound(row) {
-        console.log("row");
-        row.css({ background: 'red' });
-    }
-
     function add() {
         Global.Add({
             name: 'ADD_FEES',
@@ -146,7 +140,6 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             html: eyeBtn("View Details")
         }],
         onDataBinding: () => { },
-        rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
@@ -167,7 +160,6 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
             html: eyeBtn("View Details")
             }],
         onDataBinding: () => { },
-        rowBound: rowBound,
         columns: [
             { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
             { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
@@ -199,9 +191,6 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
                 html: eyeBtn("View Details")
             }],
         onDataBinding: () => { },
-        rowBound: (row) => {
-            row.css({ background: 'red' });
-        },
         columns: [
             { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
             { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
@@ -224,7 +213,6 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         Title: 'Deleted',
         filter: [trashRecord],
         onDataBinding: () => { },
-        rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
         Url: 'Get',

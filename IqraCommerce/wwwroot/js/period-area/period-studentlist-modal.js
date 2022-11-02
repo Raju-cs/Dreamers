@@ -10,8 +10,9 @@ var Controller = new function () {
         console.log("options=>", options);
         studentDateFilter.value = _options.PeriodMonth;
         periodFilter.value = _options.PeriodId;
-
+        
         function studentPayment(page, grid) {
+            
             console.log("fee=>", page);
             Global.Add({
                 name: 'STUDENT_PAYMENT',
@@ -31,6 +32,7 @@ var Controller = new function () {
                 additionalField: [],
                 
                 onSubmit: function (formModel, data, model) {
+                    console.log("formModel=>", formModel);
                     formModel.ActivityId = window.ActivityId;
                     formModel.StudentId = page.StudentId;
                     formModel.PeriodId = _options.PeriodId;
