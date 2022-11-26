@@ -15,16 +15,38 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
     // output: month/date/year
     const dateForSQLServer = (enDate = '01/01/1970') => {
         const dateParts = enDate.split('/');
-
+        console.log("dateparts=>", dateParts);
         return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+        //return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+    }
+
+    function periodStartDate(td) {
+        td.html(new Date(this.StartDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+    function periodEndDate(td) {
+        td.html(new Date(this.EndDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+    function paymentDate(td) {
+        td.html(new Date(this.RegularPaymentDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
     }
 
     const columns = () => [
         { field: 'Name', title: 'Month', filter: true, required: false, position: 1, add: false },
-        { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false },
-        { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false },
-        { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false },
-       
+        { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false, bound: periodStartDate },
+        { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false, bound: periodEndDate },
+        { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false, bound: paymentDate },
  /*       { field: 'TotalCollected', title: 'Total Collected', filter: true, position: 2, required: true, add: { sibling: 2 } },
         { field: 'InCome', title: 'Income', filter: true, position: 3, add: { sibling: 2 } },
         { field: 'OutCome', title: 'Outcome', filter: true, position: 5, add: { sibling: 2 } },*/
@@ -130,9 +152,9 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
-                formModel.StartDate = model.StartDate;
-                formModel.EndDate = model.EndDate;
-                formModel.RegularPaymentDate = model.RegularPaymentDate;
+                formModel.EndDate = dateForSQLServer(model.EndDate);
+                formModel.StartDate = dateForSQLServer(model.StartDate);
+                formModel.RegularPaymentDate = dateForSQLServer(model.RegularPaymentDate);
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -157,7 +179,9 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             url: '/js/period-area/period-studentlist-modal.js',
             updatePayment: model.Reload,
             PeriodId: row.Id,
-            PeriodName: row.Name
+            PeriodName: row.Name,
+            RegularPaymentDate: row.RegularPaymentDate
+
         });
     }
 

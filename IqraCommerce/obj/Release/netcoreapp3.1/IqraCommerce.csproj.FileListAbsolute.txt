@@ -2339,7 +2339,6 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Batch\Index.cshtm
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CoachingAccount\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CourseSubjectTeacher\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Course\Index.cshtml.g.cs
-H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Demo\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Fees\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
@@ -2366,3 +2365,8 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\IqraCommerce.dll
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\IqraCommerce.pdb
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\IqraCommerce.genruntimeconfig.cache
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\TeacherFee\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\BatchAttendance\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\StudentResult\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Message\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CoursePayment\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CourseBatchAttendance\Index.cshtml.g.cs

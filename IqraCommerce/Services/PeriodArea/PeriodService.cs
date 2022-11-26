@@ -38,8 +38,6 @@ namespace IqraCommerce.Services.PeriodArea
                 case "cpriodid":
                     name = "[crshprd].[PriodId]";
                     break;
-                
-                
                 case "charge":
                     name = "Charge";
                     break;
@@ -61,7 +59,7 @@ namespace IqraCommerce.Services.PeriodArea
                 return await db.GetPages(page, PeriodQuery.Get());
             }
         }
-        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> ForPayment(Page page)
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> ForModulePayment(Page page)
         {
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
             var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
@@ -72,7 +70,7 @@ namespace IqraCommerce.Services.PeriodArea
                 page.filter = innerFilters;
                 var query = GetWhereClause(page);
                 page.filter = outerFilters;
-                return await db.GetPages(page,PeriodQuery.ForPayment(query, page.Id?.ToString()));
+                return await db.GetPages(page,PeriodQuery.ForModulePayment(query, page.Id?.ToString()));
             }
         }
 
@@ -81,13 +79,13 @@ namespace IqraCommerce.Services.PeriodArea
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
             var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
 
-            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] " : page.SortBy;
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Charge] ASC" : page.SortBy;
             using (var db = new DBService())
             {
                 page.filter = innerFilters;
                 var query = GetWhereClause(page);
                 page.filter = outerFilters;
-                return await db.GetPages(page, PeriodQuery.ForCoursePayment(query));
+                return await db.GetPages(page, PeriodQuery.ForCoursePayment(query, page.Id?.ToString()));
             }
         }
 
@@ -132,7 +130,7 @@ namespace IqraCommerce.Services.PeriodArea
             get { return @"SELECT " + Get() + " Where prd.Id = '"; }
         }
 
-        public static string ForPayment(string innerCondition, string periodId)
+        public static string ForModulePayment(string innerCondition, string periodId)
         {
             return @" * from ( 
                         select 
@@ -152,48 +150,30 @@ namespace IqraCommerce.Services.PeriodArea
                         where mdlprd.PriodId = '" + periodId + @"' and stdntmdl.IsDeleted = 0
                         group by stdnt.Id, 
                                  stdnt.Name,
-								 stdnt.DreamersId) 
-                    item";
+								 stdnt.DreamersId)item";
         }
 
-        public static string ForCoursePayment(string innerCondition)
+        public static string ForCoursePayment(string innerCondition, string periodId)
         {
-            return @"  * from ( 
-       select  stdnt.[Id]
-      ,stdnt.[Name]
-      ,stdnt.[DreamersId]
-      ,stdnt.[NickName]
-      ,stdnt.[PhoneNumber]
-      ,stdnt.[DateOfBirth]
-      ,stdnt.[Gender]
-      ,stdnt.[BloodGroup]
-      ,stdnt.[IsActive]
-      ,stdnt.[Class]
-      ,stdnt.[Group]
-      ,stdnt.[Version]
-      ,count(btch.Id) [NumberOfModule]
-      ,ISNULL(avg(fs.PaidFee), '') [Due]
-      ,ISNULL(sum(stdntmdl.Charge) , '') [Charge]
-	  ,ISNULL(avg (fs.Fee), '') [Fee]
- from [CoursePeriod] [crshprd]
-left join StudentCourse [stdntcrsh] on crshprd.StudentCourseId = stdntcrsh.Id
-left join Course crsh on crsh.Id = stdntcrsh.CourseId
-left join Student stdnt on stdnt.Id = stdntcrsh.StudentId
-left join Batch btch on btch.ReferenceId = stdntcrsh.CourseId 
-left join Fees fs on fs.StudentId = stdntcrsh.StudentId
-" + innerCondition + @"
-group by stdnt.[Id]
-      ,stdnt.[Name]
-      ,stdnt.[DreamersId]
-      ,stdnt.[NickName]
-      ,stdnt.[PhoneNumber]
-      ,stdnt.[DateOfBirth]
-      ,stdnt.[Gender]
-      ,stdnt.[BloodGroup]
-      ,stdnt.[IsActive]
-      ,stdnt.[Class]
-      ,stdnt.[Group]
-      ,stdnt.[Version]) item";
+            return @" * from (  
+                           select 
+                           distinct stdnt.Id [StudentId], 
+							stdnt.DreamersId [DreamersId],
+                            stdnt.Name as [StudentName], 
+                            sum(stdntcrsh.CourseCharge) [Charge], 
+                            (SELECT 
+                                ISNULL( SUM(crspymnt.Paid), 0) 
+                            FROM CoursePayment crspymnt 
+                            WHERE PeriodId = '" + periodId + @"'
+                            and crspymnt.StudentId = stdnt.Id ) [Paid]
+                        from CoursePeriod crshprd
+                        left join StudentCourse stdntcrsh on stdntcrsh.Id = crshprd.StudentCourseId
+                        left join Student stdnt on stdnt.Id = stdntcrsh.StudentId
+                        left join Period prd on prd.Id = crshprd.PriodId
+                        where crshprd.PriodId = '" + periodId + @"' and stdntcrsh.IsDeleted = 0
+                        group by  stdnt.Id, 
+                                 stdnt.Name,
+								 stdnt.DreamersId)item";
         }
     }
 }

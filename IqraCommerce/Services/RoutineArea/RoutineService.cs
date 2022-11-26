@@ -72,19 +72,28 @@ namespace IqraCommerce.Services.RoutineArea
               ,[rtn].[ActivityId]
               ,[rtn].[Name]
               ,[rtn].[BatchId]
+              ,[rtn].[ModuleId]
+              ,[rtn].[TeacherId]
+              ,[rtn].[CourseId]
               ,ISNULL([rtn].[ClassRoomNumber], '') [ClassRoomNumber]
               ,ISNULL([rtn].[Program], '') [Program]
-              ,ISNULL([rtn].[Day], '') [Day]
+              ,ISNULL([rtn].[ModuleTeacherName], '') [ModuleTeacherName]
               ,ISNULL([rtn].[StartTime], '') [StartTime]
               ,ISNULL([rtn].[EndTime], '') [EndTime]
 			  ,ISNULL([rtn].[Module], '') [Module]
-              ,ISNULL([btch].[Name], '') [BatchName]
+              ,ISNULL([btch].Name, '') [BatchName]
+			  ,ISNULL([tchr].Name, '') [TeacherName]
+			  ,ISNULL([mdl].Name, '') [ModuleName]
+			  ,ISNULL([crsh].Name, '') [CourseName]
 	          ,ISNULL([crtr].Name, '') [Creator]
               ,ISNULL([pdtr].Name, '') [Updator] 
              FROM [dbo].[Routine] [rtn]
            LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [rtn].[CreatedBy]
            LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [rtn].[UpdatedBy]
-		   LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [rtn].[BatchId]";
+		   LEFT JOIN [dbo].[Batch] [btch] ON [btch].Id = [rtn].[BatchId]
+		   LEFT JOIN [dbo].[Module] [mdl] ON [mdl].Id = [rtn].[ModuleId]
+		   LEFT JOIN [dbo].[Teacher] [tchr] ON [tchr].Id = [rtn].[TeacherId]
+		   LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [rtn].[CourseId]";
         }
 
         public static string BasicInfo

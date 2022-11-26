@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using IqraCommerce.Entities.StudentCourseArea;
 using IqraCommerce.Entities.CoursePeriodArea;
 using IqraCommerce.Entities.FeesArea;
+using IqraCommerce.Models.FeesArea;
 
 namespace IqraCommerce.Controllers.PeriodArea
 {
@@ -33,7 +34,7 @@ namespace IqraCommerce.Controllers.PeriodArea
         public override ActionResult Create([FromForm] PeriodModel  recordToCreate)
         {
             ModulePeriod modulePeriod = new ModulePeriod();
-            CoursePeriod coursePeriod = new CoursePeriod();
+            
             var modulePeriodList = ___service.GetEntity<ModulePeriod>();
             var coursePeriodList = ___service.GetEntity<CoursePeriod>();
             var studentModuleList = ___service.GetEntity<StudentModule>();
@@ -44,7 +45,7 @@ namespace IqraCommerce.Controllers.PeriodArea
             Period period = new Period();
 
             ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false ).ToList();
-            var getData = from getdata in ListStudentModule select new {getdata.Id};
+            var getData = from getdata in ListStudentModule select new {getdata.Id, getdata.StudentId};
             
             foreach(var module in getData)
             { 
@@ -54,22 +55,23 @@ namespace IqraCommerce.Controllers.PeriodArea
                 modulePeriodList.Add(modulePeriod);
             }
 
-            ListStudentCourse = studentCourseList.Where(x => x.IsDeleted == false ).ToList();
-            var getCourse = from getcourse in ListStudentCourse select new {getcourse.Id};
-            foreach(var course in getCourse)
+            var studentCourseDB = ___service.GetEntity<StudentCourse>().Where(sc=> sc.IsDeleted == false).ToList(); 
+
+            foreach(var studentCourse in studentCourseDB)
             {
-                coursePeriod = new CoursePeriod();
-                coursePeriod.StudentCourseId = course.Id;
+                CoursePeriod coursePeriod = new CoursePeriod();
+                coursePeriod.StudentCourseId = studentCourse.Id;
                 coursePeriod.PriodId = recordToCreate.Id;
                 coursePeriodList.Add(coursePeriod);
             }
+
             return base.Create(recordToCreate);
         }
 
         [HttpPost]
-        public async Task<JsonResult> ForPayment([FromBody] Page page)
+        public async Task<JsonResult> ForModulePayment([FromBody] Page page)
         {
-            return Json(await ___service.ForPayment(page));
+            return Json(await ___service.ForModulePayment(page));
         }
 
         public async Task<JsonResult> ForCoursePayment([FromBody] Page page)

@@ -99,7 +99,7 @@ namespace IqraCommerce.Services.TeacherArea
         public static string AutoComplete()
         {
             return @"
-                    SELECT
+                      SELECT
                     [tchr].[Id] [Id],
                     tchrsbjct.Id [TecherSubjectId],
                     [tchr].[CreatedAt],
@@ -119,7 +119,7 @@ namespace IqraCommerce.Services.TeacherArea
                     [tchr].[IsActive],
                     ISNULL([tchr].[OptionalPhoneNumber], '') [OptionalPhoneNumber]
                     FROM TeacherSubject tchrsbjct
-                    LEFT JOIN Teacher tchr ON tchr.Id = tchrsbjct.TeacherId ";
+                    LEFT JOIN Teacher tchr ON tchr.Id = tchrsbjct.TeacherId";
         }
     }
 }

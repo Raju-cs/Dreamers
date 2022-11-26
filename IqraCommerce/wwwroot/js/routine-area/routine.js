@@ -6,15 +6,30 @@ import { PROGRAM} from "../dictionaries.js";
 
     const controller = 'Routine';
 
+    function startTimeForRoutine(td) {
+        td.html(new Date(this.StartTime).toLocaleTimeString('en-US', {
+            hour: "numeric",
+            minute: "numeric"
+        }));
+    }
+
+    function endTimeForRoutine(td) {
+        td.html(new Date(this.EndTime).toLocaleTimeString('en-US', {
+            hour: "numeric",
+            minute: "numeric"
+        }));
+    }
+
     const columns = () => [
-        { field: 'Name', title: 'Teacher Name', filter: true, position: 1, add: false },
-        { field: 'Module', title: 'ModuleName', filter: true, position: 3, add: false },
+        { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 1, add: false },
+        { field: 'ModuleName', title: 'ModuleName', filter: true, position: 3, add: false },
+        { field: 'CourseName', title: 'CourseName', filter: true, position: 3, add: false },
         { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
-        { field: 'Day', title: 'Day', filter: true, position: 5, },
-        { field: 'StartTime', title: 'Start Time', filter: true, position: 6, dateFormat: 'hh:tt'},
-        { field: 'EndTime', title: 'End Time', filter: true, position: 7, dateFormat: 'hh:tt'},
-        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 8, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 9, },
+        { field: 'Name', title: 'Day', filter: true, position: 5, },
+        { field: 'StartTime', title: 'Start Time', filter: true, position: 6, bound: startTimeForRoutine },
+        { field: 'EndTime', title: 'End Time', filter: true, position: 7, bound: endTimeForRoutine},
+        { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 9, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 10, },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
         { field: 'Creator', title: 'Creator', add: false },
@@ -27,14 +42,15 @@ import { PROGRAM} from "../dictionaries.js";
             model: model,
             title: 'Edit Routine',
             columns: [
-                { field: 'Name', title: 'Teacher Name', filter: true, position: 1},
-                { field: 'Module', title: 'ModuleName', filter: true, position: 3},
-                { field: 'BatchName', title: 'Batch Name', filter: true, position: 4},
-                { field: 'Day', title: 'Day', filter: true, position: 5 },
-                { field: 'StartTime', title: 'Start Time', filter: true, position: 6, dateFormat: 'hh:tt' },
-                { field: 'EndTime', title: 'End Time', filter: true, position: 7, dateFormat: 'hh:tt' },
-                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 8, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 9, },
+                { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 1, add: false },
+                { field: 'ModuleName', title: 'ModuleName', filter: true, position: 3, add: false },
+                { field: 'CourseName', title: 'CourseName', filter: true, position: 3, add: false },
+                { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
+                { field: 'Name', title: 'Day', filter: true, position: 5, },
+                { field: 'StartTime', title: 'Start Time', filter: true, position: 6, bound: startTimeForRoutine },
+                { field: 'EndTime', title: 'End Time', filter: true, position: 7, bound: endTimeForRoutine },
+                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 9, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 10, },
             ],
             dropdownList: [{
                     title: 'Program',
@@ -47,10 +63,13 @@ import { PROGRAM} from "../dictionaries.js";
                 }],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
+                console.log("formModel=>", formModel);
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
-                formModel.StartTime = ` ${model.StartTime}`;
-                formModel.EndTime = ` ${model.EndTime}`;
+                formModel.StartTime = timeForSQLServer(model.StartTime);
+                formModel.EndTime = timeForSQLServer(model.EndTime);
+                formModel.BatchName = ` ${model.BatchName}`;
+
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -74,7 +93,7 @@ import { PROGRAM} from "../dictionaries.js";
         Title: 'All',
         filter: [liveRecord],
         actions: [{
-            click: edit,
+            click: () => {},
             html: editBtn("Edit Information")
         },{
                 click: viewDetails,
@@ -93,16 +112,25 @@ import { PROGRAM} from "../dictionaries.js";
         Name: 'MODULE_ROUTINE',
         Title: 'Module',
         filter: [{ "field": "Program", "value": "Module", Operation: 0 }, liveRecord],
-        actions: [{
+        actions: [/*{
             click: edit,
             html: editBtn("Edit Information")
-        },{
+        },*/{
                 click: viewDetails,
                 html: eyeBtn("Edit Information")
        }],
         onDataBinding: () => { },
         rowBound: () => { },
-        columns: columns(),
+        columns: [
+            { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 1, add: false },
+            { field: 'ModuleName', title: 'ModuleName', filter: true, position: 3, add: false },
+            { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
+            { field: 'Name', title: 'Day', filter: true, position: 5, },
+            { field: 'StartTime', title: 'Start Time', filter: true, position: 6, bound: startTimeForRoutine },
+            { field: 'EndTime', title: 'End Time', filter: true, position: 7, bound: endTimeForRoutine },
+            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 9, },
+            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 10, },
+         ],
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
         Url: 'Get',
@@ -113,16 +141,25 @@ import { PROGRAM} from "../dictionaries.js";
         Name: 'COURSE_ROUTINE',
         Title: 'Course',
         filter: [{ "field": "Program", "value": "Course", Operation: 0 }, liveRecord],
-        actions: [{
+        actions: [/*{
             click: edit,
             html: editBtn("Edit Information")
-        }, {
+        }, */{
                click: viewDetails,
                html: eyeBtn("Edit Information")
             },],
         onDataBinding: () => { },
         rowBound: () => { },
-        columns: columns(),
+        columns: [
+            { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 1, add: false },
+            { field: 'CourseName', title: 'CourseName', filter: true, position: 3, add: false },
+            { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
+            { field: 'Name', title: 'Day', filter: true, position: 5, },
+            { field: 'StartTime', title: 'Start Time', filter: true, position: 6, bound: startTimeForRoutine },
+            { field: 'EndTime', title: 'End Time', filter: true, position: 7, bound: endTimeForRoutine },
+            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 9, },
+            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 10, },
+        ],
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
         Url: 'Get',
@@ -147,7 +184,7 @@ import { PROGRAM} from "../dictionaries.js";
         Base: {
             Url: `/${controller}/`,
         },
-        items: [allTab, batchTab, courseTab, deleteTab],
+        items: [batchTab, courseTab, deleteTab],
     };
 
     //Initialize Tabs

@@ -12,8 +12,8 @@
              model: undefined,
              title: 'Add Subject',
              columns: [
-                 { field: 'Charge', title: 'Charge', filter: true, position: 2 },
-                 { field: 'Remarks', title: 'Remarks', add: { sibling: 1 }, position: 3, required: false },
+                // { field: 'Charge', title: 'Charge', filter: true, position: 2 },
+                 { field: 'Remarks', title: 'Remarks', add: { sibling: 2 }, position: 3, required: false },
              ],
              dropdownList: [
                  {
@@ -46,8 +46,8 @@
             model: model,
             title: 'Edit Subject',
             columns: [
-                { field: 'Charge', title: 'Charge', filter: true, position: 3, },
-
+               // { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                { field: 'Remarks', title: 'Remarks', add: { sibling: 2 }, position: 2, required: false },
             ],
             dropdownList: [{
                 Id: 'SubjectId',
@@ -138,7 +138,8 @@
                         Header: 'Subject',
                         columns:[
                             { field: 'SubjectName', title: 'Subject', filter: true, position: 1, },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                            { field: 'Remarks', title: 'Remarks', add: { sibling: 2 }, position: 3, required: false },
+                            //{ field: 'Charge', title: 'Charge', filter: true, position: 3, },
                         ],
 
                         Url: '/TeacherSubject/Get/',

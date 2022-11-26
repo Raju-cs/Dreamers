@@ -10,16 +10,22 @@ var Controller = new function () {
         console.log("options=>", options);
         studentDateFilter.value = _options.PeriodMonth;
         periodFilter.value = _options.PeriodId;
-        
-        function studentPayment(page, grid) {
+
+        const dateForSQLServer = (enDate = '01/01/1970') => {
+            const dateParts = enDate.split('/');
+            console.log("dateparts=>", dateParts);
+            return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+            //return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+        }
+        function moduleStudentPayment(page, grid) {
             
             console.log("fee=>", page);
             Global.Add({
-                name: 'STUDENT_PAYMENT',
+                name: 'MODULE_STUDENT_PAYMENT',
                 model: undefined,
-                title: 'Payment',
+                title: 'Module Payment',
                 columns: [
-                    { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 3, add: false },
+                    { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 3, add: false, },
                     { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 4, add: false },
                     { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, add: false },
                     { field: 'ModuleFee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 6,},
@@ -36,6 +42,7 @@ var Controller = new function () {
                     formModel.ActivityId = window.ActivityId;
                     formModel.StudentId = page.StudentId;
                     formModel.PeriodId = _options.PeriodId;
+                    formModel.ModuleId = page.ModuleId;
                     formModel.IsActive = true;
                     formModel.ModuleFee = page.Charge;
                     formModel.TotalFee = model.ModuleFee;
@@ -43,13 +50,89 @@ var Controller = new function () {
                     formModel.PaidFee = (parseFloat(page.Charge) - parseFloat(formModel.Fee));
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
-                   // formModel.ModuleFee = page.Charge;
+                   // formModel.ModuleFee = page.Paid;
                 },
                 onSaveSuccess: function () {
                     _options.updatePayment();
                     grid?.Reload();
                 },
                 save: `/Fees/PayFees`,
+            });
+        }
+
+        function courseStudentPayment(page, grid) {
+
+            console.log("fee=>", page);
+            Global.Add({
+                name: 'COURSE_STUDENT_PAYMENT',
+                model: undefined,
+                title: 'Course Payment',
+                columns: [
+                    { field: 'Paid', title: 'Fee', filter: true, add: { sibling: 2, }, position: 7, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 10, },
+                ],
+                dropdownList: [],
+                additionalField: [],
+
+                onSubmit: function (formModel, data, model) {
+                    console.log("formModel=>", formModel);
+                    formModel.ActivityId = window.ActivityId;
+                    formModel.StudentId = page.StudentId;
+                    formModel.PeriodId = _options.PeriodId;
+                    formModel.IsActive = true;
+                    formModel.ModuleFee = page.Charge;
+                },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    // formModel.ModuleFee = page.Paid;
+                },
+                onSaveSuccess: function () {
+                    _options.updatePayment();
+                    grid?.Reload();
+                },
+                save: `/CoursePayment/PayCourseFees`,
+            });
+        }
+
+        function extendPaymentDate(td) {
+            td.html(new Date(this.ExtendPaymentDate).toLocaleDateString('en-US', {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            }));
+        }
+
+
+        function extendPaymentDate(page, grid) {
+
+            console.log("fee=>", page);
+            Global.Add({
+                name: 'EXTEND_PAYMENT_DATE',
+                model: undefined,
+                title: 'Extend Payment Date',
+                columns: [
+                    { field: 'ExtendPaymentDate', title: 'ExtendPaymentDate', add: { sibling: 2 }, position: 1, dateFormat: 'dd/MM/yyyy', required: false, bound: extendPaymentDate},
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 2, },
+                ],
+                dropdownList: [],
+                additionalField: [],
+
+                onSubmit: function (formModel, data, model) {
+                    console.log("formModel=>", formModel);
+                    formModel.ActivityId = window.ActivityId;
+                    formModel.StudentId = page.StudentId;
+                    formModel.PeriodId = _options.PeriodId;
+                    formModel.ExtendPaymentDate = dateForSQLServer(model.ExtendPaymentDate);
+                    formModel.IsActive = true;
+                    formModel.ModuleFee = page.Charge;
+                },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    // formModel.ModuleFee = page.Paid;
+                },
+                onSaveSuccess: function () {
+                    _options.updatePayment();
+                    grid?.Reload();
+                },
+                save: `/Fees/AddExtendPaymentDate`,
             });
         }
 
@@ -62,14 +145,38 @@ var Controller = new function () {
                 updatePayment: model.Reload,
                 PeriodId: _options.Id,
                 ModuleCharge: row.Charge,
+                Paid: row.Paid,
                 StudentId: row.StudentId
             });
         }
 
-        function rowBound(elm) {
+        function moduleBound(row) {
+            var currentDate = new Date();
+            if (_options.RegularPaymentDate <= currentDate.toISOString() && this.Paid == 0) {
+                row.css({ background: "#ffa50054" });
+            }
+
             if (this.Paid >= this.Charge ) {
-                elm.css({ background: "#00800040" });
-            } 
+                row.css({ background: "#00800040" });
+            }
+        }
+
+        function courseBound(row) {
+            var currentDate = new Date();
+            if (_options.RegularPaymentDate <= currentDate.toISOString() && this.Paid == 0) {
+                row.css({ background: "#ffa50054" });
+            }
+
+            if (this.Paid >= this.Charge) {
+                row.css({ background: "#00800040" });
+            }
+        }
+        function studentInfo(row) {
+            console.log("row=>", row);
+            Global.Add({
+                Id: row.StudentId,
+                url: '/js/student-area/student-details-modal.js',
+            });
         }
 
         function dueBound(td) {
@@ -81,18 +188,18 @@ var Controller = new function () {
             selected: 0,
             Tabs: [
                 {
-                    title: 'Student',
+                    title: 'Module',
                     Grid: [{
-                        Header: 'Student',
+                        Header: 'Module Charge',
                         columns: [
-                            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 2, add: { sibling: 4 }, },
-                            { field: 'StudentName', title: 'Student Name', filter: true, position: 3 },
+                            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 2 },
+                            { field: 'StudentName', title: 'Student Name', filter: true, position: 3, Click: studentInfo  },
                             { field: 'Charge', title: 'Fee', filter: true, position: 4 },
                             { field: 'Paid', title: 'Paid', filter: true, position: 5 },
                             { field: 'Due', title: 'Due', filter: true, position: 5, bound: dueBound  },
                         ],
 
-                        Url: '/Period/ForPayment/',
+                        Url: '/Period/ForModulePayment/',
                         filter: [
                             { "field": 'smIsDeleted', "value": 0, Operation: 0, Type: "INNER" },
                             { "field": 'PriodId', "value": _options.Id, Operation: 0, Type: "INNER" }
@@ -101,13 +208,48 @@ var Controller = new function () {
                         onrequest: (page) => {
                             page.Id = _options.Id;
                         },
-                        rowBound: rowBound,
+                        rowBound: moduleBound,
                         actions: [{
-                            click: studentPayment,
+                            click: moduleStudentPayment,
                             html: '<a class="action-button info t-white" > <i class="glyphicon  glyphicon-usd" title="Make Payment"></i></a >'
                         },{
                              click: viewDetails,
                              html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
+                            }],
+                        buttons: [],
+                        selector: false,
+                        Printable: {
+                            container: $('void')
+                        }
+                    }],
+                }, {
+                    title: 'Course',
+                    Grid: [{
+                        Header: 'Course',
+                        columns: [
+                            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 2 },
+                            { field: 'StudentName', title: 'Student Name', filter: true, position: 3, Click: studentInfo },
+                            { field: 'Charge', title: 'Fee', filter: true, position: 4 },
+                            { field: 'Paid', title: 'Paid', filter: true, position: 5 },
+                            { field: 'Due', title: 'Due', filter: true, position: 5, bound: dueBound },
+                        ],
+
+                        Url: '/Period/ForCoursePayment/',
+                        filter: [
+                            { "field": 'scIsDeleted', "value": 0, Operation: 0, Type: "INNER" },
+                            { "field": 'PriodId', "value": _options.Id, Operation: 0, Type: "INNER" }
+                        ],
+                        onDataBinding: function (response) { },
+                        onrequest: (page) => {
+                            page.Id = _options.Id;
+                        },
+                        rowBound: courseBound,
+                        actions: [{
+                            click: courseStudentPayment,
+                            html: '<a class="action-button info t-white" > <i class="glyphicon  glyphicon-usd" title="Make Payment"></i></a >'
+                        }, {
+                            click: viewDetails,
+                            html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
                         }],
                         buttons: [],
                         selector: false,

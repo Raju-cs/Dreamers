@@ -93,8 +93,9 @@ namespace IqraCommerce.Services.SubjectArea
         public static string AutoComplete()
         {
             return @"
-                    SELECT
-                    [sbjct].[Id]
+                   SELECT
+                    [sbjct].[Id] [Id],
+                 tchrsbjct.Id [TecherSubjectId]
                   ,[sbjct].[CreatedAt]
                   ,[sbjct].[CreatedBy]
                   ,[sbjct].[UpdatedAt]
@@ -107,11 +108,8 @@ namespace IqraCommerce.Services.SubjectArea
                   ,[sbjct].[Version]
                   ,[sbjct].[IsActive]
                   ,[sbjct].[SearchName]
-	              ,ISNULL([crtr].Name, '') [Creator]
-	              ,ISNULL([pdtr].Name, '') [Updator]
-              FROM [dbo].[Subject] [sbjct]
-               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [sbjct].[CreatedBy]
-               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [sbjct].[UpdatedBy] ";
+             FROM TeacherSubject tchrsbjct
+               LEFT JOIN Subject sbjct ON sbjct.Id = tchrsbjct.SubjectId";
         }
     }
 }

@@ -69,6 +69,7 @@ namespace IqraCommerce.Services.TeacherSubjectArea
 			  ,ISNULL([tchr].Name, '')  [TeacherName]
 			  ,ISNULL([tchr].IsActive, '')  [IsActive]
 			  ,ISNULL([sbjct].Name, '') [SubjectName]
+              ,ISNULL([sbjct].Class, '') [Class]
           FROM [dbo].[TeacherSubject] [tchrsbjct]
           LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [tchrsbjct].[CreatedBy]
           LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [tchrsbjct].[UpdatedBy]

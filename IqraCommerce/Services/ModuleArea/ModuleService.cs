@@ -28,7 +28,9 @@ namespace IqraCommerce.Services.ModuleArea
                 case "subjectname":
                     name = "[sbjct].Name";
                     break;
-             
+                case "subjectclass":
+                    name = "[sbjct].Class";
+                    break;
                 default:
                     name = "mdl." + name;
                     break;
@@ -79,6 +81,7 @@ namespace IqraCommerce.Services.ModuleArea
 	              ,ISNULL([pdtr].Name, '') [Updator] 
 	              ,ISNULL([tchr].Name, '')  [TeacherName]
 	              ,ISNULL([sbjct].SearchName, '') [SubjectName]
+	              ,ISNULL([sbjct].Class, '') [SubjectClass]
               FROM [dbo].[Module] [mdl]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [mdl].[CreatedBy]
               LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [mdl].[UpdatedBy]

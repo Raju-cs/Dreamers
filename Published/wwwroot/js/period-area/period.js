@@ -1,4 +1,4 @@
-﻿import { editBtn, eyeBtn, listBtn } from "../buttons.js";
+﻿import { editBtn, eyeBtn, listBtn, userBtn, briefcaseBtn } from "../buttons.js";
 import { filter, liveRecord, trashRecord, OPERATION_TYPE } from '../filters.js';
 import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
 (function () {
@@ -19,12 +19,33 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
         return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
     }
 
+    function periodStartDate(td) {
+        td.html(new Date(this.StartDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+    function periodEndDate(td) {
+        td.html(new Date(this.EndDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+    function paymentDate(td) {
+        td.html(new Date(this.RegularPaymentDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+
     const columns = () => [
         { field: 'Name', title: 'Month', filter: true, required: false, position: 1, add: false },
-        { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false },
-        { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false },
-        { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false },
-       
+        { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false, bound: periodStartDate },
+        { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false, bound: periodEndDate },
+        { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false, bound: paymentDate },
  /*       { field: 'TotalCollected', title: 'Total Collected', filter: true, position: 2, required: true, add: { sibling: 2 } },
         { field: 'InCome', title: 'Income', filter: true, position: 3, add: { sibling: 2 } },
         { field: 'OutCome', title: 'Outcome', filter: true, position: 5, add: { sibling: 2 } },*/
@@ -74,7 +95,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
                 const year = new Date().getFullYear();
                 formModel.StartDate = new Date(year, monthIndex, 1).format('dd/MM/yyyy');
                 formModel.EndDate = new Date(year, monthIndex + 1, 0).format('dd/MM/yyyy');
-                formModel.RegularPaymentDate = new Date(year, monthIndex , 7).format('dd/MM/yyyy');
+                formModel.RegularPaymentDate = new Date(year, monthIndex , 10).format('dd/MM/yyyy');
                 formModel.Name = months[monthIndex];
             }, 
             onSaveSuccess: function () {
@@ -146,7 +167,6 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             Id: row.Id,
             name: 'Period Information' + row.Id,
             url: '/js/period-area/period-details-modal.js',
-            
         });
     }
 
@@ -158,6 +178,19 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             url: '/js/period-area/period-studentlist-modal.js',
             updatePayment: model.Reload,
             PeriodId: row.Id,
+            PeriodName: row.Name,
+            RegularPaymentDate: row.RegularPaymentDate
+
+        });
+    }
+
+    const totalFeeList = (row) => {
+        Global.Add({
+            Id: row.Id,
+            name: 'Fees Information' + row.Id,
+            url: '/js/fees-area/fees-totalfee-modal.js',
+            PeriodId: row.Id,
+
         });
     }
 
@@ -176,7 +209,11 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             }, {
             click: studentFeesList,
             html: listBtn("View Student List")
-            }],
+            }, {
+            click: totalFeeList,
+            html: briefcaseBtn("Monthly Income")
+            }
+        ],
       
         onDataBinding: () => { },
         rowBound: () => { },

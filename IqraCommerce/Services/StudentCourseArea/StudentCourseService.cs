@@ -89,7 +89,7 @@ namespace IqraCommerce.Services.StudentCourseArea
     {
         public static string Get()
         {
-            return @" [stdntcrsh].[Id]
+            return @"  [stdntcrsh].[Id]
                   ,[stdntcrsh].[CreatedAt]
                   ,[stdntcrsh].[CreatedBy]
                   ,[stdntcrsh].[UpdatedAt]
@@ -101,6 +101,7 @@ namespace IqraCommerce.Services.StudentCourseArea
                   ,[stdntcrsh].[StudentId]
                   ,[stdntcrsh].[CourseId]
                   ,[stdntcrsh].[BatchId]
+                  ,ISNULL([stdntcrsh].[CourseCharge], '') [CourseCharge]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator]
 	              ,ISNULL([crsh].Name,  '')  [CourseName]
@@ -114,7 +115,6 @@ namespace IqraCommerce.Services.StudentCourseArea
                   ,ISNULL([btch].Program,  '')  [Program]
 	              ,ISNULL([btch].ClassRoomNumber,  '')  [ClassRoomNumber]
 	              ,ISNULL([btch].MaxStudent,  '')  [MaxStudent]
-                  ,ISNULL([btch].Charge,  '')  [Charge]
                   ,ISNULL([stdnt].Class,  '')  [Class]
               FROM [dbo].[StudentCourse] [stdntcrsh]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdntcrsh].[CreatedBy]

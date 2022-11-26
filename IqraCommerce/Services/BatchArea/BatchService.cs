@@ -62,7 +62,7 @@ namespace IqraCommerce.Services.ScheduleArea
     {
         public static string Get()
         {
-            return @" [btch].[Id]
+            return @"[btch].[Id]
                   ,[btch].[CreatedAt]
                   ,[btch].[CreatedBy]
                   ,[btch].[UpdatedAt]
@@ -76,13 +76,22 @@ namespace IqraCommerce.Services.ScheduleArea
                   ,ISNULL([btch].[Program], '') [Program]
                   ,[btch].[IsActive]
                   ,[btch].[ReferenceId]
+                  ,[btch].[CourseId]
+                  ,[btch].[TeacherId]
+                  ,[btch].[SubjectId]
+				  ,ISNULL([mdl].Name, '') [ModuleName]
                   ,ISNULL([btch].[BtachName], '') [BtachName]
+                  ,ISNULL([crsh].Name, '') [CourseName]
+				  ,ISNULL([sbjct].Name, '') [SubjectName]
                   ,ISNULL([btch].[Charge], '') [Charge]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator] 
               FROM [dbo].[Batch] [btch]
               LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [btch].[CreatedBy]
-              LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [btch].[UpdatedBy]";
+              LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [btch].[UpdatedBy]
+              LEFT JOIN [dbo].[Module] [mdl] ON [mdl].Id = [btch].[ReferenceId]
+              LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [btch].[CourseId]
+              LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [btch].[SubjectId]";
         }
 
         public static string BasicInfo

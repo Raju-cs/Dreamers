@@ -10,7 +10,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
     });
 
     const columns = () => [
-        { field: 'Name', title: 'Name', filter: true, position: 1, },
+        { field: 'SearchName', title: 'Name', filter: true, position: 1, },
         { field: 'Class', title: 'Class', filter: true, position: 2, },
         { field: 'Version', title: 'Version', filter: true, position: 3, add: false },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 5, },
@@ -54,7 +54,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
             model: model,
             title: 'Edit subject',
             columns: [
-                { field: 'Name', title: 'Name', filter: true, position: 1, },
+                { field: 'SearchName', title: 'Name', filter: true, position: 1, },
                 { field: 'Class', title: 'Class', filter: true, position: 2, },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type:"textarea" }, required: false, position: 5, },
             ],

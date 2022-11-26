@@ -15,3 +15,4 @@ export const printBtn = (text = 'Print') => `<a class="action-button info t-whit
 export const listBtn = (text = 'List') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-list-alt" title="${text}"></i></a>`;
 export const userBtn = (text = 'Person') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-user" title="${text}"></i></a>`;
 export const transferBtn = (text = 'transfer') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-transfer" title="${text}"></i></a>`;
+export const briefcaseBtn = (text = 'briefcase') => `<a class="action-button info t-white"><i class="glyphicon glyphicon-briefcase" title="${text}"></i></a>`;

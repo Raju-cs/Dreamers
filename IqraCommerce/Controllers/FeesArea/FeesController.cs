@@ -34,6 +34,7 @@ namespace IqraCommerce.Controllers.FeesArea
             return Json(await ___service.TotalFee(page));
         }
 
+
         [HttpPost]
         public async Task<IActionResult> PayFees([FromForm] FeesModel recordToCreate)
         {
@@ -42,21 +43,21 @@ namespace IqraCommerce.Controllers.FeesArea
 
             var sumOfFees = modulesFromDb.Sum(m => m.ModuleFees);
 
-            var payments = ___service.GetEntity<Fees>().Where(f => f.IsDeleted == false && f.StudentId == recordToCreate.StudentId && f.PeriodId == recordToCreate.PeriodId);
+            var payments = ___service.GetEntity<Fees>().Where(f => f.IsDeleted == false && f.StudentId == recordToCreate.StudentId && f.PeriodId == recordToCreate.PeriodId).ToList();
             
             var sumOfPaid = payments.Sum(f => f.Fee);
-
+           
             if (payments != null)
             {
             var paid = sumOfPaid + recordToCreate.Fee;
 
                 if (sumOfFees >= amount && sumOfFees >= paid)
                 {
-                    __service.Insert(recordToCreate, Guid.Empty);
+                     __service.Insert(recordToCreate, Guid.Empty);
                 }
                 else
                 {
-                    return Json(new Response(-7, null, true, "Paymnet Over"));
+                    return Ok(new Response(-4, null, true, "Paymnet Over"));
                 }
             }
             else
@@ -105,7 +106,7 @@ namespace IqraCommerce.Controllers.FeesArea
                 CreatedBy = Guid.Empty,
                 IsActive = true,
                 IsDeleted = false,
-                Name = "AUTO_GENERATE",
+                Name = "Module",
                 PeriodId = payment.PeriodId,
                 Remarks = null,
                 UpdatedAt = DateTime.Now,
@@ -129,7 +130,7 @@ namespace IqraCommerce.Controllers.FeesArea
                 CreatedBy = Guid.Empty,
                 IsActive = true,
                 IsDeleted = false,
-                Name = "AUTO_GENERATE",
+                Name = "Module",
                 PeriodId = payment.PeriodId,
                 Remarks = null,
                 UpdatedAt = DateTime.Now,

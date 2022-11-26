@@ -99,7 +99,7 @@ namespace IqraCommerce.Services.StudentModuleArea
               ,[stdntmdl].[StudentId]
               ,[stdntmdl].[ModuleId]
               ,[stdntmdl].[BatchId]
-			  ,[stdntmdl].[ReferenceId]
+			  ,[stdntmdl].[SubjectId]
 			  ,[stdntmdl].[DischargeDate] [DischargeDate]
 			  ,[stdntmdl].[Charge]
 	          ,ISNULL([crtr].Name, '') [Creator]

@@ -5,6 +5,7 @@ namespace IqraCommerce.Models.FeesArea
     {
         public Guid PeriodId { get; set; }
         public Guid StudentId { get; set; }
+        public DateTime ExtendPaymentDate { get; set; }
         public double Fee { get; set; }
         public double TotalFee { get; set; }
         public double CourseFee { get; set; }

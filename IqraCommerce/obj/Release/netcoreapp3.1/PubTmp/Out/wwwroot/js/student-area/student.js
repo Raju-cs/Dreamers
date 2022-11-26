@@ -11,13 +11,27 @@ import { print } from "./student-form.js";
         $('#add-record').click(add);
     });
 
+    const dateForSQLServer = (Date = '01/01/1970') => {
+        const dateParts = Date.split('/');
+
+        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+    }
+
+    function studentDate(td) {
+        td.html(new Date(this.DateOfBirth).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+
     const columns = () => [
         { field: 'ImageURL', title: 'Image', filter: false, position: 1, add: false, bound: imageBound },
         { field: 'NickName', title: 'Nick Name', filter: true, position: 3, add: { sibling: 4 }, required: false },
         { field: 'Name', title: 'Full Name(English)', filter: true, position: 4, add: { sibling: 4 }, },
         { field: 'StudentNameBangla', title: 'Full Name(Bangla)', filter: true, position: 5, add: { sibling: 4 }, },
         { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 6, add: { sibling: 4 }, },
-        { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'MM/dd/yyyy' },
+        { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'dd/MM/yyyy', bound: studentDate  },
         { field: 'Nationality', title: 'Nationality', filter: true, position: 11, add: { sibling: 4 }, required: false },
         { field: 'StudentSchoolName', title: 'School Name', filter: true, position: 12, add: { sibling: 4 }, required: false },
         { field: 'StudentCollegeName', title: 'College Name', filter: true, position: 13, add: { sibling: 4 }, required: false },
@@ -210,6 +224,7 @@ import { print } from "./student-form.js";
             onSubmit: function (formModel, data, model) {
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
+                formModel.DateOfBirth = dateForSQLServer(model.DateOfBirth);
                 //formModel.DateOfBirth = ` ${model.DateOfBirth}`;
             },
             onSaveSuccess: function () {
@@ -230,7 +245,7 @@ import { print } from "./student-form.js";
                 { field: 'Name', title: 'Full Name(English)', filter: true, position: 4, add: { sibling: 4 }, },
                 { field: 'StudentNameBangla', title: 'Full Name(Bangla)', filter: true, position: 5, add: { sibling: 4 }, },
                 { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 6, add: { sibling: 4 }, },
-                { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'MM-dd-yyyy' },
+                { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'dd/MM/yyyy' },
                 { field: 'Nationality', title: 'Nationality', filter: true, position: 11, add: { sibling: 4 }, required: false },
                 { field: 'StudentSchoolName', title: 'School Name', filter: true, position: 12, add: { sibling: 4 }, required: false },
                 { field: 'StudentCollegeName', title: 'College Name', filter: true, position: 13, add: { sibling: 4 }, required: false },
@@ -422,7 +437,7 @@ import { print } from "./student-form.js";
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
                 formModel.DreamersId = data.DreamersId;
-                //formModel.DateOfBirth = ` ${model.DateOfBirth}`;
+                formModel.DateOfBirth = model.DateOfBirth;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();

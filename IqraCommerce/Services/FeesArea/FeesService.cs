@@ -113,6 +113,7 @@ namespace IqraCommerce.Services.FeesArea
                   ,ISNULL([fs].[PeriodId], '') [PeriodId]
                   ,ISNULL([fs].[StudentId], '') [StudentId]
                   ,[fs].[IsActive]
+                  ,[fs].[ExtendPaymentDate]
                   ,ISNULL([fs].[CourseFee], '') [CourseFee]
                   ,ISNULL([fs].[Fee], '') [Fee]
                   ,ISNULL([fs].[ModuleFee], '') [ModuleFee]

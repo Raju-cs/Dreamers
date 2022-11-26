@@ -18,6 +18,15 @@ using IqraCommerce.Entities.ModulePeriodArea;
 using IqraCommerce.Entities.CoachingAccountArea;
 using IqraCommerce.Entities.CoursePeriodArea;
 using IqraCommerce.Entities.TeacherFeeArea;
+using IqraCommerce.Entities.PeriodAttendanceArea;
+using IqraCommerce.Entities.BatchAttendanceArea;
+using IqraCommerce.Entities.StudentResultArea;
+using IqraCommerce.Entities.BatchExamArea;
+using IqraCommerce.Entities.MessageArea;
+using IqraCommerce.Entities.CoursePaymentArea;
+using IqraCommerce.Entities.CourseRoutineArea;
+using IqraCommerce.Entities.CourseAttendanceDateArea;
+using IqraCommerce.Entities.CourseBatchAttendanceArea;
 
 namespace IqraCommerce.Entities
 {
@@ -121,6 +130,42 @@ namespace IqraCommerce.Entities
 
         #region TeacherFee
         public virtual DbSet<TeacherFee> TeacherFee { get; set; }
+        #endregion
+
+        #region PeriodAttendance
+        public virtual DbSet<PeriodAttendance> PeriodAttendance { get; set; }
+        #endregion
+
+        #region BatchAttendance
+        public virtual DbSet<BatchAttendance> BatchAttendance { get; set; }
+        #endregion
+
+        #region BatchExam
+        public virtual DbSet<BatchExam> BatchExam { get; set; }
+        #endregion
+
+        #region StudentResult
+        public virtual DbSet<StudentResult> StudentResult { get; set; }
+        #endregion
+
+        #region Message
+        public virtual DbSet<Message> Message { get; set; }
+        #endregion
+
+        #region CoursePayment
+        public virtual DbSet<CoursePayment> CoursePayment { get; set; }
+        #endregion
+
+        #region CourseRoutine
+        public virtual DbSet<CourseRoutine> CourseRoutine { get; set; }
+        #endregion
+
+        #region CourseAttendanceDate
+        public virtual DbSet<CourseAttendanceDate> CourseAttendanceDate { get; set; }
+        #endregion
+
+        #region CourseBatchAttendance
+        public virtual DbSet<CourseBatchAttendance> CourseBatchAttendance { get; set; }
         #endregion
         protected override void OnModelCreating(ModelBuilder builder)
         {

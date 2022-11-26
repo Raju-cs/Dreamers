@@ -1,13 +1,11 @@
 var Controller = new function () {
     const scheduleFilter = { "field": "ReferenceId", "value": '', Operation: 0 };
-    const studentFilter = { "field": "StudentId", "value": '', Operation: 0 };
     const trashFilter = { "field": "IsDeleted", "value": 0, Operation: 0 };
     var _options;
 
     this.Show = function (options) {
         _options = options;
         scheduleFilter.value = _options.Id;
-        studentFilter.value = _options.Id;
         console.log("options=>", _options);
 
         function addModuleBatch(page, gird) {
@@ -19,14 +17,15 @@ var Controller = new function () {
                 columns: [
                     { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
+                    //{ field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
                     formModel.ActivityId = window.ActivityId;
                     formModel.ReferenceId = _options.Id;
+                    formModel.SubjectId = _options.SubjectId;
                     formModel.Program = "Module";
                     formModel.Name = `${model.Name} `;
                 },
@@ -49,8 +48,7 @@ var Controller = new function () {
                 columns: [
                     { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                     { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -80,7 +78,28 @@ var Controller = new function () {
                 ModuleClass: _options.ModuleClass,
                 ModuleTeacher: _options.ModuleTeacher,
                 ModuleName: _options.ModuleName,
-                ModuleCharge: _options.ModuleCharge
+                ModuleCharge: _options.ModuleCharge,
+                TeacherId: _options.TeacherId,
+                SubjectId: _options.SubjectId,
+                SubjectName: _options.SubjectName
+            });
+        }
+
+        const attendanceStatus = (row, model) => {
+            console.log("row=>", row);
+            Global.Add({
+                Id: row.Id,
+                name: 'Status Information ' + row.Id,
+                url: '/js/module-batchattendance-area/student-attendance-status-modal.js',
+            });
+        }
+
+        const studentResultInfo = (row, model) => {
+            console.log("row=>", row);
+            Global.Add({
+                Id: row.Id,
+                name: 'StudentResult Information ' + row.Id,
+                url: '/js/studentresult-area/student-result-details-modal.js',
             });
         }
 
@@ -114,7 +133,7 @@ var Controller = new function () {
                         columns: [
                             { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 5, },
+                            //{ field: 'Charge', title: 'Charge', filter: true, position: 5, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                         ],
 
@@ -126,10 +145,17 @@ var Controller = new function () {
                                 click: editModuleBatch,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Batch Schedule"></i></a>`
 
-                            },
-                            {
+                            },{
                                 click: viewDetails,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-eye-open" title="View Schedule"></i></a>`
+
+                            },{
+                                click: attendanceStatus,
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-user" title="Student Attendance History"></i></a>`
+
+                            }, {
+                                click: studentResultInfo,
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-book" title="Student Result Information"></i></a>`
 
                             }
                         ],

@@ -5,16 +5,14 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
 (function () {
     const controller = 'Batch';
 
-    $(document).ready(() => {
-        $('#add-record').click(add);
-    });
-
     const columns = () => [
-        { field: 'Name', title: 'Batch Name', filter: true, position: 1, add: false },
-        { field: 'Program', title: 'Program', filter: true, position: 2, add: false },
-        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-        { field: 'Charge', title: 'Charge', filter: true, position: 4, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 5, },
+        { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
+        { field: 'CourseName', title: 'Course Name', filter: true, position: 2, add: false },
+        { field: 'Name', title: 'Batch Name', filter: true, position: 3, add: false },
+        { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
+        { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, },
+        { field: 'Charge', title: 'Charge', filter: true, position: 6, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 7, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -28,6 +26,8 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             title: 'Edit Batch',
             columns: [
                 { field: 'Name', title: 'Batch Name', filter: true, position: 1 },
+                { field: 'ModuleName', title: 'Module Name', filter: true, position: 2, add: false },
+                { field: 'C', title: 'Module Name', filter: true, position: 2, add: false },
                 { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
                // { field: 'Charge', title: 'Charge', filter: true, position: 5, },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
@@ -62,33 +62,53 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         });
     };
 
-    const viewDetails = (row) => {
+    const courseRoutine = (row, model) => {
+        console.log("row=>", row);
         Global.Add({
-            Id: row.Id,
-            name: 'Batch Information' + row.Id,
-            url: '/js/batch-area/batch-details-modal.js',
+            BatchId: row.Id,
+            name: 'Course Routine Information ' + row.Id,
+            url: '/js/routine-area/course-attendance-routine-details-modal.js',
+            CourseId: row.CourseId
         });
-
     }
 
-    const allTab = {
-        Id: 'BBC23DC6-A099-494D-BEB4-E8B98993A27D',
-        Name: 'ALL_BATCH',
-        Title: 'All',
-        filter: [liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: viewDetails,
-            html: eyeBtn("View Details")
-        }],
-        onDataBinding: () => { },
-        rowBound: () => { },
-        columns: columns(),
-        Printable: { container: $('void') },
-        remove: { save: `/${controller}/Remove` },
-        Url: 'Get',
+    const moduleRoutine = (row, model) => {
+        console.log("row=>", row);
+        Global.Add({
+            BatchId: row.Id,
+            name: 'Module Attendance Routine Information' + row.Id,
+            url: '/js/routine-area/module-attendance-routine-details-modal.js',
+            ModuleId: row.ReferenceId,
+            SubjectName: row.SubjectName,
+            SubjectId: row.SubjectId
+        });
+    }
+
+    const attendanceStatus = (row, model) => {
+        console.log("row=>", row);
+        Global.Add({
+            Id: row.Id,
+            name: 'Status Information ' + row.Id,
+            url: '/js/module-batchattendance-area/student-attendance-status-modal.js',
+        });
+    }
+
+    const courseAttendanceStatus = (row, model) => {
+        console.log("row=>", row);
+        Global.Add({
+            Id: row.Id,
+            name: 'Course Status Information ' + row.Id,
+            url: '/js/course-batchattendance-area/course-student-attendance-status-modal.js',
+        });
+    }
+
+    const studentResultInfo = (row, model) => {
+        console.log("row=>", row);
+        Global.Add({
+            Id: row.Id,
+            name: 'StudentResult Information ' + row.Id,
+            url: '/js/studentresult-area/student-result-details-modal.js',
+        });
     }
 
     const moduleTab = {
@@ -96,16 +116,25 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'MODULE_BATCH',
         Title: 'Module',
         filter: [{ "field": "Program", "value": "Module", Operation: 0 }, liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: viewDetails,
+        actions: [ {
+            click: moduleRoutine,
             html: eyeBtn("View Details")
-        }],
+        },{
+             click: attendanceStatus,
+             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-user" title="Student Attendance Details"></i></a>`
+            }, {
+                click: studentResultInfo,
+                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-book" title="Student Result Information"></i></a>`
+            }],
         onDataBinding: () => { },
         rowBound: () => { },
-        columns: columns(),
+        columns: [
+            { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
+            { field: 'Name', title: 'Batch Name', filter: true, position: 3, add: false },
+            { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
+            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, },
+            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 7, },
+        ],
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
         Url: 'Get',
@@ -116,16 +145,22 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'COURSE_BATCH',
         Title: 'Course',
         filter: [{ "field": "Program", "value": "Course", Operation: 0 }, liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: viewDetails,
+        actions: [ {
+            click: courseRoutine,
             html: eyeBtn("View Details")
-        }],
+        }, {
+                click: courseAttendanceStatus,
+                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-user" title="Student Attendance Details"></i></a>`
+            },],
         onDataBinding: () => { },
         rowBound: () => { },
-        columns: columns(),
+        columns: [
+            { field: 'CourseName', title: 'Course Name', filter: true, position: 2, add: false },
+            { field: 'Name', title: 'Batch Name', filter: true, position: 3, add: false },
+            { field: 'Program', title: 'Program', filter: true, position: 4, add: false },
+            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 5, },
+            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 7, },
+        ],
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
         Url: 'Get',
@@ -150,7 +185,7 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
         Base: {
             Url: `/${controller}/`,
         },
-        items: [allTab, moduleTab, courseTab, deleteTab],
+        items: [moduleTab, courseTab],
     };
 
 

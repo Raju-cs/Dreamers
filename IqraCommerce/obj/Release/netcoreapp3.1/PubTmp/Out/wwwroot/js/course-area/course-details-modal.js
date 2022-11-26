@@ -8,7 +8,9 @@ var Controller = new function () {
     const scheduleFilter = { "field": "ReferenceId", "value": '', Operation: 0 };
     const teacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
     const editTeacherFilterBySubject = { "field": "[tchrsbjct].[SubjectId]", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
- 
+    const subjectClassFilter = { "field": "Class", "value": '', Operation: 0 };
+    const liveSubjectFilterTwo = { "field": "SubjectIsDeleted", "value": 0, Operation: 0 };
+    const activeSubjectFilterTwo = { "field": "SubjectIsActive", "value": 1, Operation: 0 };
     var _options;
 
     let courseTeacherDropdownMat;
@@ -27,7 +29,9 @@ var Controller = new function () {
         editcourseTeacherDropdownMat.Reload();
     }
     const modalColumns = [
-        { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, },
+        { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, add: { sibling: 2 } },
+        //{ field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, add: { sibling: 2 } },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
     ]
   
     const modalDropDowns = [
@@ -38,7 +42,7 @@ var Controller = new function () {
             url: '/Subject/AutoComplete',
             Type: 'AutoComplete',
             onchange: subjectSelectHandler,
-            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject] }
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [activeFilter, liveFilterSubject, subjectClassFilter] }
         },
         courseTeacherDropdownMat = {
             Id: 'TeacherId',
@@ -74,6 +78,8 @@ var Controller = new function () {
         _options = options;
         courseFilter.value = _options.Id;
         scheduleFilter.value = _options.Id;
+        subjectClassFilter.value = _options.CourseClass;
+        console.log("options=>", _options);
    
         function addSubjectAndTeacher(page) {
             Global.Add({
@@ -117,72 +123,17 @@ var Controller = new function () {
 
         }
    
-        function addCourseBatch(page) {
-            Global.Add({
-                name: 'ADD_COURSE_BATCH',
-                model: undefined,
-                title: 'Add Course Batch',
-                columns: [
-                    { field: 'Name', title: 'BatchName', filter: true, position: 1 },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
-                ],
-                dropdownList: [],
-                additionalField: [],
-                onSubmit: function (formModel, data, model) {
-                    formModel.ActivityId = window.ActivityId;
-                    formModel.ReferenceId = _options.Id;
-                    formModel.Program = "Course";
-                    formModel.Name = `${model.Name} `;
-                },
-                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
-                    formModel.Charge = _options.CourseCharge;
-                },
-                onSaveSuccess: function () {
-                    page.Grid.Model.Reload();
-                },
-                filter: [],
-                save: `/Batch/Create`,
-            });
-
-        }
-
-        function editCourseBatch(model, grid) {
-            Global.Add({
-                name: 'EDIT_COURSE_BATCH',
-                model: model,
-                title: 'Edit Course Batch',
-                columns: [
-                    { field: 'Name', title: 'BatchName', filter: true, position: 1 },
-                    { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                    { field: 'Charge', title: 'Charge', filter: true, position: 5, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
-                ],
-                dropdownList: [],
-                additionalField: [],
-                onSubmit: function (formModel, data, model) {
-                    formModel.Id = model.Id
-                    formModel.ActivityId = window.ActivityId;
-                    formModel.ReferenceId = _options.Id;
-                    formModel.Program = "Course";
-                    formModel.Name = `${model.Name} `;
-                },
-                onSaveSuccess: function () {
-                    grid?.Reload();
-                },
-                filter: [],
-                saveChange: `/Batch/Edit`,
-            });
-        }
+  
 
         const viewDetails = (row, model) => {
+            console.log("row=>", row);
             Global.Add({
                 Id: row.Id,
-                name: 'Course Information ' + row.Id,
+                name: 'Course Batch Information ' + row.Id,
                 url: '/js/batch-area/course-batch-details-modal.js',
                 updateSchedule: model.Reload,
                 CourseId: _options.Id,
+                TeacherId: row.TeacherId,
                 CourseClass: _options.CourseClass,
                 CourseCharge: _options.CourseCharge,
             });
@@ -200,7 +151,7 @@ var Controller = new function () {
                                 { field: 'Class', title: 'Class', filter: true, position: 2, },
                                 { field: 'NumberOfClass', title: 'Number of classes', filter: true, position: 3, },
                                 { field: 'CourseFee', title: 'Course fee', filter: true, position: 4, },
-                                { field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, add: { sibling: 2 } },
+                               // { field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, add: { sibling: 2 } },
                                 { field: 'DurationInMonth', title: 'Duration in month', filter: true, position: 6, },
                                 { field: 'Hour', title: 'Hour', filter: true, position: 7 },
                                ],
@@ -215,18 +166,25 @@ var Controller = new function () {
                     Grid: [{
                         Header: 'Subject',
                         columns: [
-                            { field: 'TeacherName', title: 'Teacher', filter: true, position: 1, },
+                            { field: 'TeacherName', title: 'Teacher', filter: true, position: 1},
                             { field: 'SubjectName', title: 'Subject', filter: true, position: 2, add: false },
                             { field: 'TeacherPercentange', title: 'Teacher Percentange%', filter: true, position: 4, },
+                            //{ field: 'CoachingPercentange', title: 'CoachingPercentange%', filter: true, position: 5, add: { sibling: 2 } },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                         ],
 
                         Url: '/CourseSubjectTeacher/Get/',
-                        filter: [courseFilter],
+                        filter: [courseFilter, subjectClassFilter, liveSubjectFilterTwo, activeSubjectFilterTwo, trashFilter ],
                         onDataBinding: function (response) { },
                         actions: [
                             {
                                 click: editSubjectAndTeacher,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Subject and Teacher"></i></a>`
+
+                            },
+                            {
+                                click: viewDetails,
+                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-eye-open" title="View Batch"></i></a>`
 
                             }
                         ],
@@ -242,44 +200,6 @@ var Controller = new function () {
                         }
                     }],
 
-                }, {
-                    title: ' Batch ',
-                    Grid: [{
-
-                        Header: 'Batch',
-                        columns: [
-                            { field: 'Name', title: 'BatchName', filter: true, position: 1 },
-                            { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                            { field: 'Charge', title: 'Charge', filter: true, position: 5, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
-                        ],
-
-                        Url: '/Batch/Get/',
-                        filter: [scheduleFilter, trashFilter],
-                        onDataBinding: function (response) { },
-                        actions: [
-                            {
-                                click: editCourseBatch,
-                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Course Schedule"></i></a>`
-
-                            },
-                            {
-                                click: viewDetails,
-                                html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-eye-open" title="View Schedule"></i></a>`
-
-                            }
-                        ],
-                        buttons: [
-                            {
-                                click: addCourseBatch,
-                                html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
-                            }
-                        ],
-                        selector: false,
-                        Printable: {
-                            container: $('void')
-                        }
-                    }],
                 }],
             name: 'Course Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=OrderDetails ' + Math.random(),

@@ -72,6 +72,7 @@ namespace IqraCommerce.Services.TeacherFeeArea
               ,ISNULL([tchrfee].[Fee], '') [Fee]
               ,[tchrfee].[IsActive]
               ,[tchrfee].[ModuleId]
+              ,[tchrfee].[CourseId]
               ,[tchrfee].[PaymentId]
               ,ISNULL([tchrfee].[Percentage], '') [Percentage]
               ,[tchrfee].[StudentId]
@@ -80,6 +81,7 @@ namespace IqraCommerce.Services.TeacherFeeArea
 			  ,ISNULL([prd].Name, '') [PeriodName]
 	          ,ISNULL([stdnt].Name, '') [StudentName]
 	          ,ISNULL([tchr].Name, '') [TeacherName]
+			  ,ISNULL([crsh].Name, '') [CourseName]
 	          ,ISNULL([crtr].Name, '') [Creator]
 	          ,ISNULL([pdtr].Name, '') [Updator]
           FROM [dbo].[TeacherFee] [tchrfee]
@@ -88,7 +90,8 @@ namespace IqraCommerce.Services.TeacherFeeArea
 	        LEFT JOIN [dbo].[Period] [prd] ON [prd].Id = [tchrfee].[PeriodId]
 	        LEFT JOIN [dbo].[Teacher] [tchr] ON [tchr].Id = [tchrfee].[TeacherId]
 			LEFT JOIN [dbo].[Module] [mdl] ON [mdl].Id = [tchrfee].[ModuleId]
-			LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [tchrfee].[StudentId]";
+			LEFT JOIN [dbo].[Student] [stdnt] ON [stdnt].Id = [tchrfee].[StudentId]
+			LEFT JOIN [dbo].[Course] [crsh] ON [crsh].Id = [tchrfee].[CourseId]";
 
         }
 

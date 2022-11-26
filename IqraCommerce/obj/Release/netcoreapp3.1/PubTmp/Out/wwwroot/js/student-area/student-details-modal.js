@@ -137,12 +137,13 @@ var Controller = new function () {
         studentFilter.value = _options.Id;
        
         function addStudentInModule(page) {
+            console.log("Page=>", page);
             Global.Add({
                 name: 'ADD_STUDENT_MODULE',
                 model: undefined,
                 title: 'Add Student Module',
                 columns: [
-                    { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 3, add: false },
                     { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 4, },
                 ],
                 dropdownList: modalModuleDropDowns,
@@ -166,7 +167,8 @@ var Controller = new function () {
                 model: model,
                 title: 'Edit Student Module',
                 columns: [
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 4, },
+                    { field: 'Charge', title: 'Charge', filter: true, position: 3, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 4, },
                 ],
                 dropdownList: modalEditModuleDropDowns,
                 additionalField: [],
@@ -298,17 +300,17 @@ var Controller = new function () {
                        ],
 
                         Url: '/StudentModule/Get/',
-                        filter: [studentFilter, moduleActiveFilter, moduleLiveFilter, activeFilter],
+                        filter: [studentFilter, moduleActiveFilter, moduleLiveFilter, liveFilter],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editStudentModule,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Student Batch"></i></a>`
 
                         }],
-                       /* buttons: [{
+                        buttons: [/*{
                             click: addStudentInModule,
                             html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
-                        }],*/
+                        }*/],
                         selector: false,
                         Printable: {
                             container: $('void')

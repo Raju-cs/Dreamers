@@ -18,6 +18,6 @@ namespace IqraCommerce.Entities.CourseArea
         public double Hour { get; set; }    
         public string Version { get; set; }
         public bool IsActive { get; set; }
-
+        public int TeacherPercentange { get; internal set; }
     }
 }

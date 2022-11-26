@@ -13,6 +13,7 @@ namespace IqraCommerce.Entities.TeacherFeeArea
         public Guid StudentId { get; set; }
         public Guid PaymentId { get; set; }
         public Guid ModuleId { get; set; }
+        public Guid CourseId { get; set; }
         public double Fee { get; set; }
         public double Percentage { get; set; }
         public double Total { get; set; }
