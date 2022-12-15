@@ -16,8 +16,8 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
     const dateForSQLServer = (enDate = '01/01/1970') => {
         const dateParts = enDate.split('/');
         console.log("dateparts=>", dateParts);
-        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
-        //return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+        //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+        return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
     }
 
     function periodStartDate(td) {
@@ -47,9 +47,6 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
         { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false, bound: periodStartDate },
         { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false, bound: periodEndDate },
         { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false, bound: paymentDate },
- /*       { field: 'TotalCollected', title: 'Total Collected', filter: true, position: 2, required: true, add: { sibling: 2 } },
-        { field: 'InCome', title: 'Income', filter: true, position: 3, add: { sibling: 2 } },
-        { field: 'OutCome', title: 'Outcome', filter: true, position: 5, add: { sibling: 2 } },*/
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5 },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -116,9 +113,6 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
                 { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, dateFormat: 'dd/MM/yyyy', required: false },
                 { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, dateFormat: 'dd/MM/yyyy', required: false },
                 { field: 'RegularPaymentDate', title: 'Regular Payment Date', filter: true, position: 4, dateFormat: 'dd/MM/yyyy', required: false },
-          /*      { field: 'TotalCollected', title: 'Total Collected', filter: true, position: 2, required: false, add: { sibling: 2 } },
-                { field: 'InCome', title: 'Income', filter: true, position: 3, add: { sibling: 2 } },
-                { field: 'OutCome', title: 'Outcome', filter: true, position: 5, add: { sibling: 2 } },*/
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 7, },],
             dropdownList: [{
                 title: 'Name',

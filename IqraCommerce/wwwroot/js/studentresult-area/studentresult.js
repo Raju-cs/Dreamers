@@ -23,9 +23,10 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         { field: 'SubjectName', title: 'SubjectName', filter: true, position: 4},
         { field: 'ModuleName', title: 'ModuleName', filter: true, position: 5 },
         { field: 'BatchName', title: 'BatchName', filter: true, position: 6, },
-        { field: 'Status', title: 'Status', filter: true, position: 7, },
-        { field: 'Mark', title: 'Marks', filter: true, position: 8, },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 9, },
+        { field: 'Mark', title: 'Marks', filter: true, position: 7, },
+        { field: 'ExamBandMark', title: 'ExamBandMark', filter: true, position: 8, },
+        { field: 'Status', title: 'Status', filter: true, position: 9, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 10, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
         { field: 'Updator', title: 'Updator', add: false },
@@ -65,18 +66,11 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Name: 'MODULE_STUDENT_RESULT',
         Title: 'Module Student Result',
         filter: [liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: () => {},
-            html: eyeBtn("View Details")
-        }],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
-        remove: { save: `/${controller}/Remove` },
+       // remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
 

@@ -98,10 +98,6 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Name: 'COURSE_ATTENDANCE',
         Title: 'Course Attendance',
         filter: [liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),

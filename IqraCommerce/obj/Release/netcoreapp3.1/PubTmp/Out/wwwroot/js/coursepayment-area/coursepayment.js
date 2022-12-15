@@ -9,10 +9,19 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         $('#add-record').click(add);
     });
 
+    function paymentDate(td) {
+        td.html(new Date(this.PaymentDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+
     const columns = () => [
         { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, required: false, },
         { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
         { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
+        { field: 'PaymentDate', title: 'PaymentDate', filter: true, add: { sibling: 2, }, position: 5, dateFormat: 'dd/MM/yyyy', bound: paymentDate },
         { field: 'Paid', title: 'Paid', filter: true, add: { sibling: 2, }, position: 7, },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 10, },
         { field: 'Creator', title: 'Creator', add: false },
@@ -70,13 +79,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         Name: 'COURSE_PAYMENT',
         Title: 'Course Payment',
         filter: [liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: viewDetails,
-            html: eyeBtn("View Details")
-        }],
+        actions: [],
         onDataBinding: () => { },
         columns: columns(),
         Printable: { container: $('void') },

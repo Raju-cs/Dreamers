@@ -94,6 +94,8 @@ namespace IqraCommerce.Services.FeesArea
             }
         }
 
+      
+
 
     }
 
@@ -113,12 +115,10 @@ namespace IqraCommerce.Services.FeesArea
                   ,ISNULL([fs].[PeriodId], '') [PeriodId]
                   ,ISNULL([fs].[StudentId], '') [StudentId]
                   ,[fs].[IsActive]
-                  ,[fs].[ExtendPaymentDate]
+                  ,[fs].[PaymentDate]
                   ,ISNULL([fs].[CourseFee], '') [CourseFee]
                   ,ISNULL([fs].[Fee], '') [Fee]
                   ,ISNULL([fs].[ModuleFee], '') [ModuleFee]
-                  ,ISNULL([fs].[PaidFee], '') [PaidFee]
-                  ,ISNULL([fs].[RestFee], '') [RestFee]
                   ,ISNULL([fs].[TotalFee], '') [TotalFee]
 	              ,ISNULL([crtr].Name, '') [Creator]
 	              ,ISNULL([pdtr].Name, '') [Updator]

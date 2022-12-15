@@ -6,7 +6,6 @@
     var _options;
     this.Show = function (options) {
         _options = options;
-        console.log("options=>", options);
         studentFilter.value = _options.StudentId;
         periodFilter.value = _options.PeriodId;
         paidFilter.value = _options.ModuleCharge;

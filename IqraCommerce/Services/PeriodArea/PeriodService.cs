@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using System.Linq;
+using IqraCommerce.Models.PeriodArea;
 
 namespace IqraCommerce.Services.PeriodArea
 {
@@ -41,6 +42,9 @@ namespace IqraCommerce.Services.PeriodArea
                 case "charge":
                     name = "Charge";
                     break;
+                case "due":
+                    name = "Due";
+                    break;
                 /* case "fsperiodid":
                      name = "[fs].[PeriodId]";
                      break;*/
@@ -59,6 +63,8 @@ namespace IqraCommerce.Services.PeriodArea
                 return await db.GetPages(page, PeriodQuery.Get());
             }
         }
+
+  
         public async Task<ResponseList<Pagger<Dictionary<string, object>>>> ForModulePayment(Page page)
         {
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
@@ -70,7 +76,7 @@ namespace IqraCommerce.Services.PeriodArea
                 page.filter = innerFilters;
                 var query = GetWhereClause(page);
                 page.filter = outerFilters;
-                return await db.GetPages(page,PeriodQuery.ForModulePayment(query, page.Id?.ToString()));
+                return await db.GetPages(page,PeriodQuery.ForModulePayment( page.Id?.ToString()));
             }
         }
 
@@ -130,14 +136,22 @@ namespace IqraCommerce.Services.PeriodArea
             get { return @"SELECT " + Get() + " Where prd.Id = '"; }
         }
 
-        public static string ForModulePayment(string innerCondition, string periodId)
+        public static string ForModulePayment( string periodId)
         {
             return @" * from ( 
                         select 
                             distinct stdnt.Id [StudentId], 
 							stdnt.DreamersId [DreamersId],
-                            stdnt.Name as [StudentName], 
+                            stdnt.Name as [StudentName],
+                            stdnt.PhoneNumber [PhoneNumber],
+							stdnt.GuardiansPhoneNumber [GuardiansPhoneNumber],
+							ISNULL(xtndpymntdt.ExtendPaymentdate, '') [ExtendPaymentdate],
                             sum(stdntmdl.Charge) [Charge], 
+							sum(stdntmdl.Charge) -  (SELECT 
+                                ISNULL( SUM(fs.Fee), 0) 
+                            FROM Fees fs 
+                            WHERE PeriodId = '" + periodId + @"' 
+                            and fs.StudentId = stdnt.Id ) [Due],
                             (SELECT 
                                 ISNULL( SUM(fs.Fee), 0) 
                             FROM Fees fs 
@@ -145,35 +159,47 @@ namespace IqraCommerce.Services.PeriodArea
                             and fs.StudentId = stdnt.Id ) [Paid]
                         from ModulePeriod mdlprd
                         left join StudentModule stdntmdl on stdntmdl.Id = mdlprd.StudentModuleId
-                        left join Student stdnt on stdnt.Id = stdntmdl.StudentId
+                        left join Student stdnt on stdnt.Id = stdntmdl.StudentId 
                         left join Period prd on prd.Id = mdlprd.PriodId
-                        where mdlprd.PriodId = '" + periodId + @"' and stdntmdl.IsDeleted = 0
+                        left join ExtendPaymentDate xtndpymntdt on  xtndpymntdt.PeriodId = mdlprd.PriodId and xtndpymntdt.StudentId = stdnt.Id
+                         where mdlprd.PriodId = '" + periodId + @"'   and stdntmdl.IsDeleted = 0
                         group by stdnt.Id, 
                                  stdnt.Name,
-								 stdnt.DreamersId)item";
+                                 stdnt.PhoneNumber,
+								 stdnt.GuardiansPhoneNumber,
+								 stdnt.DreamersId,
+								 xtndpymntdt.ExtendPaymentdate)item";
         }
 
         public static string ForCoursePayment(string innerCondition, string periodId)
         {
-            return @" * from (  
-                           select 
+            return @" * from (   select 
                            distinct stdnt.Id [StudentId], 
 							stdnt.DreamersId [DreamersId],
                             stdnt.Name as [StudentName], 
+							ISNULL(xtndpymntdt.ExtendPaymentdate, '') [ExtendPaymentdate],
                             sum(stdntcrsh.CourseCharge) [Charge], 
+							sum(stdntcrsh.CourseCharge) -  (SELECT 
+                                ISNULL( SUM(crspymnt.Paid), 0) 
+                            FROM CoursePayment crspymnt 
+                            WHERE PeriodId = '" + periodId + @"' 
+                            and crspymnt.StudentId = stdnt.Id ) [Due],
                             (SELECT 
                                 ISNULL( SUM(crspymnt.Paid), 0) 
                             FROM CoursePayment crspymnt 
-                            WHERE PeriodId = '" + periodId + @"'
+                            WHERE PeriodId = '" + periodId + @"' 
                             and crspymnt.StudentId = stdnt.Id ) [Paid]
                         from CoursePeriod crshprd
                         left join StudentCourse stdntcrsh on stdntcrsh.Id = crshprd.StudentCourseId
                         left join Student stdnt on stdnt.Id = stdntcrsh.StudentId
                         left join Period prd on prd.Id = crshprd.PriodId
-                        where crshprd.PriodId = '" + periodId + @"' and stdntcrsh.IsDeleted = 0
+						left join ExtendPaymentDate xtndpymntdt on  xtndpymntdt.PeriodId = crshprd.PriodId and xtndpymntdt.StudentId = stdnt.Id
+                        where crshprd.PriodId = '" + periodId + @"'  and stdntcrsh.IsDeleted = 0
                         group by  stdnt.Id, 
                                  stdnt.Name,
-								 stdnt.DreamersId)item";
+								 stdnt.DreamersId,
+								 xtndpymntdt.ExtendPaymentdate)item";
         }
+
     }
 }

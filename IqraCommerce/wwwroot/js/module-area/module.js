@@ -107,8 +107,10 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
         $('#add-record').click(add);
     });
 
+ 
+
     const columns = () => [
-        { field: 'Name', title: 'Name', filter: true, position: 1,},
+        { field: 'Name', title: 'Name', filter: true, position: 1},
         { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
         { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
         { field: 'SubjectClass', title: 'Class', filter: true, position: 4, add: false },

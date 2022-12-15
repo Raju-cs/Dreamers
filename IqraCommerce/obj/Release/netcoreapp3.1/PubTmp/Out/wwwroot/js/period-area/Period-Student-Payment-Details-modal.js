@@ -1,14 +1,14 @@
 ﻿var Controller = new function () {
     const studentFilter = { "field": "StudentId", "value": '', Operation: 0 };
     const periodFilter = { "field": "PeriodId", "value": '', Operation: 0 };
+    const paidFilter = { "field": "ModuleFee", "value": '', Operation: 0 };
    
     var _options;
     this.Show = function (options) {
         _options = options;
-        console.log("options=>", options);
         studentFilter.value = _options.StudentId;
         periodFilter.value = _options.PeriodId;
-
+        paidFilter.value = _options.ModuleCharge;
         Global.Add({
             title: 'Payment Information',
             selected: 0,
@@ -26,8 +26,8 @@
                             { field: 'Updator', title: 'Updator', add: false },
                             { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
                         ],
-                        Url: '/Fees/Get/',  
-                        filter: [studentFilter, periodFilter],
+                        Url: '/Fees/Get/',
+                        filter: [studentFilter, periodFilter, paidFilter],
                         onDataBinding: function (response) { },
                         buttons: [],
                         selector: false,

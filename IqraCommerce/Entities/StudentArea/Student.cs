@@ -10,6 +10,7 @@ namespace IqraCommerce.Entities.StudentArea
     {
         public string ImageURL { get; set; }
         public string DreamersId { get; set; }
+        public Guid DistrictId { get; set; }
         public string NickName { get; set; }
         public string StudentNameBangla { get; set; }
         public string PhoneNumber { get; set; }

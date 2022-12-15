@@ -9,17 +9,24 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         $('#add-record').click(add);
     });
 
+    function paymentDate(td) {
+        td.html(new Date(this.PaymentDate).toLocaleDateString('en-US', {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }));
+    }
+
     const columns = () => [
         
         { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, required: false, },
         { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
         { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
         { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 4, },
+        { field: 'PaymentDate', title: 'PaymentDate', filter: true, add: { sibling: 2, }, position: 5, dateFormat: 'dd/MM/yyyy', bound: paymentDate },
         { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, },
         { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 6, },
         { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 7, },
-        { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, },
-        { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 9,  },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 10, },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -75,10 +82,9 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
                 { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
                 { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 4, },
                 { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 5, },
+                { field: 'PaymentDate', title: 'PaymentDate', filter: true, add: { sibling: 2, }, position: 5, dateFormat: 'dd/MM/yyyy', bound: paymentDate },
                 { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 6, },
                 { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 7, },
-                { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, },
-                { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 10, },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 11, },
             ],
             dropdownList: [{
@@ -127,80 +133,28 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         });
     }
 
-    const allTab = {
-        Id: 'BBC23DC6-A099-494D-BEB4-E8B98993A27D',
-        Name: 'ALL_FEES',
-        Title: 'All',
-        filter: [liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: viewDetails,
-            html: eyeBtn("View Details")
-        }],
-        onDataBinding: () => { },
-        columns: columns(),
-        Printable: { container: $('void') },
-        remove: { save: `/${controller}/Remove` },
-        Url: 'Get',
-    }
+
 
     const moiduleTab = {
         Id: '5EF1DA6B-86ED-4DE8-8154-9A851937E804',
-        Name: 'MODULE',
-        Title: 'Module',
-        filter: [ liveRecord],
+        Name: 'MODULE_PAYMENT',
+        Title: 'Module Payment',
+        filter: [{ "field": "Name", "value": "Module", Operation: 0 }, liveRecord],
         remove: false,
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: viewDetails,
-            html: eyeBtn("View Details")
-            }],
+        actions: [],
         onDataBinding: () => { },
         columns: [
             { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
             { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
             { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
-            { field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 4, },
+            //{ field: 'ModuleFee', title: 'ModuleFee', filter: true, add: { sibling: 2, }, position: 4, },
+            { field: 'PaymentDate', title: 'PaymentDate', filter: true, add: { sibling: 2, }, position: 5, dateFormat: 'dd/MM/yyyy', bound: paymentDate },
             { field: 'Fee', title: 'Paid', filter: true, add: { sibling: 2, }, position: 7, },
             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 11, },
             { field: 'Creator', title: 'Creator', add: false },
             { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
             { field: 'Updator', title: 'Updator', add: false },
             { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
-        ],
-        Printable: { container: $('void') },
-        remove: { save: `/${controller}/Remove` },
-        Url: 'Get',
-    }
-
-    const courseTab = {
-        Id: 'EF823F95-804C-496A-B010-2C37257E8356',
-        Name: 'COURSE',
-        Title: 'Course',
-        filter: [{ "field": "Name", "value": "Course", Operation: 0 }, liveRecord],
-        remove: false,
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-                click: viewDetails,
-                html: eyeBtn("View Details")
-            }],
-        onDataBinding: () => { },
-        columns: [
-            { field: 'Period', title: 'Month', filter: true, position: 1, add: { sibling: 2, }, add: false, dateFormat: 'yyyy/dd/MM', required: false, },
-            { field: 'DreamersId', title: 'DreamersId', filter: true, add: false, position: 2, },
-            { field: 'StudentName', title: 'Student Name', filter: true, add: false, position: 3, },
-            { field: 'CourseFee', title: 'CourseFee', filter: true, add: { sibling: 2, }, position: 4, },
-            { field: 'TotalFee', title: 'TotalFee', filter: true, add: { sibling: 2, }, position: 6, },
-            { field: 'Fee', title: 'Fee', filter: true, add: { sibling: 2, }, position: 7, },
-            { field: 'PaidFee', title: 'PaidFee', filter: true, add: { sibling: 2, }, position: 8, },
-            { field: 'RestFee', title: 'RestFee', filter: true, add: { sibling: 2, }, position: 10, },
-            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 11, },
         ],
         Printable: { container: $('void') },
         remove: { save: `/${controller}/Remove` },
@@ -225,7 +179,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         Base: {
             Url: `/${controller}/`,
         },
-        items: [ moiduleTab, courseTab, deleteTab],
+        items: [ moiduleTab, deleteTab],
     };
 
     //Initialize Tabs

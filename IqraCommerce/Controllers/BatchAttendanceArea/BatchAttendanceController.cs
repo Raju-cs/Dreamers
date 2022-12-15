@@ -30,6 +30,7 @@ namespace IqraCommerce.Controllers.BatchAttendanceArea
 
            batchAttendanceForDb.AttendanceTime = DateTime.Now;
            batchAttendanceForDb.EarlyLeaveTime = recordToCreate.EarlyLeaveTime;
+            //batchAttendanceForDb.Status = "Present";
             
 
 

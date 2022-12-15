@@ -18,6 +18,7 @@ namespace IqraCommerce.Services
 {
     public class AppBaseService<T>: IqraBase.Service.AppBaseService<T> where T : IqraBase.Data.Entities.AppBaseEntity
     {
+        public Task SendMessage { get; internal set; }
 
         public AppBaseService():base(new AppDB()) { 
             

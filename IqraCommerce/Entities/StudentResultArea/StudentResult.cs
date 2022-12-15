@@ -13,6 +13,9 @@ namespace IqraCommerce.Entities.StudentResultArea
         public Guid BatchId { get; set; }
         public Guid ModuleId { get; set; }
         public Guid BatchExamId { get; set; }
+        public DateTime ExamDate { get; set; }
+        public string PhoneNumber { get; set; }
+        public string GuardiansPhoneNumber { get; set; }
         public string Status { get; set; }
         public double Mark { get; set; }
 

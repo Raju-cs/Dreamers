@@ -190,7 +190,7 @@ const renderPageHeader = (windowToPrint) => {
             }
             .repeat-item h4 span {
                 position: relative;
-                bottom: 5px;
+                bottom: 1px;
             }
             .d-flex {
                 display: flex;
@@ -498,7 +498,7 @@ const renderAddresses = (windowToPrint, report) => {
             <h4 class="cmn-text cmn-text2">Permanent Address :<span> ${report.PermanantAddress}</span></h4>
             <div class="add-inner-flex">
                 <h4 class="cmn-text"><small>Present Address ------:</small> <span></span></h4>
-                <h4 class="cmn-text new-text">Home District :<span>${report.HomeDistrict}</span></h4>
+                <h4 class="cmn-text new-text">Home District :<span>${report.District}</span></h4>
             </div>
         </div>
     </div>

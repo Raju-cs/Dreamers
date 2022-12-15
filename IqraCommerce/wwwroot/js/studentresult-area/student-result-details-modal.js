@@ -32,13 +32,19 @@
                             { field: 'SubjectName', title: 'SubjectName', filter: true, position: 4 },
                             { field: 'BatchName', title: 'BatchName', filter: true, position: 5, },
                             { field: 'Status', title: 'Status', filter: true, position: 6, },
-                            { field: 'Mark', title: 'Marks', filter: true, position: 7, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 8, },
+                            { field: 'ExamBandMark', title: 'ExamBandMark', filter: true, position: 7, },
+                            { field: 'Mark', title: 'Marks', filter: true, position: 8, },
+                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: "textarea" }, required: false, position: 9, },
                         ],
 
                         Url: '/StudentResult/Get/',
                         filter: [batchFilter, liveFilter],
                         onDataBinding: function (response) { },
+
+                        actions: [/*{
+                            click: () => { },
+                            html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-envelope" title="Send Message"></i></a >'
+                        }*/],
                         selector: false,
                         Printable: {
                             container: $('void')

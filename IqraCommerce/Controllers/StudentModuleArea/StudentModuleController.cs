@@ -48,7 +48,7 @@ namespace IqraCommerce.Controllers.StudentModuleArea
 
             modulePeriodList = modulePeriodEntity.Where(x => x.Id != ListStudentModule.Id).ToList();
             
-            var getData = from getdata in modulePeriodList select new { getdata.Id };
+            var getData = from getdata in modulePeriodList select new { getdata.Id};
             
             foreach (var studentmoduleId in getData)
             {
@@ -56,6 +56,7 @@ namespace IqraCommerce.Controllers.StudentModuleArea
                     modulePeriod.StudentModuleId = recordToCreate.Id;
                     modulePeriod.Name = period.Name;
                     modulePeriodEntity.Add(modulePeriod);
+                    
             }
 
             var studentModuleFromDb = ___service.GetEntity<StudentModule>()

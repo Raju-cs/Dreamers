@@ -52,7 +52,7 @@ namespace IqraCommerce.Services.BatchExamArea
             }
         }
 
-        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> BatchExamStudent(Page page)
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> ModuleBatchExamStudent(Page page)
         {
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
             var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
@@ -63,7 +63,7 @@ namespace IqraCommerce.Services.BatchExamArea
                 page.filter = innerFilters;
                 var query = GetWhereClause(page);
                 page.filter = outerFilters;
-                return await db.GetPages(page, BatchExamQuery.BatchExamStudent(query, page.Id?.ToString()));
+                return await db.GetPages(page, BatchExamQuery.ModuleBatchExamStudent(query, page.Id?.ToString()));
             }
         }
     }
@@ -85,6 +85,7 @@ namespace IqraCommerce.Services.BatchExamArea
               ,[btchxm].[ModuleId]
               ,[btchxm].[SubjectId]
               ,[btchxm].[ExamDate]
+              ,[btchxm].[ExamBandMark]
               ,[btchxm].[ExamStartTime]
               ,[btchxm].[ExamEndTime]
               ,ISNULL([btchxm].[ExamName], '') [ExamName]
@@ -101,12 +102,14 @@ namespace IqraCommerce.Services.BatchExamArea
 		  LEFT JOIN [dbo].[Subject] [sbjct] ON [sbjct].Id = [btchxm].[SubjectId]";
         }
 
-        public static string BatchExamStudent(string innerCondition, string batchExamId)
+        public static string ModuleBatchExamStudent(string innerCondition, string batchExamId)
         {
             return @"* from ( 
        select  stdnt.[Id]
       ,stdnt.[Name]
       ,stdnt.[DreamersId]
+      ,stdnt.PhoneNumber
+	  ,stdnt.GuardiansPhoneNumber
       ,ISNULL(stdntrslt.[Status], '') [Status]
 	  ,ISNULL(stdntrslt.[Mark], '') [Mark]
     from [StudentModule] [stdntmdl]
@@ -117,6 +120,8 @@ namespace IqraCommerce.Services.BatchExamArea
      group by stdnt.[Id]
       ,stdnt.[Name]
       ,stdnt.[DreamersId]
+      ,stdnt.PhoneNumber
+	  ,stdnt.GuardiansPhoneNumber
 	  ,stdntrslt.[Status]
 	  ,stdntrslt.Mark) item";
         }

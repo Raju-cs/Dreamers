@@ -1,0 +1,24 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace IqraCommerce.Migrations
+{
+    public partial class addExamDateinStudentResult : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AddColumn<DateTime>(
+                name: "ExamDate",
+                table: "StudentResult",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "ExamDate",
+                table: "StudentResult");
+        }
+    }
+}

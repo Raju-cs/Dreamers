@@ -11,8 +11,7 @@ using IqraCommerce.Entities.StudentModuleArea;
 using System.Collections.Generic;
 using IqraCommerce.Entities.StudentCourseArea;
 using IqraCommerce.Entities.CoursePeriodArea;
-using IqraCommerce.Entities.FeesArea;
-using IqraCommerce.Models.FeesArea;
+using IqraCommerce.Entities.ExtendPaymentdateArea;
 
 namespace IqraCommerce.Controllers.PeriodArea
 {
@@ -42,6 +41,7 @@ namespace IqraCommerce.Controllers.PeriodArea
             List<StudentModule> ListStudentModule = new List<StudentModule>();
             List<StudentCourse> ListStudentCourse = new List<StudentCourse>();
 
+
             Period period = new Period();
 
             ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false ).ToList();
@@ -65,12 +65,18 @@ namespace IqraCommerce.Controllers.PeriodArea
                 coursePeriodList.Add(coursePeriod);
             }
 
+
+
             return base.Create(recordToCreate);
         }
+
+
 
         [HttpPost]
         public async Task<JsonResult> ForModulePayment([FromBody] Page page)
         {
+
+
             return Json(await ___service.ForModulePayment(page));
         }
 
@@ -78,6 +84,8 @@ namespace IqraCommerce.Controllers.PeriodArea
         {
             return Json(await ___service.ForCoursePayment(page));
         }
+
+        
     }
 
     public class IdDto

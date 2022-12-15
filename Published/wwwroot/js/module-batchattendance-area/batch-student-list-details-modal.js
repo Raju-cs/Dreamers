@@ -4,21 +4,22 @@ var Controller = new function () {
 
     this.Show = function (options) {
         _options = options;
-        console.log("options=>", _options);
 
         function rowBound(row) {
             if (this.Status == "Present" || this.Status == "Late") {
                 row.css({ background: "#fff" }).find('.glyphicon-ok').css({ display: "none" });
-                row.css({ background: "#fff" }).find('.glyphicon-time').css({ padding: 6, });
+                row.css({ background: "#fff" }).find('.glyphicon-time').css({ padding: 6 });
+                row.css({ background: "#fff" }).find('.glyphicon-envelope').css({ padding: 6, });
                 row.css({ background: "#fff" }).find('.action a').css({ padding: 0 });
-                row.css({ background: "#fff" }).find('.action').css({ padding: 4, gap: 0 });
+                row.css({ background: "#fff" }).find('.action').css({ padding: 4, gap: 2 });
             }
 
             if (this.IsEarlyLeave == true) {
                 row.css({ background: "#fff" }).find('.glyphicon-time').css({ display: "none" });
-                row.css({ background: "#fff" }).find('.glyphicon-ok').css({ padding: 6 });
+                row.css({ background: "#fff" }).find('.glyphicon-ok').css({ padding: 6, });
+                row.css({ background: "#fff" }).find('.glyphicon-envelope').css({ padding: 6 });
                 row.css({ background: "#fff" }).find('.action a').css({ padding: 0, });
-                row.css({ background: "#fff" }).find('.action').css({ padding: 0, gap: 0 });
+                row.css({ background: "#fff" }).find('.action').css({ padding: 4, gap: 2 });
             }
         }
         function studentAttendance(data, grid ) {
@@ -85,7 +86,79 @@ var Controller = new function () {
                 grid?.Reload();
             }).catch(err => alert(err));
         }
-   
+
+        function allStudentMessage(data, grid) {
+            console.log("data=>", data);
+            const payload = {
+                BatchId: _options.BatchId,
+                ModuleId: _options.ModuleId,
+                SubjectId: _options.SubjectId
+            };
+            var url = '/Message/AllStudentAbsentMessage/';
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload),
+            }).then(res => {
+                if (res.status === 200) {
+                    return res.json();
+                }
+
+                throw Error(res.statusText);
+            }).then(data => {
+                if (data.IsError)
+                    throw Error(data.Msg);
+
+                //alert(data.Msg);
+                grid?.Reload();
+            }).catch(err => alert(err));
+        }
+
+        function SinglestudentMessage(page, grid) {
+            console.log("fee=>", page);
+            Global.Add({
+                name: 'MESSAGE',
+                model: undefined,
+                title: 'Message',
+                columns: [
+                    { field: 'PhoneNumber', title: 'PhoneNumber', filter: true, position: 1, add: { sibling: 2 } },
+                    { field: 'GuardiansPhoneNumber', title: 'GuardiansPhoneNumber', filter: true, position: 1, add: { sibling: 2 } },
+                    { field: 'Content', title: 'Content', filter: true, add: { sibling: 1, type: "textarea" }, position:2, },
+                ],
+                dropdownList: [],
+                additionalField: [],
+
+                onSubmit: function (formModel, data, model) {
+                    console.log("formModel=>", formModel);
+                    formModel.ActivityId = window.ActivityId;
+                    formModel.IsActive = true;
+                    formModel.StudentId = page.Id;
+                    formModel.BatchId = _options.BatchId;
+                    formModel.ModuleId = _options.ModuleId;
+                    formModel.SubjectId = _options.SubjectId;
+                    formModel.Content = model.Content;
+                    formModel.PhoneNumber = model.PhoneNumber;
+                    formModel.GuardiansPhoneNumber = model.GuardiansPhoneNumber;
+                    formModel.SubjectId = _options.SubjectId;
+                    formModel.Name = page.Name;
+
+                },
+                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
+                    console.log("model=>", model);
+                    formModel.PhoneNumber = page.PhoneNumber;
+                    formModel.GuardiansPhoneNumber = page.GuardiansPhoneNumber;
+                    formModel.Content = "Student" + " " + page.Name + " " + " was " + page.Status + " todays class. Class conducted on " + _options.AttendanceDate
+                       + " \n" +  "Regards,Dreamer's ";
+                },
+                onSaveSuccess: function () {
+                    _options.updatePayment();
+                    grid?.Reload();
+                },
+                save: `/Message/SingleStudentMessage`,
+            });
+        }
 
         Global.Add({
             title: 'Batch Student List',
@@ -116,9 +189,15 @@ var Controller = new function () {
                         }, {
                             click: earlyLeave,
                             html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-time" title="Student Early Leave"></i></a >'
+                            },{
+                                click: SinglestudentMessage,
+                                html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-envelope" title="Send Message"></i></a >'
                             }],
                         rowBound: rowBound,
-                        buttons: [],
+                        buttons: [{
+                            click: allStudentMessage,
+                            html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-envelope" title="Add Exam"></span> Send All student </a>'
+                        }],
                         selector: false,
                         Printable: {
                             container: $('void')

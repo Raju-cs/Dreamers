@@ -31,7 +31,7 @@ var Controller = new function () {
     const modalColumns = [
         { field: 'TeacherPercentange', title: 'Teacher Percentange', filter: true, position: 4, add: { sibling: 2 } },
         //{ field: 'CoachingPercentange', title: 'Coaching Percentange', filter: true, position: 5, add: { sibling: 2 } },
-        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 6, },
+        { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
     ]
   
     const modalDropDowns = [
@@ -136,6 +136,7 @@ var Controller = new function () {
                 TeacherId: row.TeacherId,
                 CourseClass: _options.CourseClass,
                 CourseCharge: _options.CourseCharge,
+                SubjectId: row.SubjectId
             });
         }
 

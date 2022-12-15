@@ -8,6 +8,7 @@ namespace IqraCommerce.Models.BatchExamArea
         public Guid SubjectId { get; set; }
         public DateTime ExamDate { get; set; }
         public String ExamName { get; set; }
+        public double ExamBandMark { get; set; }
         public DateTime ExamStartTime { get; set; }
         public DateTime ExamEndTime { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿var Controller = new function () {
+    const studentBatchFilter = { "field": "BatchId", "value": '', Operation: 0 };
     const studentCourseFilter = { "field": "BatchId", "value": '', Operation: 0 };
     const teacherFilter = { "field": "TeacherId", "value": '', Operation: 0 };
     const liveStudentFilterTwo = { "field": "StudentIsDeleted", "value": 0, Operation: 0 };
@@ -11,7 +12,7 @@
     this.Show = function (options) {
         _options = options;
         console.log("options=>", options);
-        studentCourseFilter.value = _options.Id;
+        studentBatchFilter.value = _options.Id;
         scheduleFilter.value = _options.Id;
         teacherFilter.value = _options.TeacherId;
         studentClassFilter.value = _options.CourseClass;
@@ -206,7 +207,7 @@
                         ],
 
                         Url: '/Routine/Get/',
-                        filter: [teacherFilter],
+                        filter: [teacherFilter, studentBatchFilter],
                         onDataBinding: function (response) { },
                         actions: [
                             {
@@ -239,7 +240,7 @@
                         ],
 
                         Url: '/StudentCourse/Get/',
-                        filter: [studentCourseFilter, liveStudentFilterTwo, activeStudentFilterTwo],
+                        filter: [studentBatchFilter, liveStudentFilterTwo, activeStudentFilterTwo],
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editCourseBatchStudent,

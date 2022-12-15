@@ -40,6 +40,9 @@ namespace IqraCommerce.Controllers.CoursePaymentArea
 
             var sumOfPaid = payments.Sum(f => f.Paid);
 
+            recordToCreate.Name = "Course";
+            recordToCreate.PaymentDate = DateTime.Now;
+
             if (payments != null)
             {
                 var coursePaid = sumOfPaid + recordToCreate.Paid;

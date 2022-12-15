@@ -87,6 +87,7 @@ namespace IqraCommerce.Services.CoursePaymentArea
           ,[crspymnt].[Name]
           ,[crspymnt].[PeriodId]
           ,[crspymnt].[StudentId]
+          ,[crspymnt].[PaymentDate]
           ,[crspymnt].[Paid]
           ,[crspymnt].[IsActive]
 	      ,ISNULL([prd].Name, '') [Period]

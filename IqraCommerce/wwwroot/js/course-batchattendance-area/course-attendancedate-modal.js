@@ -6,21 +6,21 @@
 
     this.Show = function (options) {
         _options = options;
-        console.log("options=>", _options);
         routineFilter.value = _options.RoutineId;
         batchFilter.value = _options.BatchId;
 
         const dateForSQLServer = (enDate = '01/01/1970') => {
             const dateParts = enDate.split('/');
 
-            return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
-            //return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}
+            //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+            return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
         }
 
 
         function addCourseStudentAttendance(page) {
             console.log("Page=>", page);
             Global.Add({
+
                 name: 'ADD_COURSE_STUDENT_ATTENDANCE',
                 model: undefined,
                 title: 'Add Course Student Attendance',

@@ -4,7 +4,6 @@
 
     this.Show = function (options) {
         _options = options;
-        console.log("options=>", options);
 
         Global.Add({
             title: 'Period Information',

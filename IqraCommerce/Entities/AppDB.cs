@@ -27,6 +27,11 @@ using IqraCommerce.Entities.CoursePaymentArea;
 using IqraCommerce.Entities.CourseRoutineArea;
 using IqraCommerce.Entities.CourseAttendanceDateArea;
 using IqraCommerce.Entities.CourseBatchAttendanceArea;
+using IqraCommerce.Entities.CourseExamsArea;
+using IqraCommerce.Entities.CourseStudentResultArea;
+using IqraCommerce.Entities.LocationArea;
+using IqraCommerce.Entities.ExtendPaymentdateArea;
+using IqraCommerce.Entities.StudentMessageStatusArea;
 
 namespace IqraCommerce.Entities
 {
@@ -166,6 +171,26 @@ namespace IqraCommerce.Entities
 
         #region CourseBatchAttendance
         public virtual DbSet<CourseBatchAttendance> CourseBatchAttendance { get; set; }
+        #endregion
+
+        #region CourseExams
+        public virtual DbSet<CourseExams> CourseExam { get; set; }
+        #endregion
+
+        #region CourseStudentResult
+        public virtual DbSet<CourseStudentResult> CourseStudentResult { get; set; }
+        #endregion
+
+        #region District
+        public virtual DbSet<District> District { get; set; }
+        #endregion
+
+        #region ExtendPaymentDate
+        public virtual DbSet<ExtendPaymentDate> ExtendPaymentDate { get; set; }
+        #endregion
+
+        #region StudentMessageStatus
+        public virtual DbSet<StudentMessageStatus> StudentMessageStatus { get; set; }
         #endregion
         protected override void OnModelCreating(ModelBuilder builder)
         {

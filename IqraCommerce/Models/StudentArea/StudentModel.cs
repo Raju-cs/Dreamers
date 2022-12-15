@@ -3,7 +3,9 @@ namespace IqraCommerce.Models.StudentArea
 {
     public class StudentModel: AppDropDownBaseModel
     {
+
         public string DreamersId { get; set; }
+        public Guid DistrictId { get; set; }
         public string NickName { get; set; }
         public string StudentNameBangla { get; set; }
         public string PhoneNumber { get; set; }

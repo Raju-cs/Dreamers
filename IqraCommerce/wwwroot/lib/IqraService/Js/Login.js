@@ -79,7 +79,7 @@
         };
         this.Events = new function () {
             $(document).ready(function () {
-                $('#btn_forget_passwoed').click(label2.Show);
+                $('#btn_forget_password').click(label2.Show);
             });
         };
     };

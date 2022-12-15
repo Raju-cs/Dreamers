@@ -94,13 +94,15 @@ namespace IqraCommerce.Services.PeriodAttendanceArea
 
         public static string BatchStudent(string innerCondition, string periodAttendanceId)
         {
-            return @"* from ( 
+            return @" * from ( 
        select  stdnt.[Id],
 	   btchattndnce.AttendanceTime,
 	   prdattndnc.GraceTime,
        btchattndnce.[IsEarlyLeave]
       ,stdnt.[Name]
-      ,stdnt.[DreamersId],
+      ,stdnt.[DreamersId]
+	  ,stdnt.[PhoneNumber]
+	  ,stdnt.[GuardiansPhoneNumber],
 	    case when btchattndnce.AttendanceTime >= prdattndnc.GraceTime then 'Late'
 	   when btchattndnce.AttendanceTime <= prdattndnc.GraceTime then 'Present'
 	   else 'absent' end as Status
@@ -112,7 +114,9 @@ namespace IqraCommerce.Services.PeriodAttendanceArea
     " + innerCondition + @"
      group by stdnt.[Id]
       ,stdnt.[Name]
-      ,stdnt.[DreamersId],
+      ,stdnt.[DreamersId]
+	  ,stdnt.PhoneNumber
+	  ,stdnt.[GuardiansPhoneNumber],
 	   btchattndnce.AttendanceTime,
 	   prdattndnc.GraceTime,
        btchattndnce.[IsEarlyLeave]

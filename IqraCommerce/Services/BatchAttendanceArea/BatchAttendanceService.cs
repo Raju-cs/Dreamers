@@ -73,6 +73,7 @@ namespace IqraCommerce.Services.BatchAttendanceArea
               ,[btchattndnc].[ModuleId]
               ,[btchattndnc].[BatchId]
 			  ,[btchattndnc].[RoutineId]
+			  ,[btchattndnc].[SubjectId]
               ,[btchattndnc].[PeriodAttendanceId]
 			  ,ISNULL([btchattndnc].[AttendanceTime], '') [AttendanceTime]
 			  ,ISNULL([btchattndnc].[EarlyLeaveTime], '') [EarlyLeaveTime]

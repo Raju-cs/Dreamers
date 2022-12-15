@@ -11,11 +11,23 @@ import { print } from "./student-form.js";
         $('#add-record').click(add);
     });
 
+    function isValidPhoneNumber(phoneNumber) {
+        // Regular expression to match the correct pattern of a Bangladeshi mobile number
+        const phoneNumberRegex = /^(?:\+?88)?01[15-9]\d{8}$/;
+        return phoneNumberRegex.test(phoneNumber);
+    }
+
+    function isValidGuardiansPhoneNumber(guardiansphoneNumber) {
+        // Regular expression to match the correct pattern of a Bangladeshi mobile number
+        const phoneNumberRegex = /^(?:\+?88)?01[15-9]\d{8}$/;
+        return phoneNumberRegex.test(guardiansphoneNumber);
+    }
+
     const dateForSQLServer = (Date = '01/01/1970') => {
         const dateParts = Date.split('/');
 
-        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
-        //return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}
+        //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+        return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
     }
 
     function studentDate(td) {
@@ -26,17 +38,18 @@ import { print } from "./student-form.js";
         }));
     }
 
+
     const columns = () => [
         { field: 'ImageURL', title: 'Image', filter: false, position: 1, add: false, bound: imageBound },
-        { field: 'NickName', title: 'Nick Name', filter: true, position: 3, add: { sibling: 4 }, required: false },
-        { field: 'Name', title: 'Full Name(English)', filter: true, position: 4, add: { sibling: 4 }, },
-        { field: 'StudentNameBangla', title: 'Full Name(Bangla)', filter: true, position: 5, add: { sibling: 4 }, },
-        { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 6, add: { sibling: 4 }, },
+        { field: 'NickName', title: 'Nick Name', filter: true, position: 3, add: { sibling: 4 }},
+        { field: 'Name', title: 'Full Name(English)', filter: true, position: 4, add: { sibling: 4 } },
+        { field: 'StudentNameBangla', title: 'Full Name(Bangla)', filter: true, position: 5, add: { sibling: 4 } },
+        { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 6, add: { sibling: 4 }},
         { field: 'DateOfBirth', title: 'Date Of Birth', filter: true, position: 7, add: { sibling: 4 }, dateFormat: 'dd/MM/yyyy', bound: studentDate  },
-        { field: 'Nationality', title: 'Nationality', filter: true, position: 11, add: { sibling: 4 }, required: false },
+        { field: 'Nationality', title: 'Nationality', filter: true, position: 11, add: { sibling: 4 }},
         { field: 'StudentSchoolName', title: 'School Name', filter: true, position: 12, add: { sibling: 4 }, required: false },
         { field: 'StudentCollegeName', title: 'College Name', filter: true, position: 13, add: { sibling: 4 }, required: false },
-        { field: 'Class', title: 'Class', filter: true, position: 14, add: { sibling: 4 }, required: false },
+        { field: 'Class', title: 'Class', filter: true, position: 14, add: { sibling: 4 }},
         { field: 'Section', title: 'Section', filter: true, position: 17, add: { sibling: 4 }, required: false },
         { field: 'FathersName', title: 'Fathers Name', filter: true, position: 18, add: { sibling: 4 }, required: false },
         { field: 'FathersOccupation', title: 'Fathers Occupation', filter: true, position: 19, add: { sibling: 4 }, required: false },
@@ -46,12 +59,13 @@ import { print } from "./student-form.js";
         { field: 'MothersOccupation', title: 'Mothers Occupation', filter: true, position: 22, add: { sibling: 4 }, required: false  },
         { field: 'MothersPhoneNumber', title: 'Mothers Phone Number', filter: true, position: 23, add: { sibling: 4 }, required: false  },
         { field: 'MothersEmail', title: 'Mothers Email Address', filter: true, position: 24, add: { sibling: 4 }, required: false  },
-        { field: 'GuardiansName', title: 'Guardians Name', filter: true, position: 25, add: { sibling: 4 }, },
-        { field: 'GuardiansOccupation', title: 'Guardians Occupation', filter: true, position: 26, add: { sibling: 4 }, },
-        { field: 'GuardiansPhoneNumber', title: 'Guardians Phone Number', filter: true, position: 27, add: { sibling: 4}, },
-        { field: 'GuardiansEmail', title: 'Guardians Email Address', filter: true, position: 28, add: { sibling: 4 }, },
-        { field: 'PresentAddress', title: 'Present Address', filter: true, position: 29, add: { sibling: 3 }, },
-        { field: 'PermanantAddress', title: 'Permanant Address', filter: true, position: 30, add: { sibling: 3 }, },
+        { field: 'GuardiansName', title: 'Guardians Name', filter: true, position: 25, add: { sibling: 4 } },
+        { field: 'GuardiansOccupation', title: 'Guardians Occupation', filter: true, position: 26, add: { sibling: 4 }},
+        { field: 'GuardiansPhoneNumber', title: 'Guardians Phone Number', filter: true, position: 27, add: { sibling: 4 }  },
+        { field: 'GuardiansEmail', title: 'Guardians Email Address', filter: true, position: 28, add: { sibling: 4 } },
+        { field: 'PresentAddress', title: 'Present Address', filter: true, position: 29, add: { sibling: 3 }},
+        { field: 'PermanantAddress', title: 'Permanant Address', filter: true, position: 30, add: { sibling: 3 } },
+        { field: 'District', title: 'District', filter: true, position: 31, add: false, },
         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false },
         { field: 'Creator', title: 'Creator', add: false },
         { field: 'CreatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Creation Date', add: false },
@@ -148,85 +162,28 @@ import { print } from "./student-form.js";
                     add: { sibling: 4 },
                     required: false,
                 }, {
-                    title: 'HomeDistrict',
-                    Id: 'HomeDistrict',
-                    dataSource: [
-                        { text: 'Dhaka City', value: DISTRICT.DHAKA_CITY },
-                        { text: 'Barguna', value: DISTRICT.BARGUNA },
-                        { text: 'Kurigram', value: DISTRICT.KURIGRAM },
-                        { text: 'Habiganj', value: DISTRICT.HABIGANJ },
-                        { text: 'Kishoreganj', value: DISTRICT.KISHOREGONJ },
-                        { text: 'Noakhali', value: DISTRICT.NOAKHALI },
-                        { text: 'Nilphamari', value: DISTRICT.NILPHAMARI },
-                        { text: 'Jhenaidah', value: DISTRICT.JHENAIDAH },
-                        { text: 'Panchagarh', value: DISTRICT.PANCHAGARH },
-                        { text: 'Chuadanga', value: DISTRICT.CHUADANGA },
-                        { text: 'Manikganj', value: DISTRICT.MANIKGANJ },
-                        { text: 'Narayanganj', value: DISTRICT.NARAYANGANJ },
-                        { text: 'Chandpur', value: DISTRICT.CHANDPUR },
-                        { text: 'Feni', value: DISTRICT.FENI },
-                        { text: 'Khulna', value: DISTRICT.KHULNA },
-                        { text: 'Joypurhat', value: DISTRICT.JOYPURHAT },
-                        { text: 'Naogaon', value: DISTRICT.NAOGAON },
-                        { text: 'Meherpur', value: DISTRICT.MEHERPUR },
-                        { text: 'Mymensingh', value: DISTRICT.MYMENSINGH },
-                        { text: 'Rajbari', value: DISTRICT.RAJBARI },
-                        { text: 'Munshiganj', value: DISTRICT.MUNSHIGANJ },
-                        { text: 'Gopalganj', value: DISTRICT.GOPALGANJ },
-                        { text: 'Bagerhat', value: DISTRICT.BAGERHAT },
-                        { text: 'Bandarban', value: DISTRICT.BANDARBAN },
-                        { text: 'Chittagong', value: DISTRICT.CHITTAGONG },
-                        { text: 'Gazipur', value: DISTRICT.GAZIPUR },
-                        { text: 'Gaibandha', value: DISTRICT.GAIBANDHA },
-                        { text: 'Rangamati', value: DISTRICT.RANGAMATI },
-                        { text: 'Jhalokati', value: DISTRICT.JHALOKATI },
-                        { text: 'Jessore', value: DISTRICT.JESSORE },
-                        { text: 'Rajshahi', value: DISTRICT.RAJSHAHI },
-                        { text: 'Kushtia', value: DISTRICT.KUSHTIA },
-                        { text: 'Comilla', value: DISTRICT.COMILLA },
-                        { text: 'Pabna', value: DISTRICT.PABNA },
-                        { text: 'Madaripur', value: DISTRICT.MADARIPUR },
-                        { text: 'Jamalpur', value: DISTRICT.JAMALPUR },
-                        { text: 'Lakshmipur', value: DISTRICT.LAKSHMIPUR },
-                        { text: 'Thakurgaon', value: DISTRICT.THAKURGAON },
-                        { text: 'Coxs Bazar', value: DISTRICT.COXS_BAZAR },
-                        { text: 'Narail', value: DISTRICT.NARAIL },
-                        { text: 'Barisal', value: DISTRICT.BARISAL },
-                        { text: 'Magura', value: DISTRICT.MAGURA },
-                        { text: 'Patuakhali', value: DISTRICT.PATUAKHALI },
-                        { text: 'Sirajganj', value: DISTRICT.SIRAJGANJ },
-                        { text: 'Faridpur', value: DISTRICT.FARIDPUR },
-                        { text: 'Bhola', value: DISTRICT.BHOLA },
-                        { text: 'Sylhet', value: DISTRICT.SYLHET },
-                        { text: 'Netrakona', value: DISTRICT.NETRAKONA },
-                        { text: 'Rangpur', value: DISTRICT.RANGPUR },
-                        { text: 'Satkhira', value: DISTRICT.SATKHIRA },
-                        { text: 'Bogra', value: DISTRICT.BOGRA },
-                        { text: 'Sherpur', value: DISTRICT.SHERPUR },
-                        { text: 'Narsingdi', value: DISTRICT.NARSINGDI },
-                        { text: 'Pirojpur', value: DISTRICT.PIROJPUR },
-                        { text: 'Dhaka', value: DISTRICT.DHAKA },
-                        { text: 'Brahamanbaria', value: DISTRICT.BRAHAMANBARIA },
-                        { text: 'Dinajpur', value: DISTRICT.DINAJPUR },
-                        { text: 'Shariatpur', value: DISTRICT.SHARIATPUR },
-                        { text: 'Nawabganj', value: DISTRICT.NAWABGANJ },
-                        { text: 'Lalmonirhat', value: DISTRICT.LALMONIRHAT },
-                        { text: 'Maulvibazar', value: DISTRICT.MAULVIBAZAR },
-                        { text: 'Tangail', value: DISTRICT.TANGAIL },
-                        { text: 'Khagrachhari', value: DISTRICT.KHAGRACHHARI },
-                        { text: 'Sunamganj', value: DISTRICT.SUNAMGANJ },
-                    ],
-                    position: 31,
+                    Id: 'DistrictId',
                     add: { sibling: 3 },
-                    required: false,
+                    position: 31,
+                    url: '/District/AutoComplete',
+                    Type: 'AutoComplete',
+                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveRecord] }
+
                 }
             ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
+                if (!isValidPhoneNumber(model.PhoneNumber)) {
+                    model.PhoneNumber.required = true;
+                    return false;
+                }
+
+                if (!isValidGuardiansPhoneNumber(model.GuardiansPhoneNumber)) {
+                    return false;
+                }
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
                 formModel.DateOfBirth = dateForSQLServer(model.DateOfBirth);
-                //formModel.DateOfBirth = ` ${model.DateOfBirth}`;
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
@@ -263,10 +220,10 @@ import { print } from "./student-form.js";
                 { field: 'GuardiansName', title: 'Guardians Name', filter: true, position: 25, add: { sibling: 4 }, },
                 { field: 'GuardiansOccupation', title: 'Guardians Occupation', filter: true, position: 26, add: { sibling: 4 }, },
                 { field: 'GuardiansPhoneNumber', title: 'Guardians Phone Number', filter: true, position: 27, add: { sibling: 4 }, },
-                { field: 'GuardiansEmail', title: 'Guardians Email Address', filter: true, position: 28, add: { sibling: 4 }, },
-                { field: 'PresentAddress', title: 'Present Address', filter: true, position: 29, add: { sibling: 4 }, },
-                { field: 'PermanantAddress', title: 'Permanant Address', filter: true, position: 30, add: { sibling: 4 }, },
-                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, type: 'textarea' }, required: false },
+                { field: 'GuardiansEmail', title: 'Guardians Email Address', filter: true, position: 28, add: { sibling: 3 }, },
+                { field: 'PresentAddress', title: 'Present Address', filter: true, position: 29, add: { sibling: 3 }, },
+                { field: 'PermanantAddress', title: 'Permanant Address', filter: true, position: 30, add: { sibling: 3 }, },
+                { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false },
             ],
             dropdownList: [
 
@@ -358,91 +315,35 @@ import { print } from "./student-form.js";
                         { text: 'No', value: ACTIVE_STATUS.FALSE },
                     ],
                     add: { sibling: 4 },
-                    position: 37,
+                    position: 20,
                 }, {
-                    title: 'HomeDistrict',
-                    Id: 'HomeDistrict',
-                    dataSource: [
-                        { text: 'Dhaka City', value: DISTRICT.DHAKA_CITY },
-                        { text: 'Barguna', value: DISTRICT.BARGUNA },
-                        { text: 'Kurigram', value: DISTRICT.KURIGRAM },
-                        { text: 'Habiganj', value: DISTRICT.HABIGANJ },
-                        { text: 'Kishoreganj', value: DISTRICT.KISHOREGONJ },
-                        { text: 'Noakhali', value: DISTRICT.NOAKHALI },
-                        { text: 'Nilphamari', value: DISTRICT.NILPHAMARI },
-                        { text: 'Jhenaidah', value: DISTRICT.JHENAIDAH },
-                        { text: 'Panchagarh', value: DISTRICT.PANCHAGARH },
-                        { text: 'Chuadanga', value: DISTRICT.CHUADANGA },
-                        { text: 'Manikganj', value: DISTRICT.MANIKGANJ },
-                        { text: 'Narayanganj', value: DISTRICT.NARAYANGANJ },
-                        { text: 'Chandpur', value: DISTRICT.CHANDPUR },
-                        { text: 'Feni', value: DISTRICT.FENI },
-                        { text: 'Khulna', value: DISTRICT.KHULNA },
-                        { text: 'Joypurhat', value: DISTRICT.JOYPURHAT },
-                        { text: 'Naogaon', value: DISTRICT.NAOGAON },
-                        { text: 'Meherpur', value: DISTRICT.MEHERPUR },
-                        { text: 'Mymensingh', value: DISTRICT.MYMENSINGH },
-                        { text: 'Rajbari', value: DISTRICT.RAJBARI },
-                        { text: 'Munshiganj', value: DISTRICT.MUNSHIGANJ },
-                        { text: 'Gopalganj', value: DISTRICT.GOPALGANJ },
-                        { text: 'Bagerhat', value: DISTRICT.BAGERHAT },
-                        { text: 'Bandarban', value: DISTRICT.BANDARBAN },
-                        { text: 'Chittagong', value: DISTRICT.CHITTAGONG },
-                        { text: 'Gazipur', value: DISTRICT.GAZIPUR },
-                        { text: 'Gaibandha', value: DISTRICT.GAIBANDHA },
-                        { text: 'Rangamati', value: DISTRICT.RANGAMATI },
-                        { text: 'Jhalokati', value: DISTRICT.JHALOKATI },
-                        { text: 'Jessore', value: DISTRICT.JESSORE },
-                        { text: 'Rajshahi', value: DISTRICT.RAJSHAHI },
-                        { text: 'Kushtia', value: DISTRICT.KUSHTIA },
-                        { text: 'Comilla', value: DISTRICT.COMILLA },
-                        { text: 'Pabna', value: DISTRICT.PABNA },
-                        { text: 'Madaripur', value: DISTRICT.MADARIPUR },
-                        { text: 'Jamalpur', value: DISTRICT.JAMALPUR },
-                        { text: 'Lakshmipur', value: DISTRICT.LAKSHMIPUR },
-                        { text: 'Thakurgaon', value: DISTRICT.THAKURGAON },
-                        { text: 'Coxs Bazar', value: DISTRICT.COXS_BAZAR },
-                        { text: 'Narail', value: DISTRICT.NARAIL },
-                        { text: 'Barisal', value: DISTRICT.BARISAL },
-                        { text: 'Magura', value: DISTRICT.MAGURA },
-                        { text: 'Patuakhali', value: DISTRICT.PATUAKHALI },
-                        { text: 'Sirajganj', value: DISTRICT.SIRAJGANJ },
-                        { text: 'Faridpur', value: DISTRICT.FARIDPUR },
-                        { text: 'Bhola', value: DISTRICT.BHOLA },
-                        { text: 'Sylhet', value: DISTRICT.SYLHET },
-                        { text: 'Netrakona', value: DISTRICT.NETRAKONA },
-                        { text: 'Rangpur', value: DISTRICT.RANGPUR },
-                        { text: 'Satkhira', value: DISTRICT.SATKHIRA },
-                        { text: 'Bogra', value: DISTRICT.BOGRA },
-                        { text: 'Sherpur', value: DISTRICT.SHERPUR },
-                        { text: 'Narsingdi', value: DISTRICT.NARSINGDI },
-                        { text: 'Pirojpur', value: DISTRICT.PIROJPUR },
-                        { text: 'Dhaka', value: DISTRICT.DHAKA },
-                        { text: 'Brahamanbaria', value: DISTRICT.BRAHAMANBARIA },
-                        { text: 'Dinajpur', value: DISTRICT.DINAJPUR },
-                        { text: 'Shariatpur', value: DISTRICT.SHARIATPUR },
-                        { text: 'Nawabganj', value: DISTRICT.NAWABGANJ },
-                        { text: 'Lalmonirhat', value: DISTRICT.LALMONIRHAT },
-                        { text: 'Maulvibazar', value: DISTRICT.MAULVIBAZAR },
-                        { text: 'Tangail', value: DISTRICT.TANGAIL },
-                        { text: 'Khagrachhari', value: DISTRICT.KHAGRACHHARI },
-                        { text: 'Sunamganj', value: DISTRICT.SUNAMGANJ },
-                    ],
+                    Id: 'DistrictId',
+                    add: { sibling: 2 },
                     position: 31,
-                    add: { sibling: 4 },
-                    required: false,
+                    url: '/District/AutoComplete',
+                    Type: 'AutoComplete',
+                    page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveRecord] }
                 }
             ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
+                if (!isValidPhoneNumber(model.PhoneNumber)) {
+                    return false;
+                }
+                if (!isValidGuardiansPhoneNumber(model.GuardiansPhoneNumber)) {
+                    return false;
+                }
+                console.log("formModel=>", model);
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
                 formModel.DreamersId = data.DreamersId;
                 formModel.DateOfBirth = model.DateOfBirth;
             },
+
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
             },
+            onviewcreated: function onviewcreated(windowModel, formInputs, dropDownList, IsNew, formModel) { },
             saveChange: `/${controller}/Edit`,
         });
     };
@@ -456,6 +357,7 @@ import { print } from "./student-form.js";
     }
     
     const uploadImage = (row) => {
+        console.log("row=>", row);
         Global.Add({
             name: 'add-student-image',
             url: '/js/utils/file-uploader.js',

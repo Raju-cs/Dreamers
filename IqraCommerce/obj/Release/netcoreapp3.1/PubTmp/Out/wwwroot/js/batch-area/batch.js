@@ -68,7 +68,9 @@ import { SHEDULENAME, PROGRAM, ACTIVE_STATUS } from "../dictionaries.js";
             BatchId: row.Id,
             name: 'Course Routine Information ' + row.Id,
             url: '/js/routine-area/course-attendance-routine-details-modal.js',
-            CourseId: row.CourseId
+            CourseId: row.CourseId,
+            SubjectId: row.SubjectId,
+            SubjectName: row.SubjectName
         });
     }
 

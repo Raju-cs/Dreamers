@@ -6,14 +6,14 @@
 
     this.Show = function (options) {
         _options = options;
-        console.log("options=>", _options);
         routineFilter.value = _options.RoutineId;
         batchFilter.value = _options.BatchId;
 
         const dateForSQLServer = (enDate = '01/01/1970') => {
             const dateParts = enDate.split('/');
 
-            return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+           //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+            return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
         }
 
 
@@ -89,8 +89,11 @@
                 BatchId: row.BatchId,
                 BatchId: _options.BatchId,
                 ModuleId: _options.ModuleId,
+                SubjectId: _options.SubjectId,
+                AttendanceDate: row.AttendanceDate,
                 EndTime: _options.EndTime,
-                Day: _options.RoutineName
+                Day: _options.RoutineName,
+                AttendanceDate: row.AttendanceDate
             });
         }
 

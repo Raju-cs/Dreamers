@@ -18,7 +18,8 @@
         const dateForSQLServer = (enDate = '01/01/1970') => {
             const dateParts = enDate.split('/');
 
-            return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+           //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+           return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
         }
 
         function endTimeForRoutine(td) {
@@ -57,6 +58,7 @@
                 RoutineId: row.Id,
                 BatchId: _options.BatchId,
                 ModuleId: _options.ModuleId,
+                SubjectId: _options.SubjectId,
                 StartTime: row.StartTime,
                 EndTime: row.EndTime,
                 RoutineName: row.Name
@@ -72,10 +74,11 @@
                 columns: [
                     { field: 'ExamDate', title: 'ExamDate', filter: true, position: 1, dateFormat: 'dd/MM/yyyy' },
                     { field: 'ExamName', title: 'ExamName', filter: true, position: 2,},
-                    { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, },
+                    { field: 'Name', title: 'Subject Name', filter: true, position: 3, },
                     { field: 'ExamStartTime', title: 'ExamStartTime', filter: true, position: 4, dateFormat: 'hh:mm' },
                     { field: 'ExamEndTime', title: 'ExamEndTime', filter: true, position: 5, dateFormat: 'hh:mm' },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 6, },
+                    { field: 'ExamBandMark', title: 'ExamBandMark', filter: true, position: 6 },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 6, },
                 ],
                 dropdownList: [],
                 additionalField: [],
@@ -89,12 +92,13 @@
                     formModel.BatchId = _options.BatchId;
                     formModel.SubjectId = _options.SubjectId;
                     formModel.ModuleId = _options.ModuleId;
+                    formModel.Name = _options.SubjectName;
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
 
                     formModel.ExamDate = new Date().format('dd/MM/yyyy');
                     // formModel.GraceTime = new Date(new Date(_options.StartTime).setMinutes(new Date(_options.StartTime).getMinutes() + 10)).format('hh:mm');
-                    formModel.SubjectName = _options.SubjectName;
+                    formModel.Name = _options.SubjectName;
                 },
                 onSaveSuccess: function () {
                     page.Grid.Model.Reload();
@@ -104,15 +108,18 @@
             });
         }
 
-        const batchStudentExam = (row, model) => {
-
+        const batchStudentExamResult = (row, model) => {
+            console.log("row=>", row);
             Global.Add({
                 Id: row.Id,
                 name: 'BatchExam Student' + row.Id,
-                url: '/js/batchexam-area/batchexam-studentlist-modal.js',
+                url: '/js/batchexam-area/module-batchexam-studentlist-modal.js',
                 updatePayment: model.Reload,
                 BatchId: _options.BatchId,
-                ModuleId: _options.ModuleId
+                ModuleId: _options.ModuleId,
+                SubjectId: row.SubjectId,
+                SubjectName: row.SubjectName,
+                ExamDate: row.ExamDate
             });
         }
 
@@ -154,9 +161,10 @@
                         columns: [
                             { field: 'ExamDate', title: 'ExamDate', filter: true, position: 1, add: false, bound: examDate },
                             { field: 'ExamName', title: 'ExamName', filter: true, position: 2, add: false },
-                            { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
+                            { field: 'Name', title: 'Subject Name', filter: true, position: 3, add: false },
                             { field: 'ExamStartTime', title: 'ExamStartTime', filter: true, position: 4, dateFormat: 'hh:mm', bound: examStartTime },
                             { field: 'ExamEndTime', title: 'ExamEndTime', filter: true, position: 5, dateFormat: 'hh:mm', bound: examEndTime },
+                            { field: 'ExamBandMark', title: 'ExamBandMark', filter: true, position: 6 },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 6, },
                         ],
 
@@ -168,7 +176,7 @@
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>`
 
                         }, {
-                            click: batchStudentExam,
+                            click: batchStudentExamResult,
                             html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-list" title="Student List"></i></a>`
                         }],
                         buttons: [{

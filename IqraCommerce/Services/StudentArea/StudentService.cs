@@ -86,7 +86,9 @@ namespace IqraCommerce.Services.StudentArea
 
             return new Response(200, null, false, "successed");
         }
-   
+
+      
+
         private string GenerateCode()
         {
            // var Code = "Dreamers";
@@ -127,6 +129,7 @@ namespace IqraCommerce.Services.StudentArea
                     ,ISNULL([stdnt].[PhoneNumber], '') [PhoneNumber]
                     ,[stdnt].[DateOfBirth]
                     ,[stdnt].[Gender]
+                    ,[stdnt].[DistrictId]
                     ,ISNULL([stdnt].[BloodGroup], '') [BloodGroup]
                     ,ISNULL([stdnt].[Religion], '') [Religion]
                     ,ISNULL([stdnt].[Nationality], '') [Nationality]
@@ -154,11 +157,13 @@ namespace IqraCommerce.Services.StudentArea
                     ,ISNULL([stdnt].[Version], '') [Version]
                     ,ISNULL([stdnt].[HomeDistrict], '') [HomeDistrict]
 					,ISNULL([stdnt].[StudentNameBangla], '') [StudentNameBangla]
+					,ISNULL(dstrct.Name, '') [District]
                     ,ISNULL([crtr].[Name], '') [Creator]
 	                ,ISNULL([pdtr].[Name], '') [Updator]
                 FROM [dbo].[Student] [stdnt]
                 LEFT JOIN [dbo].[User] [crtr] ON [crtr].Id = [stdnt].[CreatedBy]
-                LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdnt].[UpdatedBy]";
+                LEFT JOIN [dbo].[User] [pdtr] ON [pdtr].Id = [stdnt].[UpdatedBy]
+				LEFT JOIN [dbo].District dstrct ON dstrct.Id = [stdnt].[DistrictId]";
         }
         public static string BasicInfo
         {

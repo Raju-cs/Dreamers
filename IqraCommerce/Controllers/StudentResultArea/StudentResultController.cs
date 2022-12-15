@@ -30,6 +30,8 @@ namespace IqraCommerce.Controllers.StudentResultArea
 
             studentResultForDb.Status = "Present";
             studentResultForDb.Mark = recordToCreate.Mark;
+            studentResultForDb.PhoneNumber = recordToCreate.PhoneNumber;
+            studentResultForDb.GuardiansPhoneNumber = recordToCreate.GuardiansPhoneNumber;
 
 
 

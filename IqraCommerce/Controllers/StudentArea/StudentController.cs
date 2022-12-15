@@ -8,6 +8,8 @@ using IqraCommerce.Helpers;
 using Microsoft.Extensions.Configuration;
 using IqraCommerce.DTOs;
 using IqraService.Search;
+using System.Linq;
+using IqraCommerce.Entities.LocationArea;
 
 namespace IqraCommerce.Controllers.StudentArea
 {
@@ -40,7 +42,6 @@ namespace IqraCommerce.Controllers.StudentArea
         {
             return Json(await ___service.AutoComplete(page));
         }
-   
-        
+
     }
 }

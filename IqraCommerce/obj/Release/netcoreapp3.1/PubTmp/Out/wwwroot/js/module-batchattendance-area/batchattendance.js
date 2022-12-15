@@ -105,18 +105,11 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         Name: 'MODULE_BATCH_ATTENDANCE',
         Title: 'Module Attendance',
         filter: [liveRecord],
-        actions: [{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, {
-            click: viewDetails,
-            html: eyeBtn("View Details")
-        }],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: columns(),
         Printable: { container: $('void') },
-        remove: { save: `/${controller}/Remove` },
+       // remove: { save: `/${controller}/Remove` },
         Url: 'Get',
     }
 

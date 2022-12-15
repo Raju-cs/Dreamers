@@ -98,6 +98,7 @@ import { SUBJECT, ACTIVE_STATUS } from "../dictionaries.js";
         });
     };
 
+
     const viewDetails = (row) => {
         console.log("row=>", row);
         Global.Add({

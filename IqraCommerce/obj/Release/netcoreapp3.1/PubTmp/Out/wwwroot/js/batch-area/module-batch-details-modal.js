@@ -17,10 +17,11 @@ var Controller = new function () {
         studentClassFilter.value = _options.ModuleClass;
         subjectFilter.value = _options.SubjectId;
 
-        const dateForSQLServer = (enDate = '01/01/1970') => {
-            const dateParts = enDate.split('/');
+        const dateForSQLServer = (enDate = '01/01/1970') => { 
+            const dateParts = enDate.split('/'); 
 
-            return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+           // return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+            return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
         }
 
         function startTimeForRoutine(td) {
@@ -33,25 +34,6 @@ var Controller = new function () {
             td.html(new Date(this.EndTime).toLocaleTimeString('en-US', {
                 hour: "numeric",
                 minute: "numeric" 
-            }));
-        }
-        function examStartTime(td) {
-            td.html(new Date(this.ExamStartTime).toLocaleTimeString('en-US', {
-                hour: "numeric",
-                minute: "numeric"
-            }));
-        }
-        function examEndTime(td) {
-            td.html(new Date(this.ExamEndTime).toLocaleTimeString('en-US', {
-                hour: "numeric",
-                minute: "numeric"
-            }));
-        }
-        function examDate(td) {
-            td.html(new Date(this.ExamDate).toLocaleDateString('en-US', {
-                day: "2-digit",
-                month: "short",
-                year: "numeric"
             }));
         }
         function dateOfBirth(td) {
@@ -99,6 +81,7 @@ var Controller = new function () {
                     formModel.BatchId = _options.Id;
                     formModel.TeacherId = _options.TeacherId;
                     formModel.ModuleId = _options.ModuleId;
+                    formModel.SubjectId = _options.SubjectId;
                     formModel.Program = "Module";
                     formModel.ModuleTeacherName = _options.ModuleTeacher;
                     formModel.StartTime = model.StartTime;
@@ -129,10 +112,14 @@ var Controller = new function () {
                     formModel.Id = model.Id
                     formModel.ActivityId = window.ActivityId;
                     formModel.BatchId = _options.Id;
+                    formModel.TeacherId = _options.TeacherId;
+                    formModel.ModuleId = _options.ModuleId;
+                    formModel.SubjectId = _options.SubjectId;
                     formModel.Program = "Module";
-                    formModel.Name = `${model.Day} : ${model.StartTime} - ${model.EndTime} , ClassRoomNumber ${model.ClassRoomNumber}`;
-                    formModel.StartTime = ` ${model.StartTime}`;
-                    formModel.EndTime = ` ${model.EndTime}`;
+                    formModel.ModuleTeacherName = _options.ModuleTeacher;
+                    formModel.StartTime = model.StartTime;
+                    formModel.EndTime = model.EndTime;
+                    formModel.Module = _options.ModuleName;
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -242,46 +229,6 @@ var Controller = new function () {
             });
         }
 
-        function batchExamination(page) {
-            console.log("Page=>", page);
-            Global.Add({
-                name: 'ADD_EXAMINATION',
-                model: undefined,
-                title: 'Add Examination',
-                columns: [
-                    { field: 'ExamDate', title: 'ExamDate', filter: true, position: 1, dateFormat: 'dd/MM/yyyy' },
-                    { field: 'SubjectName', title: 'Subject Name', filter: true, position: 1,},
-                    { field: 'ExamStartTime', title: 'ExamStartTime', filter: true, position: 2, dateFormat: 'hh:mm' },
-                    { field: 'ExamEndTime', title: 'ExamEndTime', filter: true, position: 3, dateFormat: 'hh:mm' },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 4, },
-                ],
-                dropdownList: [],
-                additionalField: [],
-                onSubmit: function (formModel, data, model) {
-                    console.log("formModel", formModel);
-                    formModel.ActivityId = window.ActivityId;
-                    formModel.ExamDate = dateForSQLServer(model.ExamDate);
-                    formModel.IsActive = true;
-                    formModel.ExamStartTime = model.ExamStartTime;
-                    formModel.ExamEndTime = model.ExamEndTime;
-                    formModel.BatchId = _options.Id;
-                    formModel.SubjectId = _options.SubjectId;
-                    formModel.ModuleId = _options.ModuleId;
-                },
-                onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
-
-                    formModel.ExamDate = new Date().format('dd/MM/yyyy');
-                    // formModel.GraceTime = new Date(new Date(_options.StartTime).setMinutes(new Date(_options.StartTime).getMinutes() + 10)).format('hh:mm');
-                    formModel.SubjectName = _options.SubjectName;
-                },
-                onSaveSuccess: function () {
-                    page.Grid.Model.Reload();
-                },
-                filter: [],
-                save: `/BatchExam/Create`,
-            });
-        }
-
         const batchAttendance = (row, model) => {
             console.log("row=>", row);
             Global.Add({
@@ -297,18 +244,7 @@ var Controller = new function () {
             });
         }
 
-        const batchStudentExam = (row, model) => {
-           
-            Global.Add({
-                Id: row.Id,
-                name: 'BatchExam Student' + row.Id,
-                url: '/js/batchexam-area/batchexam-studentlist-modal.js',
-                updatePayment: model.Reload,
-                BatchId: row.BatchId,
-                ModuleId: _options.ModuleId
-            });
-        }
-   
+
 
         Global.Add({
             title: 'Batch Information',
@@ -397,40 +333,7 @@ var Controller = new function () {
                             container: $('void')
                         },
                     }],
-                }, {
-                    title: ' Examination ',
-                    Grid: [{
-
-                        Header: 'Examination',
-                        columns: [
-                            { field: 'ExamDate', title: 'ExamDate', filter: true, position: 1, add: false, bound: examDate  },
-                            { field: 'SubjectName', title: 'Subject Name', filter: true, position: 1, add: false },
-                            { field: 'ExamStartTime', title: 'ExamStartTime', filter: true, position: 2, dateFormat: 'hh:mm', bound: examStartTime  },
-                            { field: 'ExamEndTime', title: 'ExamEndTime', filter: true, position: 3, dateFormat: 'hh:mm', bound: examEndTime },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 4, },
-                        ],
-
-                        Url: '/BatchExam/Get/',
-                        filter: [studentBatchFilter, subjectFilter],
-                        onDataBinding: function (response) { },
-                        actions: [{
-                            click: () => {},
-                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>`
-
-                        }, {
-                            click: batchStudentExam,
-                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-list" title="Student List"></i></a>`
-                        }],
-                        buttons: [{
-                            click: batchExamination,
-                            html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Exam"></span> </a>'
-                        }],
-                        selector: false,
-                        Printable: {
-                            container: $('void')
-                        },
-                    }],
-                },],
+                }],
 
             name: 'Batch Information',
             url: '/lib/IqraService/Js/OnDetailsWithTab.js?v=' + + Math.random(),

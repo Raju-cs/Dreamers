@@ -30,13 +30,14 @@ namespace IqraCommerce.Controllers.StudentCourseArea
 
             coursePeriodList = coursePeriodEntity.Where(x => x.Id != ListStudentCourse.Id).ToList();
             var getData = from getdata in coursePeriodList select new { getdata.Id };
-            foreach (var studentmoduleId in getData)
+            foreach (var studentCourseId in getData)
             {
-                coursePeriod = new CoursePeriod();
-                coursePeriod.PriodId = periodEntity.FirstOrDefault().Id;
+                coursePeriod.PriodId = periodEntity.OrderByDescending(x => x.StartDate).FirstOrDefault().Id;
                 coursePeriod.StudentCourseId = recordToCreate.Id;
+                coursePeriod.Name = period.Name;
+                coursePeriodEntity.Add(coursePeriod);
             }
-            coursePeriodEntity.Add(coursePeriod);
+           
             return base.Create(recordToCreate);
         }
     }

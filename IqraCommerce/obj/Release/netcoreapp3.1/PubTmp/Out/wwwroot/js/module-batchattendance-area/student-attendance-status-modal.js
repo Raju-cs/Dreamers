@@ -5,7 +5,6 @@
 
     this.Show = function (options) {
         _options = options;
-        console.log("options=>", _options);
         batchFilter.value = _options.Id;
 
         function attendanceTime(td) {

@@ -1,4 +1,5 @@
 ﻿using IqraCommerce.Entities.CoachingAccountArea;
+using IqraCommerce.Entities.ExtendPaymentdateArea;
 using IqraCommerce.Entities.FeesArea;
 using IqraCommerce.Entities.ModuleArea;
 using IqraCommerce.Entities.TeacherFeeArea;
@@ -23,7 +24,7 @@ namespace IqraCommerce.Controllers.FeesArea
         {
             service = __service = ___service = new FeesService();
         }
-    
+
         public async Task<JsonResult> BasicInfo([FromQuery] Guid id)
         {
             return Json(await ___service.BasicInfo(id));
@@ -43,10 +44,11 @@ namespace IqraCommerce.Controllers.FeesArea
 
             var sumOfFees = modulesFromDb.Sum(m => m.ModuleFees);
 
-            var payments = ___service.GetEntity<Fees>().Where(f => f.IsDeleted == false && f.StudentId == recordToCreate.StudentId && f.PeriodId == recordToCreate.PeriodId).ToList();
+            var payments = ___service.GetEntity<Fees>().Where(f => f.IsDeleted == false && f.StudentId == recordToCreate.StudentId && f.PeriodId == recordToCreate.PeriodId);
             
             var sumOfPaid = payments.Sum(f => f.Fee);
-           
+            recordToCreate.PaymentDate = DateTime.Now;
+            recordToCreate.Name = "Module";
             if (payments != null)
             {
             var paid = sumOfPaid + recordToCreate.Fee;
@@ -146,6 +148,7 @@ namespace IqraCommerce.Controllers.FeesArea
             __service.Insert(__service.GetEntity<TeacherFee>(), teacherFeeModel, Guid.Empty);
         }
 
+     
 
     }
 }

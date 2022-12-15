@@ -7,6 +7,7 @@ namespace IqraCommerce.Models.RoutineArea
         public Guid TeacherId { get; set; }
         public Guid ModuleId { get; set; }
         public  Guid CourseId { get; set; }
+        public Guid SubjectId { get; set; }
         public string Module { get; set; }
         public string Program { get; set; }
         public string ModuleTeacherName { get; set; }

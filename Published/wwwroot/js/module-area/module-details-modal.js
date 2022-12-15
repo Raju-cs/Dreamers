@@ -6,7 +6,6 @@ var Controller = new function () {
     this.Show = function (options) {
         _options = options;
         scheduleFilter.value = _options.Id;
-        console.log("options=>", _options);
 
         function addModuleBatch(page, gird) {
             console.log("page=>", page);
