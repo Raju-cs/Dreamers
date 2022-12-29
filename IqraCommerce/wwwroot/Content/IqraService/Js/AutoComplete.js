@@ -314,7 +314,9 @@
                     }
                     options.CurrentList = options.CurrentList.concat(options.data);
                     create(options, isFirst);
-                    options.IsFirstTime && options.elm.val() && options.val(options.elm.val());
+                    options.IsFirstTime && (options.elm.val() || options.selectedvalue) && options.val(options.elm.val() || options.selectedvalue);
+                    options.IsFirstTime = false;
+                    console.log(['options.elm', options.elm]);
                     func && func(response);
                     //console.log([options, options.onloaded]);
                     options.onloaded && options.onloaded(response.Data, options);

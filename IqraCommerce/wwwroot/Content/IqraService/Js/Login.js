@@ -1,5 +1,5 @@
 ﻿var LogIn = new function () {
-    var that = this, form = $('.login_form'), bindingModel = { RememberMe: true };
+    var that = this, form = $('#login_form'), bindingModel = { RememberMe: true };
 
     function checkValidation() {
 
@@ -19,7 +19,6 @@
                 Global.Free();
             }, bindingModel);
         }
-        console.log(['form', form, bindingModel, bindingModel.IsValid]);
         return false;
     };
 
@@ -88,6 +87,5 @@
         //form.submit(submit);
         form.find('.btn_save').click(submit);
         Global.Form.Bind(bindingModel, form);
-        console.log(['form', form, bindingModel, bindingModel.IsValid]);
     };
 };

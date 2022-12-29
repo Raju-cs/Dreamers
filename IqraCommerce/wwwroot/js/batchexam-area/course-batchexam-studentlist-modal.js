@@ -72,10 +72,7 @@
                         actions: [{
                             click: studentMark,
                             html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-pencil" title="Student Exam Mark"></i></a >'
-                        }/*, {
-                            click: () => {},
-                            html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-time" title="Student Early Leave"></i></a >'
-                        }*/],
+                        }],
                         rowBound: rowBound,
                         buttons: [],
                         selector: false,

@@ -1,11 +1,12 @@
 ﻿using IqraCommerce.Entities.CoachingAccountArea;
-using IqraCommerce.Entities.ExtendPaymentdateArea;
 using IqraCommerce.Entities.FeesArea;
 using IqraCommerce.Entities.ModuleArea;
+using IqraCommerce.Entities.PaymentHistoryArea;
 using IqraCommerce.Entities.TeacherFeeArea;
 using IqraCommerce.Helpers;
 using IqraCommerce.Models.CoachingAccountArea;
 using IqraCommerce.Models.FeesArea;
+using IqraCommerce.Models.PaymentHistoryArea;
 using IqraCommerce.Models.TeacherFeeArea;
 using IqraCommerce.Services.FeesArea;
 using IqraService.Search;
@@ -47,8 +48,10 @@ namespace IqraCommerce.Controllers.FeesArea
             var payments = ___service.GetEntity<Fees>().Where(f => f.IsDeleted == false && f.StudentId == recordToCreate.StudentId && f.PeriodId == recordToCreate.PeriodId);
             
             var sumOfPaid = payments.Sum(f => f.Fee);
+
             recordToCreate.PaymentDate = DateTime.Now;
             recordToCreate.Name = "Module";
+
             if (payments != null)
             {
             var paid = sumOfPaid + recordToCreate.Fee;
@@ -59,7 +62,7 @@ namespace IqraCommerce.Controllers.FeesArea
                 }
                 else
                 {
-                    return Ok(new Response(-4, null, true, "Paymnet Over"));
+                    return Json(new Response(-4, null, true, "Paymnet Over"));
                 }
             }
             else
@@ -67,6 +70,34 @@ namespace IqraCommerce.Controllers.FeesArea
                 __service.Insert(recordToCreate, Guid.Empty);
             }
 
+
+            var paymentHistoryForDB = ___service.GetEntity<PaymentHistory>().FirstOrDefault(ph=> ph.StudentId == recordToCreate.StudentId 
+                                                                                                                   && ph.PeriodId == recordToCreate.PeriodId
+                                                                                                                   && ph.IsDeleted == false);
+
+
+            if (paymentHistoryForDB != null)
+            {
+                paymentHistoryForDB.Paid = recordToCreate.Fee + paymentHistoryForDB.Paid;
+            }
+            else
+            {
+                var payment = new PaymentHistoryModel()
+                {
+                    Id = Guid.NewGuid(),
+                    ActivityId = Guid.Empty,
+                    StudentId = recordToCreate.StudentId,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Guid.Empty,
+                    PeriodId = recordToCreate.PeriodId,
+                    Charge = recordToCreate.ModuleFee,
+                    Paid = recordToCreate.Fee,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = Guid.Empty,
+                    Remarks = null
+                };
+                __service.Insert(__service.GetEntity<PaymentHistory>(), payment, Guid.Empty);
+            }
 
             foreach (var module in modulesFromDb)
                 Distribute((module.ModuleFees * amount) / sumOfFees, module, recordToCreate);

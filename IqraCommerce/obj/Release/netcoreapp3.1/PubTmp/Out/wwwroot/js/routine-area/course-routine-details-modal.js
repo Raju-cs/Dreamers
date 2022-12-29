@@ -39,12 +39,12 @@
             position: 1,
         }];
 
-        function addModuleRoutine(page) {
+        function addCourseRoutine(page) {
             
             Global.Add({
-                name: 'ADD_ROUTINE',
+                name: 'ADD_COURSE_ROUTINE',
                 model: undefined,
-                title: 'Add Routine',
+                title: 'Add Course Routine',
                 columns: modalColumns,
                 dropdownList: modalDropDowns,
                 additionalField: [],
@@ -68,7 +68,7 @@
             });
         }
 
-        function editModuleRoutine(model, grid) {
+        function editCourseRoutine(model, grid) {
             Global.Add({
                 name: 'EDIT_COURSE_ROUTINE',
                 model: model,
@@ -211,13 +211,13 @@
                         onDataBinding: function (response) { },
                         actions: [
                             {
-                                click: editModuleRoutine,
+                                click: editCourseRoutine,
                                 html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Batch Schedule"></i></a>`
                             }
                         ],
                         buttons: [
                             {
-                                click: addModuleRoutine,
+                                click: addCourseRoutine,
                                 html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
                             }
                         ],

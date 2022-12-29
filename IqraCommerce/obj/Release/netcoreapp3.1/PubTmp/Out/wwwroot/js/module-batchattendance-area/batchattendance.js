@@ -73,33 +73,6 @@ import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
         });
     };
 
-    function edit(model) {
-        Global.Add({
-            name: 'EDIT_BATCH_ATTENDANCE',
-            model: model,
-            title: 'Edit Batch Attendance',
-            columns: columns(),
-            dropdownList: [],
-            additionalField: [],
-            onSubmit: function (formModel, data, model) {
-                formModel.Id = model.Id
-                formModel.ActivityId = window.ActivityId;
-            },
-            onSaveSuccess: function () {
-                tabs.gridModel?.Reload();
-            },
-            saveChange: `/${controller}/Edit`,
-        });
-    };
-
-    const viewDetails = (row) => {
-        Global.Add({
-            Id: row.Id,
-            name: 'Subject Information' + row.Id,
-            url: '/js/subject-area/subject-details-modal.js',
-        });
-    }
-
     const attendanceTab = {
         Id: '4F000385-ABC3-4BE1-9627-2A1A442F02A0',
         Name: 'MODULE_BATCH_ATTENDANCE',

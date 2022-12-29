@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using IqraCommerce.Entities.StudentCourseArea;
 using IqraCommerce.Entities.CoursePeriodArea;
 using IqraCommerce.Entities.ExtendPaymentdateArea;
+using IqraCommerce.Entities.PaymentHistoryArea;
+using IqraCommerce.Entities.StudentArea;
 
 namespace IqraCommerce.Controllers.PeriodArea
 {
@@ -45,7 +47,7 @@ namespace IqraCommerce.Controllers.PeriodArea
             Period period = new Period();
 
             ListStudentModule = studentModuleList.Where(x => x.IsDeleted == false ).ToList();
-            var getData = from getdata in ListStudentModule select new {getdata.Id, getdata.StudentId};
+            var getData = from getdata in ListStudentModule select new {getdata.Id, getdata.StudentId, getdata.Charge};
             
             foreach(var module in getData)
             { 
@@ -54,6 +56,9 @@ namespace IqraCommerce.Controllers.PeriodArea
                 modulePeriod.PriodId = recordToCreate.Id;
                 modulePeriodList.Add(modulePeriod);
             }
+
+
+            // Add student in StudentCourse
 
             var studentCourseDB = ___service.GetEntity<StudentCourse>().Where(sc=> sc.IsDeleted == false).ToList(); 
 
@@ -65,7 +70,27 @@ namespace IqraCommerce.Controllers.PeriodArea
                 coursePeriodList.Add(coursePeriod);
             }
 
+           // add student in PaymentHistory
 
+            var paymentHistoryEntity = ___service.GetEntity<PaymentHistory>();
+            foreach(var moduleStudent in getData)
+            {
+               
+                    PaymentHistory paymentHistory = new PaymentHistory()
+                    {
+                        ActivityId = Guid.Empty,
+                        StudentId = moduleStudent.StudentId,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = Guid.Empty,
+                        PeriodId = recordToCreate.Id,
+                        Charge = moduleStudent.Charge,
+                        Paid = 0,
+                        UpdatedAt = DateTime.Now,
+                        UpdatedBy = Guid.Empty,
+                        Remarks = null
+                    };
+                    paymentHistoryEntity.Add(paymentHistory);
+            }
 
             return base.Create(recordToCreate);
         }

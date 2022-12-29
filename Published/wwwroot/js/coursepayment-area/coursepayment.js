@@ -30,50 +30,6 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         { field: 'UpdatedAt', dateFormat: 'dd/MM/yyyy hh:mm', title: 'Last Updated', add: false },
     ];
 
-
-    function edit(model) {
-        Global.Add({
-            name: 'EDIT_COURSE_PAYMENT',
-            model: model,
-            title: 'Edit Course Payment',
-            columns: columns(),
-            dropdownList: [{
-                Id: 'StudentId',
-                add: { sibling: 2 },
-                position: 2,
-                url: '/Student/AutoComplete',
-                Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL), liveRecord] }
-            }, {
-                Id: 'PeriodId',
-                add: { sibling: 2 },
-                position: 1,
-                url: '/Period/AutoComplete',
-                Type: 'AutoComplete',
-                page: { 'PageNumber': 1, 'PageSize': 20, filter: [filter('IsActive', 1, OPERATION_TYPE.EQUAL), liveRecord] },
-
-            }],
-            additionalField: [],
-            onSubmit: function (formModel, data, model) {
-                formModel.Id = model.Id
-                formModel.ActivityId = window.ActivityId;
-            },
-            onSaveSuccess: function () {
-                tabs.gridModel?.Reload();
-
-            },
-            saveChange: `/${controller}/Edit`,
-        });
-    };
-
-    const viewDetails = (row) => {
-        Global.Add({
-            Id: row.Id,
-            name: 'Fees Information' + row.Id,
-            url: '/js/fees-area/fees-details-modal.js',
-        });
-    }
-
     const coursePaymentTab = {
         Id: 'BBC23DC6-A099-494D-BEB4-E8B98993A27D',
         Name: 'COURSE_PAYMENT',

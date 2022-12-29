@@ -43,11 +43,6 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
         teacherCode = data?.Name?.slice(0, 3).toUpperCase();
         generateModuleCode();
     }
-/*
-    const classSelectHandler = (data) => {
-        classCode = data?.value?.slice(0, 3).toUpperCase();
-        generateModuleCode();
-    }*/
 
     const modalDropDowns = [
         {
@@ -107,8 +102,10 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
         $('#add-record').click(add);
     });
 
+ 
+
     const columns = () => [
-        { field: 'Name', title: 'Name', filter: true, position: 1,},
+        { field: 'Name', title: 'Name', filter: true, position: 1},
         { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 2, add: false },
         { field: 'SubjectName', title: 'Subject Name', filter: true, position: 3, add: false },
         { field: 'SubjectClass', title: 'Class', filter: true, position: 4, add: false },
@@ -139,7 +136,7 @@ import { ACTIVE_STATUS, CLASS } from "../dictionaries.js";
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();
             },
-            save: `/${controller}/Create`,
+            save: `/Module/AddModule`,
         });
     };
 

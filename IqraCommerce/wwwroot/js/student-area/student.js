@@ -174,11 +174,12 @@ import { print } from "./student-form.js";
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 if (!isValidPhoneNumber(model.PhoneNumber)) {
-                    model.PhoneNumber.required = true;
+                    alert("Invalid PhoneNumber");
                     return false;
                 }
 
                 if (!isValidGuardiansPhoneNumber(model.GuardiansPhoneNumber)) {
+                    alert("Invalid PhoneNumber");
                     return false;
                 }
                 formModel.ActivityId = window.ActivityId;
@@ -328,9 +329,11 @@ import { print } from "./student-form.js";
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 if (!isValidPhoneNumber(model.PhoneNumber)) {
+                    alert("Invalid PhoneNumber");
                     return false;
                 }
                 if (!isValidGuardiansPhoneNumber(model.GuardiansPhoneNumber)) {
+                    alert("Invalid PhoneNumber");
                     return false;
                 }
                 console.log("formModel=>", model);
@@ -349,8 +352,10 @@ import { print } from "./student-form.js";
     };
 
     const viewDetails = (row) => {
+        console.log("row=>", row);
         Global.Add({
             Id: row.Id,
+            Class: row.Class,
             name: 'Student Information' + row.Id,
             url: '/js/student-area/student-details-modal.js',
         });

@@ -190,6 +190,7 @@ var Controller = new function () {
                     formModel.ActivityId = window.ActivityId;
                     formModel.BatchId = _options.Id;
                     formModel.ModuleId = _options.ModuleId;
+                    formModel.SubjectId = _options.SubjectId;
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();

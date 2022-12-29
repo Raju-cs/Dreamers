@@ -146,6 +146,7 @@ namespace IqraCommerce.Services.PeriodArea
                             stdnt.PhoneNumber [PhoneNumber],
 							stdnt.GuardiansPhoneNumber [GuardiansPhoneNumber],
 							ISNULL(xtndpymntdt.ExtendPaymentdate, '') [ExtendPaymentdate],
+                            prd.Name [Month],
                             sum(stdntmdl.Charge) [Charge], 
 							sum(stdntmdl.Charge) -  (SELECT 
                                 ISNULL( SUM(fs.Fee), 0) 
@@ -168,6 +169,7 @@ namespace IqraCommerce.Services.PeriodArea
                                  stdnt.PhoneNumber,
 								 stdnt.GuardiansPhoneNumber,
 								 stdnt.DreamersId,
+                                 prd.Name, 
 								 xtndpymntdt.ExtendPaymentdate)item";
         }
 

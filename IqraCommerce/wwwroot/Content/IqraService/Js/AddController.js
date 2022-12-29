@@ -1,1 +1,270 @@
-var Controller=new function(n){function t(){function w(){var n=Global.Copy({},i,!0),r;for(r in u)u[r].dataset.dateformat&&u[r].value&&(n[r]=Global.DateTime.GetObject(u[r].value,u[r].dataset.dateformat||Global.DatePicker.ClientFormat).format(Global.DatePicker.ServerFormat));return t.model&&t.fields&&t.fields.each(function(){var i=this+"";n[i]=t.model[i]}),t.postdata&&Global.Copy(n,t.postdata,!0),n.IsValid=t.onsubmit?t.onsubmit(n,t.model,i)!=!1:!0,n}function b(){var n,f;return i.IsValid&&(r.Wait(),n=t.save||"/"+t.name+"s/Create",e||(n=t.savechange||"/"+t.name+"s/SaveChange"),f=w(),f.IsValid?Global.Uploader.upload({url:n,data:f,onComplete:function(f){if(f.IsError)o.Save(f,n);else{if(r.Free(),t.model)for(var e in t.model)typeof i[e]!="undefined"&&(t.model[e]=i[e]);t.onsavesuccess&&t.onsavesuccess(f,i,u);h()}},onError:function(t){t.Id=-8;o.Save(t,n)}}):(alert("Validation Errors."),r.Free())),!1}function h(){activeSave=!1;r.Hide(function(){});document.title=a}function v(n){var i=t.name+(t.name[t.name.length-1]=="s"||n?"":"s");return i.replace(/[A-Z]/g,function(n){return" "+n})}function c(r){var o,e;r=r||{};o={};Global.Copy(o,r,!0);f.Model=r;for(e in u)u[e].dataset.dateformat&&/^\/Date\(\d+\)\/$/.test(r[e])&&(r[e]=r[e].getDate().format(Global.DatePicker.ClientFormat));for(e in i)i[e]=r[e]||"";i.Id=r.Id?r.Id:n;f.Options.each(function(){this.data&&this.val?(this.selectedValue=r[this.Id],this.val(r[this.Id])):this.selectedValue=r[this.Id]});f.BaseChanged[t.name]&&f.BaseChanged[t.name].each(function(){$(u[this]).change()})}function k(n){c(n);t.details&&(r.Wait("Please wait while loading Doctor details......."),Global.CallServer(t.details(n),function(i){if(i.IsError)o.Load(i,t.details(n));else{if(!i.Data){i.Id=-1;o.Load(i);return}r.Free();for(var u in i.Data)n[u]=i.Data[u]||"";c(n)}},function(i){i.Id=-8;o.Load(i,t.details(n))},{},"POST"))}function y(n){if(r.Show(),a=document.title,n)e=!1,k(n),document.title=i.Title=t.edittitle||t.title||"Edit "+v(!0);else{e=!0;n={};for(var o in i)n[o]="";c(n);document.title=i.Title=t.addtitle||t.title||"Add New "+v(!0)}t.onshow&&t.onshow(n,u,f,e,r,i)}function p(n){Global.Free();r=Global.Window.Bind(n,t.width);s=r.View.find(".form");l.Events.Bind(t.model);t.dropdownList&&t.dropdownList.each&&f.Bind(t.dropdownList);t.onviewcreated&&t.onviewcreated(r,u,f,e,i);y(t.model)}var l=this,s,t,i={},a=document.title,e=!0,r,u,o=new function(){this.Save=function(n,i){if(r.Free(),t.onerror)t.onerror(n);else Global.Error.Show(n,{path:i,section:"AddController.Add",user:t.name})};this.Load=function(n,i){r.Free();Global.Error.Show(n,{path:i,section:"AddController load]",user:t.name});h()}},f;(function(n){n.SetAddNew=function(n){for(var t in n.add)n[t.toLowerCase()]=n[t];n.add.name=n.add.name||n.title||n.Id.replace(/id\s*$/i,"");r.View.find("#btn_add_new_"+n.title.toLowerCase()).click(function(){setTimeout(function(){n.add.onSaveSuccess=n.add.onsavesuccess||function(t,i){$(u[n.field]).prepend('<option value="'+t.Data+'">'+i.Name+"<\/option>").val(t.Data).change()};Global.Add(n.add)},0)})}})(this);f=new function(){function f(n){return n.elm=$(u[n.Id]).empty(),n.type=="AutoComplete"?Global.AutoComplete.Bind(n):Global.DropDown.Bind(n),n.elm}function e(t,i){var u=i.url;i.url="";i.datasource=i.datasource||[];t.change=function(r){i.datasource=i.datasource&&i.datasource.length?i.datasource:n;t.onchange&&t.onchange(r);i.url=typeof u=="function"?u(r,t):u;i.Reload()};r.call(this,i)}function r(n){var u=typeof n.url=="function"?n.url.call(this):n.url,i=Global.Copy(n,{Id:n.Id,datasource:n.datasource,valuefield:n.valuefield,textfield:n.textfield,ondatabinding:n.ondatabinding},!0),r;n.change&&e(i,n.change);i.change=n.change||n.onchange;for(r in i)t[r]=t[r.toLowerCase()]||t[r];f(i);n.add&&l.SetAddNew(n)}var i=this;this.BaseChanged={};this.Model={};this.Options=[];this.Bind=function(n){i.BaseChanged[t.name]=[];n.each(function(){r(this)});i.Options=n}};this.Show=function(n){if(t=n,r)i={},u=Global.Form.Bind(i,s),y(t.model);else if(t.template||!t.columns){var f=t.template||"/Areas/"+t.name+"/Templates/Add.html";Global.LoadTemplate(f,function(n){p(n)},function(){})}else Global.Add({model:t,url:IqraConfig.Url.Js.AddFormController,onSuccess:function(n){p(n)}})};this.Events=new function(){var t=this,n=!1;this.Bind=function(t){n||(t=t||{},n=!0,u=Global.Form.Bind(i,s),s.find(".btn_cancel").click(h),Global.Click(r.View.find(".btn_save"),b))}}}this.Wait=!0;models={};this.Show=function(n){for(var i in n)n[i.toLowerCase()]=n[i];n.dropdownlist&&n.dropdownlist.each(function(){for(var n in this)this[n.toLowerCase()]=this[n]});n.name=n.name||Global.Guid();models[n.name]||(models[n.name]=new t);models[n.name].Show(n)}}
+var Controller = new function (none) {
+    this.Wait = true, models = {};
+    function bind() {
+        var that = this, view, options, formModel = {}, oldTitle = document.title, IsNew = true, windowModel, formInputs;
+        var error = new function () {
+            this.Save = function (response, path) {
+                windowModel.Free();
+                if (options.onerror) {
+                    options.onerror(response);
+                } else {
+                    Global.Error.Show(response, { path: path, section: 'AddController.Add', user: options.name });
+                }
+            };
+            this.Load = function (response, path) {
+                windowModel.Free();
+                Global.Error.Show(response, { path: path, section: 'AddController load]', user: options.name });
+                cancel();
+            };
+        };
+        function getModel() {
+            var model = Global.Copy({}, formModel, true);
+            for (var key in formInputs) {
+                if (formInputs[key].dataset.dateformat && formInputs[key].value) {
+                    model[key] = Global.DateTime.GetObject(formInputs[key].value, formInputs[key].dataset.dateformat || Global.DatePicker.ClientFormat).format(Global.DatePicker.ServerFormat);
+                }
+            }
+            //options.onSubmit && options.onSubmit(model);
+            options.model && options.fields && options.fields.each(function () {
+                var key = this + '';
+                model[key] = options.model[key];
+            });
+            options.postdata && Global.Copy(model, options.postdata, true);
+            model.IsValid = options.onsubmit ? options.onsubmit(model, options.model, formModel) != false : true;
+            return model;
+        };
+        function save() {
+            if (formModel.IsValid) {
+                windowModel.Wait();
+                var saveUrl = options.save || ('/' + options.name + 's/Create');
+                if (!IsNew) {
+                    saveUrl = options.savechange || ('/' + options.name + 's/SaveChange');
+                }
+                var model = getModel();
+                if (model.IsValid) {
+                    Global.Uploader.upload({
+                        url: saveUrl,
+                        data: model,
+                        onComplete: function (response) {
+                            if (!response.IsError) {
+                                windowModel.Free();
+                                if (options.model) for (var key in options.model) {
+                                    if (typeof formModel[key] != 'undefined')
+                                        options.model[key] = formModel[key];
+                                }
+                                options.onsavesuccess && options.onsavesuccess(response, formModel, formInputs);
+                                cancel();
+                            } else {
+                                error.Save(response, saveUrl);
+                            }
+                        },
+                        onError: function (response) {
+                            response.Id = -8;
+                            error.Save(response, saveUrl);
+                        }
+                    });
+                } else {
+                    alert('Validation Errors.');
+                    windowModel.Free();
+                }
+            }
+
+            return false;
+        };
+        function cancel() {
+            activeSave = false;
+            windowModel.Hide(function () {
+            });
+            document.title = oldTitle;
+        };
+        function getName(isClear) {
+            var name = options.name + ((options.name[options.name.length - 1] == 's' || isClear) ? '' : 's');
+            return name.replace(/[A-Z]/g, function (match) {
+                return ' ' + match;
+            });
+        };
+        function populate(model) {
+            model = model || {};
+            var newModel = {};
+            Global.Copy(newModel, model, true);
+            dropDownList.Model = model;
+            for (var key in formInputs) {
+                if (formInputs[key].dataset.dateformat && /^\/Date\(\d+\)\/$/.test(model[key])) {
+                    model[key] = model[key].getDate().format(Global.DatePicker.ClientFormat);
+                }
+            }
+            for (var key in formModel) {
+                formModel[key] = model[key] || '';
+            }
+            if (model.Id) { formModel.Id = model.Id; } else { formModel.Id = none; }
+            dropDownList.Options.each(function () {
+                console.log(['dropDownList.Options.each => this', this, this.val, this.data, model, model[this.Id]]);
+                if (this.data && this.val) {
+                    this.selectedValue = model[this.Id];
+                    this.val(model[this.Id]);
+                } else {
+                    this.selectedValue = model[this.Id];
+                }
+            });
+            dropDownList.BaseChanged[options.name] && dropDownList.BaseChanged[options.name].each(function () {
+                $(formInputs[this]).change();
+            });
+        };
+        function loadDetails(model) {
+            populate(model);
+            if (options.details) {
+                windowModel.Wait('Please wait while loading Doctor details.......');
+                Global.CallServer(options.details(model), function (response) {
+                    if (!response.IsError) {
+                        if (!response.Data) {
+                            response.Id = -1;
+                            error.Load(response);
+                            return;
+                        }
+                        windowModel.Free();
+                        for (var key in response.Data) {
+                            model[key] = response.Data[key] || '';
+                        }
+                        populate(model);
+                    } else {
+                        error.Load(response, options.details(model));
+                    }
+                }, function (response) {
+                    response.Id = -8;
+                    error.Load(response, options.details(model));
+                }, {}, 'POST')
+            }
+        };
+        (function (that) {
+            that.SetAddNew = function (model) {
+                for (var key in model.add) { model[key.toLowerCase()] = model[key]; }
+                model.add.name = model.add.name || model.title || model.Id.replace(/id\s*$/i, '')
+                windowModel.View.find('#btn_add_new_' + model.title.toLowerCase()).click(function () {
+                    setTimeout(function () {
+                        model.add.onSaveSuccess = model.add.onsavesuccess || function (response, formModel) {
+                            $(formInputs[model.field]).prepend('<option value="' + response.Data + '">' + formModel.Name + '</option>').val(response.Data).change();
+                        }
+                        Global.Add(model.add);
+                    }, 0)
+                });
+            }
+        })(this)
+        var dropDownList = new function () {
+            var drp = this;
+            this.BaseChanged = {};
+            this.Model = {};
+            this.Options = [];
+            function bindDropDownList(options) {
+                options.elm = $(formInputs[options.Id]).empty();
+                options.type == 'AutoComplete' ? Global.AutoComplete.Bind(options) : Global.DropDown.Bind(options);
+                return options.elm;
+            };
+            function setChangedModel(model, changedModel) {
+                var urlFunc = changedModel.url;
+                changedModel.url = '';
+                changedModel.datasource = changedModel.datasource || [];
+                model.change = function (data) {
+                    changedModel.datasource = changedModel.datasource && changedModel.datasource.length ? changedModel.datasource : none;
+                    model.onchange && model.onchange(data);
+                    changedModel.url = typeof urlFunc == 'function' ? urlFunc(data, model) : urlFunc;
+                    changedModel.Reload();
+                }
+                setModel.call(this, changedModel);
+            };
+            function setModel(model) {
+                var dataUrl = typeof model.url == 'function' ? model.url.call(this) : model.url;
+                var dropdrownModel = Global.Copy(model, {
+                    Id: model.Id,
+                    //url: dataUrl,
+                    datasource: model.datasource,
+                    valuefield: model.valuefield,
+                    textfield: model.textfield,
+                    ondatabinding: model.ondatabinding
+                }, true);
+                model.change && setChangedModel(dropdrownModel, model.change);
+                dropdrownModel.change = model.change || model.onchange;
+                for (var key in dropdrownModel) { options[key] = options[key.toLowerCase()] || options[key]; }
+                bindDropDownList(dropdrownModel);
+                model.add && that.SetAddNew(model);
+            };
+            this.Bind = function (model) {
+                drp.BaseChanged[options.name] = [];
+                model.each(function () {
+                    setModel(this);
+                });
+                drp.Options = model;
+            };
+        };
+        function show(model) {
+            windowModel.Show();
+            oldTitle = document.title;
+            if (model) {
+                IsNew = false;
+                loadDetails(model);
+                document.title = formModel.Title = (options.edittitle || options.title || 'Edit ' + getName(true));
+            } else {
+                IsNew = true;
+                model = {};
+                for (var key in formModel) { model[key] = '' };
+                populate(model);
+                document.title = formModel.Title = (options.addtitle || options.title || 'Add New ' + getName(true));
+            }
+            options.onshow && options.onshow(model, formInputs, dropDownList, IsNew, windowModel, formModel);
+        }
+        function createWindow(template) {
+            Global.Free();
+            windowModel = Global.Window.Bind(template, options.width);
+            view = windowModel.View.find('.form');
+            that.Events.Bind(options.model);
+            options.dropdownList && options.dropdownList.each && dropDownList.Bind(options.dropdownList);
+            options.onviewcreated && options.onviewcreated(windowModel, formInputs, dropDownList, IsNew, formModel);
+            show(options.model);
+        };
+        this.Show = function (opts) {
+            options = opts;
+            if (windowModel) {
+                formModel = {};
+                formInputs = Global.Form.Bind(formModel, view);
+                show(options.model);
+            } else {
+                if (options.template || !options.columns) {
+                    var templateUrl = options.template || '/Areas/' + options.name + '/Templates/Add.html';
+                    Global.LoadTemplate(templateUrl, function (response) {
+                        createWindow(response);
+                    }, function (response) {
+                    });
+                } else {
+                    Global.Add({
+                        model: options,
+                        url: IqraConfig.Url.Js.AddFormController,
+                        onSuccess: function (template) {
+                            createWindow(template);
+                        }
+                    });
+                }
+            }
+        }
+        this.Events = new function () {
+            var evt = this, isBind = false;
+            this.Bind = function (model) {
+                if (!isBind) {
+                    model = model || {};
+                    isBind = true;
+                    formInputs = Global.Form.Bind(formModel, view);
+                    view.find('.btn_cancel').click(cancel);
+                    Global.Click(windowModel.View.find('.btn_save'), save);
+                }
+            };
+        };
+    };
+    this.Show = function (opts) {
+        for (var key in opts) { opts[key.toLowerCase()] = opts[key]; }
+        opts.dropdownlist && opts.dropdownlist.each(function () { for (var key in this) { this[key.toLowerCase()] = this[key]; } });
+        opts.name = opts.name || Global.Guid();
+        if (!models[opts.name]) {
+            models[opts.name] = new bind();
+        };
+        models[opts.name].Show(opts);
+    }
+};
+

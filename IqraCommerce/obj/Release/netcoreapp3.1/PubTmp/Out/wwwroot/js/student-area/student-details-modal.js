@@ -10,10 +10,11 @@ var Controller = new function () {
     const studentFilter = { "field": "StudentId", "value": '', Operation: 0 };
     const programModuleFilter = { "field": "Program", "value": "Module", Operation: 0 }
     const programCourseFilter = { "field": "Program", "value": "Course", Operation: 0 }
-    const scheduleFilterByCourse = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
-    const scheduleEditFilterByCourse = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
+    const scheduleFilterByCourse = { "field": "CourseId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
+    const scheduleEditFilterByCourse = { "field": "CourseId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
     const scheduleFilterBymodule = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
     const scheduleEditFilterBymodule = { "field": "ReferenceId", "value": '00000000-0000-0000-0000-000000000000', Operation: 0 };
+    const classFilter = { "field": "Class", "value": '', Operation: 0 };
    
     var _options;
 
@@ -56,7 +57,7 @@ var Controller = new function () {
             url: '/Module/AutoComplete',
             Type: 'AutoComplete',
             onchange: moduleSelectHandler,
-            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter] }
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter, classFilter] }
 
         },
         scheduleModuleDropdownMat = {
@@ -65,7 +66,7 @@ var Controller = new function () {
             position: 2,
             url: '/Batch/AutoComplete',
             Type: 'AutoComplete',
-            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleFilterBymodule, programModuleFilter] }
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, scheduleFilterBymodule] }
 
         }];
 
@@ -98,7 +99,7 @@ var Controller = new function () {
             url: '/Course/AutoComplete',
             Type: 'AutoComplete',
             onchange: courseSelectHandler,
-            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter] }
+            page: { 'PageNumber': 1, 'PageSize': 20, filter: [liveFilter, activeFilter, classFilter] }
 
         },
         scheduleCourseDropdownMat = {
@@ -134,7 +135,9 @@ var Controller = new function () {
  
     this.Show = function (options) {
         _options = options;
+        console.log("options=>", _options);
         studentFilter.value = _options.Id;
+        classFilter.value = _options.Class;
        
         function addStudentInModule(page) {
             console.log("Page=>", page);
@@ -143,12 +146,12 @@ var Controller = new function () {
                 model: undefined,
                 title: 'Add Student Module',
                 columns: [
-                    { field: 'Charge', title: 'Charge', filter: true, position: 3, add: false },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 4, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 4, },
                 ],
                 dropdownList: modalModuleDropDowns,
                 additionalField: [],
                 onSubmit: function (formModel, data, model) {
+                    console.log("model=>", model);
                     formModel.ActivityId = window.ActivityId;
                     formModel.StudentId = _options.Id;
                 },
@@ -156,7 +159,7 @@ var Controller = new function () {
                     page.Grid.Model.Reload();
                 },
                 filter: [],
-                save: `/StudentModule/Create`,
+                save: `/StudentModule/AddStudent`,
             });
 
         }
@@ -167,8 +170,7 @@ var Controller = new function () {
                 model: model,
                 title: 'Edit Student Module',
                 columns: [
-                    { field: 'Charge', title: 'Charge', filter: true, position: 3, },
-                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 4, },
+                    { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1 }, required: false, position: 4, },
                 ],
                 dropdownList: modalEditModuleDropDowns,
                 additionalField: [],
@@ -181,7 +183,7 @@ var Controller = new function () {
                     grid?.Reload();
                 },
                 filter: [],
-                saveChange: `/StudentModule/Edit`,
+                saveChange: `/StudentModule/EditStudent`,
             });
 
         }
@@ -205,7 +207,7 @@ var Controller = new function () {
                     page.Grid.Model.Reload();
                 },
                 filter: [],
-                save: `/StudentCourse/Create`,
+                save: `/StudentCourse/AddCourseStudent`,
             });
 
         }
@@ -230,7 +232,7 @@ var Controller = new function () {
                     grid?.Reload();
                 },
                 filter: [],
-                saveChange: `/StudentCourse/Edit`,
+                saveChange: `/StudentCourse/EditCourseStudent`,
             });
         }
 
@@ -296,7 +298,6 @@ var Controller = new function () {
                             { field: 'ModuleName', title: 'Module Name', filter: true, position: 1, add: false },
                             { field: 'BatchName', title: 'Batch Name', filter: true, position: 2, add: false },
                             { field: 'Charge', title: 'Charge', filter: true, position: 3, },
-                            { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 1, }, required: false, position: 5, },
                        ],
 
                         Url: '/StudentModule/Get/',
@@ -304,13 +305,13 @@ var Controller = new function () {
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editStudentModule,
-                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Student Batch"></i></a>`
+                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Module Student "></i></a>`
 
                         }],
-                        buttons: [/*{
+                        buttons: [{
                             click: addStudentInModule,
-                            html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
-                        }*/],
+                            html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Module Student"></span> </a>'
+                        }],
                         selector: false,
                         Printable: {
                             container: $('void')
@@ -334,12 +335,12 @@ var Controller = new function () {
                         onDataBinding: function (response) { },
                         actions: [{
                             click: editStudentCourse,
-                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Student Batch"></i></a>`
+                            html: `<a class="action-button info t-white"><i class="glyphicon glyphicon-edit" title="Edit Course Student"></i></a>`
 
                         }],
                         buttons: [{
                             click: addStudentInCourse,
-                            html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Subject and Teacher"></span> </a>'
+                            html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-plus" title="Add Course Student"></span> </a>'
                         }],
                         selector: false,
                         Printable: {

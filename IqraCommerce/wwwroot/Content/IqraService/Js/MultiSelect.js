@@ -1,1 +1,431 @@
-(function(n,t,i){function c(n,t){t.value=t[n.valuefield]+"";t.text=t[n.textfield]+"";var i=t;i.elm=$('<li class="k-item'+(n.selectedDic[t[n.valuefield]]?" selected":"")+'"><input'+(n.selectedDic[t[n.valuefield]]?' checked="checked"':"")+' type="checkbox"> <span> '+t[n.textfield]+"<\/span><\/li>").click(function(){o(n,i)}).data("model",i);n.ItemContainer.append(i.elm)}function f(n,t){var r,i,u;for(t&&n.ItemContainer.empty(),n.page.PageNumber=n.page.PageNumber||1,r=Math.min(n.page.PageNumber.mlt(n.page.PageSize),n.CurrentList.length),i=(n.page.PageNumber-1).mlt(n.page.PageSize);i<r;i++)u=n.CurrentList[i],c(n,u)}function l(n,t){for(var u,i=0;i<n.data.length;i++)if(n.data[i][n.valuefield]==t){u=n.data[i];break}u?o(n,u):t?(n.page.filter=n.page.filter.where('itm=>itm.field !="'+n.textfield+'"'),n.page.filter.push({field:n.valuefield,value:t,Operation:0}),r.Load(n,!0,function(){n.IsSearching=!1;n.data.length>0?o(n,n.data[0]):setEmptyValue(n)}),n.page.filter.pop()):setEmptyValue(n)}function e(n){var t,i;if(n.IsOpened)return!1;h();n.IsOpened=!0;t=n.Container.width()-4;n.ItemTemplate.css({width:t+"px"}).find(".dropdown_item_container").css({width:t+"px"});n.ItemTemplate.slideToggle(100);i=n.Container.offset();i.top+=30;n.ItemTemplate.offset(i);n.Container.addClass("opened");n.Container.find(".k-input").val()==n.TotalSelectedItems&&n.Container.find(".k-input").val("")}function o(n,t){t.selected=!t.selected;t.elm||c(n,t);var i=[];n.selectedValues=[];n.selected.each(function(){this[n.valuefield]!=t[n.valuefield]&&(i.push(this),n.selectedValues.push(this[n.valuefield]))});n.selected=n.selected.where("itm=>itm."+n.valuefield+" != '"+t[n.valuefield]+"'");t.selected?(n.selected.push(t),t.elm.addClass("selected").find("input").prop("checked",!0),n.selectedValues.push(t[n.valuefield]),n.selectedDic[t[n.valuefield]]=!0):(t.elm.removeClass("selected").find("input").prop("checked",!1),n.selectedDic[t[n.valuefield]]=!1);n.value=n.selectedValues.join(",");n.elm.val(n.value);n.change&&n.change.call(n,n.selectedValues,n.selected);n.TotalSelectedItems=n.selectedValues.length+" Items Selected"}function s(n,t,i){if(i||n.filter.value!=t||n.Inputs.val()!=t){n.IsLoading&&n.Caller&&n.Caller.abort();n.filter.value=t;var u=[];n.page.filter.each(function(){this.field!=n.filter.field&&u.push(this)});Global.Copy(n.page.filter,u,!0);n.page.filter.length=u.length;t&&n.page.filter.push(n.filter);n.IsSearching=!0;r.Load(n,!0,function(){n.IsSearching=!1})}}function a(n,t){n.SearchEvent&&clearTimeout(n.SearchEvent);n.SearchEvent=setTimeout(function(){s(n,t.trim())},150)}function v(n){n.CurrentList=n.CurrentList||[];n.SorIndex==2?(n.SorIndex=i,n.CurrentList=n.CurrentDefaultList):n.SorIndex==1?(n.SorIndex=2,n.CurrentList.orderBy("Name",!0)):(n.CurrentDefaultList=n.CurrentList,n.SorIndex=1,n.CurrentList=n.CurrentList.slice().orderBy("Name"));f(n,!0);e(n)}function y(t){t.width=t.width||t.elm.width();t.ItemTemplate=$('<div class="dropdown_item_template">').click(function(n){n.stopPropagation()});t.ItemTemplate.append('<div class="dropdown_item_container"><div class="k-list-header"><a class="btn_search_list active glyphicon glyphicon-search" title="Search List"><\/a><a class="btn_clear glyphicon glyphicon-trash" title="Clear"><\/a><a class="btn_selected_list glyphicon glyphicon-th-list" title="Selected List"><\/a><\/div><div class="k-list-scroller"><ul class="k-list k-reset"><\/ul><\/div><div class="k-list-footer"><label class="auto_bind" data-binding="TotalSelectedItems"><\/label><\/div><\/div>').css({width:t.width-4+"px"});t.ItemContainer=t.ItemTemplate.find("ul");Global.Form.Bind(t,t.ItemTemplate.find(".k-list-footer"));$(document.body).append(t.ItemTemplate);u.Events.Bind(t);var i=$('<span class="k-widget k-dropdown k-header" title="" style="width: 100%"><span class="k-dropdown-wrap k-state-default"><input class="form-control k-input" style="max-height: 27px; width: 100%; padding: 0; color: inherit;" /><span class="k-select"><span class="k-icon k-i-arrow-s">select<\/span><\/span><\/span><\/span>').click(function(n){n.stopPropagation()});t.elm.after(i).hide().data("dropdown",t);i.find(".k-dropdown-wrap").click(function(){return e(t),!1});t.Inputs=i.find(".k-input").keyup(function(){return a(t,this.value),!1}).focus(function(){this.value==t.TotalSelectedItems&&(this.value="");e(t)});Global.Click(i.find(".k-select"),v,t);t.Container=i;r.Models.push(t);n.Service.LoadMore.Bind(t)}function h(n){r.Models.each(function(){this.IsOpened=!1;this.ItemTemplate.hide();this.Container.removeClass("opened");this.Container.find(".k-input").val(this.TotalSelectedItems)});n||(Global.DropDown&&Global.DropDown.CloseAll&&Global.DropDown.CloseAll("MultiSelect"),Global.AutoComplete&&Global.AutoComplete.CloseAll&&Global.AutoComplete.CloseAll("MultiSelect"))}Global.Free();LazyLoading.LoadCss([IqraConfig.Url.Css.DropDown]);var r={Models:[]},u={};(function(n){function t(n){var t,i,u,r,f;return(window.filterModelClientSIde={},t=[],i="item",n.page.filter=n.page.filter||[],n.page.filter.length>0?(n.page.filter.each(function(){filterModelClientSIde[this.field]=new RegExp(this.value,"i");i+=" && item."+this.field+".Contains(filterModelClientSIde."+this.field+")"}),console.log(["exp",i,n]),u=new Function("item","return "+i),n.datasource.each(function(){u(this)&&t.push(this)})):t=n.datasource,n.page.SortBy&&(t=t.orderBy(n.page.SortBy,n.page.IsDescending)),r=n.page.PageSize*(n.page.PageNumber-1),f=r+n.page.PageSize,r>=t.length)?[]:t.slice(r,f)}n.Load=function(n,i,r){var u,e;n.onload&&n.onload(n);n.datasource?(i&&(n.page.PageNumber=1,n.AllLoaded=!1,n.CurrentList=[]),n.data=t(n),n.data.length<n.page.PageSize&&(n.AllLoaded=!0),n.CurrentList=n.CurrentList.concat(n.data),f(n,i)):(n.Container.addClass("loading"),n.IsLoading=!0,u=Global.Copy({},n.page,!0),n.onpost&&n.onpost(u),e=typeof n.url=="function"?n.url.call(n,u):n.url,n.Caller=Global.CallServer(e,function(t){n.ondatabinding&&n.ondatabinding.call(n,t);n.data=typeof t.each=="function"?t:t.Data;n.Container.removeClass("loading");n.IsLoading=!1;i&&(n.page.PageNumber=1,n.AllLoaded=!1,n.CurrentList=[]);n.data.length<n.page.PageSize&&(n.AllLoaded=!0);n.CurrentList=n.CurrentList.concat(n.data);f(n,i);r&&r(t);n.onloaded&&n.onloaded(t.Data,n)},function(){n.IsLoading=!1},u,"POST",null,!1))}})(r),function(){function t(n){n.textfield=n.textfield||IqraConfig.MultiSelect.TextField;n.valuefield=n.valuefield||IqraConfig.MultiSelect.ValuField;n.page=n.page||Global.Copy({},IqraConfig.MultiSelect.Page);n.page.filter=n.page.filter||[];n.filter=n.filter||{field:n.textfield,operation:IqraConfig.MultiSelect.Operation};n.notFilter={field:n.valuefield,operation:13};n.selected=n.selected||[];n.selectedDic={};n.selected.each(function(){n.selectedDic[this[n.valuefield]||this+""]=!0});n.selectedValues=[];console.log(["Global.MultiSelect=>",n])}this.Bind=function(n){var f,i;if(n.elm.data("MultiSelect")){f=n.elm.data("MultiSelect");for(i in n)n[i.toLowerCase()]=n[i.toLowerCase()]||n[i];f.url=n.url;r.Load(f,!0,function(){n.IsSearching=!1})}else{for(i in n)n[i.toLowerCase()]=n[i.toLowerCase()]||n[i];t(n);n.IsDropDownBind=!0;y(n);n.val=function(t){if(arguments.length<1)return n.value;t&&t[n.valuefield]?l(n,t[n.valuefield]):l(n,t)};n.GetData=function(){for(var t=0;t<n.CurrentList.length;t++)if(n.CurrentList[t][n.valuefield]===n.value)return n.CurrentList[t];return null};n.GetText=function(){for(var t=0;t<n.CurrentList.length;t++)if(n.CurrentList[t][n.valuefield]===n.value)return n.CurrentList[t][n.textfield];return""};n.GetList=function(){return n.CurrentList};console.log(["options called ",n]);n.Reload=function(){r.Load(n,!0,function(){n.IsSearching=!1})};n.Clear=function(){u.Events.Clear(n)};n.Enable=function(t){t===!1?n.DisabledModel?n.DisabledModel.show():(n.DisabledModel=$('<span class="drp_disabled"><\/span>'),n.Container.append(n.DisabledModel)):n.DisabledModel&&n.DisabledModel.hide()};n.data=[];r.Load(n,!0,function(){n.IsSearching=!1});n.oncomplete&&n.oncomplete(n);console.log(["options.oncomplete",n])}return n};n.CloseAll=function(){h(!0)},function(){this.Bind=function(n){n.ItemTemplate.find(".k-list-scroller").scroll(function(){!n.AllLoaded&&!n.IsLoading&&n.ItemContainer.height()-$(this).scrollTop()-$(this).scrollTop()-$(this).height()<60&&(n.SearchEvent&&clearTimeout(n.SearchEvent),n.SearchEvent=setTimeout(function(){n.page.PageNumber++;r.Load(n,!1,function(){n.IsSearching=!1})},150))})}}.call(this.LoadMore={})}.call(n.Service={}),function(){function n(n){console.log(["setEmptyValue",n]);n.selected.each(function(){this.selected=!1;this.elm.removeClass("selected").find("input").prop("checked",!1)});n.selectedValues=[];n.selected=[];n.selectedDic={};n.value="";n.elm.val(n.value);n.change&&n.change.call(n,n.selectedValues,n.selected);n.TotalSelectedItems="No Item Selected";n.Container.find(".k-input").val("");t(n)}function t(n){n.IsSelectedList&&(n.IsSelectedList=!1,n.datasource=n.orginalDataSource,n.page.PageNumber=1,n.Inputs.val(""),s(n,"",!0),n.Header.find(".btn_search_list").addClass("active"),n.Header.find(".btn_selected_list").removeClass("active"))}function i(n){n.IsSelectedList||(n.IsSelectedList=!0,n.orginalDataSource=n.datasource,n.datasource=n.selected,n.page.PageNumber=1,n.Inputs.val(""),s(n,"",!0),n.Header.find(".btn_search_list").removeClass("active"),n.Header.find(".btn_selected_list").addClass("active"))}function r(n){n.buttons.each(function(){var i,t;setNonCapitalisation(this);i="";i=this.html?this.html:'<a class="glyphicon glyphicon-'+(this.class||this.classname||"")+'" title="'+(this.title||"")+'">'+(this.text||"")+"<\/a>";t=$(i);n.Header.append(t);Global.Click(t,this.click,n,!1,t)})}this.Clear=n;this.Bind=function(u){u.Header=u.ItemTemplate.find(".k-list-header");Global.Click(u.Header.find(".btn_search_list"),t,u);Global.Click(u.Header.find(".btn_clear"),n,u);Global.Click(u.Header.find(".btn_selected_list"),i,u);u.buttons&&u.buttons.each&&r(u)}}.call(u.Events={});$(document).click(function(){h()})})(Global.MultiSelect,function(){})
+﻿
+
+(function (that, nope, none) {
+    Global.Free();
+    LazyLoading.LoadCss([IqraConfig.Url.Css.DropDown]);
+    var self = { Models: [] }, service = {};
+    function createItem(options, data) {
+        data.value = data[options.valuefield] + '';
+        data.text = data[options.textfield] + '';
+        var model = data;
+        model.elm = $('<li class="k-item' + (options.selectedDic[data[options.valuefield]] ? ' selected' : '') + '"><input' + (options.selectedDic[data[options.valuefield]] ? ' checked="checked"' : '') + ' type="checkbox"> <span> ' + data[options.textfield] + '</span></li>').click(function () { onSelect(options, model); }).data('model', model);
+        options.ItemContainer.append(model.elm);
+    };
+    function create(options, isFirst) {
+        isFirst && options.ItemContainer.empty();
+        options.page.PageNumber = options.page.PageNumber || 1;
+        var len = Math.min((options.page.PageNumber).mlt(options.page.PageSize), options.CurrentList.length);//options.CurrentList.length < 100 ? options.CurrentList.length : 100;
+        for (var i = (options.page.PageNumber - 1).mlt(options.page.PageSize) ; i < len; i++) {
+            var data = options.CurrentList[i];
+            createItem(options, data);
+        }
+    };
+    function onSetValue(options, value) {
+        var model;
+        for (var i = 0; i < options.data.length; i++) {
+            if (options.data[i][options.valuefield] == value) {
+                model = options.data[i];
+                break;
+            }
+        }
+        if (model) {
+            onSelect(options, model);
+        } else if (value) {
+            options.page.filter = options.page.filter.where('itm=>itm.field !="' + options.textfield + '"');
+            options.page.filter.push({ field: options.valuefield, value: value, Operation: 0 });
+            self.Load(options, true, function () {
+                options.IsSearching = false;
+                if (options.data.length > 0) {
+                    onSelect(options, options.data[0]);
+                } else {
+                    setEmptyValue(options);
+                }
+            });
+            options.page.filter.pop();
+        } else {
+            setEmptyValue(options);
+        }
+    };
+    function onOpen(options) {
+        if (options.IsOpened) {
+            //closeItem(options);
+            return false;
+        }
+        closeAll();
+        //if (options.IsLoading) { alert('Data is loading.'); return false; }
+        options.IsOpened = true;
+        var width = options.Container.width() - 4;
+        options.ItemTemplate.css({ width: width + 'px' }).find('.dropdown_item_container').css({ width: width + 'px' });
+        options.ItemTemplate.slideToggle(100);
+        var offset = options.Container.offset();
+        offset.top += 30;
+        options.ItemTemplate.offset(offset);
+        options.Container.addClass('opened');
+        if (options.Container.find('.k-input').val() == options.TotalSelectedItems) {
+            options.Container.find('.k-input').val('');
+        }
+    };
+    function onSelect(options, item) {
+        item.selected = !item.selected;
+        !item.elm && createItem(options, item);
+        var list = [];
+        options.selectedValues = [];
+        options.selected.each(function () {
+            if (this[options.valuefield] != item[options.valuefield]) {
+                list.push(this);
+                options.selectedValues.push(this[options.valuefield]);
+            }
+        });
+        options.selected = options.selected.where('itm=>itm.' + options.valuefield + " != '" + item[options.valuefield] + "'");
+        if (item.selected) {
+            options.selected.push(item);
+            item.elm.addClass('selected').find('input').prop('checked', true);
+            options.selectedValues.push(item[options.valuefield]);
+            options.selectedDic[item[options.valuefield]] = true;
+        } else {
+            item.elm.removeClass('selected').find('input').prop('checked', false);
+            options.selectedDic[item[options.valuefield]] = false;
+        }
+        //options.Container.find('.k-input').val(item[options.textfield]);
+        options.value = options.selectedValues.join(',');
+        options.elm.val(options.value);
+        options.change && options.change.call(options, options.selectedValues, options.selected);
+        options.TotalSelectedItems = options.selectedValues.length + ' Items Selected'
+    };
+    function search(options, text, isForced) {
+        if (!isForced && options.filter.value == text && options.Inputs.val() == text)
+            return;
+        options.IsLoading && options.Caller && options.Caller.abort();
+        options.filter.value = text;
+        var newFilter = [];
+        //console.log(options.page);
+        options.page.filter.each(function () {
+            if (this.field != options.filter.field) {
+                newFilter.push(this);
+            }
+        });
+        Global.Copy(options.page.filter, newFilter, true);
+        options.page.filter.length = newFilter.length;
+        //options.page.filter
+        if (text) {
+            options.page.filter.push(options.filter);
+        }
+        //if (options.selectedValues.length) {
+        //    options.notFilter.value =  options.selectedValues.join(",");
+        //    options.page.filter.push(options.notFilter);
+        //} else {
+        //    options.notFilter.value = none;
+        //}
+        options.IsSearching = true;
+        self.Load(options, true, function () { options.IsSearching = false; });
+    };
+    function onSearch(options, text) {
+        if (options.SearchEvent) {
+            clearTimeout(options.SearchEvent);
+        }
+        options.SearchEvent = setTimeout(function () { search(options, text.trim()) }, 150);
+    };
+    function onSort(options) {
+        options.CurrentList = options.CurrentList || [];
+        if (options.SorIndex == 2) {
+            options.SorIndex = none;
+            options.CurrentList = options.CurrentDefaultList;
+        } else if (options.SorIndex == 1) {
+            options.SorIndex = 2;
+            options.CurrentList.orderBy('Name', true);
+        } else {
+            options.CurrentDefaultList = options.CurrentList;
+            options.SorIndex = 1;
+            options.CurrentList = options.CurrentList.slice().orderBy('Name');
+        }
+        create(options, true);
+        onOpen(options);
+    };
+    function setTemplate(options) {
+        options.width = options.width || options.elm.width();
+        options.ItemTemplate = $('<div class="dropdown_item_template">').click(function (evt) { evt.stopPropagation(); });
+        options.ItemTemplate.append('<div class="dropdown_item_container"><div class="k-list-header"><a class="btn_search_list active glyphicon glyphicon-search" title="Search List"></a><a class="btn_clear glyphicon glyphicon-trash" title="Clear"></a><a class="btn_selected_list glyphicon glyphicon-th-list" title="Selected List"></a></div><div class="k-list-scroller"><ul class="k-list k-reset"></ul></div><div class="k-list-footer"><label class="auto_bind" data-binding="TotalSelectedItems"></label></div></div>').css({ width: (options.width - 4) + 'px' });
+        options.ItemContainer = options.ItemTemplate.find('ul');
+        Global.Form.Bind(options, options.ItemTemplate.find('.k-list-footer'))
+        $(document.body).append(options.ItemTemplate);
+        service.Events.Bind(options);
+        var container = $('<span class="k-widget k-dropdown k-header" title="" style="width: 100%"><span class="k-dropdown-wrap k-state-default"><input class="form-control k-input" style="max-height: 27px; width: 100%; padding: 0; color: inherit;" />' +
+        '<span class="k-select"><span class="k-icon k-i-arrow-s">select</span></span></span></span>').click(function (evt) { evt.stopPropagation(); });
+        options.elm.after(container).hide().data('dropdown', options);
+        container.find('.k-dropdown-wrap').click(function () { onOpen(options); return false; });
+        options.Inputs = container.find('.k-input').keyup(function () { onSearch(options, this.value); return false; }).focus(function () {
+            if (this.value == options.TotalSelectedItems) {
+                this.value = '';
+            }
+            onOpen(options);
+        });
+        //.blur(function () { var elm = this; setTimeout(function () { checkValue(options, elm.value); }, 150); });
+        Global.Click(container.find('.k-select'), onSort, options);
+        options.Container = container;
+        self.Models.push(options);
+        that.Service.LoadMore.Bind(options);
+    };
+    function closeItem(options) {
+        options.IsOpened = false;
+        options.ItemTemplate.hide();
+        options.Container.removeClass('opened');
+    };
+    function closeAll(isOutSide) {
+        self.Models.each(function () {
+            this.IsOpened = false;
+            this.ItemTemplate.hide();
+            this.Container.removeClass('opened');
+            this.Container.find('.k-input').val(this.TotalSelectedItems);
+        });
+        if (!isOutSide) {
+            Global.DropDown && Global.DropDown.CloseAll && Global.DropDown.CloseAll('MultiSelect');
+            Global.AutoComplete && Global.AutoComplete.CloseAll && Global.AutoComplete.CloseAll('MultiSelect');
+        }
+    };
+    (function (that) {
+        function reloadClientSIde(options) {
+            window.filterModelClientSIde = {};
+            var newArray = [], exp = 'item';
+            options.page.filter = options.page.filter || [];
+            if (options.page.filter.length > 0) {
+                options.page.filter.each(function () { filterModelClientSIde[this.field] = new RegExp(this.value, "i"); exp += ' && item.' + this.field + '.Contains(filterModelClientSIde.' + this.field + ')' });
+                console.log(['exp', exp, options]);
+                var b = new Function('item', 'return ' + exp);
+                options.datasource.each(function () { b(this) && newArray.push(this); });
+            } else {
+                newArray = options.datasource;
+            }
+            options.page.SortBy && (newArray = newArray.orderBy(options.page.SortBy, options.page.IsDescending));
+            var from = options.page.PageSize * (options.page.PageNumber - 1), to = from + options.page.PageSize;
+            if (from >= newArray.length) {
+                return [];
+            }
+            return newArray.slice(from, to);
+        };
+        that.Load = function (options, isFirst, func) {
+            options.onload && options.onload(options);
+            if (options.datasource) {
+                if (isFirst) {
+                    options.page.PageNumber = 1;
+                    options.AllLoaded = false;
+                    options.CurrentList = [];
+                }
+                options.data = reloadClientSIde(options);
+                if (options.data.length < options.page.PageSize) {
+                    options.AllLoaded = true;
+                }
+                options.CurrentList = options.CurrentList.concat(options.data);
+                create(options, isFirst);
+            } else {
+                options.Container.addClass('loading');
+                options.IsLoading = true;
+                var page = Global.Copy({}, options.page, true);
+                options.onpost && options.onpost(page);
+                var dataUrl = typeof options.url == 'function' ? options.url.call(options, page) : options.url;
+                options.Caller = Global.CallServer(dataUrl, function (response) {
+                    options.ondatabinding && options.ondatabinding.call(options, response);
+                    if (typeof response.each == 'function') {
+                        options.data = response;
+                    } else {
+                        options.data = response.Data;
+                    }
+                    options.Container.removeClass('loading');
+                    options.IsLoading = false;
+                    if (isFirst) {
+                        options.page.PageNumber = 1;
+                        options.AllLoaded = false;
+                        options.CurrentList = [];
+                    }
+                    if (options.data.length < options.page.PageSize) {
+                        options.AllLoaded = true;
+                    }
+                    options.CurrentList = options.CurrentList.concat(options.data);
+                    create(options, isFirst);
+                    //options.elm.val() && options.val(options.elm.val());
+                    func && func(response);
+                    //console.log([options, options.onloaded]);
+                    options.onloaded && options.onloaded(response.Data, options);
+                }, function (response) {
+                    options.IsLoading = false;
+                }, page, 'POST', null, false);
+            }
+        };
+    })(self);
+    (function () {
+        function setDefaultValue(options) {
+            options.textfield = options.textfield || IqraConfig.MultiSelect.TextField;
+            options.valuefield = options.valuefield || IqraConfig.MultiSelect.ValuField;
+
+            options.page = options.page || Global.Copy({}, IqraConfig.MultiSelect.Page);
+            options.page.filter = options.page.filter || [];
+            options.filter = options.filter || { field: options.textfield, operation: IqraConfig.MultiSelect.Operation }
+            options.notFilter = { field: options.valuefield, operation: 13 }
+            options.selected = options.selected || [];
+            options.selectedDic = {};
+            options.selected.each(function () {
+                options.selectedDic[this[options.valuefield] || (this + '')] = true;
+            });
+            options.selectedValues = [];
+            console.log(['Global.MultiSelect=>', options]);
+        };
+        this.Bind = function (options) {
+            //console.log([options]);
+            if (options.elm.data('MultiSelect')) {
+                var model = options.elm.data('MultiSelect');
+                for (var key in options) { options[key.toLowerCase()] = options[key.toLowerCase()] || options[key]; }
+                model.url = options.url;
+                self.Load(model, true, function () { options.IsSearching = false; });
+            } else {
+                for (var key in options) { options[key.toLowerCase()] = options[key.toLowerCase()] || options[key]; }
+
+                setDefaultValue(options);
+                options.IsDropDownBind = true;
+                setTemplate(options);
+                options.val = function (value) {
+                    if (arguments.length < 1)
+                        return options.value;
+                    else if (value && value[options.valuefield]) {
+                        onSetValue(options, value[options.valuefield]);
+                    } else {
+                        onSetValue(options, value);
+                    }
+                };
+                options.GetData = function () {
+                    for (var i = 0; i < options.CurrentList.length; i++) {
+                        if (options.CurrentList[i][options.valuefield] === options.value) {
+                            return options.CurrentList[i];
+                        }
+                    }
+                    return null;
+                };
+                options.GetText = function () {
+                    for (var i = 0; i < options.CurrentList.length; i++) {
+                        if (options.CurrentList[i][options.valuefield] === options.value) {
+                            return options.CurrentList[i][options.textfield];
+                        }
+                    }
+                    return '';
+                };
+                options.GetList = function () {
+                    return options.CurrentList;
+                };
+                console.log(['options called ', options]);
+                options.Reload = function () {
+                    self.Load(options, true, function () { options.IsSearching = false; });
+                };
+                options.Clear = function () {
+                    service.Events.Clear(options);
+                };
+                options.Enable = function (isEnable) {
+                    if (isEnable === false) {
+                        if (!options.DisabledModel) {
+                            options.DisabledModel = $('<span class="drp_disabled"></span>');
+                            options.Container.append(options.DisabledModel);
+                        } else {
+                            options.DisabledModel.show();
+                        }
+                    } else {
+                        options.DisabledModel && options.DisabledModel.hide();
+                    }
+                };
+                options.data = [];
+                self.Load(options, true, function () {
+                    options.IsSearching = false;
+                });
+                options.oncomplete && options.oncomplete(options);
+                console.log(['options.oncomplete', options]);
+            }
+            return options;
+        };
+        that.CloseAll = function () {
+            closeAll(true);
+        };
+        (function () {
+            this.Bind = function (model) {
+                model.ItemTemplate.find('.k-list-scroller').scroll(function (e) {
+                    //console.log([model.IsLoading, model.ItemContainer.height(), $(this).scrollTop(), $(this).height(), (model.ItemContainer.height() - $(this).scrollTop() - $(this).height()) < 100]);
+                    if (!model.AllLoaded && !model.IsLoading && (model.ItemContainer.height() - $(this).scrollTop() - $(this).scrollTop() - $(this).height()) < 60) {
+                        if (model.SearchEvent) {
+                            clearTimeout(model.SearchEvent);
+                        }
+                        model.SearchEvent = setTimeout(function () {
+                            model.page.PageNumber++;
+                            self.Load(model, false, function () { model.IsSearching = false; });
+                        }, 150);
+                    }
+                });
+            };
+        }).call(this.LoadMore = {});
+    }).call(that.Service = {});
+    (function () {
+
+        function setClear(options) {
+            console.log(['setEmptyValue', options]);
+            options.selected.each(function () {
+                this.selected = false;
+                this.elm.removeClass('selected').find('input').prop('checked', false);
+            });
+            options.selectedValues = [];
+            options.selected = [];
+            options.selectedDic = {};
+            options.value = '';
+            options.elm.val(options.value);
+            options.change && options.change.call(options, options.selectedValues, options.selected);
+            options.TotalSelectedItems = 'No Item Selected'
+            options.Container.find('.k-input').val('');
+            setSearchList(options);
+        };
+        function setSearchList(options) {
+            if (options.IsSelectedList) {
+                options.IsSelectedList = false;
+                options.datasource = options.orginalDataSource;
+                options.page.PageNumber = 1;
+                options.Inputs.val('');
+                search(options, '', true);
+                options.Header.find('.btn_search_list').addClass('active');
+                options.Header.find('.btn_selected_list').removeClass('active');
+            }
+        };
+        function setSelectedList(options) {
+            if (!options.IsSelectedList) {
+                options.IsSelectedList = true;
+                options.orginalDataSource = options.datasource;
+                options.datasource = options.selected;
+                options.page.PageNumber = 1;
+                options.Inputs.val('');
+                search(options, '', true);
+                options.Header.find('.btn_search_list').removeClass('active');
+                options.Header.find('.btn_selected_list').addClass('active');
+            }
+        };
+        function createButtons(options) {
+            options.buttons.each(function () {
+                setNonCapitalisation(this);
+                var html = '';
+                if (this.html) {
+                    html = this.html;
+                } else {
+                    html = '<a class="glyphicon glyphicon-' + (this.class || this.classname || '') + '" title="' + (this.title || '') + '">' + (this.text || '') + '</a>';
+                }
+                var elm = $(html);
+                options.Header.append(elm);
+                Global.Click(elm, this.click, options, false, elm);
+            });
+        };
+        this.Clear = setClear;
+        this.Bind = function (options) {
+            options.Header = options.ItemTemplate.find('.k-list-header');
+            Global.Click(options.Header.find('.btn_search_list'), setSearchList, options);
+            Global.Click(options.Header.find('.btn_clear'), setClear, options);
+            Global.Click(options.Header.find('.btn_selected_list'), setSelectedList, options);
+            if (options.buttons && options.buttons.each) {
+                createButtons(options);
+            }
+        };
+    }).call(service.Events = {});
+    $(document).click(function () {
+        closeAll();
+    });
+})(Global.MultiSelect, function () { });
+
+

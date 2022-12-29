@@ -63,6 +63,7 @@
                     formModel.SubjectId = _options.SubjectId;
                     formModel.Program = "Course";
                     formModel.Name = `${model.Name} `;
+                    formModel.Charge = _options.CourseCharge;
                 },
                 onSaveSuccess: function () {
                     grid?.Reload();
@@ -99,7 +100,6 @@
                         columns: [
                             { field: 'Name', title: 'BatchName', filter: true, position: 1 },
                             { field: 'MaxStudent', title: 'Max Student', filter: true, position: 3, },
-                            //{ field: 'Charge', title: 'Charge', filter: true, position: 5, },
                             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2 }, required: false, position: 6, },
                         ],
 

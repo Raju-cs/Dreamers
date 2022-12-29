@@ -32,6 +32,7 @@ using IqraCommerce.Entities.CourseStudentResultArea;
 using IqraCommerce.Entities.LocationArea;
 using IqraCommerce.Entities.ExtendPaymentdateArea;
 using IqraCommerce.Entities.StudentMessageStatusArea;
+using IqraCommerce.Entities.PaymentHistoryArea;
 
 namespace IqraCommerce.Entities
 {
@@ -191,6 +192,10 @@ namespace IqraCommerce.Entities
 
         #region StudentMessageStatus
         public virtual DbSet<StudentMessageStatus> StudentMessageStatus { get; set; }
+        #endregion
+
+        #region PaymentHistory
+        public virtual DbSet<PaymentHistory> PaymentHistory { get; set; }
         #endregion
         protected override void OnModelCreating(ModelBuilder builder)
         {

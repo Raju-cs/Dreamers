@@ -52,7 +52,7 @@
         const moduleBatchAttendance = (row, model) => {
             console.log("row=>", row);
             Global.Add({
-                name: 'Course AttendanceDate Information' + row.Id,
+                name: 'Attendance Information' + row.Id,
                 url: '/js/module-batchattendance-area/batch-attendance-modal.js',
                 updatePayment: model.Reload,
                 RoutineId: row.Id,

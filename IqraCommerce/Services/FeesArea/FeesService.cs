@@ -37,7 +37,7 @@ namespace IqraCommerce.Services.FeesArea
                     name = "[prd].EndDate";
                     break;
                 case "period":
-                    name = "[prd].Name";
+                    name = "[prd].Month";
                     break;
                 case "fsisdeleted":
                     name = "[fs].[IsDeleted]";
@@ -67,7 +67,7 @@ namespace IqraCommerce.Services.FeesArea
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
             var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
 
-            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] ASC" : page.SortBy;
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Month] ASC" : page.SortBy;
             using (var db = new DBService())
             {
                 page.filter = innerFilters;
@@ -140,29 +140,19 @@ namespace IqraCommerce.Services.FeesArea
         }
         public static string TotalFee(string innerCondition)
         {
-            return @" * from ( 
-       select  prd.[Id]
-      ,prd.[CreatedAt]
-      ,prd.[CreatedBy]
-      ,prd.[UpdatedAt]
-      ,prd.[UpdatedBy]
-      ,prd.[IsDeleted]
-      ,prd.[Remarks]
-      ,prd.[ActivityId]
-      ,prd.[Name]
-	  ,SUM(Fee) as Total_Fee
- FROM [dbo].Period prd
- left join Fees fs on fs.PeriodId = prd.Id
-" + innerCondition + @"
- group by prd.[Id]
-      ,prd.[CreatedAt]
-      ,prd.[CreatedBy]
-      ,prd.[UpdatedAt]
-      ,prd.[UpdatedBy]
-      ,prd.[IsDeleted]
-      ,prd.[Remarks]
-      ,prd.[ActivityId]
-      ,prd.[Name]) item";
+            return @"   * from ( 
+          select prd.Name [Month],
+		  p.PeriodId,
+		  SUM(p.Charge) Charge,
+          SUM(p.Paid) Paid,
+		  (SUM(p.Charge) -
+          SUM(p.Paid)) Due
+		 
+	  from PaymentHistory p
+	  Left join Student stdnt on stdnt.Id = p.StudentId
+      Left join Period prd on prd.Id = p.PeriodId
+       " + innerCondition + @"
+      group by  p.PeriodId, prd.Name) item";
         }
 
 

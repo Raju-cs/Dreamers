@@ -9,6 +9,12 @@ import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
         $('#add-record').click(add);
     });
 
+    function isValidPhoneNumber(phoneNumber) {
+        // Regular expression to match the correct pattern of a Bangladeshi mobile number
+        const phoneNumberRegex = /^(?:\+?88)?01[15-9]\d{8}$/;
+        return phoneNumberRegex.test(phoneNumber);
+    }
+
     const columns = () => [
         { field: 'Name', title: 'Name', filter: true, position: 1, },
         { field: 'PhoneNumber', title: 'Phone Number', filter: true, position: 2, },
@@ -45,6 +51,9 @@ import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
             ],
             additionalField: [],
             onSubmit: function (formModel, data, model) {
+                if (!isValidPhoneNumber(model.PhoneNumber)) {
+                    return false;
+                }
                 formModel.ActivityId = window.ActivityId;
                 formModel.IsActive = true;
             },
@@ -97,6 +106,9 @@ import { Gender, ACTIVE_STATUS } from "../dictionaries.js";
             onSubmit: function (formModel, data, model) {
                 formModel.Id = model.Id
                 formModel.ActivityId = window.ActivityId;
+                if (!isValidPhoneNumber(model.PhoneNumber)) {
+                    return false;
+                }
             },
             onSaveSuccess: function () {
                 tabs.gridModel?.Reload();

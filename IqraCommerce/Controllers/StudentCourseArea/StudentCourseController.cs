@@ -1,9 +1,12 @@
-﻿using IqraCommerce.Entities.CoursePeriodArea;
+﻿using IqraCommerce.Entities.BatchArea;
+using IqraCommerce.Entities.CoursePeriodArea;
 using IqraCommerce.Entities.PeriodArea;
 using IqraCommerce.Entities.StudentCourseArea;
+using IqraCommerce.Helpers;
 using IqraCommerce.Models.StudentCourseArea;
 using IqraCommerce.Services.StudentCourseArea;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,8 +40,70 @@ namespace IqraCommerce.Controllers.StudentCourseArea
                 coursePeriod.Name = period.Name;
                 coursePeriodEntity.Add(coursePeriod);
             }
-           
+
+            var studentCourseFromDb = ___service.GetEntity<StudentCourse>()
+                                         .FirstOrDefault(sc => sc.StudentId == recordToCreate.StudentId
+                                                            && sc.IsDeleted == false
+                                                            && sc.CourseId == recordToCreate.CourseId
+                                                            && sc.BatchId == recordToCreate.BatchId);
+
+            if (studentCourseFromDb != null)
+                return Json(new Response(-4, null, true, "Student Already Exist!"));
+
             return base.Create(recordToCreate);
+        }
+
+        public ActionResult AddCourseStudent([FromForm] StudentCourseModel recordToCreate)
+        {
+
+            var studentModuleEntity = ___service.GetEntity<StudentCourse>();
+            var batchForDB = ___service.GetEntity<Batch>().FirstOrDefault(exp => exp.Id == recordToCreate.BatchId
+                                                                                       && exp.CourseId == recordToCreate.CourseId
+                                                                                       && exp.IsDeleted == false);
+
+            if (batchForDB != null)
+            {
+                StudentCourse studentCourse = new StudentCourse()
+                {
+                    ActivityId = Guid.Empty,
+                    Id = Guid.NewGuid(),
+                    StudentId = recordToCreate.StudentId,
+                    CourseId = recordToCreate.CourseId,
+                    BatchId = recordToCreate.BatchId,
+                    CourseCharge = batchForDB.Charge,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = Guid.Empty,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Guid.Empty,
+                    Remarks = null
+
+                };
+                studentModuleEntity.Add(studentCourse);
+
+            }
+
+
+            try
+            {
+                ___service.SaveChange();
+            }
+            catch (Exception ex)
+            {
+
+                return Ok(new Response(-4, ex.StackTrace, true, ex.Message));
+            }
+
+            return Ok(new Response(batchForDB.Id, batchForDB, false, "Success"));
+        }
+
+        public ActionResult EditCourseStudent([FromForm] StudentCourseModel recordToCreate)
+        {
+            var batchForDB = ___service.GetEntity<Batch>().FirstOrDefault(exp => exp.Id == recordToCreate.BatchId
+                                                                                        && exp.CourseId == recordToCreate.CourseId
+                                                                                        && exp.IsDeleted == false);
+
+            recordToCreate.CourseCharge = batchForDB.Charge;
+            return base.Edit(recordToCreate);
         }
     }
 }

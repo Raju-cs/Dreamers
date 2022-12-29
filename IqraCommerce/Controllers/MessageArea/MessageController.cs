@@ -23,12 +23,11 @@ namespace IqraCommerce.Controllers.MessageArea
             service = __service = ___service = new MessageService();
         }
 
-        public async Task<ActionResult> AllStudentMarkMessage([FromBody] MessageModel model)
+        public async Task<ActionResult> AllStudentMarkMessage([FromForm] MessageModel model)
         {
 
                 var data = await ___service.AllStudentMarkMessage(model, Guid.Empty);
                 return Json(data);
-       
         }
 
         public async Task<ActionResult> SingleStudentMessage([FromForm] MessageModel model)
@@ -37,17 +36,17 @@ namespace IqraCommerce.Controllers.MessageArea
             var data = await ___service.SingleStudentMessage(model, Guid.Empty);
             return Json(data);
         }
-        public async Task<ActionResult> AllStudentAbsentMessage([FromBody] MessageModel model)
+        public async Task<ActionResult> AllStudentAbsentMessage([FromForm] MessageModel model)
         {
-
-            var data = await ___service.AllStudentAbsentMessage(model, Guid.Empty);
-            return Json(data);
+                var data = await ___service.AllStudentAbsentMessage(model, Guid.Empty);
+                return Json(data);
         }
 
-        public async Task<IActionResult> PayStudentMessage([FromBody] MessageModel recordToCreate)
+        public async Task<IActionResult> PayStudentMessage([FromForm] MessageModel recordToCreate)
         {
-            
+
             var studentPaidMessageFromDb = await ___service.GetMessageStudent( recordToCreate.PeriodId);
+            
 
             var content = "";
             foreach (var messageStudent in studentPaidMessageFromDb)
@@ -55,45 +54,33 @@ namespace IqraCommerce.Controllers.MessageArea
                 
                 var studnt = ___service.GetEntity<StudentModule>().FirstOrDefault(sm => sm.StudentId == messageStudent.StudentId && !sm.IsDeleted );
 
-                content = "Student" + " " + messageStudent.StudentName + " " + "  Your fee status is: Total fees amount -  " + messageStudent.Charge + ", Total received amount - " + messageStudent.Paid + "Total pending amount - " + (messageStudent.Charge - messageStudent.Paid) + "\n" +
+
+                if (messageStudent.Charge != messageStudent.Paid && recordToCreate.Name == "StudentNumber")
+                {
+                    content = "Student" + " " + messageStudent.StudentName + " " + "  Your fee status is: Total fees amount -  " + messageStudent.Charge + ", Total received amount - " + messageStudent.Paid + "Total pending amount - " + (messageStudent.Charge - messageStudent.Paid) + "\n" +
                              "Regards,Dreamer's ";
 
+                    // use the API URL here  
+                    string strUrl = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + messageStudent.PhoneNumber + "Number&message=" + content;
+                    // Create a request object  
+                    WebRequest request = HttpWebRequest.Create(strUrl);
+                    // Get the response back  
+                    HttpWebResponse res = (HttpWebResponse)request.GetResponse();
+                    Stream s = (Stream)res.GetResponseStream();
+                    StreamReader readStream = new StreamReader(s);
+                    string dataString = readStream.ReadToEnd();
+                    res.Close();
+                    s.Close();
+                    readStream.Close();
 
-
-                /*// use the API URL here  
-                string strUrl = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + messageStudent.PhoneNumber + "Number&message=" + content;
-                // Create a request object  
-                WebRequest request = HttpWebRequest.Create(strUrl);
-                // Get the response back  
-                HttpWebResponse res = (HttpWebResponse)request.GetResponse();
-                Stream s = (Stream)res.GetResponseStream();
-                StreamReader readStream = new StreamReader(s);
-                string dataString = readStream.ReadToEnd();
-                res.Close();
-                s.Close();
-                readStream.Close();
-
-                // use the API URL here  
-                string strUrl1 = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + messageStudent.GuardiansPhoneNumber + "Number&message=" + content;
-                // Create a request object  
-                WebRequest request1 = HttpWebRequest.Create(strUrl1);
-                // Get the response back  
-                HttpWebResponse res1 = (HttpWebResponse)request1.GetResponse();
-                Stream s1 = (Stream)res1.GetResponseStream();
-                StreamReader readStream1 = new StreamReader(s1);
-                string dataString1 = readStream1.ReadToEnd();
-                res1.Close();
-                s1.Close();
-                readStream1.Close();*/
-
-                Message message = new Message()
+                    Message message = new Message()
                     {
                         ActivityId = Guid.Empty,
                         CreatedAt = DateTime.Now,
                         CreatedBy = Guid.Empty,
                         Id = Guid.NewGuid(),
                         StudentId = messageStudent.StudentId,
-                        PeriodId = messageStudent.PeriodId,
+                        PeriodId = recordToCreate.PeriodId,
                         ModuleId = studnt.ModuleId,
                         BatchId = studnt.BatchId,
                         SubjectId = studnt.SubjectId,
@@ -106,6 +93,54 @@ namespace IqraCommerce.Controllers.MessageArea
 
                     };
                     ___service.GetEntity<Message>().Add(message);
+                }
+
+
+            if(messageStudent.Charge != messageStudent.Paid && recordToCreate.Name == "GuardiansPhoneNumber")
+                {
+
+                    content = "Student" + " " + messageStudent.StudentName + " " + "  Your fee status is: Total fees amount -  " + messageStudent.Charge + ", Total received amount - " + messageStudent.Paid + "Total pending amount - " + (messageStudent.Charge - messageStudent.Paid) + "\n" +
+                            "Regards,Dreamer's ";
+
+
+                    // use the API URL here  
+                    string strUrl1 = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + messageStudent.GuardiansPhoneNumber + "Number&message=" + content;
+                    // Create a request object  
+                    WebRequest request1 = HttpWebRequest.Create(strUrl1);
+                    // Get the response back  
+                    HttpWebResponse res1 = (HttpWebResponse)request1.GetResponse();
+                    Stream s1 = (Stream)res1.GetResponseStream();
+                    StreamReader readStream1 = new StreamReader(s1);
+                    string dataString1 = readStream1.ReadToEnd();
+                    res1.Close();
+                    s1.Close();
+                    readStream1.Close();
+
+
+                    Message message = new Message()
+                    {
+                        ActivityId = Guid.Empty,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = Guid.Empty,
+                        Id = Guid.NewGuid(),
+                        StudentId = messageStudent.StudentId,
+                        PeriodId = recordToCreate.PeriodId,
+                        ModuleId = studnt.ModuleId,
+                        BatchId = studnt.BatchId,
+                        SubjectId = studnt.SubjectId,
+                        UpdatedAt = DateTime.Now,
+                        UpdatedBy = Guid.Empty,
+                        PhoneNumber = messageStudent.PhoneNumber,
+                        GuardiansPhoneNumber = messageStudent.GuardiansPhoneNumber,
+                        Content = content,
+                        Remarks = null,
+
+                    };
+                    ___service.GetEntity<Message>().Add(message);
+                }
+            
+
+             
             }
 
             var response = new ResponseJson()

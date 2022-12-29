@@ -16,7 +16,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
     const dateForSQLServer = (enDate = '01/01/1970') => {
         const dateParts = enDate.split('/');
         console.log("dateparts=>", dateParts);
-        //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+       // return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
         return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
     }
 
@@ -206,7 +206,7 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
             html: listBtn("View Student List")
             }, {
             click: totalFeeList,
-            html: briefcaseBtn("Monthly Income")
+            html: briefcaseBtn("Monthly Information")
             }
         ],
       

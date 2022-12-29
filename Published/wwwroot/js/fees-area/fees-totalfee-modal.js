@@ -1,13 +1,13 @@
 ﻿var Controller = new function () {
 
-    const dateFilter = { "field": "Name", "value": '', Operation: 0 };
+    const dateFilter = { "field": "Month", "value": '', Operation: 0 };
     var _options;
 
     this.Show = function (options) {
         _options = options;
-        dateFilter.value = _options.PeriodMonth;
+        dateFilter.value = _options.Id;
         Global.Add({
-            title: 'Monthly Income',
+            title: 'Monthly Informations',
             selected: 0,
             Tabs: [
                 {
@@ -15,18 +15,17 @@
                     Grid: [{
                         Header: 'Module',
                         columns: [
-                            { field: 'Name', title: 'Month', filter: true, position: 1, },
-                            { field: 'Total_Fee', title: 'Total Income', filter: true, position: 1, },
+                            { field: 'Month', title: 'Month', filter: true, position: 1, },
+                            { field: 'Charge', title: 'TotalCharge', filter: true, position: 1, },
+                            { field: 'Paid', title: 'TotalPaid', filter: true, position: 1, },
+                            { field: 'Due', title: 'TotalDue', filter: true, position: 1, },
                         ],
 
                         Url: '/Fees/TotalFee/',
                         filter: [
-                            { "field": 'fsIsDeleted', "value": 0, Operation: 0, Type: "INNER" },
                             { "field": 'Id', "value": _options.Id, Operation: 0, Type: "INNER" }
                         ],
                         onDataBinding: function (response) { },
-
-                        //actions: [],
 
                         buttons: [],
 
@@ -51,8 +50,6 @@
                             { "field": 'Id', "value": _options.Id, Operation: 0, Type: "INNER" }
                         ],
                         onDataBinding: function (response) { },
-
-                        //actions: [],
 
                         buttons: [],
 

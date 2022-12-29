@@ -1,4 +1,5 @@
 ﻿using IqraCommerce.Entities.ExtendPaymentdateArea;
+using IqraCommerce.Entities.FeesArea;
 using IqraCommerce.Helpers;
 using IqraCommerce.Models.ExtendPaymentDateArea;
 using IqraCommerce.Services.ExtendPaymentDateArea;
@@ -24,8 +25,10 @@ namespace IqraCommerce.Controllers.ExtendPaymentDateArea
         {
 
             var extendPaymentDateEntity = ___service.GetEntity<ExtendPaymentDate>();
-            var extendPaymentDateForDB = ___service.GetEntity<ExtendPaymentDate>().FirstOrDefault(exp => exp.PeriodId == recordToCreate.PeriodId && exp.StudentId == recordToCreate.StudentId);
+            var extendPaymentDateForDB = ___service.GetEntity<ExtendPaymentDate>().FirstOrDefault(exp => exp.PeriodId == recordToCreate.PeriodId 
+                                                                                                             && exp.StudentId == recordToCreate.StudentId);
 
+         
             if(extendPaymentDateForDB != null)
             {
                 extendPaymentDateForDB.ExtendPaymentdate = recordToCreate.ExtendPaymentdate;

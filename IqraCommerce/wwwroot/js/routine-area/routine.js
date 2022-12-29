@@ -42,14 +42,14 @@ import { PROGRAM} from "../dictionaries.js";
             model: model,
             title: 'Edit Routine',
             columns: [
-                { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 1, add: false },
+                { field: 'TeacherName', title: 'TeacherName', filter: true, position: 1, add: false },
                 { field: 'ModuleName', title: 'ModuleName', filter: true, position: 3, add: false },
                 { field: 'CourseName', title: 'CourseName', filter: true, position: 3, add: false },
-                { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
+                { field: 'BatchName', title: 'BatchName', filter: true, position: 4, add: false },
                 { field: 'Name', title: 'Day', filter: true, position: 5, },
-                { field: 'StartTime', title: 'Start Time', filter: true, position: 6, bound: startTimeForRoutine },
-                { field: 'EndTime', title: 'End Time', filter: true, position: 7, bound: endTimeForRoutine },
-                { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 9, },
+                { field: 'StartTime', title: 'StartTime', filter: true, position: 6, bound: startTimeForRoutine },
+                { field: 'EndTime', title: 'EndTime', filter: true, position: 7, bound: endTimeForRoutine },
+                { field: 'ClassRoomNumber', title: 'Class RoomNumber', filter: true, position: 9, },
                 { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 10, },
             ],
             dropdownList: [{
@@ -77,58 +77,22 @@ import { PROGRAM} from "../dictionaries.js";
             saveChange: `/${controller}/Edit`,
         });
     };
-    const viewDetails = (row) => {
-        console.log("row=>", row);
-        Global.Add({
-            Id: row.Id,
-            name: 'Routine Information' + row.Id,
-            url: '/js/routine-area/routine-details-modal.js',
-
-        });
-    }
-
-    const allTab = {
-        Id: 'FC380B85-5899-427B-97C2-FFB7BA538301',
-        Name: 'ALL_ROUTINE',
-        Title: 'All',
-        filter: [liveRecord],
-        actions: [{
-            click: () => {},
-            html: editBtn("Edit Information")
-        },{
-                click: viewDetails,
-                html: eyeBtn("Edit Information")
-            }],
-        onDataBinding: () => { },
-        rowBound: () => { },
-        columns: columns(),
-        Printable: { container: $('void') },
-        remove: { save: `/${controller}/Remove` },
-        Url: 'Get',
-    }
 
     const batchTab = {
         Id: 'AA7EC29A-9FA9-49B6-9AC3-08F93E3D1329',
         Name: 'MODULE_ROUTINE',
         Title: 'Module',
         filter: [{ "field": "Program", "value": "Module", Operation: 0 }, liveRecord],
-        actions: [/*{
-            click: edit,
-            html: editBtn("Edit Information")
-        },*/{
-                click: viewDetails,
-                html: eyeBtn("Edit Information")
-       }],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: [
-            { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 1, add: false },
+            { field: 'TeacherName', title: 'TeacherName', filter: true, position: 1, add: false },
             { field: 'ModuleName', title: 'ModuleName', filter: true, position: 3, add: false },
-            { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
+            { field: 'BatchName', title: 'BatchName', filter: true, position: 4, add: false },
             { field: 'Name', title: 'Day', filter: true, position: 5, },
-            { field: 'StartTime', title: 'Start Time', filter: true, position: 6, bound: startTimeForRoutine },
-            { field: 'EndTime', title: 'End Time', filter: true, position: 7, bound: endTimeForRoutine },
-            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 9, },
+            { field: 'StartTime', title: 'StartTime', filter: true, position: 6, bound: startTimeForRoutine },
+            { field: 'EndTime', title: 'EndTime', filter: true, position: 7, bound: endTimeForRoutine },
+            { field: 'ClassRoomNumber', title: 'ClassRoomNumber', filter: true, position: 9, },
             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 10, },
          ],
         Printable: { container: $('void') },
@@ -141,23 +105,16 @@ import { PROGRAM} from "../dictionaries.js";
         Name: 'COURSE_ROUTINE',
         Title: 'Course',
         filter: [{ "field": "Program", "value": "Course", Operation: 0 }, liveRecord],
-        actions: [/*{
-            click: edit,
-            html: editBtn("Edit Information")
-        }, */{
-               click: viewDetails,
-               html: eyeBtn("Edit Information")
-            },],
         onDataBinding: () => { },
         rowBound: () => { },
         columns: [
-            { field: 'TeacherName', title: 'Teacher Name', filter: true, position: 1, add: false },
+            { field: 'TeacherName', title: 'TeacherName', filter: true, position: 1, add: false },
             { field: 'CourseName', title: 'CourseName', filter: true, position: 3, add: false },
-            { field: 'BatchName', title: 'Batch Name', filter: true, position: 4, add: false },
+            { field: 'BatchName', title: 'BatchName', filter: true, position: 4, add: false },
             { field: 'Name', title: 'Day', filter: true, position: 5, },
-            { field: 'StartTime', title: 'Start Time', filter: true, position: 6, bound: startTimeForRoutine },
-            { field: 'EndTime', title: 'End Time', filter: true, position: 7, bound: endTimeForRoutine },
-            { field: 'ClassRoomNumber', title: 'Class Room Number', filter: true, position: 9, },
+            { field: 'StartTime', title: 'StartTime', filter: true, position: 6, bound: startTimeForRoutine },
+            { field: 'EndTime', title: 'EndTime', filter: true, position: 7, bound: endTimeForRoutine },
+            { field: 'ClassRoomNumber', title: 'ClassRoomNumber', filter: true, position: 9, },
             { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2, }, required: false, position: 10, },
         ],
         Printable: { container: $('void') },

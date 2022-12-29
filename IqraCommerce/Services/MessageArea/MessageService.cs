@@ -70,6 +70,8 @@ namespace IqraCommerce.Services.MessageArea
                     var studentResultDb = GetEntity<BatchAttendance>().Where(ba => ba.ModuleId == model.ModuleId
                                                                                                    && ba.BatchId == model.BatchId && ba.AttendanceTime == null).ToList();
 
+                  
+
                     foreach (var AbsentSms in studentResultDb)
                     {
 
@@ -83,32 +85,38 @@ namespace IqraCommerce.Services.MessageArea
                                 content = "Student" + " " + item2.Name + " " + " was absent todays class."  + " \n" +
                                  "Regards,Dreamer's ";
 
-                           /* // use the API URL here  
-                            string strUrl = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.PhoneNumber + "Number&message=" + content.ToString();
-                            // Create a request object  
-                            WebRequest request = HttpWebRequest.Create(strUrl);
-                            // Get the response back  
-                            HttpWebResponse res = (HttpWebResponse)request.GetResponse();
-                            Stream s = (Stream)res.GetResponseStream();
-                            StreamReader readStream = new StreamReader(s);
-                            string dataString = readStream.ReadToEnd();
-                            res.Close();
-                            s.Close();
-                            readStream.Close();
 
+                            if(model.Name == "StudentNumber")
+                            {
+                                // use the API URL here  
+                                string strUrl = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.PhoneNumber + "Number&message=" + content.ToString();
+                                // Create a request object  
+                                WebRequest request = HttpWebRequest.Create(strUrl);
+                                // Get the response back  
+                                HttpWebResponse res = (HttpWebResponse)request.GetResponse();
+                                Stream s = (Stream)res.GetResponseStream();
+                                StreamReader readStream = new StreamReader(s);
+                                string dataString = readStream.ReadToEnd();
+                                res.Close();
+                                s.Close();
+                                readStream.Close();
+                            }
+                            else
+                            {
+                                // use the API URL here  
+                                string strUrl1 = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.GuardiansPhoneNumber + "Number&message=" + content.ToString();
+                                // Create a request object  
+                                WebRequest request1 = HttpWebRequest.Create(strUrl1);
+                                // Get the response back  
+                                HttpWebResponse res1 = (HttpWebResponse)request1.GetResponse();
+                                Stream s1 = (Stream)res1.GetResponseStream();
+                                StreamReader readStream1 = new StreamReader(s1);
+                                string dataString1 = readStream1.ReadToEnd();
+                                res1.Close();
+                                s1.Close();
+                                readStream1.Close();
 
-                            // use the API URL here  
-                            string strUrl1 = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.GuardiansPhoneNumber + "Number&message=" + content.ToString();
-                            // Create a request object  
-                            WebRequest request1 = HttpWebRequest.Create(strUrl1);
-                            // Get the response back  
-                            HttpWebResponse res1 = (HttpWebResponse)request1.GetResponse();
-                            Stream s1 = (Stream)res1.GetResponseStream();
-                            StreamReader readStream1 = new StreamReader(s1);
-                            string dataString1 = readStream1.ReadToEnd();
-                            res1.Close();
-                            s1.Close();
-                            readStream1.Close();*/
+                            }
 
                             Message message = new Message()
                             {
@@ -120,6 +128,7 @@ namespace IqraCommerce.Services.MessageArea
                                 ModuleId = AbsentSms.ModuleId,
                                 BatchId = AbsentSms.BatchId,
                                 SubjectId = model.SubjectId,
+                                PeriodId = model.PeriodId,
                                 UpdatedAt = DateTime.Now,
                                 UpdatedBy = Guid.Empty,
                                 PhoneNumber = item2.PhoneNumber,
@@ -154,6 +163,8 @@ namespace IqraCommerce.Services.MessageArea
                     var studentResultDb = GetEntity<StudentResult>().Where(sr => sr.ModuleId == model.ModuleId
                                                                                                    && sr.BatchId == model.BatchId).ToList();
 
+
+
                     foreach (var item in studentResultDb)
                     {
 
@@ -175,32 +186,36 @@ namespace IqraCommerce.Services.MessageArea
                             }
 
 
-                            /*// use the API URL here  
-                            string strUrl = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.PhoneNumber + "Number&message=" + content.ToString();
-                            // Create a request object  
-                            WebRequest request = HttpWebRequest.Create(strUrl);
-                            // Get the response back  
-                            HttpWebResponse res = (HttpWebResponse)request.GetResponse();
-                            Stream s = (Stream)res.GetResponseStream();
-                            StreamReader readStream = new StreamReader(s);
-                            string dataString = readStream.ReadToEnd();
-                            res.Close();
-                            s.Close();
-                            readStream.Close();
+                            if(model.Name == "StudentNumber") {
+                                // use the API URL here  
+                                string strUrl = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.PhoneNumber + "Number&message=" + content.ToString();
+                                // Create a request object  
+                                WebRequest request = HttpWebRequest.Create(strUrl);
+                                // Get the response back  
+                                HttpWebResponse res = (HttpWebResponse)request.GetResponse();
+                                Stream s = (Stream)res.GetResponseStream();
+                                StreamReader readStream = new StreamReader(s);
+                                string dataString = readStream.ReadToEnd();
+                                res.Close();
+                                s.Close();
+                                readStream.Close();
 
-                            // use the API URL here  
-                            string strUrl1 = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.GuardiansPhoneNumber + "Number&message=" + content.ToString();
-                            // Create a request object  
-                            WebRequest request1 = HttpWebRequest.Create(strUrl1);
-                            // Get the response back  
-                            HttpWebResponse res1 = (HttpWebResponse)request1.GetResponse();
-                            Stream s1 = (Stream)res1.GetResponseStream();
-                            StreamReader readStream1 = new StreamReader(s1);
-                            string dataString1 = readStream1.ReadToEnd();
-                            res1.Close();
-                            s1.Close();
-                            readStream1.Close();*/
-
+                            }
+                            else
+                            {
+                                // use the API URL here  
+                                string strUrl1 = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + item2.GuardiansPhoneNumber + "Number&message=" + content.ToString();
+                                // Create a request object  
+                                WebRequest request1 = HttpWebRequest.Create(strUrl1);
+                                // Get the response back  
+                                HttpWebResponse res1 = (HttpWebResponse)request1.GetResponse();
+                                Stream s1 = (Stream)res1.GetResponseStream();
+                                StreamReader readStream1 = new StreamReader(s1);
+                                string dataString1 = readStream1.ReadToEnd();
+                                res1.Close();
+                                s1.Close();
+                                readStream1.Close();
+                            }
 
                             Message message = new Message()
                             {
@@ -212,9 +227,11 @@ namespace IqraCommerce.Services.MessageArea
                                 ModuleId = item.ModuleId,
                                 BatchId = item.BatchId,
                                 SubjectId = item.SubjectId,
+                                PeriodId = item.BatchExamId,
                                 UpdatedAt = DateTime.Now,
                                 UpdatedBy = Guid.Empty,
                                 PhoneNumber = item2.PhoneNumber,
+                                GuardiansPhoneNumber = item2.GuardiansPhoneNumber,
                                 Content = content,
                                 Remarks = null,
 
@@ -255,31 +272,21 @@ namespace IqraCommerce.Services.MessageArea
                     s.Close();
                     readStream.Close();
 
-                    // use the API URL here  
-                    string strUrl1 = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=iqrasys&password=8857b7f565b96262d2818dbe6460fdca&MsgType=TEXT&receiver=" + model.GuardiansPhoneNumber + "Number&message=" + model.Content;
-                    // Create a request object  
-                    WebRequest request1 = HttpWebRequest.Create(strUrl1);
-                    // Get the response back  
-                    HttpWebResponse res1 = (HttpWebResponse)request1.GetResponse();
-                    Stream s1 = (Stream)res1.GetResponseStream();
-                    StreamReader readStream1 = new StreamReader(s1);
-                    string dataString1 = readStream1.ReadToEnd();
-                    res1.Close();
-                    s1.Close();
-                    readStream1.Close();*/
+       */
 
-                    Message message = new Message()
+                          Message message = new Message()
                             {
                                 ActivityId = Guid.Empty,
                                 CreatedAt = DateTime.Now,
                                 CreatedBy = Guid.Empty,
                                 Id = Guid.NewGuid(),
                                 StudentId = model.StudentId,
-                                PeriodId = model.PeriodId,
+                                ModuleId = model.ModuleId,
+                                BatchId = model.BatchId,
+                                SubjectId = model.SubjectId,
                                 UpdatedAt = DateTime.Now,
                                 UpdatedBy = Guid.Empty,
                                 PhoneNumber = model.PhoneNumber,
-                                GuardiansPhoneNumber = model.GuardiansPhoneNumber,
                                 Content = model.Content,
                                 Remarks = null,
 

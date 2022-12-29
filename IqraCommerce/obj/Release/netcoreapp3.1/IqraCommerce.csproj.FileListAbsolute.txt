@@ -2371,3 +2371,4 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\Message\Index.csh
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CoursePayment\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CourseBatchAttendance\Index.cshtml.g.cs
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\CourseStudentResult\Index.cshtml.g.cs
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\Razor\Views\PaymentHistory\Index.cshtml.g.cs

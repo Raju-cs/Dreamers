@@ -16,9 +16,6 @@
                         { field: 'StartDate', title: 'Start Date (Day/Month/Year)', filter: true, position: 2, required: false },
                         { field: 'EndDate', title: 'End Date (Day/Month/Year)', filter: true, position: 3, required: false, },
                         { field: 'Name', title: 'Month', filter: true, required: false, position: 3, },
-                        /*{ field: 'TotalCollected', title: 'Total Collected', filter: true, position: 2, required: true, add: { sibling: 2 } },
-                        { field: 'InCome', title: 'Income', filter: true, position: 3, add: { sibling: 2 } },
-                        { field: 'OutCome', title: 'Outcome', filter: true, position: 5, add: { sibling: 2 } },*/
                         { field: 'Remarks', title: 'Remarks', filter: true, add: { sibling: 2,  }, required: false, position: 6, },
                     ],
 
