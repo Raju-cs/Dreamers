@@ -38,7 +38,7 @@
             options.points[0] = [];
             for (var j = 0; j < options.sections.length; j++) {
                 options.data[0].x = 0;
-                var prevPoint, curentPoint = { value: options.data[0][options.sections[j].valuefield], x: 0, y: options.height - options.data[0][options.sections[j].valuefield] * options.yUnit }, nextPoint = { x: options.xUnit, y: options.height - options.data[1][options.sections[j].valuefield] * options.yUnit };
+                var prevPoint, curentPoint = { value: options.data[0][options.sections[j].valuefield], x: 0, y: options.height - options.data[0][options.sections[j].valuefield] * options.yUnit * options.sections[j].Mult }, nextPoint = { x: options.xUnit, y: options.height - options.data[1][options.sections[j].valuefield] * options.yUnit * options.sections[j].Mult };
                 options.d[j] = 'M' + curentPoint.x + ' ' + curentPoint.y + ' C ' + (curentPoint.x + options.TQXUnit) + ' ' + (curentPoint.y + (nextPoint.y - curentPoint.y) / 3);
                 curentPoint.profile = options.sections[j];
                 options.points[0].push(curentPoint);
@@ -52,7 +52,7 @@
                 options.data[i].x = i * options.xUnit;
                 for (var j = 0; j < options.sections.length; j++) {
                     var value = options.data[i][options.sections[j].valuefield];
-                    var curentPoint = { value: value, x: options.data[i].x, y: options.height - value * options.yUnit };
+                    var curentPoint = { value: value, x: options.data[i].x, y: options.height - value * options.yUnit * options.sections[j].Mult };
                     curentPoint.profile = options.sections[j];
                     options.d[j] += getDForPoint(curentPoint, options, g);
                     //createCircle(g, curentPoint);
@@ -67,8 +67,8 @@
             options.data[lastIndex].x = lastIndex * options.xUnit;
             for (var j = 0; j < options.sections.length; j++) {
                 var value = options.data[lastIndex][options.sections[j].valuefield];
-                var curentPoint = { value: value, x: options.data[lastIndex].x, y: options.height - value * options.yUnit },
-                    prevPoint = { x: (lastIndex - 1) * options.xUnit, y: options.height - options.data[lastIndex - 1][options.sections[j].valuefield] * options.yUnit };
+                var curentPoint = { value: value, x: options.data[lastIndex].x, y: options.height - value * options.yUnit * options.sections[j].Mult },
+                    prevPoint = { x: (lastIndex - 1) * options.xUnit, y: options.height - options.data[lastIndex - 1][options.sections[j].valuefield] * options.yUnit * options.sections[j].Mult };
                 options.d[j] += ' ' + (curentPoint.x - options.TQXUnit) + ' ' + (curentPoint.y - (curentPoint.y - prevPoint.y) / 3) + ' ' + curentPoint.x + ' ' + curentPoint.y;
                 curentPoint.profile = options.sections[j];
                 //createCircle(g, curentPoint);
@@ -185,30 +185,39 @@
     (function (wnd, gbl) {
         function calculateVertix(options) {
             var start = 0, str = (parseInt(options.max) + ''), firstDigit = parseInt(str[0]);
+            //console.log(['calculateVertix1 >= ', firstDigit, str]);
             if (firstDigit < 4) {
                 str = str.length - 2;
                 start = firstDigit == 1 ? options.max < 20 ? options.max < 10 ? 1 : 3 : 1 : 5;
+                //console.log(['calculateVertix2 >= ', firstDigit, str, start, options.max - 5000000, options.max]);
                 for (var i = 0; i < str; i++) {
                     start = start * 10;
                 }
             } else {
                 str = str.length - 1;
                 start = 1;
+                //console.log(['calculateVertix3 >= ', firstDigit, str, start]);
                 for (var i = 0; i < str; i++) {
                     start = start * 10;
                 }
             }
+            //console.log(['calculateVertix4 >= ', firstDigit, options.max]);
             options.vertex = [];
             var i = start;
             for (; i <= options.max; i += start) {
+
+                //console.log(['calculateVertix5 >= ', options.vertex, i, options.max]);
+                //alert('' + options.vertex + ' aaaaaaaaaaaaaaaa ' + i + ' aaaaaaaaaaaaaaaa ' + options.max + '');
                 options.vertex.push(i.toMoney());
             }
+            //console.log(['calculateVertix6 >= ', options.vertex, i]);
             options.vertex.push(i.toMoney());
             options.max = i;
             //options.vertexwidth = options.ctx.measureText(options.vertex[options.vertex.length - 1]).width + 10;
         };
         function calculateMax(options) {
             if (options.max) {
+                //console.log(['calculateVertix0 >= ', options.max, options]);
                 calculateVertix(options);
                 return options.max;
             }
@@ -216,8 +225,17 @@
             options.data.each(function () {
                 data = this;
                 options.sections.each(function () {
-                    max = max < data[this.valuefield] ? data[this.valuefield] : max;
+                    this.Max = this.Max || 0;
+                    this.Max = this.Max < data[this.valuefield] ? data[this.valuefield] : this.Max;
+                    max = max < this.Max ? this.Max : max;
                 });
+            });
+            options.sections.each(function () {
+                if (this.Max > 0) {
+                    this.Mult = parseInt(max / this.Max);
+                } else {
+                    this.Mult = 1;
+                }
             });
             options.max = max;
             calculateVertix(options);

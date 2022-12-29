@@ -49,8 +49,8 @@
     opacity: 0.6;
 }
 .new_window .formHeader {
-    background-color: #04432e;
-    background-image: none, linear-gradient(to bottom, #3f7764 0px, #76a595 100%);
+    background-color: #3b5998;
+    background-image: none, linear-gradient(to bottom, #3b5998 0px, #3b5998 100%);
     background-position: 50% 50%;
     border: 1px solid transparent;
     border-color: #ffffff;

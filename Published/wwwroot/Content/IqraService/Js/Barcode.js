@@ -1,1 +1,500 @@
-﻿var Ean13=new function(){function a(t){var r=o;t.fillRect(r,f,n,i);r+=n*2;t.fillRect(r,f,n,i);r=u[5].Point.X+n*8;t.fillRect(r,f,n,i);r+=n*2;t.fillRect(r,f,n,i);r=u[11].Point.X+n*7;t.fillRect(r,f,n,i);r+=n*2;t.fillRect(r,f,n,i);u.each(function(){this.Draw(t)})}function v(){var l=e[0],a=c[l],i=parseInt(l+""),t,f;for(u=[],o+=3*n,t=1;t<7;t++)i+=s(e[t],t),f=h(e[t],t-1,r.WhitePen,r.BlackPen),f.SetDirection(a[t-1]),u.push(f);for(o+=5*n,t=7;t<12;t++)i+=s(e[t],t),f=h(e[t],t-1,r.BlackPen,r.WhitePen),u.push(f);console.log(["checkSum",i]);i=i%10;u.push(h(i==0?"0":10-i+"",11,r.BlackPen,r.WhitePen));o-=8*n}function y(){return{"0":[!1,!1,!1,!1,!1,!1],"1":[!1,!1,!0,!1,!0,!0],"2":[!1,!1,!0,!0,!1,!0],"3":[!1,!1,!0,!0,!0,!1],"4":[!1,!0,!1,!1,!0,!0],"5":[!1,!0,!0,!1,!1,!0],"6":[!1,!0,!0,!0,!1,!1],"7":[!1,!0,!1,!0,!1,!0],"8":[!1,!0,!1,!0,!0,!1],"9":[!1,!0,!0,!1,!0,!1]}}function s(n,t){var i=parseInt(n+"");return t%2==0?i:i*3}function t(n,t){return[{Width:n[0],StartAt:n[1]},{Width:t[0],StartAt:t[1]}]}function h(u,e,s,h){var l={X:o+e*7*n,Y:f},c=new r(l,i,n,s,h,u);switch(u){case"0":return c.AddLines(t([n*2,n*3],[n,n*6])),c;case"1":return c.AddLines(t([n*2,n*2],[n,n*6])),c;case"2":return c.AddLines(t([n,n*2],[n*2,n*5])),c;case"3":return c.AddLines(t([n*4,n*1],[n,n*6])),c;case"4":return c.AddLines(t([n,n],[n*2,n*5])),c;case"5":return c.AddLines(t([n*2,n],[n,n*6])),c;case"6":return c.AddLines(t([n,n],[n*4,n*3])),c;case"7":return c.AddLines(t([n*3,n],[n*2,n*5])),c;case"8":return c.AddLines(t([n*2,n],[n*3,n*4])),c;case"9":return c.AddLines(t([n,n*3],[n*2,n*5])),c}return new Font0(l,i,n)}function r(n,t,i,r,u,f){function v(n){var i,t;n.fillStyle=c;n.fillRect(e.X,e.Y,h*7,s);for(i in o)t=o[i],n.fillStyle=l,n.fillRect(e.X+t.StartAt,e.Y,t.Width,s),t.Rect=[e.X+t.StartAt,e.Y,t.Width,s]}function y(n){var t,i;for(n.fillStyle=l,n.fillRect(e.X,e.Y,h*7,s),i=o.length-1;i>-1;i--)t=o[i],n.fillStyle=c,n.fillRect(e.X+7*h-t.StartAt-t.Width,e.Y,t.Width,s),t.Rect1=[e.X+t.StartAt,e.Y,t.Width,s]}var o=[],s=t,h=i,e=n,c=r,l=u,a;this.BackColor=r;this.FillColor=u;this.Lines=o;this.Later=f;this.Point=n;this.FontBase=function(n,t,i,r,u){this.Point=n;this.Height=t;this.BarWidth=i;this.BackColor=r;this.FillColor=u};this.Draw=function(n){a?y(n):v(n)};this.SetDirection=function(n){a=n;this.IsDesc=n};this.AddLine=function(n){o.push(n)};this.AddLines=function(n){return this.Lines=o=o.concat(n),this}}function p(){for(var i=Math.floor(Math.random()*8999)+1e3+""+(Math.floor(Math.random()*8999)+1e3)+""+(Math.floor(Math.random()*8999)+1e3)+"",r=i[0],n=parseInt(r+""),t=1;t<12;t++)n+=s(i[t],t);return n=n%10,i+(n==0?"0":10-n)}function w(n){return n=n||{},setNonCapitalisation(n),n.height=n.height||40,n.width=n.width||140,n.text=n.text||n.code,n.code=n.code||n.text,n}var c=y(),l=1,n=1,i=1,u=[],e="",o=0,f=0;r.WhitePen="#FFFFFF";r.BlackPen="#000000";this.Check=function(n){var i;if(n.length!=13)return!1;var r=n[0],t=parseInt(r+"");for(i=1;i<12;i++)t+=s(n[i],i);return t=t%10,n[12]===(t==0?"0":10-t+"")};this.Get=function(t){var h,c,r,s;if(t=w(t),h=t.width,c=t.height,!t.code)return p();e=t.text;n=(h-4)/95;o=(h-n*95)/2;f=2;l=n*7;i=c-4;r=document.createElement("canvas");s=r.getContext("2d");r.width=h;r.height=c;s.font="10px Arial";s.fillStyle="#FFFFFF";s.fillRect(0,0,r.width,r.height);s.fillStyle="#000000";v();a(s);console.log(["fonts",u]);$(document.body).append('<img style="position:fixed; top:100px;left:500px;" src="'+r.toDataURL("image/png")+'"/>')};this.Bind=function(n){var t=that.Get(n);n.elm.html('<img src="'+t+'"/>')};this.Print=function(n,t){typeof n=="string"&&(n={Code:n,text:t});Global.Print('<img src="'+that.Get(n)+'"/>')}},code=Ean13.Get();Ean13.Get({code:"6298996158568",width:400,height:70});console.log([code,Ean13.Check("6298996158568")])
+﻿
+
+//var Ean13 = new function () {
+//    var Structure = setStructure(), img, elementWidth = 1, barWidth = 1, height = 1, fonts = [];
+//    var Text = '', StartX = 0, StartY = 0, ctx;
+//    this.Get = function (text, width, hgt) {
+//        Text = getRandom();
+//        console.log(Text);
+//        barWidth = (width - 4) / 95;
+//        StartX = (width - barWidth * 95) / 2;
+//        StartY = 2;
+//        elementWidth = barWidth * 7;
+//        height = hgt - 4;
+
+
+//        var c = document.createElement("canvas"),
+//        ctx = c.getContext("2d");
+//        c.width = width;
+//        c.height = hgt;
+//        ctx.font = "10px Arial";
+//        ctx.fillStyle = "#FFFFFF";
+//        ctx.fillRect(0, 0, c.width, c.height);
+//        ctx.fillStyle = "#000000";
+//        SetFont();
+//        Draw(ctx);
+//        //console.log(['fonts', fonts]);
+//        //$(document.body).append($(c));
+//        $(document.body).append('<img style="position:fixed; top:100px;left:500px;" src="' + c.toDataURL("image/png") + '"/>');
+//    };
+    
+//    function getRandom() {
+//        var code = (Math.floor(Math.random() * 8999) + 1000) + '' +
+//                 (Math.floor(Math.random() * 8999) + 1000) + '' +
+//                 (Math.floor(Math.random() * 8999) + 1000)+'';
+
+//        var chk = code[0];
+//        var checkSum = parseInt(chk + ""), digit = 0;
+//        console.log(['checkSum', checkSum]);
+//        for (var i = 1; i < 12; i++) {
+//            console.log(['checkSum', checkSum]);
+//            checkSum += getValue(code[i], i);
+//        }
+//        console.log(['checkSum', checkSum]);
+//        checkSum = checkSum % 10;
+//        code = code + (checkSum == 0 ? '0' : (10 - checkSum));
+//        return code;
+//    };
+//    function Draw(ctx) {
+//        var x = StartX;
+//        //console.log(['x, StartY, barWidth, height', x, StartY, barWidth, height]);
+//        ctx.fillRect(x, StartY, barWidth, height);
+//        x += barWidth * 2;
+//        ctx.fillRect(x, StartY, barWidth, height);
+//        x = fonts[5].Point.X + barWidth * 8;
+//        ctx.fillRect( x, StartY, barWidth, height);
+//        x += barWidth * 2;
+//        ctx.fillRect(x, StartY, barWidth, height);
+//        x = fonts[11].Point.X + barWidth * 7;
+//        ctx.fillRect(x, StartY, barWidth, height);
+//        x += barWidth * 2;
+//        ctx.fillRect(x, StartY, barWidth, height);
+
+//        fonts.each(function () {
+//            this.Draw(ctx);
+//        });
+//    };
+//    function SetFont() {
+//        var chk = Text[0];
+//        var strct = Structure[chk];
+//        var checkSum = parseInt(chk + ""), digit = 0;
+//        fonts = [];
+//        StartX += 3 * barWidth;
+//        for (var i = 1; i < 7; i++) {
+//            checkSum += getValue(Text[i], i);
+//            var font = GetFont(Text[i], i - 1, FontBase.WhitePen, FontBase.BlackPen);
+//            font.SetDirection(strct[i - 1]);
+//            fonts.push(font);
+//        }
+//        StartX += 5 * barWidth;
+//        for (var i = 7; i < 12; i++) {
+//            checkSum += getValue(Text[i], i);
+//            var font = GetFont(Text[i], i - 1, FontBase.BlackPen, FontBase.WhitePen);
+//            fonts.push(font);
+//        }
+//        console.log(['checkSum', checkSum]);
+//        checkSum = checkSum % 10;
+//        fonts.push(GetFont(checkSum == 0 ? '0' : ((10 - checkSum) + ''), 11, FontBase.BlackPen, FontBase.WhitePen));
+//        StartX -= 8 * barWidth;
+
+//        //console.log(['StartX, StartY, barWidth, checkSum', StartX, StartY, barWidth, checkSum]);
+//    };
+//    function setStructure() {
+//        return {
+//            '0': [false, false, false, false, false, false],
+//            '1': [false, false, true, false, true, true],
+//            '2': [false, false, true, true, false, true],
+//            '3': [false, false, true, true, true, false],
+//            '4': [false, true, false, false, true, true],
+//            '5': [false, true, true, false, false, true],
+//            '6': [false, true, true, true, false, false],
+//            '7': [false, true, false, true, false, true],
+//            '8': [false, true, false, true, true, false],
+//            '9': [false, true, true, false, true, false]
+//        };
+//    };
+//    function getValue(chk, i) {
+//        var digit = parseInt(chk + "");
+//        if (i % 2 == 0) {
+//            return digit;
+//        }
+//        else {
+//            return digit * 3;
+//        }
+//    };
+//    function getLine(line,line1) {
+//        return [
+//            {
+//                Width:line[0],
+//                StartAt: line[1]
+//            },
+//            {
+//                Width: line1[0],
+//                StartAt: line1[1]
+//            }
+//        ]
+//    };
+//    function GetFont(latter, i, BackColor, FillColor) {
+//        var point = { X: StartX + i * 7 * barWidth, Y: StartY }, line = new FontBase(point, height, barWidth, BackColor, FillColor, latter);
+//        switch (latter) {
+//            case '0':
+//                line.AddLines(getLine([barWidth * 2, barWidth * 3], [barWidth, barWidth * 6]))
+//                return line;
+//            case '1':
+//                line.AddLines(getLine([barWidth * 2, barWidth * 2], [barWidth, barWidth * 6]))
+//                return line;
+//            case '2':
+//                line.AddLines(getLine([barWidth, barWidth * 2], [barWidth * 2, barWidth * 5]))
+//                return line;
+//            case '3':
+//                line.AddLines(getLine([barWidth * 4, barWidth * 1], [barWidth, barWidth * 6]))
+//                return line;
+//            case '4':
+//                line.AddLines(getLine([barWidth, barWidth], [barWidth * 2, barWidth * 5]))
+//                return line;
+//            case '5':
+//                line.AddLines(getLine([barWidth * 2, barWidth], [barWidth, barWidth * 6]))
+//                return line;
+//            case '6':
+//                line.AddLines(getLine([barWidth, barWidth], [barWidth * 4, barWidth * 3]))
+//                return line;
+//            case '7':
+//                line.AddLines(getLine([barWidth * 3, barWidth], [barWidth * 2, barWidth * 5]))
+//                return line;
+//            case '8':
+//                line.AddLines(getLine([barWidth * 2, barWidth], [barWidth * 3, barWidth * 4]))
+//                return line;
+//            case '9':
+//                line.AddLines(getLine([barWidth, barWidth * 3], [barWidth * 2, barWidth * 5]))
+//                return line;
+//        }
+//        return new Font0(point, height, barWidth);
+//    };
+
+//    function FontBase(point, height, barWidth, backColor, fillColor, latter) {
+//        var blackPen = '#000000', whitePen = '#FFFFFF', Lines = [];
+//        var Height = height, BarWidth = barWidth, Point = point, BackColor = backColor, FillColor = fillColor, IsDesc;
+
+
+//        this.BackColor = backColor;
+//        this.FillColor = fillColor;
+
+//        this.Lines = Lines;
+//        this.Later = latter;
+//        this.Point = point;
+//        this.FontBase = function (point, height, width, backColor, fillColor) {
+//            this.Point = point;
+//            this.Height = height;
+//            this.BarWidth = width;
+//            this.BackColor = backColor;
+//            this.FillColor = fillColor;
+//        }
+//        this.Draw = function (ctx) {
+
+//            if (IsDesc) {
+//                DrawDesc(ctx);
+//            }
+//            else {
+//                Drawing(ctx);
+//            }
+//        }
+//        function Drawing(ctx) {
+//            ctx.fillStyle = BackColor;
+//            ctx.fillRect(Point.X, Point.Y, BarWidth * 7, Height);
+//            for (var l in Lines) {
+//                var line = Lines[l];
+//                ctx.fillStyle = FillColor;
+//                ctx.fillRect(Point.X + line.StartAt, Point.Y, line.Width, Height);
+//                line.Rect = [Point.X + line.StartAt, Point.Y, line.Width, Height];
+//            }
+//        }
+//        function DrawDesc(ctx) {
+//            ctx.fillStyle = FillColor;
+//            ctx.fillRect(Point.X, Point.Y, BarWidth * 7, Height);
+//            var line;
+//            for (var i = Lines.length - 1; i > -1 ; i--) {
+//                line = Lines[i];
+//                ctx.fillStyle = BackColor;
+//                ctx.fillRect(Point.X + 7 * BarWidth - line.StartAt - line.Width, Point.Y, line.Width, Height);
+//                line.Rect1 = [Point.X + line.StartAt, Point.Y, line.Width, Height];
+//            }
+//        }
+//        this.SetDirection = function (IsDescending) {
+//            IsDesc = IsDescending;
+//            this.IsDesc = IsDescending;
+//        }
+//        this.AddLine = function (line) {
+//            Lines.push(line);
+//        };
+//        this.AddLines = function (lines) {
+//            this.Lines = Lines = Lines.concat(lines);
+//            return this;
+//        };
+//    };
+//    FontBase.WhitePen = '#FFFFFF';
+//    FontBase.BlackPen = '#000000';
+//};
+
+
+var Ean13 = new function () {
+    var Structure = setStructure(), img, elementWidth = 1, barWidth = 1, height = 1, fonts = [];
+    var Text = '', StartX = 0, StartY = 0, ctx;
+    function Draw(ctx) {
+        var x = StartX;
+        //console.log(['x, StartY, barWidth, height', x, StartY, barWidth, height]);
+        ctx.fillRect(x, StartY, barWidth, height);
+        x += barWidth * 2;
+        ctx.fillRect(x, StartY, barWidth, height);
+        x = fonts[5].Point.X + barWidth * 8;
+        ctx.fillRect(x, StartY, barWidth, height);
+        x += barWidth * 2;
+        ctx.fillRect(x, StartY, barWidth, height);
+        x = fonts[11].Point.X + barWidth * 7;
+        ctx.fillRect(x, StartY, barWidth, height);
+        x += barWidth * 2;
+        ctx.fillRect(x, StartY, barWidth, height);
+
+        fonts.each(function () {
+            this.Draw(ctx);
+        });
+    };
+    function SetFont() {
+        var chk = Text[0];
+        var strct = Structure[chk];
+        var checkSum = parseInt(chk + ""), digit = 0;
+        fonts = [];
+        StartX += 3 * barWidth;
+        for (var i = 1; i < 7; i++) {
+            checkSum += getValue(Text[i], i);
+            var font = GetFont(Text[i], i - 1, FontBase.WhitePen, FontBase.BlackPen);
+            font.SetDirection(strct[i - 1]);
+            fonts.push(font);
+        }
+        StartX += 5 * barWidth;
+        for (var i = 7; i < 12; i++) {
+            checkSum += getValue(Text[i], i);
+            var font = GetFont(Text[i], i - 1, FontBase.BlackPen, FontBase.WhitePen);
+            fonts.push(font);
+        }
+        console.log(['checkSum', checkSum]);
+        checkSum = checkSum % 10;
+        fonts.push(GetFont(checkSum == 0 ? '0' : ((10 - checkSum) + ''), 11, FontBase.BlackPen, FontBase.WhitePen));
+        StartX -= 8 * barWidth;
+
+        //console.log(['StartX, StartY, barWidth, checkSum', StartX, StartY, barWidth, checkSum]);
+    };
+    function setStructure() {
+        return {
+            '0': [false, false, false, false, false, false],
+            '1': [false, false, true, false, true, true],
+            '2': [false, false, true, true, false, true],
+            '3': [false, false, true, true, true, false],
+            '4': [false, true, false, false, true, true],
+            '5': [false, true, true, false, false, true],
+            '6': [false, true, true, true, false, false],
+            '7': [false, true, false, true, false, true],
+            '8': [false, true, false, true, true, false],
+            '9': [false, true, true, false, true, false]
+        };
+    };
+    function getValue(chk, i) {
+        var digit = parseInt(chk + "");
+        if (i % 2 == 0) {
+            return digit;
+        }
+        else {
+            return digit * 3;
+        }
+    };
+    function getLine(line, line1) {
+        return [
+            {
+                Width: line[0],
+                StartAt: line[1]
+            },
+            {
+                Width: line1[0],
+                StartAt: line1[1]
+            }
+        ]
+    };
+    function GetFont(latter, i, BackColor, FillColor) {
+        var point = { X: StartX + i * 7 * barWidth, Y: StartY }, line = new FontBase(point, height, barWidth, BackColor, FillColor, latter);
+        switch (latter) {
+            case '0':
+                line.AddLines(getLine([barWidth * 2, barWidth * 3], [barWidth, barWidth * 6]))
+                return line;
+            case '1':
+                line.AddLines(getLine([barWidth * 2, barWidth * 2], [barWidth, barWidth * 6]))
+                return line;
+            case '2':
+                line.AddLines(getLine([barWidth, barWidth * 2], [barWidth * 2, barWidth * 5]))
+                return line;
+            case '3':
+                line.AddLines(getLine([barWidth * 4, barWidth * 1], [barWidth, barWidth * 6]))
+                return line;
+            case '4':
+                line.AddLines(getLine([barWidth, barWidth], [barWidth * 2, barWidth * 5]))
+                return line;
+            case '5':
+                line.AddLines(getLine([barWidth * 2, barWidth], [barWidth, barWidth * 6]))
+                return line;
+            case '6':
+                line.AddLines(getLine([barWidth, barWidth], [barWidth * 4, barWidth * 3]))
+                return line;
+            case '7':
+                line.AddLines(getLine([barWidth * 3, barWidth], [barWidth * 2, barWidth * 5]))
+                return line;
+            case '8':
+                line.AddLines(getLine([barWidth * 2, barWidth], [barWidth * 3, barWidth * 4]))
+                return line;
+            case '9':
+                line.AddLines(getLine([barWidth, barWidth * 3], [barWidth * 2, barWidth * 5]))
+                return line;
+        }
+        return new Font0(point, height, barWidth);
+    };
+
+    function FontBase(point, height, barWidth, backColor, fillColor, latter) {
+        var blackPen = '#000000', whitePen = '#FFFFFF', Lines = [];
+        var Height = height, BarWidth = barWidth, Point = point, BackColor = backColor, FillColor = fillColor, IsDesc;
+
+
+        this.BackColor = backColor;
+        this.FillColor = fillColor;
+
+        this.Lines = Lines;
+        this.Later = latter;
+        this.Point = point;
+        this.FontBase = function (point, height, width, backColor, fillColor) {
+            this.Point = point;
+            this.Height = height;
+            this.BarWidth = width;
+            this.BackColor = backColor;
+            this.FillColor = fillColor;
+        }
+        this.Draw = function (ctx) {
+
+            if (IsDesc) {
+                DrawDesc(ctx);
+            }
+            else {
+                Drawing(ctx);
+            }
+        }
+        function Drawing(ctx) {
+            ctx.fillStyle = BackColor;
+            ctx.fillRect(Point.X, Point.Y, BarWidth * 7, Height);
+            for (var l in Lines) {
+                var line = Lines[l];
+                ctx.fillStyle = FillColor;
+                ctx.fillRect(Point.X + line.StartAt, Point.Y, line.Width, Height);
+                line.Rect = [Point.X + line.StartAt, Point.Y, line.Width, Height];
+            }
+        }
+        function DrawDesc(ctx) {
+            ctx.fillStyle = FillColor;
+            ctx.fillRect(Point.X, Point.Y, BarWidth * 7, Height);
+            var line;
+            for (var i = Lines.length - 1; i > -1 ; i--) {
+                line = Lines[i];
+                ctx.fillStyle = BackColor;
+                ctx.fillRect(Point.X + 7 * BarWidth - line.StartAt - line.Width, Point.Y, line.Width, Height);
+                line.Rect1 = [Point.X + line.StartAt, Point.Y, line.Width, Height];
+            }
+        }
+        this.SetDirection = function (IsDescending) {
+            IsDesc = IsDescending;
+            this.IsDesc = IsDescending;
+        }
+        this.AddLine = function (line) {
+            Lines.push(line);
+        };
+        this.AddLines = function (lines) {
+            this.Lines = Lines = Lines.concat(lines);
+            return this;
+        };
+    };
+    FontBase.WhitePen = '#FFFFFF';
+    FontBase.BlackPen = '#000000';
+
+
+    function getRandom() {
+        var code = (Math.floor(Math.random() * 8999) + 1000) + '' +
+                 (Math.floor(Math.random() * 8999) + 1000) + '' +
+                 (Math.floor(Math.random() * 8999) + 1000) + '';
+
+        var chk = code[0];
+        var checkSum = parseInt(chk + ""), digit = 0;
+        //console.log(['checkSum', checkSum]);
+        for (var i = 1; i < 12; i++) {
+            //console.log(['checkSum', checkSum]);
+            checkSum += getValue(code[i], i);
+        }
+        //console.log(['checkSum', checkSum]);
+        checkSum = checkSum % 10;
+        code = code + (checkSum == 0 ? '0' : (10 - checkSum));
+        return code;
+    };
+    function setDefaultOptions(options) {
+        options = options || {};
+        setNonCapitalisation(options);
+        options.height = options.height || 40;
+        options.width = options.width || 140;
+        options.text = options.text || options.code;
+        options.code = options.code || options.text;
+        return options;
+    };
+    this.Check = function (code) {
+        if (code.length != 13) {
+            return false;
+        }
+        var chk = code[0];
+        var checkSum = parseInt(chk + ""), digit = 0;
+        //console.log(['checkSum', checkSum]);
+        for (var i = 1; i < 12; i++) {
+            //console.log(['checkSum', checkSum]);
+            checkSum += getValue(code[i], i);
+        }
+        //console.log(['checkSum', checkSum]);
+        checkSum = checkSum % 10;
+        //code = code + (checkSum == 0 ? '0' : (10 - checkSum)+'');
+        return code[12] === (checkSum == 0 ? '0' : (10 - checkSum) + '');
+    };
+    this.Get = function (options) {
+        options = setDefaultOptions(options);
+        var width = options.width, hgt = options.height;
+        if (!options.code) {
+            return getRandom();
+        }
+        Text = options.text;
+        barWidth = (width - 4) / 95;
+        StartX = (width - barWidth * 95) / 2;
+        StartY = 2;
+        elementWidth = barWidth * 7;
+        height = hgt - 4;
+
+
+        var c = document.createElement("canvas"),
+        ctx = c.getContext("2d");
+        c.width = width;
+        c.height = hgt;
+        ctx.font = "10px Arial";
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = "#000000";
+        SetFont();
+        Draw(ctx);
+
+        //return c.toDataURL("image/png");
+
+        console.log(['fonts', fonts]);
+        //$(document.body).append($(c));
+        $(document.body).append('<img style="position:fixed; top:100px;left:500px;" src="' + c.toDataURL("image/png") + '"/>');
+    };
+    this.Bind = function (options) {
+        var data = that.Get(options);
+        options.elm.html('<img src="' + data + '"/>');
+    };
+    this.Print = function (options, text) {
+        if (typeof (options) === 'string') {
+            options = { Code: options, text: text };
+        }
+        Global.Print('<img src="' + that.Get(options) + '"/>');
+    };
+};
+
+
+var code=Ean13.Get();
+Ean13.Get({ code: '6298996158568', width: 400, height: 70 });
+console.log([code, Ean13.Check('6298996158568')]);

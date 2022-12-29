@@ -4,15 +4,15 @@
 var Controller = new function () {
 
     const studentDateFilter = { "field": "Name", "value": '', Operation: 0 }, ModuleList = {};
-    const periodFilter = { "field": "PriodId", "value": '', Operation: 0 };
+    const periodFilter = { "field": "PriodId", "value": '', Operation: 0 }, CourseList = {};
     var _options;
 
 
     const dateForSQLServer = (enDate = '01/01/1970') => {
         const dateParts = enDate.split('/');
         console.log("dateparts=>", dateParts);
-        //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
-        return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+       // return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
     }
     function moduleStudentPayment(page, grid) {
 
@@ -346,92 +346,23 @@ var Controller = new function () {
                                     this.model.Reload();
                                 }
                             });
-
-                                }
-
-                        //{
-                        //Header: 'Module Charge',
-                        //columns: [
-                        //    { field: 'DreamersId', title: 'DreamersId', filter: true, position: 1 },
-                        //    { field: 'StudentName', title: 'Student Name', filter: true, position: 2, Click: studentInfo  },
-                        //    { field: 'Charge', title: 'Fees', filter: true, position: 3 },
-                        //    { field: 'Paid', title: 'Paid', filter: true, position: 4},
-                        //    { field: 'Due', title: 'Due', filter: true, position: 5, },
-                        //    { field: 'ExtendPaymentdate', title: 'ExtendPaymentdate', filter: true, position: 6, bound: extendpaymentDate },
-                        //],
-                        //Url: '/Period/ForModulePayment/',
-                        //filter: [
-                        //    { "field": 'smIsDeleted', "value": 0, Operation: 0, Type: "INNER" },
-                        //    { "field": 'PriodId', "value": _options.Id, Operation: 0, Type: "INNER" }
-                        //],
-                        //onDataBinding: function (response) { },
-                        //onrequest: (page) => {
-                        //    page.Id = _options.Id;
-                        //},
-                        //rowBound: moduleBound,
-                        //actions: [{
-                        //    click: moduleStudentPayment,
-                        //    html: '<a class="action-button info t-white" > <i class="glyphicon  glyphicon-usd" title="Make Payment"></i></a >'
-                        //},{
-                        //     click: viewDetails,
-                        //     html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
-                        //    }, {
-                        //    click: SinglestudentMessage,
-                        //        html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-envelope" title="Send Message"></i></a >'
-                        //    }, {
-                        //    click: moduleExtendPaymentDate,
-                        //    html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-calendar" title="Extend Payment Date"></i></a >'
-                        //    }],
-                        //buttons: [{
-                        //    click: allStudentMessage,
-                        //    html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-envelope" title="Add Exam"></span> Message All student </a>'
-                        //}],
-                        //selector: false,
-                        //Printable: {
-                        //    container: $('void')
-                        //}
-                        //}
-
+                          }
                     ]
                 }, {
                     title: 'Course',
-                    Grid: [{
-                        Header: 'Course',
-                        columns: [
-                            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 2 },
-                            { field: 'StudentName', title: 'Student Name', filter: true, position: 3, Click: studentInfo },
-                            { field: 'Charge', title: 'Fee', filter: true, position: 4 },
-                            { field: 'Paid', title: 'Paid', filter: true, position: 5 },
-                            { field: 'Due', title: 'Due', filter: true, position: 5, bound: dueBound },
-                            { field: 'ExtendPaymentdate', title: 'ExtendPaymentdate', filter: true, position: 6, bound: extendpaymentDate },
-                        ],
+                    Grid: [
+                        function (windowModel, container, position, model, func) {
+                            CourseList.Bind({
+                                container: container,
+                                model: model,
+                                filter: [],
+                                func: function () {
+                                    this.model.Reload();
+                                }
+                            });
 
-                        Url: '/Period/ForCoursePayment/',
-                        filter: [
-                            { "field": 'scIsDeleted', "value": 0, Operation: 0, Type: "INNER" },
-                            { "field": 'PriodId', "value": _options.Id, Operation: 0, Type: "INNER" }
-                        ],
-                        onDataBinding: function (response) { },
-                        onrequest: (page) => {
-                            page.Id = _options.Id;
-                        },
-                        rowBound: courseBound,
-                        actions: [{
-                            click: courseStudentPayment,
-                            html: '<a class="action-button info t-white" > <i class="glyphicon  glyphicon-usd" title="Make Payment"></i></a >'
-                        }, {
-                            click: viewDetails,
-                            html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
-                        }, {
-                            click: courseExtendPaymentDate,
-                            html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-calendar" title="Extend Payment Date"></i></a >'
-                        }],
-                        buttons: [],
-                        selector: false,
-                        Printable: {
-                            container: $('void')
                         }
-                    }],
+                     ],
                 }],
 
             name: 'Period Information',
@@ -506,7 +437,7 @@ var Controller = new function () {
                 title: name,
                 Url: '',
                 Id: id,
-                page: { 'PageNumber': 1, 'PageSize': 50, showingInfo: ' {0}-{1} of {2} Items ', filter: [filter] },
+                page: { 'PageNumber': 1, 'PageSize': 50, showingInfo: ' {0}-{1} of {2} Items ', filter: filter? [filter]:[] },
                 columns: [
                     { field: 'DreamersId', title: 'DreamersId', filter: true, position: 1 },
                     { field: 'StudentName', title: 'Student Name', filter: true, position: 2, Click: studentInfo },
@@ -533,19 +464,25 @@ var Controller = new function () {
                 }, {
                     click: moduleExtendPaymentDate,
                     html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-calendar" title="Extend Payment Date"></i></a >'
-                }],
+                    }],
+                buttons: [{
+                      click: allStudentMessage,
+                      html: '<a class= "icon_container btn_add_product pull-right btn btn-primary" style="margin-bottom: 0"><span class="glyphicon glyphicon-envelope" title="Add Exam"></span> Message All student </a>'
+                        }],
                 bound: moduleBound,
                 binding: (response) => {
                     //response.Data.Total.Balance = response.Data.Total.CashId - response.Data.Total.CashOut;
                 },
-                Printable: { container: container.find('.button_container') },
+               // Printable: { container: container.find('.button_container') },
             }
         };
         function getItems(options, container) {
+            var currentDate = new Date();
             var items = [
-                getDaily('5567850E-28E5-4A51-B5F9-C15CB876C8A1', 'All', container),
+                getDaily('5567850E-28E5-4A51-B5F9-C15CB876C8A1', 'All'),
                 getDaily('537D006E-5880-4490-A679-D1EF33932DA9', 'Paid', container, { "field": "Paid", "value": '0', Operation: 1 }),
-                getDaily('4D22A640-28E5-4483-8CD4-D755D331DB6C', 'Due', container, { "field": "Due", "value": '0', Operation: 1 })
+                getDaily('4D22A640-28E5-4483-8CD4-D755D331DB6C', 'Due', container, { "field": "Due", "value": '0', Operation: 1 }),
+                getDaily('7013606C-A130-465E-8390-34F4B3BC323D', 'ExtenddateStudent', container, { "field": "ExtendPaymentdate", "value": '1900-01-01T00:00:00', Operation: 0 })
             ]
             return items;
         };
@@ -570,7 +507,7 @@ var Controller = new function () {
                 }
             };
             Global.Tabs(model);
-            model.items[1].set(model.items[1]);
+            model.items[0].set(model.items[0]);
         };
         function setDefaultOpt(opt) {
             opt = opt || {};
@@ -589,11 +526,157 @@ var Controller = new function () {
         ModuleList.Bind = function (options) {
             options = setDefaultOpt(options);
             options.model.Reload = function () {
-                model.items[1].set && model.items[1].set(model.items[1]);
+                model.items[0].set && model.items[0].set(model.items[0]);
             };
             bind(options.container, options);
         }
 
 
     }).call(ModuleList);
+    (function () {
+
+        var service = {}, model = {}, formModel = {};
+        function getView() {
+            return $(`<div><div class="row summary_container">
+                                        </div>
+                                        <div class ="row filter_container" style="margin-top:10px;">
+                                        </div>
+                                        <div style="margin-top:10px;">
+                                            <div class ="empty_style button_container row">
+
+                                            </div>
+                                            <div class="grid_container">
+                                            </div>
+                                        </div></div>`);
+        };
+
+
+        function studentInfo(row) {
+            console.log("row=>", row);
+            Global.Add({
+                Id: row.StudentId,
+                url: '/js/student-area/student-details-modal.js',
+            });
+        }
+
+        function dueBound(td) {
+            td.html(this.Charge - this.Paid);
+        }
+
+        function extendpaymentDate(td) {
+            if (this.ExtendPaymentdate === "1900-01-01T00:00:00") td.html('N/A');
+            else {
+                td.html(new Date(this.ExtendPaymentdate).toLocaleDateString('en-US', {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                }));
+            }
+
+        }
+
+        function courseBound(row) {
+            var currentDate = new Date();
+            if (_options.RegularPaymentDate <= currentDate.toISOString()) {
+                row.css({ background: "#ffa50054" });
+            }
+
+            if (this.ExtendPaymentdate <= currentDate.toISOString() && _options.RegularPaymentDate <= this.ExtendPaymentdate) {
+                row.css({ background: "#d97f74" });
+            }
+
+
+            if (this.Paid >= this.Charge) {
+                row.css({ background: "#00800040" });
+            }
+        }
+
+
+        function getDaily(id, name, container, filter) {
+            return {
+                Name: name,
+                title: name,
+                Url: '',
+                Id: id,
+                page: { 'PageNumber': 1, 'PageSize': 50, showingInfo: ' {0}-{1} of {2} Items ', filter: filter ? [filter] : [] },
+                columns: [
+                    { field: 'DreamersId', title: 'DreamersId', filter: true, position: 2 },
+                    { field: 'StudentName', title: 'Student Name', filter: true, position: 3, Click: studentInfo },
+                    { field: 'Charge', title: 'Fee', filter: true, position: 4 },
+                    { field: 'Paid', title: 'Paid', filter: true, position: 5 },
+                    { field: 'Due', title: 'Due', filter: true, position: 5, bound: dueBound },
+                    { field: 'ExtendPaymentdate', title: 'ExtendPaymentdate', filter: true, position: 6, bound: extendpaymentDate },
+                ], onrequest: (page) => {
+                    page.Id = _options.Id;
+                    //page.filter = page.filter.filter((itm) => {
+                    //    //itm.field !== filter.field;
+
+                    //});
+                },
+                actions: [{
+                    click: courseStudentPayment,
+                    html: '<a class="action-button info t-white" > <i class="glyphicon  glyphicon-usd" title="Make Payment"></i></a >'
+                }, {
+                    click: viewDetails,
+                    html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-eye-open" title="View Payment Details"></i></a >'
+                }, {
+                    click: courseExtendPaymentDate,
+                    html: '<a class="action-button info t-white" > <i class="glyphicon glyphicon-calendar" title="Extend Payment Date"></i></a >'
+                }],
+                bound: courseBound,
+                binding: (response) => {
+                    //response.Data.Total.Balance = response.Data.Total.CashId - response.Data.Total.CashOut;
+                },
+                // Printable: { container: container.find('.button_container') },
+            }
+        };
+        function getItems(options, container) {
+            var items = [
+                getDaily('77C56818-DF6C-4300-9026-523C1165EE5B', 'All'),
+                getDaily('9D61F00B-5E5A-4425-8701-9E05E33553F2', 'Paid', container, { "field": "Paid", "value": '0', Operation: 1 }),
+                getDaily('B8D25BDF-B445-42A2-91CE-D0CA40CEA5CA', 'Due', container, { "field": "Due", "value": '0', Operation: 1 })
+            ]
+            return items;
+        };
+        function bind(container, options) {
+            model = {
+                gridContainer: '.grid_container',
+                container: container,
+                Base: {
+                    Url: '/Period/ForCoursePayment/',
+                },
+                filter: options.filter.slice(),
+                items: getItems(options, container),
+                Summary: {
+                    Container: '.summary_container',
+                    Items: []
+                }
+            };
+            Global.Tabs(model);
+            model.items[0].set(model.items[0]);
+        };
+        function setDefaultOpt(opt) {
+            opt = opt || {};
+            setNonCapitalisation(opt);
+            callarOptions = opt;
+            opt.model = opt.model || {};
+            opt.filter = opt.filter || [];
+
+            if (opt.container) {
+                opt.container.append(getView());
+            } else {
+                opt.container = $('#page_container');
+            }
+            return opt;
+        };
+        CourseList.Bind = function (options) {
+            options = setDefaultOpt(options);
+            options.model.Reload = function () {
+                model.items[0].set && model.items[0].set(model.items[0]);
+            };
+            bind(options.container, options);
+        }
+
+
+    }).call(CourseList);
 };

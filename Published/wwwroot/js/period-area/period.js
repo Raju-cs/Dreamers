@@ -168,6 +168,9 @@ import { ACTIVE_STATUS, MONTH } from "../dictionaries.js";
     const studentFeesList = (row, model) => {
         console.log("row=>", row);
         Global.Add({
+            //attr: {
+            //    type: 'module'
+            //},
             Id: row.Id,
             name: 'Period Information' + row.Id,
             url: '/js/period-area/period-studentlist-modal.js',

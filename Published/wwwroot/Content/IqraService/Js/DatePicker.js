@@ -26,9 +26,10 @@
             formModel: {},
             formInputs: {},
             ondateselect: option.ondateselect,
+            onmonthselect: option.onmonthselect,
             onviewcreated: option.onviewcreated
         };
-
+        //console.log(['getDefaultOption => option.onmonthselect', option.onmonthselect, options]);
         model.shortTime = new RegExp("hh").test(model.format);
         model.time = new RegExp("hh|HH|mm").test(model.format);
         model.date = new RegExp("dd").test(model.format);
@@ -180,6 +181,7 @@
                 objectModel.SetDateView(model);
                 setPosition(model);
             }
+            //console.log(['model.ondateselect', model.ondateselect, !model.ondateselect || model.ondateselect(date, e, model)]);
             (!model.ondateselect || model.ondateselect(date, e, model)) && onSetElmValue(model, 0);
         };
         this.SelectMonth = function (model) {
@@ -197,6 +199,8 @@
                 model.currentaVlue = model.DateModel.Date;
                 onSetElmValue(model, 0);
             }
+            //console.log(['model.onmonthselect', model.onmonthselect, model]);
+            model.onmonthselect && model.onmonthselect(model.DateModel.Date, model);
         };
         this.SelectYear = function (model) {
             var date = new Date(this.data('year'), 0);
@@ -841,6 +845,7 @@
     this.Bind = function (elm, model) {
         if (elm.data('DatePicker')) { return elm.data('DatePicker'); }
         //var max = model.max;
+        //console.log(['DatePicker.Bind => model, model.onMonthSelect', model, model.onMonthSelect, elm.data('onMonthSelect'), elm.data('onMonthSelect') == model]);
         model = getDefaultOption(model);
         //model.max = max || model.max;
         model.elm = elm;

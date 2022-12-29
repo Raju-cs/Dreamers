@@ -1073,6 +1073,7 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\Iq
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\IqraService\Js\OnDetailsWithTab.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\IqraService\Js\OnDetailsWithTab.js.bak
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\IqraService\Js\WarningController.js
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\IqraService\Js\xlsx.mini.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\Product Image\5ea593b0-3368-4d44-a7d8-000054fbf83d.jpeg
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\Product Image\6374c07b-fa23-4801-8bd6-000aae46139b.jpeg
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\Content\Product Image\6b5f3c48-1e66-4973-ae21-0008fb4fd8db.jpeg
@@ -1519,6 +1520,7 @@ H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\module-
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\module-batchattendance-area\student-attendance-status-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\moduleperiod-area\moduleperiod.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\paymenthistory-area\paymenthistory.js
+H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\period-area\ModuleList.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\period-area\period-details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\period-area\Period-Student-Payment-Details-modal.js
 H:\Dreamers\IqraCommerce\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\period-area\period-studentlist-modal.js

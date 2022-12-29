@@ -64,7 +64,7 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         Id: '550AC948-C353-453E-8528-CBB8D9C38245',
         Name: 'ALL',
         Title: 'All',
-        filter: [{ "field": "Paid", "value": 0, Operation: 1 }],
+        filter: [],
         remove: false,
         onDataBinding: () => { },
         bound: moduleBound,

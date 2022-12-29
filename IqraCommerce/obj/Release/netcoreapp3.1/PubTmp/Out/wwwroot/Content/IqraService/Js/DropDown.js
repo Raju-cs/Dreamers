@@ -1,1 +1,174 @@
-(function(n,t){function e(n,t){for(var r,i=0;i<n.data.length;i++)if(n.data[i][n.valuefield]==t){r=n.data[i];break}r?u(n,r):(n.Container.find(".k-input").text(" Select "),n.Selected&&n.Selected.elm.removeClass("selected"),n.value=null,n.elm.val(null))}function o(n){var t,i;if(n.enable){if(n.IsOpened)return f(n),!1;if(r(),n.IsLoading)return alert("Data is loading."),!1;n.IsOpened=!0;t=n.Container.width()-4;n.ItemTemplate.css({width:t+"px"}).find(".dropdown_item_container").css({width:t+"px"});n.ItemTemplate.slideToggle(100);i=n.Container.offset();i.top+=30;n.ItemTemplate.offset(i);n.Container.addClass("opened")}}function u(n,t){n.Container.find(".k-input").text(t[n.textfield]);t.elm.addClass("selected");n.Selected=n.Selected||{elm:{removeClass:function(){}}};n.Selected.elm.removeClass("selected");var i=n.Selected;n.Selected=t;n.value=t[n.valuefield];n.ItemTemplate.hide();n.elm.val(n.value);f(n);i[n.valuefield]!=t[n.valuefield]&&n.change&&n.change.call(n,n.Selected,i)}function s(n){n.width=n.width||n.elm.width();n.ItemTemplate=$('<div class="dropdown_item_template">').click(function(n){n.stopPropagation()});n.ItemTemplate.append('<div class="field_container"><\/div><div class="dropdown_item_container"><div class="k-list-scroller"><ul class="k-list k-reset"><\/ul><\/div><\/div>').css({width:n.width-4+"px"});n.ItemContainer=n.ItemTemplate.find("ul");$(document.body).append(n.ItemTemplate);var t=$('<span class="k-widget k-dropdown k-header" title="" style="width: 100%"><span class="k-dropdown-wrap k-state-default"><span class="k-input">Select<\/span><span class="k-select"><span class="k-icon k-i-arrow-s">select<\/span><\/span><\/span><\/span>').click(function(n){n.stopPropagation()});n.elm.after(t).hide().data("dropdown",n);t.find(".k-dropdown-wrap").click(function(){return o(n),!1});n.Container=t;i.Models.push(n);n.onviewcreated&&n.onviewcreated(n)}function f(n){n.IsOpened=!1;n.ItemTemplate.hide();n.Container.removeClass("opened")}function r(n){i.Models.each(function(){this.IsOpened=!1;this.ItemTemplate.hide();this.Container.removeClass("opened")});n||(Global.AutoComplete.CloseAll&&Global.AutoComplete.CloseAll("DropDown"),Global.MultiSelect.CloseAll&&Global.MultiSelect.CloseAll("DropDown"))}function h(n){n.enable=!0;n.Container.removeClass("disabled")}function c(n){n.Container.addClass("disabled");n.enable=!1}Global.Free();LazyLoading.LoadCss([IqraConfig.Url.Css.DropDown]);var i={Models:[]};(function(n){function t(n){$(n.data).each(function(){this.value=this[n.valuefield]+"";this.text=this[n.textfield]+"";var t=this;t.elm=$('<li class="k-item">'+this[n.textfield]+"<\/li>").click(function(){u(n,t)}).data("model",t);n.ItemContainer.append(t.elm)});var t=n.selectedValue||n.elm.val();t&&n.val(t)}n.Load=function(n){if(n.ItemContainer.empty(),n.valuefield=n.valuefield,n.textfield=n.textfield,n.datasource)n.data=n.datasource,t(n);else{n.Container.addClass("loading");n.IsLoading=!0;n.onpost&&n.onpost();var i=typeof n.url=="function"?n.url.call(n):n.url;Global.CallServer(i,function(i){n.ondatabinding&&n.ondatabinding(i);n.data=typeof i.each=="function"?i:i.Data;n.Container.removeClass("loading");n.IsLoading=!1;t(n)},function(){},null,"GET",null,!1)}}})(i),function(u){n.CloseAll=function(){r(!0)};u.Bind=function(n){var u,r;if(n.elm.data("dropdown")){u=n.elm.data("dropdown");for(r in n)n[r.toLowerCase()]=n[r.toLowerCase()]||n[r];u.url=n.url;i.Load(u)}else{for(r in n)n[r.toLowerCase()]=n[r.toLowerCase()]||n[r];n.IsDropDownBind=!0;n.textfield=n.textfield||IqraConfig.DropDown.TextField;n.valuefield=n.valuefield||IqraConfig.DropDown.ValuField;s(n);n.data=[];n.Enabled=!0;n.enable=typeof n.enable==typeof t?!0:n.enable;n.val=function(t){if(arguments.length<1)return n.value;e(n,t)};i.Load(n);n.Reload=function(){i.Load(n)};n.SetEnable=function(t){t?h(n):c(n)};n.SetEnable(n.enable);n.oncomplete&&n.oncomplete(n)}}}(n.Service={});$(document).click(function(){r()})})(Global.DropDown)
+(function (that, none) {
+    Global.Free();
+    LazyLoading.LoadCss([IqraConfig.Url.Css.DropDown]);
+    var self = { Models: [] };
+    function onSetValue(options, value) {
+        var model;
+        for (var i = 0; i < options.data.length; i++) {
+            //console.log(options.data[i][options.valuefield]);
+            if (options.data[i][options.valuefield] == value) {
+                model = options.data[i];
+                break;
+            }
+        }
+        if (model) {
+            onSelect(options, model);
+        } else {
+            options.Container.find('.k-input').text(' Select ');
+            options.Selected && options.Selected.elm.removeClass('selected');
+            options.value = null;
+            options.elm.val(null);
+        }
+    };
+    function onOpen(options) {
+        if (!options.enable)
+            return;
+        if (options.IsOpened) {
+            closeItem(options);
+            return false;
+        }
+        closeAll();
+        if (options.IsLoading) { alert('Data is loading.'); return false; }
+        options.IsOpened = true;
+        var width = options.Container.width() - 4;
+        options.ItemTemplate.css({ width: width + 'px' }).find('.dropdown_item_container').css({ width: width + 'px' });
+        options.ItemTemplate.slideToggle(100);
+        var offset = options.Container.offset();
+        offset.top += 30;
+        options.ItemTemplate.offset(offset);
+        options.Container.addClass('opened');
+    };
+    function onSelect(options, item) {
+        options.Container.find('.k-input').text(item[options.textfield]);
+        item.elm.addClass('selected');
+        options.Selected = options.Selected || { elm: { removeClass: function () { } } };
+        options.Selected.elm.removeClass('selected');
+        var selected = options.Selected;
+        options.Selected = item;
+        options.value = item[options.valuefield]
+        options.ItemTemplate.hide();
+        options.elm.val(options.value);
+        closeItem(options);
+        selected[options.valuefield] != item[options.valuefield] && options.change && options.change.call(options, options.Selected, selected);
+    };
+    function setTemplate(options) {
+        options.width = options.width || options.elm.width();
+        //console.log(options.width);
+        options.ItemTemplate = $('<div class="dropdown_item_template">').click(function (evt) { evt.stopPropagation(); });
+        options.ItemTemplate.append('<div class="field_container"></div><div class="dropdown_item_container"><div class="k-list-scroller"><ul class="k-list k-reset"></ul></div></div>').css({ width: (options.width - 4) + 'px' });
+        options.ItemContainer = options.ItemTemplate.find('ul');
+        $(document.body).append(options.ItemTemplate);
+
+        var container = $('<span class="k-widget k-dropdown k-header" title="" style="width: 100%"><span class="k-dropdown-wrap k-state-default"><span class="k-input">Select</span>' +
+        '<span class="k-select"><span class="k-icon k-i-arrow-s">select</span></span></span></span>').click(function (evt) { evt.stopPropagation(); });
+        options.elm.after(container).hide().data('dropdown', options);
+        container.find('.k-dropdown-wrap').click(function () { onOpen(options); return false; });
+        options.Container = container;
+        self.Models.push(options);
+        options.onviewcreated && options.onviewcreated(options);
+    }
+    function closeItem(options) {
+        options.IsOpened = false;
+        options.ItemTemplate.hide();
+        options.Container.removeClass('opened');
+    };
+    function closeAll(isOutSide) {
+        self.Models.each(function () {
+            this.IsOpened = false;
+            this.ItemTemplate.hide();
+            this.Container.removeClass('opened');
+        });
+        if (!isOutSide) {
+            Global.AutoComplete.CloseAll && Global.AutoComplete.CloseAll('DropDown');
+            Global.MultiSelect.CloseAll && Global.MultiSelect.CloseAll('DropDown');
+        }
+    };
+    function enable(options) {
+        options.enable = true;
+        options.Container.removeClass('disabled');
+    };
+    function disable(options) {
+        options.Container.addClass('disabled');
+        options.enable = false;
+    };
+    (function (that) {
+        function create(options) {
+            $(options.data).each(function () {
+                this.value = this[options.valuefield] + '';
+                this.text = this[options.textfield] + '';
+                var model = this;
+                model.elm = $('<li class="k-item">' + this[options.textfield] + '</li>').click(function () { onSelect(options, model); }).data('model', model);
+                options.ItemContainer.append(model.elm);
+            });
+            var value = options.selectedValue || options.elm.val();
+            value && options.val(value);
+            console.log(['value && options.val(value) =>', value]);
+        };
+        that.Load = function (options) {
+            options.ItemContainer.empty();
+            options.valuefield = options.valuefield;
+            options.textfield = options.textfield;
+            if (options.datasource) {
+                options.data = options.datasource;
+                create(options);
+            } else {
+                options.Container.addClass('loading');
+                options.IsLoading = true;
+                options.onpost && options.onpost();
+                var dataUrl = typeof options.url == 'function' ? options.url.call(options) : options.url;
+                Global.CallServer(dataUrl, function (response) {
+                    options.ondatabinding && options.ondatabinding(response);
+                    if (typeof response.each == 'function') {
+                        options.data = response;
+                    } else {
+                        options.data = response.Data;
+                    }
+                    options.Container.removeClass('loading');
+                    options.IsLoading = false;
+                    create(options);
+                }, function (response) {
+                }, null, 'GET', null, false);
+            }
+        };
+    })(self);
+    (function (service) {
+        that.CloseAll = function () {
+            closeAll(true);
+        };
+        service.Bind = function (options) {
+            if (options.elm.data('dropdown')) {
+                var model = options.elm.data('dropdown');
+                for (var key in options) { options[key.toLowerCase()] = options[key.toLowerCase()] || options[key]; }
+                model.url = options.url;
+                self.Load(model);
+            } else {
+                for (var key in options) { options[key.toLowerCase()] = options[key.toLowerCase()] || options[key]; }
+                options.IsDropDownBind = true;
+                options.textfield = options.textfield || IqraConfig.DropDown.TextField;
+                options.valuefield = options.valuefield || IqraConfig.DropDown.ValuField;
+                setTemplate(options);
+                options.data = [];
+                options.Enabled = true;
+                options.enable = typeof (options.enable) == typeof (none) ? true : options.enable;
+                options.val = function (value) {
+                    if (arguments.length < 1)
+                        return options.value;
+                    else
+                        onSetValue(options, value);
+                };
+                self.Load(options);
+                options.Reload = function () {
+                    self.Load(options);
+                };
+                options.SetEnable = function (enbl) {
+                    enbl ? enable(options) : disable(options);
+                }
+                options.SetEnable(options.enable);
+                options.oncomplete && options.oncomplete(options);
+            }
+        };
+    })(that.Service = {});
+    $(document).click(function () {
+        closeAll();
+    });
+})(Global.DropDown);

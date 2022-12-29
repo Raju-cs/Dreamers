@@ -1,12 +1,11 @@
 ﻿var IqraConfig = {
     Text: {
-        Title: 'Lazz Pharma Ltd ',
-        Address: 'Rasel Squre Branch, 64/3, Lake Circus,<br/> Rasel Squre, Dhaka-1205.',
-        Phone: 'Phone : 02-9110864'
+        Branch: '',
+        Title: 'UADW DOCTORS CONSULTANCY AND DIAGNOSTIC CENTER.',
+        Address: '80, Water Works Road, Lalbagh, Dhaka - 1211.',
+        Phone: 'Phone : 01944-030030, 01810-122422'
     }
 };
-
-
 IqraConfig = {
     Version: '1.17',
     BaseUrl: '',
@@ -58,14 +57,31 @@ IqraConfig = {
                 var text = '';
                 return (model.title || model.name || document.title)+' Report';
             },
+            summaryTitle: () => '',
+            summaryFooter: () => '',
+            gridTitle: () => '',
+            gridFooter: () => {
+                return '';
+            },
+            gridPageFooter: (model) => {
+                var time = '<div style="">';
+                if (model.DataLoadedAt && model.DataLoadedAt.getDate()) {
+                    time += '<div style="float:left;"> Report Generated At : ' + model.DataLoadedAt.format('yyyy-MM-dd hh:mm') + '</div>';
+                    time += '<div style="float:right;"> Printed At : ' + new Date().format('yyyy-MM-dd hh:mm') + '</div>';
+                }
+                time += '</div>';
+                console.log(['time', time]);
+                return time;
+            },
             footer: function (model) {
-
+                //var text = '', time = '<div><div style="position:fixed;bottom:0;border-top: 1px solid black; width:100%;">';
                 var text = '';
                 if (model.footer && model.footer.showingInfo && model.footer.showingInfo.html) {
                     text = model.footer.showingInfo.html();
                 }
+                //.DataLoadedAt
                 return '<div style="text-align: right; font-size: 1.5em; font-weight: bold; padding-top: 5px;">' + text + '</div>';
-            },
+            }
         },
         setting: {
             url: function (model) {
@@ -106,5 +122,6 @@ IqraConfig = {
     },
     Text: IqraConfig.Text
 };
+
 
 

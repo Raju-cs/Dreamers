@@ -190,6 +190,30 @@
         //});
     };
 
+    function setButtons(options) {
+        console.log(['options', options, options.add , options.grid]);
+        if (options.add || options.grid) {
+            var container = $('<div class="button_container row" style="padding: 5px 10px; border-top: 1px solid silver;"></div>');
+            options.ItemTemplate.find('.dropdown_item_container').append(container);
+            if (typeof (options.create) === 'function') {
+                var elm = $('<a style="margin-bottom: 0px;padding: 3px 10px;border-radius: 3px;border-width: 1px;border-style: solid;" class="pull-right btn-round btn-default"><span class="glyphicon glyphicon-plus"></span> New</a>');
+                container.append(elm);
+                Global.Click(elm, function () {
+                    closeItem(options);
+                    options.create({
+                        onSaveSuccess: function (response, model, formModel, formInputs) {
+                            onSetValue(options, response.Id);
+                        }});
+                });
+            }
+            if (options.grid) {
+                var elm = $('<a style="margin-bottom: 0px;padding: 3px 10px;border-radius: 3px;border-width: 1px;border-style: solid;" class="pull-left btn-round btn-default"><span class="glyphicon glyphicon-list"></span> List</a>');
+                container.append(elm);
+                self.List.Bind(options, elm);
+            }
+        }
+    };
+
     function setTemplate(options) {
         options.width = options.width || options.elm.width();
         options.ItemTemplate = $('<div class="dropdown_item_template">').click(function (evt) { evt.stopPropagation(); });
@@ -197,6 +221,7 @@
         options.ItemContainer = options.ItemTemplate.find('ul');
         $(document.body).append(options.ItemTemplate);
         extraSearch(options);
+        setButtons(options);
         var container = $('<span class="k-widget k-dropdown k-header" title="" style="width: 100%"><span class="k-dropdown-wrap k-state-default"><input class="form-control k-input" style="max-height: 27px; width: 100%; padding: 0; color: inherit;" />' +
         '<span class="k-select"><span class="k-icon k-i-arrow-s">select</span></span></span></span>').click(function (evt) { evt.stopPropagation(); });
         options.elm.after(container).hide().data('dropdown', options);
@@ -266,6 +291,7 @@
                 options.Container.addClass('loading');
                 options.IsLoading = true;
                 var page = Global.Copy({}, options.page, true);
+                options.onpost = options.onpost || options.onrequest;
                 options.onpost && options.onpost(page);
                 var dataUrl = typeof options.url == 'function' ? options.url.call(options, page) : options.url;
                 options.Caller = Global.CallServer(dataUrl, function (response) {
@@ -288,7 +314,8 @@
                     }
                     options.CurrentList = options.CurrentList.concat(options.data);
                     create(options, isFirst);
-                    options.IsFirstTime && options.elm.val() && options.val(options.elm.val());
+                    options.IsFirstTime && (options.elm.val() || options.selectedvalue) && options.val(options.elm.val() || options.selectedvalue);
+                    console.log(['options.elm', options.elm]);
                     func && func(response);
                     //console.log([options, options.onloaded]);
                     options.onloaded && options.onloaded(response.Data, options);
@@ -299,6 +326,127 @@
         };
     })(self);
     (function () {
+        function getView() {
+            return '<div class="">'+
+    '<div class="formHeader empty_style row headerFormMenu">'+
+        '<div class="col-xs-10 empty_style"><h4 data-binding="title" class="widget-title auto_bind" style="margin: 5px;"> Item Selector </h4></div>'+
+        '<div class="col-xs-2 empty_style" style="padding: 0px; margin: 0px;">'+
+            '<span class="pull-right button_container">'+
+                '<a class="button btn_cancel"><span style="left:-2px;" class="glyphicon glyphicon-remove"></span></a>'+
+            '</span>'+
+        '</div>'+
+    '</div>'+
+    '<div class="middleForm empty_style">'+
+        '<div role="form" class="form-horizontal smart-form middleForm">'+
+            '<div class="item_selector_grid"></div>'+
+            '<div class="row">'+
+                '<div class="text-center formFooter FooterFormMenu">'+
+                    '<button class="btn btn_save btn-white btn-default btn-round" type="button"><span class="glyphicon glyphicon-plus"></span> Add Items </button>'+
+                    '<button class="btn btn_cancel btn-white btn-default btn-round" type="button" style="margin-left: 10px;">'+
+                        '<span class="glyphicon glyphicon-remove"></span> Cancel'+
+                    '</button>'+
+                '</div>'+
+            '</div>'+
+        '</div>'+
+    '</div>'+
+'</div>';
+        };
+        function getAction(option) {
+            if (option.actions) {
+                return Global.Copy({
+                    title: {
+                        items: option.pagger && option.pagger.items || IqraConfig.Grid.Pagger.PageSize,
+                        selected: option.page && option.page.PageSize || IqraConfig.Grid.Pagger.Selected,
+                        showingInfo: option.page && option.page.showingInfo || (option.pagger && option.pagger.showingInfo) || 'Showing {0} to {1}  of {2}  items'
+                    },
+                    items: option.actions,
+                    className: 'action'
+                }, option.action || {});
+            }
+        };
+        function setGrid(options,windowModel, grid) {
+            function onSelect(model) {
+                var field = options.grid.valuefield || options.valuefield;
+
+                if (grid.selected === model) {
+                    console.log(['grid.selected && grid.selected[field] === model[field]', grid.selected, grid.selected[field], model[field]]);
+                    return;
+                }else if (grid.selected) {
+                    grid.selected.elm.removeClass('i-state-selected');
+                } 
+                grid.selected = model;
+                grid.selected.elm = $(this);
+                grid.selected.elm.addClass('i-state-selected');
+                
+            };
+            function rowBound(elm) {
+                Global.Click(elm, onSelect, this);
+                var model = this;
+                elm.dblclick(function () {
+                    var field = options.grid.valuefield || options.valuefield;
+                    if (model[field]) {
+                        windowModel.Hide();
+                        onSetValue(options, model[field]);
+                    }
+                });
+            };
+
+            //console.log(['options.grid.columns()', options.grid.columns()]);
+
+            Global.Grid.Bind(Global.Copy(Global.Copy({
+                elm: windowModel.View.find('.item_selector_grid'),
+                url: options.grid.url,
+                page: { 'PageNumber': 1, 'PageSize': 10, filter: options.grid.filter || [] },
+                pagger: { showingInfo: '{0}-{1} of {2} Items' },
+                //oncomplete: function (model) {
+                //    /*gridModel = model;*/
+                //},
+                Action: getAction(options.grid),
+                Printable: false
+            }, options.grid, true), {
+                elm: windowModel.View.find('.item_selector_grid'),
+                rowBound: rowBound,
+                //columns: options.grid.columns(),
+                oncomplete: function (model) {
+                    grid.gridModel = model;
+                    options.grid.oncomplete && options.grid.oncomplete(model);
+                }
+            }, true));
+        };
+        this.Bind = function (options, elm,none) {
+            var windowModel, grid = {}, callerOptions;
+            setNonCapitalisation(options.grid);
+            Global.Click(elm, function () {
+                closeItem(options);
+                grid.selected = none;
+                //dataSource = [];
+                if (windowModel) {
+                    windowModel.Show();
+                    grid.gridModel && grid.gridModel.Reload();
+                } else {
+                    windowModel = Global.Window.Bind(getView, { width: '90%' });
+                    windowModel.View.find('.btn_cancel').click(function () {
+                        windowModel && windowModel.Hide();
+                    });
+                    Global.Click(windowModel.View.find('.btn_save'), function () {
+                        if (grid.selected) {
+                            var field = options.grid.valuefield || options.valuefield;
+                            if (grid.selected[field]) {
+                                windowModel.Hide();
+                                onSetValue(options, grid.selected[field]);
+                            }
+                        } else {
+                            alert('No item selected.');
+                        }
+                    });
+                    windowModel.Show();
+                    setGrid(options, windowModel, grid);
+
+                }
+            });
+        };
+    }).call(self.List = {});
+    (function () {
         function setDefaultValue(options) {
 
             options.IsDropDownBind = true;
@@ -308,7 +456,7 @@
 
             options.page = options.page || Global.Copy({}, IqraConfig.AutoComplete.Page);
             options.page.filter = options.page.filter || [];
-            options.filter = options.filter || { field: options.textfield, operation: options.operation }
+            options.filter = options.filter || { field: options.textfield || IqraConfig.AutoComplete.TextField, operation: options.operation || IqraConfig.AutoComplete.Operation }
 
         };
         this.Bind = function (options) {
@@ -470,7 +618,7 @@
             }
         };
         $(document).click(function () {
-            console.log(456);
+            //console.log(456);
             closeAll();
         });
         $(document).keyup(function (e) {

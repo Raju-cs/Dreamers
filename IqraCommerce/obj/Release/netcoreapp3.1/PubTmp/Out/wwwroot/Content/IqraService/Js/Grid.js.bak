@@ -1,6 +1,6 @@
 (function (nope, wnd, gbl, none) {
     LazyLoading.LoadCss([IqraConfig.Url.Css.Grid]);
-    var label1 = this, ctx, service = {};
+    var label1 = this, ctx, service = {}, funcType = typeof (nope);
     (function () {
         var c = document.createElement("canvas");
         ctx = c.getContext("2d");
@@ -152,26 +152,27 @@
         return model.ColGroupTemplate;
     };
     function getText(column, text) {
-        switch (column.type) {
+        switch (column.type && column.type[0] || column.type) {
             case 1:
+                text = text || 0;
                 if ((typeof text) == 'number' && text.toFloat) {
                     column.style = column.style || 'text-align: right; white-space: pre;';
-                    return text.toFloat();
+                    return text.toFloat(column.type[1]);
                 }
             case 2:
+                text = text || 0;
                 if ((typeof text) == 'number' && text.toMoney) {
                     column.style = column.style || 'text-align: right; white-space: pre;';
-                    return text.toMoney();
+                    //console.log(['column.type,[1] || 2, column.type[2] || 1, column.type[3]', column.type, column.type[1], column.type[2], column.type[3]])
+                    return text.toMoney(column.type[1] ?? 2, column.type[2] ?? 1, column.type[3] ?? ',');
                 }
         }
         return text;
     };
-
     function onBodyChange(model) {
         model.header = model.header || {};
         model.header.BodyHeight = model.Body.view.height();
     };
-
     var report = new function () {
         var form;
         function submitReport(model, reportUrl) {
@@ -305,6 +306,26 @@
                 mywindow.document.write('<' + elmName + '>' + header + '</' + elmName + '>');
             }
         };
+        function getGridTitle(model, columns) {
+            var ttl = '', printable = model.Printable;
+            printable.gridtitle = printable.gridtitle || IqraConfig.Grid.Printable.gridTitle || nope;
+            if (typeof (printable.gridtitle) == funcType) {
+                ttl = printable.gridtitle(model, columns);
+            } else if (printable.gridtitle) {
+                ttl = printable.gridtitle;
+            }
+            return ttl;
+        };
+        function getGridFooter(model, columns) {
+            var ttl = '', printable = model.Printable;
+            printable.gridfooter = printable.gridfooter || IqraConfig.Grid.Printable.gridFooter || nope;
+            if (typeof (printable.gridfooter) == funcType) {
+                ttl = printable.gridfooter(model, columns);
+            } else if (printable.gridfooter) {
+                ttl = printable.gridfooter;
+            }
+            return ttl;
+        };
         //function getFilterHtml(fltModel) {
         //    var header = '';
         //    if (fltModel) {
@@ -318,7 +339,7 @@
         //    }
         //    return header;
         //};
-        function getFilter(list) {
+        function getFilter(model,list) {
             var header = '';
             //if (model.Printable.filter) {
             //    //if (model.Printable.filter.each && model.Printable.filter.length) {
@@ -333,8 +354,10 @@
             //    //} else if (typeof (model.Printable.filter.html) === typeof (nope)) {
             //    //    header = model.Printable.filter.html(model);
             //    //}
-
             //}
+            if (typeof (model.Printable.filter) === typeof (nope)) {
+                return model.Printable.filter(model, list) || '';
+            }
             var filterModel = {};
             list.each(function () {
                 Global.Copy(filterModel = {}, this, true)
@@ -343,8 +366,12 @@
             });
             return header;
         };
-        function getSummaryWidth(summary, fildModel, list) {
+        function getSummaryWidth(summary, fildModel, list,i) {
             var width = fildModel.width || summary.itemwidth || '';
+            if (typeof (width) === funcType) {
+                width = width(summary, fildModel, list, i);
+            }
+            
             console.log(['', width, width == 'fit' && list.length > 0, width == 'fit', list.length > 0, list.length]);
             if (width) {
                 width = width + '';
@@ -358,12 +385,17 @@
             return width;
         };
         function getSummary(model, list) {
-            var header = '', value, elm = '';
-            list.each(function () {
+            var header = '', value, elm = '', width;
+
+            list.each(function (i) {
                 setNonCapitalisation(this);
+                //console.log(['this, model.SummaryData[this.field],this.type', this, model.SummaryData[this.field], this.type]);
+                width = getSummaryWidth(model.Printable, this, list, i);
                 if (typeof (model.SummaryData[this.field]) != typeof (none)) {
-                    value = this.type === 2 ? (model.SummaryData[this.field] || 0).toMoney() : this.type === 1 ? (model.SummaryData[this.field] || 0).toFloat() : (model.SummaryData[this.field] || 0);
-                    elm = '<div class="col"' + getSummaryWidth(model.Printable, this, list) + '><div class="label"> ' + (this.title || this.field) + ' </div><div>' + value + '</div></div>';
+                    //console.log(['this, model.SummaryData[this.field],this.type', this, model.SummaryData[this.field],this.type]);
+                    value = getText(this, model.SummaryData[this.field]);
+                    //this.type === 2 ? (model.SummaryData[this.field] || 0).toMoney() : this.type === 1 ? (model.SummaryData[this.field] || 0).toFloat() : (model.SummaryData[this.field] || 0);
+                    elm = '<div class="col' + ((!width) && (i % 6) === 0 ? " first-child":"")+'"' + width + '><div class="label"> ' + (this.title || this.field) + ' </div><div>' + value + '</div></div>';
                     header += this.created && (elm = this.created(elm)) || elm;
                 }
             });
@@ -373,8 +405,8 @@
             model.Printable.summary = model.Printable.summary || model.summary;
             if (model.Printable.summary) {
                 var header = '';
+                var list = [];
                 if (model.Printable.summary === true) {
-                    var list = [];
                     for (var key in model.SummaryData) {
                         if (key != 'Total') {
                             list.push({ field: key, type: 2 });
@@ -388,17 +420,33 @@
                 } else if (typeof (model.Printable.summary.html) === typeof (nope)) {
                     header = model.Printable.summary.html(model);
                 } else if (typeof (model.Printable.summary) === typeof ([]) && model.Printable.summary.New) {
+                    list = model.Printable.summary;
                     header = getSummary(model, model.Printable.summary);
                 } else if (typeof (model.Printable.summary) === typeof (model.Printable)) {
                     setNonCapitalisation(model.Printable.summary);
                     if (model.Printable.summary.items) {
+                        list = model.Printable.summary.items;
                         header = getSummary(model, model.Printable.summary.items);
-                        //console.log(['model.Printable.summary.items', model.Printable.summary.items, model.SummaryData]);
                     }
-                    //console.log(['model.Printable.summary.itemsaa', model.Printable.summary.items]);
                 }
+
+                var summary = model.Printable, ttl = '',ftr='';
+                summary.summarytitle = summary.summarytitle || IqraConfig.Grid.Printable.summaryTitle || nope;
+                if (typeof (summary.summarytitle) == funcType) {
+                    ttl = summary.summarytitle(model, list);
+                } else if (summary.summarytitle) {
+                    ttl = summary.summarytitle;
+                }
+
+                summary.summaryfooter = summary.summaryfooter || IqraConfig.Grid.Printable.summaryFooter || nope;
+                if (typeof (summary.summaryfooter) == funcType) {
+                    ftr = summary.summaryfooter(model, list);
+                } else if (summary.summaryfooter) {
+                    ftr = summary.summaryfooter;
+                }
+
                 //console.log(['model.Printable.summary', model.Printable.summary]);
-                mywindow.document.write('<div class="row summary_container">' + header + '</div>');
+                mywindow.document.write(ttl + '<div class="row summary_container">' + header + '</div>' + ftr);
             }
         };
         function setPeriodic(model, mywindow) {
@@ -422,7 +470,7 @@
                 }
                 //console.log(['fltr', fltr, model.page.filter.where('itm=>itm.printable !== false')]);
 
-                header += getFilter(fltr);
+                header += getFilter(model,fltr);
             }
             mywindow.document.write('<div class="row filter_container">' + header + '</div>');
             mywindow.document.write('<div class="report_title active"></div>');
@@ -432,18 +480,23 @@
             model.name = model.name || document.title;
             var mywindow = window.open('', 'PRINT', 'height=800,width=1200');
             mywindow.document.write('<!DOCTYPE html><html><head><title>' + model.name + '</title>');
-            mywindow.document.write('</head><style type="text/css">@page{size:auto;margin: 10mm;} html{background-color: #FFFFFF;margin: 0px;} .report_title.active{border-top:2px dashed #666666;margin: 5px 0;} .row:after{clear:both;content:"";display:table;} .col{border:1px solid silver;float:left;margin:5px;padding:0 5px;width:16%;text-align:center;} .col:first-child{margin-left:0;} .label {font-weight:bold;}</style><body style="padding: 20px;">');
+            mywindow.document.write('</head><style type="text/css">@page{size:auto;margin: 10mm;} html{background-color: #FFFFFF;margin: 0px;} .report_title.active{border-top:2px dashed #666666;margin: 5px 0;} .row:after{clear:both;content:"";display:table;} .col{border:1px solid silver;float:left;margin:2px;padding:0 2px;width:calc(16% - 6px);text-align:center;} .col:first-child, .col.first-child{margin-left:0;} .label {font-weight:bold;}</style><body style="padding: 20px;">');
             //header
             setHeader(model, mywindow, 'header');
             //Periodic
             setPeriodic(model, mywindow);
             //Summary
             setSummary(model, mywindow);
-            mywindow.document.write('<table style="border-collapse: collapse;">');
+
+
             var columns = getColumns(model);
+            mywindow.document.write(getGridTitle(model, columns));
+            mywindow.document.write('<table style="border-collapse: collapse;">');
             printHeader(model, mywindow, columns);
             printData(model, mywindow, columns);
             mywindow.document.write('</tbody></table>');
+            mywindow.document.write(getGridFooter(model, columns));
+
             //footer
             setHeader(model, mywindow, 'footer');
             mywindow.document.write('</body></html>');
@@ -906,28 +959,15 @@
             });
             return td;
         }
-        function autoBindText(model, column, func) {
+        function autoBindText(model, column,elm) {
             if (column.isautobind != false) {
-                var data = model[column.field];
-                Object.defineProperty(model, column.field, {
-                    get: function () {
-                        return data;
-                    },
-                    set: function (val) {
-                        data = val;
-                        func(val);
-                    },
-                    configurable: true
-                });
+                Global.AutoBind(model, elm, column.field, column.type, 2);
             }
         };
         function setAutoBindText(model, column, elm) {
-            column.autobind != false && autoBindText(model, column, function (val) {
-                elm.html(val);
-            });
+            column.autobind != false && autoBindText(model, column, elm);
             return elm;
         };
-
 
         function getColumnElm(model, column, text,grid) {
             var txt = getText(column, text), cls = column.className ? 'class="' + column.className + '"' : '';
@@ -1025,6 +1065,20 @@
             model.Body.view.append(createRow.call(item, model));
             onBodyChange(model);
         };
+        this.Remove = function (item,tr, model) {
+            var index=0, source = model.dataSource || [];
+            source.each(function () {
+                if (this === item) {
+                    tr.remove();
+                } else {
+                    model.dataSource[index] = this;
+                    index++;
+                    //list.push(this);
+                    //console.log(['item,tr, model => ', item, tr, model, this[key], model[key], this[key] === model[key]]);
+                }
+            });
+            model.dataSource.length = index;
+        };
         this.SaveChange = function (item) {
             if (item.tr && item.tr.find) {
                 item.tr.find('td,a').each(function () {
@@ -1039,16 +1093,19 @@
                 onBodyChange(model);
             } else if (model.isActive != false) {
                 busy(model);
+                model.page.filter = model.page.filter || [];
                 var page = {
                     "SortBy": model.page.SortBy,
-                    "filter": model.page.filter,
+                    "filter": model.page.filter.slice(),
                     "IsDescending": model.page.IsDescending,
                     "PageNumber": model.page.PageNumber,
                     "PageSize": model.page.PageSize,
                     "Id": model.page.Id
                 };
                 model.onrequest && model.onrequest(page);
-                Global.CallServer(getUrl(model), function (response) {
+                model.loading = true;
+                return Global.CallServer(getUrl(model), function (response) {
+                    model.loading = false;
                     if (!response.IsError) {
                         model.ondata && model.ondata(response, model);
                         response = getColumnData(response);
@@ -1072,6 +1129,7 @@
                     }
                     free(model);
                 }, function (response) {
+                    model.loading = false;
                     (typeof model.onerror == 'function' && model.onerror(response)) || alert('Network error had occured.');
                     free(model);
                 }, page, 'POST')
@@ -2065,15 +2123,17 @@
                     if (this.onsetvalue) {
                         this.onsetvalue(data.Total, grid.summary.container);
                     }
-                    else if (this.type == 1 && (data.Total[this.field] || 0).toFloat) {
-                        grid.formmodel[this.field] = (data.Total[this.field] || 0).toFloat();
-                    } else if (this.type == 2 && (data.Total[this.field] || 0).toMoney) {
-                        grid.formmodel[this.field] = (data.Total[this.field] || 0).toMoney();
-                    } else if (this.type == 3) {
-                        grid.formmodel[this.field] = (data.Total[this.field] || '').getDate().format(this.format || 'dd/MM/yyyy');
-                    } else {
-                        grid.formmodel[this.field] = data.Total[this.field] || '';
-                    }
+                    console.log(['this, model.SummaryData[this.field],this.type', this, data.Total[this.field], this.type]);
+                    grid.formmodel[this.field] = getText(this, data.Total[this.field]);
+                    //else if (this.type == 1 && (data.Total[this.field] || 0).toFloat) {
+                    //    grid.formmodel[this.field] = (data.Total[this.field] || 0).toFloat();
+                    //} else if (this.type == 2 && (data.Total[this.field] || 0).toMoney) {
+                    //    grid.formmodel[this.field] = (data.Total[this.field] || 0).toMoney();
+                    //} else if (this.type == 3) {
+                    //    grid.formmodel[this.field] = (data.Total[this.field] || '').getDate().format(this.format || 'dd/MM/yyyy');
+                    //} else {
+                    //    grid.formmodel[this.field] = data.Total[this.field] || '';
+                    //}
                 });
                 data.Total = (typeof data.Total.Total == 'undefined') ? data.Total : data.Total.Total;
             }
@@ -2118,6 +2178,7 @@
             setSummary(grid);
         };
         this.Populate = function (data, grid) {
+            console.log(['Populate = function (data, grid)', data, grid, grid.summary, grid.summary && grid.summary.items && grid.summary.items.length]);
             populate(data, grid);
         };
     }).call(service.Summary = {});
@@ -2154,7 +2215,7 @@
                 }
                 grid.filter = periodic.filter = Global.Filters().Bind(periodic.model);
                 setFilterBy(periodic, grid);
-                console.log(['grid.page', grid.page.filter, grid.page]);
+                //console.log(['grid.page', grid.page.filter, grid.page]);
             }
         };
         function setFilterBy(periodic, grid) {
@@ -2213,7 +2274,7 @@
     (function () {
         var formModel = {}, dataModel = {}, valueModel = 0, viewModel, lastModel = { row: -1, col: -1};
         $(document).click(function (e) {
-            console.log([e]);
+            //console.log([e]);
             valueModel = 0;
             formModel.value = 0;
             dataModel = {};
@@ -2407,12 +2468,19 @@
                     gridBody.Reload(model, func);
                 };
                 model.Add = function (item) {
-                    model.dataSource && model.dataSource.push(item);
+                    model.dataSource && model.dataSource.unshift(item);
                     gridBody.Add(item, model);
                 };
                 model.AddTottom = function (item) {
                     model.dataSource && model.dataSource.push(item);
                     gridBody.AddTottom(item, model);
+                };
+                model.AddToBottom = function (item) {
+                    model.dataSource && model.dataSource.push(item);
+                    gridBody.AddTottom(item, model);
+                };
+                model.Remove = function (item, tr) {
+                    gridBody.Remove(item, tr, model);
                 };
                 model.SaveChange = function () {
                     if (typeof model.page == 'object') {
