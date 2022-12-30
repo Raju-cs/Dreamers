@@ -13,7 +13,7 @@ import { print } from "./student-form.js";
 
     function isValidPhoneNumber(phoneNumber) {
         // Regular expression to match the correct pattern of a Bangladeshi mobile number
-        const phoneNumberRegex = /^(?:\+?88)?01[15-9]\d{8}$/;
+        const phoneNumberRegex = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
         return phoneNumberRegex.test(phoneNumber);
     }
 
