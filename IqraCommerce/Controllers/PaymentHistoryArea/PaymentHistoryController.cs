@@ -24,6 +24,13 @@ namespace IqraCommerce.Controllers.PaymentHistoryArea
             return Json(await ___service.PaymentHistory(page));
         }
 
+        public async Task<JsonResult> CoursePaymentHistory([FromBody] Page page)
+        {
+
+
+            return Json(await ___service.CoursePaymentHistory(page));
+        }
+
         public async Task<JsonResult> Due([FromBody] Page page)
         {
 

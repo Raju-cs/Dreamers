@@ -1,8 +1,4 @@
-﻿import { editBtn, eyeBtn, listBtn } from "../buttons.js";
-import { filter, liveRecord, OPERATION_TYPE, trashRecord } from '../filters.js';
-import { ACTIVE_STATUS } from "../dictionaries.js";
-
-(function () {
+﻿(function () {
 
     const controller = 'PaymentHistory';
 
@@ -58,9 +54,8 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         }
 
     }
-
   
-    const allTab = {
+    const moduleTab = {
         Id: '550AC948-C353-453E-8528-CBB8D9C38245',
         Name: 'ALL_MODULE_PAYMENT',
         Title: 'All Module Payment',
@@ -82,13 +77,35 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
         Url: 'PaymentHistory/',
     }
 
+    const courseTab = {
+        Id: '550AC948-C353-453E-8528-CBB8D9C38245',
+        Name: 'ALL_COURSE_PAYMENT',
+        Title: 'All Course Payment',
+        filter: [],
+        remove: false,
+        onDataBinding: () => { },
+        bound: moduleBound,
+        columns: [
+            { field: 'Month', title: 'Month', filter: true, position: 1 },
+            { field: 'DreamersId', title: 'DreamersId', filter: true, position: 2 },
+            { field: 'Name', title: 'Student', filter: true, position: 3, },
+            { field: 'Charge', title: 'Fees', filter: true, position: 4 },
+            { field: 'Paid', title: 'Paid', filter: true, position: 5 },
+            { field: 'Due', title: 'Due', filter: true, position: 6, },
+            { field: 'ExtendPaymentdate', title: 'ExtendPaymentdate', filter: true, position: 8, bound: extendpaymentDate },
+        ],
+        Printable: { container: $('void') },
+        remove: { save: `/${controller}/Remove` },
+        Url: 'CoursePaymentHistory/',
+    }
+
     //Tabs config
     const tabs = {
         container: $('#page_container'),
         Base: {
             Url: `/${controller}/`,
         },
-        items: [allTab],
+        items: [moduleTab, courseTab],
 
         periodic: {
             container: '.filter_container',

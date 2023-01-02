@@ -1,8 +1,10 @@
 ﻿using IqraCommerce.Entities.BatchArea;
+using IqraCommerce.Entities.CoursePaymentHistoryArea;
 using IqraCommerce.Entities.CoursePeriodArea;
 using IqraCommerce.Entities.PeriodArea;
 using IqraCommerce.Entities.StudentCourseArea;
 using IqraCommerce.Helpers;
+using IqraCommerce.Models.CoursePaymentHistoryArea;
 using IqraCommerce.Models.StudentCourseArea;
 using IqraCommerce.Services.StudentCourseArea;
 using Microsoft.AspNetCore.Mvc;
@@ -80,6 +82,27 @@ namespace IqraCommerce.Controllers.StudentCourseArea
                 };
                 studentModuleEntity.Add(studentCourse);
 
+            }
+
+            var periodEntity = ___service.GetEntity<Period>();
+            var periodForDB = ___service.GetEntity<Period>().FirstOrDefault(p => p.IsDeleted == false);
+            if (periodForDB != null)
+            {
+                var coursePayment = new CoursePaymentHistoryModel()
+                {
+                    Id = Guid.NewGuid(),
+                    ActivityId = Guid.Empty,
+                    StudentId = recordToCreate.StudentId,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Guid.Empty,
+                    PeriodId = periodEntity.OrderByDescending(x => x.StartDate).FirstOrDefault().Id,
+                    Charge = batchForDB.Charge,
+                    Paid = 0,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = Guid.Empty,
+                    Remarks = null
+                };
+                __service.Insert(__service.GetEntity<CoursePaymentHistory>(), coursePayment, Guid.Empty);
             }
 
 

@@ -39,6 +39,7 @@ var Controller = new function () {
                     formModel.ModuleId = _options.ModuleId;
                     formModel.PhoneNumber = page.PhoneNumber;
                     formModel.GuardiansPhoneNumber = page.GuardiansPhoneNumber;
+                    formModel.ExamBandMark = _options.ExamBandMark;
                 },
                 onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
                     // formModel.ModuleFee = page.Paid;
@@ -94,7 +95,7 @@ var Controller = new function () {
                     console.log("model=>", model);
                     /*formModel.PhoneNumber = page.PhoneNumber;
                     formModel.GuardiansPhoneNumber = page.GuardiansPhoneNumber;*/
-                    formModel.Content = "Dear" + " " + `${page.Name},` + " " + "You have got " + `${page.Mark}` + " out of 100 for the " + `${_options.SubjectName}` + " exam conducted on " + `${_options.ExamDate}` + '\n' + 
+                    formModel.Content = "Dear" + " " + `${page.Name},` + " " + "You have got " + `${page.Mark}` + " out of " + _options.ExamBandMark + " for the " + `${_options.SubjectName}` + " exam conducted on " + `${_options.ExamDate}` + '\n' +
                     "Regards,Dreamer's "
                 },
                 onSaveSuccess: function () {

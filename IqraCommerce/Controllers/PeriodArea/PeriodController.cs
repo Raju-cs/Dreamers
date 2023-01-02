@@ -14,6 +14,7 @@ using IqraCommerce.Entities.CoursePeriodArea;
 using IqraCommerce.Entities.ExtendPaymentdateArea;
 using IqraCommerce.Entities.PaymentHistoryArea;
 using IqraCommerce.Entities.StudentArea;
+using IqraCommerce.Entities.CoursePaymentHistoryArea;
 
 namespace IqraCommerce.Controllers.PeriodArea
 {
@@ -90,6 +91,26 @@ namespace IqraCommerce.Controllers.PeriodArea
                         Remarks = null
                     };
                     paymentHistoryEntity.Add(paymentHistory);
+            }
+
+
+            var coursePaymentHistoryEntity = ___service.GetEntity<CoursePaymentHistory>();
+            foreach(var courseStudentInfo in studentCourseDB)
+            {
+                CoursePaymentHistory coursePaymentHistory = new CoursePaymentHistory()
+                {
+                    ActivityId = Guid.Empty,
+                    StudentId = courseStudentInfo.StudentId,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Guid.Empty,
+                    PeriodId = recordToCreate.Id,
+                    Charge = courseStudentInfo.CourseCharge,
+                    Paid = 0,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = Guid.Empty,
+                    Remarks = null
+                };
+                coursePaymentHistoryEntity.Add(coursePaymentHistory);
             }
 
             return base.Create(recordToCreate);

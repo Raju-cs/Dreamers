@@ -174,12 +174,12 @@ import { print } from "./student-form.js";
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 if (!isValidPhoneNumber(model.PhoneNumber)) {
-                    alert("Invalid PhoneNumber");
+                    alert("Invalid StudentPhoneNumber");
                     return false;
                 }
 
                 if (!isValidGuardiansPhoneNumber(model.GuardiansPhoneNumber)) {
-                    alert("Invalid PhoneNumber");
+                    alert("Invalid GuardiansPhoneNumber");
                     return false;
                 }
                 formModel.ActivityId = window.ActivityId;

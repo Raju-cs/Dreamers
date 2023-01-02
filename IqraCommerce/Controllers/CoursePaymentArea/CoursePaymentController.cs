@@ -1,11 +1,12 @@
 ﻿using IqraCommerce.Entities.CoachingAccountArea;
-using IqraCommerce.Entities.CourseArea;
 using IqraCommerce.Entities.CoursePaymentArea;
+using IqraCommerce.Entities.CoursePaymentHistoryArea;
 using IqraCommerce.Entities.CourseSubjectTeacherArea;
 using IqraCommerce.Entities.TeacherFeeArea;
 using IqraCommerce.Helpers;
 using IqraCommerce.Models.CoachingAccountArea;
 using IqraCommerce.Models.CoursePaymentArea;
+using IqraCommerce.Models.CoursePaymentHistoryArea;
 using IqraCommerce.Models.TeacherFeeArea;
 using IqraCommerce.Services.CoursePaymentArea;
 using IqraService.Search;
@@ -59,6 +60,35 @@ namespace IqraCommerce.Controllers.CoursePaymentArea
             else
             {
                 __service.Insert(recordToCreate, Guid.Empty);
+            }
+
+
+
+            var coursePaymentHistoryForDB = ___service.GetEntity<CoursePaymentHistory>().FirstOrDefault(ph => ph.StudentId == recordToCreate.StudentId
+                                                                                                                   && ph.PeriodId == recordToCreate.PeriodId
+                                                                                                                   && ph.IsDeleted == false);
+
+
+            if (coursePaymentHistoryForDB != null)
+            {
+                coursePaymentHistoryForDB.Paid = recordToCreate.Paid + coursePaymentHistoryForDB.Paid;
+            }
+            else
+            {
+                var coursePayment = new CoursePaymentHistoryModel()
+                {
+                    Id = Guid.NewGuid(),
+                    ActivityId = Guid.Empty,
+                    StudentId = recordToCreate.StudentId,
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = Guid.Empty,
+                    PeriodId = recordToCreate.PeriodId,
+                    Paid = recordToCreate.Paid,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = Guid.Empty,
+                    Remarks = null
+                };
+                __service.Insert(__service.GetEntity<CoursePaymentHistory>(), coursePayment, Guid.Empty);
             }
 
             foreach (var course in coursesFromDb)

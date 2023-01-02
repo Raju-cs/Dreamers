@@ -28,7 +28,7 @@ namespace IqraCommerce.Controllers.BatchAttendanceArea
                                                                                                   && f.PeriodAttendanceId == recordToCreate.PeriodAttendanceId);
 
 
-           batchAttendanceForDb.AttendanceTime = DateTime.Now;
+            batchAttendanceForDb.AttendanceTime = DateTime.Now;
            batchAttendanceForDb.EarlyLeaveTime = recordToCreate.EarlyLeaveTime;
             //batchAttendanceForDb.Status = "Present";
             

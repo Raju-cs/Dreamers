@@ -14,7 +14,6 @@ using IqraCommerce.Entities.BatchAttendanceArea;
 using IqraCommerce.Entities.PeriodAttendanceArea;
 using IqraCommerce.Entities.StudentResultArea;
 using IqraCommerce.Entities.BatchExamArea;
-using IqraCommerce.Entities.ModuleArea;
 using IqraCommerce.Entities.PaymentHistoryArea;
 using IqraCommerce.Models.PaymentHistoryArea;
 
@@ -168,7 +167,6 @@ namespace IqraCommerce.Controllers.StudentModuleArea
                 modulePeriod.StudentModuleId = recordToCreate.Id;
                 modulePeriod.Name = period.Name;
                 modulePeriodEntity.Add(modulePeriod);
-
             }
 
             // add StudentDetails in StudentModule
@@ -218,7 +216,6 @@ namespace IqraCommerce.Controllers.StudentModuleArea
                 __service.Insert(__service.GetEntity<PaymentHistory>(), payment, Guid.Empty);
             }
 
-           
             try
             {
                 ___service.SaveChange();

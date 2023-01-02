@@ -47,6 +47,7 @@ namespace IqraCommerce.Controllers.BatchExamArea
                     ExamDate = recordToCreate.ExamDate,
                     Status = "Absent",
                     Mark = 0,
+                    ExamBandMark = recordToCreate.ExamBandMark,
                     Name = recordToCreate.Name,
                     UpdatedAt = DateTime.Now,
                     UpdatedBy = Guid.Empty,

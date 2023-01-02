@@ -176,7 +176,7 @@ namespace IqraCommerce.Services.MessageArea
                         {
                             if(item.Status == "Present")
                             {
-                                 content = "Student" + " " + item2.Name + " " + " have got " + item.Mark + " out of 100 for the " + item.Name + " exam conducted on " + item.ExamDate + "\n" +
+                                 content = "Student" + " " + item2.Name + " " + " have got " + item.Mark + " out of"+ item.ExamBandMark +"for the " + item.Name + " exam conducted on " + item.ExamDate + "\n" +
                                  "Regards,Dreamer's ";
                             }
                             else

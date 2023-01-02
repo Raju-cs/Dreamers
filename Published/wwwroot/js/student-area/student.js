@@ -13,13 +13,13 @@ import { print } from "./student-form.js";
 
     function isValidPhoneNumber(phoneNumber) {
         // Regular expression to match the correct pattern of a Bangladeshi mobile number
-        const phoneNumberRegex = /^(?:\+?88)?01[15-9]\d{8}$/;
+        const phoneNumberRegex = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
         return phoneNumberRegex.test(phoneNumber);
     }
 
     function isValidGuardiansPhoneNumber(guardiansphoneNumber) {
         // Regular expression to match the correct pattern of a Bangladeshi mobile number
-        const phoneNumberRegex = /^(?:\+?88)?01[15-9]\d{8}$/;
+        const phoneNumberRegex = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
         return phoneNumberRegex.test(guardiansphoneNumber);
     }
 
@@ -174,12 +174,12 @@ import { print } from "./student-form.js";
             additionalField: [],
             onSubmit: function (formModel, data, model) {
                 if (!isValidPhoneNumber(model.PhoneNumber)) {
-                    alert("Invalid PhoneNumber");
+                    alert("Invalid StudentPhoneNumber");
                     return false;
                 }
 
                 if (!isValidGuardiansPhoneNumber(model.GuardiansPhoneNumber)) {
-                    alert("Invalid PhoneNumber");
+                    alert("Invalid GuardiansPhoneNumber");
                     return false;
                 }
                 formModel.ActivityId = window.ActivityId;

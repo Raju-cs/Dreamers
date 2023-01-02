@@ -64,10 +64,11 @@ namespace IqraCommerce.Helpers
         private void Save(IFormFile image, string imageName, string dirName, size imageSize, int resulation = 0)
         {
             var rootPath = _config.GetSection(rootDirectory)["ROOT_PATH"];
-            var dir = $"/images/{dirName}/{imageSize.ToString()}/";
+            var dir = $"wwwroot/images/{dirName}/{imageSize.ToString()}/";
 
-            if (!Directory.Exists(rootPath + dir))
-                Directory.CreateDirectory(rootPath + dir);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
 
             using (var memoryStream = new MemoryStream())
             {
@@ -97,8 +98,9 @@ namespace IqraCommerce.Helpers
                     }
                 }
 
-                transformedImage.Save(rootPath + dir + imageName);
+                transformedImage.Save(dir + imageName);
             }
+           
         }
     }
 }

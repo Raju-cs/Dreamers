@@ -597,6 +597,53 @@ namespace IqraCommerce.Migrations
                     b.ToTable("CoursePayment");
                 });
 
+            modelBuilder.Entity("IqraCommerce.Entities.CoursePaymentHistoryArea.CoursePaymentHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ActivityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Charge")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Paid")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("PeriodId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CoursePaymentHistory");
+                });
+
             modelBuilder.Entity("IqraCommerce.Entities.CoursePeriodArea.CoursePeriod", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1631,6 +1678,9 @@ namespace IqraCommerce.Migrations
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("ExamBandMark")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("ExamDate")
                         .HasColumnType("datetime2");

@@ -18,6 +18,7 @@ namespace IqraCommerce.Entities.StudentResultArea
         public string GuardiansPhoneNumber { get; set; }
         public string Status { get; set; }
         public double Mark { get; set; }
+        public double ExamBandMark { get; set; }
 
     }
 }

@@ -8,8 +8,6 @@ using IqraCommerce.Helpers;
 using Microsoft.Extensions.Configuration;
 using IqraCommerce.DTOs;
 using IqraService.Search;
-using System.Linq;
-using IqraCommerce.Entities.LocationArea;
 
 namespace IqraCommerce.Controllers.StudentArea
 {
@@ -37,7 +35,7 @@ namespace IqraCommerce.Controllers.StudentArea
 
             return Json(___service.UploadImage(fileName, imageUpload.Id, Guid.Empty, imageUpload.ActivityId));
         }
-        
+
         public override async Task<JsonResult> AutoComplete(Page page)
         {
             return Json(await ___service.AutoComplete(page));

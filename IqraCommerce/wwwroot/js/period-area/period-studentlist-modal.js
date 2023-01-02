@@ -11,8 +11,8 @@ var Controller = new function () {
     const dateForSQLServer = (enDate = '01/01/1970') => {
         const dateParts = enDate.split('/');
         console.log("dateparts=>", dateParts);
-        return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
-       // return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
+        //return `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+        return `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`;
     }
     function moduleStudentPayment(page, grid) {
 
@@ -77,7 +77,7 @@ var Controller = new function () {
                 formModel.StudentId = page.StudentId;
                 formModel.PeriodId = _options.PeriodId;
                 formModel.IsActive = true;
-                formModel.ModuleFee = page.Charge;
+                formModel.Charge = page.Charge;
             },
             onShow: function (model, formInputs, dropDownList, IsNew, windowModel, formModel) {
                 // formModel.ModuleFee = page.Paid;

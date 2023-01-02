@@ -22,6 +22,7 @@ var Controller = new function () {
                 row.css({ background: "#fff" }).find('.action').css({ padding: 4, gap: 2 });
             }
         }
+
         function studentAttendance(data, grid ) {
             console.log("data=>", data);
             console.log("options=>", options);

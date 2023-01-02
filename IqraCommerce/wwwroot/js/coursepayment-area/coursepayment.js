@@ -5,10 +5,6 @@ import { ACTIVE_STATUS } from "../dictionaries.js";
 (function (option) {
     const controller = 'CoursePayment';
 
-    $(document).ready(() => {
-        $('#add-record').click(add);
-    });
-
     function paymentDate(td) {
         td.html(new Date(this.PaymentDate).toLocaleDateString('en-US', {
             day: "2-digit",

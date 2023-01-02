@@ -52,6 +52,21 @@ namespace IqraCommerce.Services.PaymentHistoryArea
             }
         }
 
+        public async Task<ResponseList<Pagger<Dictionary<string, object>>>> CoursePaymentHistory(Page page)
+        {
+            var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
+            var outerFilters = page.filter?.Where(f => f.Type != "INNER").ToList() ?? new List<FilterModel>();
+
+            page.SortBy = (page.SortBy == null || page.SortBy == "") ? "[Name] " : page.SortBy;
+            using (var db = new DBService())
+            {
+                page.filter = innerFilters;
+                var query = GetWhereClause(page);
+                page.filter = outerFilters;
+                return await db.GetPages(page, PaymentHistoryQuery.CoursePaymentHistory());
+            }
+        }
+
         public async Task<ResponseList<Pagger<Dictionary<string, object>>>> Due(Page page)
         {
             var innerFilters = page.filter?.Where(f => f.Type == "INNER").ToList() ?? new List<FilterModel>();
@@ -184,6 +199,30 @@ namespace IqraCommerce.Services.PaymentHistoryArea
 	  where p.Paid <>  0 or p.Paid = p.Charge
       group by stdnt.Id,
 		  stdnt.Name, p.PeriodId,stdnt.DreamersId, prd.Name,  prd.CreatedAt, xtndpymntdt.ExtendPaymentdate, prd.RegularPaymentDate) item";
+        }
+
+        public static string CoursePaymentHistory()
+        {
+            return @" * from ( 
+          select  stdnt.Id,
+		  stdnt.Name,
+		  prd.Name [Month],
+		  stdnt.DreamersId,
+		  c.PeriodId,
+		  prd.RegularPaymentDate [RegularPaymentDate],
+		  SUM(c.Charge) Charge,
+          SUM(c.Paid) Paid,
+		  (SUM(c.Charge) -
+          SUM(c.Paid)) Due,
+		  prd.CreatedAt,
+		  ISNULL(xtndpymntdt.ExtendPaymentdate, '') [ExtendPaymentdate]
+		 
+	  from CoursePaymentHistory c
+	  Left join Student stdnt on stdnt.Id = c.StudentId
+      Left join Period prd on prd.Id = c.PeriodId
+	  left join ExtendPaymentDate xtndpymntdt on  xtndpymntdt.PeriodId = prd.Id and xtndpymntdt.StudentId = stdnt.Id
+      group by stdnt.Id,
+		  stdnt.Name, c.PeriodId,stdnt.DreamersId, prd.Name,  prd.CreatedAt, xtndpymntdt.ExtendPaymentdate, prd.RegularPaymentDate) item";
         }
 
     }

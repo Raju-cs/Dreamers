@@ -119,7 +119,8 @@
                 ModuleId: _options.ModuleId,
                 SubjectId: row.SubjectId,
                 SubjectName: row.SubjectName,
-                ExamDate: row.ExamDate
+                ExamDate: row.ExamDate,
+                ExamBandMark: row.ExamBandMark
             });
         }
 
